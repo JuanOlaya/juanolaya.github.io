@@ -22,8 +22,11 @@ describe('extraction from the original index.html', () => {
 
   it('keeps every device field, in the original order', () => {
     legacyDevices.forEach((original, index) => {
-      const { audit, ...fields } = devices[index];
-      expect(fields).toEqual(original);
+      const { audit, mechanism, ...fields } = devices[index];
+      const { mechanism: _legacyMechanism, ...originalFields } = original;
+      expect(fields).toEqual(originalFields);
+      expect(mechanism.length).toBeGreaterThanOrEqual(70);
+      expect(mechanism.length).toBeLessThanOrEqual(120);
       expect(audit).toEqual(legacy.hapticAuditData[original.name]);
     });
   });

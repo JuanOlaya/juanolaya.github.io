@@ -56,8 +56,7 @@ export const devices: readonly Device[] = [
     author: 'André Zenner, Antonio Krüger',
     title:
       'Drag:on: A Virtual Reality Controller Providing Dynamic Drag and Weight Feedback Based on Flow and Mass Manipulation',
-    mechanism:
-      'Dual servo-driven folding fans rapidly expand up to 650% in 570 ms, dynamically manipulating both aerodynamic drag and weight distribution to simulate virtual gas/fluid resistance, virtual mass, and weapon grasping.',
+    mechanism: 'A folding fan opens and closes to vary air drag and weight shift as the controller is swung.',
     useCaseText:
       'Providing dynamic drag, variable weight shift, and virtual shape feedback during swinging and virtual interactions.',
     useCaseTags: ['Resistance cues', 'Weight magnitude cues', 'Shape cues'],
@@ -93,8 +92,7 @@ export const devices: readonly Device[] = [
     author: 'Yuhu Liu, Takeru Hashimoto, Shigeo Yoshida, Takuji Narumi, Tomohiro Tanikawa, Michitaka Hirose',
     title:
       'ShapeSense: a 2D shape rendering VR device with moving surfaces that controls mass properties and air resistance',
-    mechanism:
-      'Two sliding planar surfaces driven by motorized timing belts change their overlap and position relative to the grip, modulating both aerodynamic drag resistance and center-of-gravity shifts to render 2D object shapes.',
+    mechanism: 'Two surfaces slide along the shaft to alter mass distribution and air resistance, rendering 2D shapes.',
     useCaseText:
       'Providing dynamic 2D shape and inertia feedback by altering aerodynamic resistance and mass distribution.',
     useCaseTags: ['Shape cues', 'Resistance cues', 'Weight distribution cues'],
@@ -130,8 +128,7 @@ export const devices: readonly Device[] = [
     author:
       'Po-Yu Chen, Ching-Yi Tsai, Wei-Hsin Wang, Chao-Jung Lai, Chia-An Fan, Shih-Chin Lin, Chia-Chen Chi, Mike Y. Chen',
     title: 'AirCharge: Amplifying Ungrounded Impact Force by Accumulating Air Propulsion Momentum',
-    mechanism:
-      'Compressed air propulsion jets mounted on dual counter-rotating swingarms accumulate kinetic momentum to amplify ungrounded impact force up to 40 N with rapid 3 ms rise time.',
+    mechanism: 'Compressed air jets on rotating swingarms accumulate momentum to amplify ungrounded impact tenfold.',
     useCaseText:
       'Rendering sharp ballistic and sports impacts such as baseball swings, tennis smashes, and physical weapon collisions in VR.',
     useCaseTags: ['Impact cues', 'Ballistic collisions', 'Sports simulation'],
@@ -167,8 +164,7 @@ export const devices: readonly Device[] = [
     author: 'Ching-Yi Tsai, I-Lun Tsai, Chao-Jung Lai, Derrek Chow, Lauren Wei, Lung-Pan Cheng, Mike Y. Chen',
     title:
       'AirRacket: Perceptual Design of Ungrounded, Directional Force Feedback to Improve Virtual Racket Sports Experiences',
-    mechanism:
-      'Pneumatic high-speed solenoid valves modulate compressed air jets across three interchangeable racket geometries (ping-pong, badminton, tennis) with perceptual duration scaling to amplify perceived impact force.',
+    mechanism: 'Compressed air jets deliver directional racket impacts, tuned for ping-pong, badminton and tennis.',
     useCaseText:
       'Simulating realistic directional impact forces during virtual racket sports including table tennis, badminton, and tennis.',
     useCaseTags: ['Directional impact', 'Racket sports', 'Perceptual force scaling'],
@@ -209,8 +205,7 @@ export const devices: readonly Device[] = [
     author:
       'Yu-Wei Wang, Yu-Hsin Lin, Pin-Sung Ku, Yōko Miyatake, Yi-Hsuan Mao, Po-Yu Chen, Chun-Miao Tseng, Mike Y. Chen',
     title: 'JetController: High-Speed Ungrounded 3-DoF Force Feedback Controllers Using Air Propulsion Jets',
-    mechanism:
-      'High-speed pneumatic solenoid valves deliver 20–50 Hz air impulses (1.0–4.0 N) through a 120° 5-nozzle manifold configured to steer ungrounded 3-DoF propulsion forces away from the user.',
+    mechanism: 'Air propulsion jets give high-speed 3-DoF force, preferred over vibrating controllers by 88% of users.',
     useCaseText:
       'High-speed recoil and resistance sensations for virtual firearm firing, melee slicing, and vehicle driving in VR.',
     useCaseTags: ['3-DoF propulsion', 'High-speed impulses', 'Weapon recoil'],
@@ -250,8 +245,7 @@ export const devices: readonly Device[] = [
     author: 'Chi-Jung Lee, Hsin-Ruey Tsai, Bing-Yu Chen',
     title:
       'HairTouch: Providing Stiffness, Roughness and Surface Height Differences Using Reconfigurable Brush Hairs on a VR Controller',
-    mechanism:
-      'Reconfigurable brush hair modules mounted on finger segments use servo actuators to dynamically adjust hair length, tilt direction, and pin heights, realistically rendering multilevel tactile stiffness, roughness, and surface height.',
+    mechanism: 'Servos reset the free length of brush hairs, varying stiffness, roughness and surface height.',
     useCaseText:
       'Rendering tactile stiffness, texture roughness, and geometry height when touching virtual materials and fur in VR.',
     useCaseTags: ['Stiffness cues', 'Friction cues', 'Shape cues'],
@@ -286,8 +280,7 @@ export const devices: readonly Device[] = [
     category: 'Flexible surface deformation',
     author: 'Lifeng Zhu, Xudong Jiang, Jiangwei Shen, Heng Zhang, Yiting Mo, Aiguo Song',
     title: 'TapeTouch: A Handheld Shape-changing Device for Haptic Display of Soft Objects',
-    mechanism:
-      'Four independent motors dynamically bend and stretch a flexible brass shape-changing tape within the controller, controlling curvature and elastic compliance to simulate 3D object geometries and multilevel softness.',
+    mechanism: 'Motors bend elastic brass tapes, whose compliance renders the softness and form of virtual objects.',
     useCaseText:
       'Providing real-time shape curvature and variable softness compliance when touching soft virtual objects.',
     useCaseTags: ['Stiffness cues', 'Shape cues'],
@@ -318,8 +311,7 @@ export const devices: readonly Device[] = [
     category: 'Flexible surface deformation',
     author: 'K. M. Arafat Aziz, Hu Luo, Lehiany Asma, Weiliang Xu, Yuru Zhang, Dangxiao Wang',
     title: 'Haptic Handshank – A Handheld Multimodal Haptic Feedback Controller for Virtual Reality',
-    mechanism:
-      'A modular multimodal VR controller featuring a pneumatically actuated silicone airbag on the thumb module for softness and pressure feedback, combined with a Peltier thermoelectric element and vibration motor on the palm module.',
+    mechanism: 'A silicone airbag inflates for softness, with a Peltier cell for temperature and a motor for vibration.',
     useCaseText:
       'Rendering synchronized multimodal thermal, compliance, and vibrotactile feedback during handheld virtual reality interactions.',
     useCaseTags: ['Thermal cues', 'Stiffness cues', 'Vibration cues'],
@@ -350,8 +342,7 @@ export const devices: readonly Device[] = [
     category: 'Joint actuation',
     author: 'Mike Sinclair, Eyal Ofek, Mar Gonzalez-Franco, Christian Holz',
     title: 'CapstanCrunch: A Haptic VR Controller with User-supplied Force Feedback',
-    mechanism:
-      'A friction-based capstan-plus-cord brake mechanism driven by a miniature low-power motor amplifies user-supplied gripping force by up to 40x, rendering rigid and compliant virtual surfaces with high holding force and low latency.',
+    mechanism: "A capstan brake clutches a built-in spring, so the user's own grip supplies the rendered compliance.",
     useCaseText:
       'Providing high-force resistive stiffness and variable compliance when grasping virtual objects.',
     useCaseTags: ['Stiffness cues'],
@@ -387,8 +378,7 @@ export const devices: readonly Device[] = [
     author: 'Inrak Choi, Eyal Ofek, Hrvoje Benko, Mike Sinclair, Christian Holz',
     title:
       'CLAW: A Multifunctional Handheld Haptic Controller for Grasping, Touching, and Triggering in Virtual Reality',
-    mechanism:
-      'A motorized rotating arm tracks the index finger to actuate resistive grasping forces and trigger resistance, while an integrated voice-coil actuator on the fingertip delivers high-bandwidth vibrotactile textures and impact pulses.',
+    mechanism: 'A servo arm resists the index finger for grasping, with a voice coil adding texture and trigger impact.',
     useCaseText:
       'Rendering multimodal grasping stiffness, surface touching textures, and firearm trigger recoil.',
     useCaseTags: ['Stiffness cues', 'Vibration cues', 'Impact cues', 'Shape cues'],
@@ -423,8 +413,7 @@ export const devices: readonly Device[] = [
     category: 'Joint actuation',
     author: 'Nianlong Li, Han-Jong Kim, Luyao Shen, Feng Tian, Teng Han, Xing-Dong Yang, Tek-Jin Nam',
     title: 'HapLinkage: Prototyping Haptic Proxies for Virtual Hand Tools Using Linkage Mechanism',
-    mechanism:
-      'Configurable planar mechanical linkage systems driven by active and passive joint actuators rapidly prototype kinematic motion and force feedback for diverse virtual hand tools (pliers, scissors, syringes, wrenches).',
+    mechanism: 'Motor-driven linkage mechanisms resist the hand, prototyping the feel of virtual hand tools.',
     useCaseText:
       'Prototyping dynamic kinetic motions and joint resistance forces for virtual handheld tools.',
     useCaseTags: ['Resistance cues'],
@@ -459,8 +448,7 @@ export const devices: readonly Device[] = [
     category: 'Joint actuation',
     author: 'Evan Strasnick, Christian Holz, Eyal Ofek, Mike Sinclair, Hrvoje Benko',
     title: 'Haptic Links: Bimanual Haptics for Virtual Reality Using Variable Stiffness Actuation',
-    mechanism:
-      'Electro-mechanical variable stiffness linkages (Layer-Hinge, Chain, and Ratchet) connect two VR controllers, electrostatically and mechanically locking multi-DOF relative motion to render rigid, constrained, and compliant bimanual objects.',
+    mechanism: 'Variable-stiffness brakes lock the relative motion of two controllers into one bimanual object.',
     useCaseText:
       'Transforming two handheld VR controllers into rigid two-handed tools, bows, weapons, or constrained mechanisms.',
     useCaseTags: ['Resistance cues', 'Shape cues'],
@@ -496,8 +484,7 @@ export const devices: readonly Device[] = [
     author: 'Neung Ryu, Woojin Lee, Myung Jin Kim, Andrea Bianchi',
     title:
       'ElaStick: A Handheld Variable Stiffness Display for Rendering Dynamic Haptic Response of Flexible Object',
-    mechanism:
-      'Four servomotors wind spools to independently tension four elastic tendons along a 2-DOF flexible joint, dynamically modulating bending stiffness and damping to realistically render flexible virtual objects.',
+    mechanism: 'Four servos wind spools to tune four elastic tendons, rendering the flex of dynamic flexible objects.',
     useCaseText:
       'Simulating the dynamic bending compliance, stiffness, and oscillation of flexible objects and tools in VR.',
     useCaseTags: ['Stiffness cues', 'Shape cues'],
@@ -532,8 +519,7 @@ export const devices: readonly Device[] = [
     category: 'Band elasticity control',
     author: 'Tzu-Yun Wei, Hsin-Ruey Tsai, Yu-So Liao, Chieh Tsai, Yi-Shan Chen, Chi Wang, Bing-Yu Chen',
     title: 'ElastiLinks: Force Feedback between VR Controllers with Dynamic Points of Application of Force',
-    mechanism:
-      'A pair of VR controllers connected by an elastic link utilizing motorized rotatable tracks to dynamically reposition the Point of Application of Force (PAF) and wind the band, rendering directional resistive forces and impact moments.',
+    mechanism: 'A motor winds an elastic band between two controllers, changing its length and resistive force level.',
     useCaseText:
       'Providing bimanual kinesthetic resistance and torque sensations with dynamic application points (e.g., archery bow, slingshot).',
     useCaseTags: ['Impact cues', 'Resistance cues'],
@@ -568,8 +554,7 @@ export const devices: readonly Device[] = [
     category: 'Band elasticity control',
     author: 'Hsin-Ruey Tsai, Ching-Wen Hung, Tzu-Chun Wu, Bing-Yu Chen',
     title: 'ElastOscillation: 3D Multilevel Force Feedback for Damped Oscillation on VR Controllers',
-    mechanism:
-      'Elastic bands and controllable damping mechanisms suspend a moving proxy mass in 3D space within the controller, dynamically rendering 3D damped oscillation effects and shifting center of mass.',
+    mechanism: 'Elastic bands damp a bouncing proxy, so the moving mass reads as a shifting centre of mass.',
     useCaseText:
       'Rendering 3D damped oscillations, bouncing effects, and mass dynamics during virtual object manipulation.',
     useCaseTags: ['Weight distribution cues'],
@@ -605,8 +590,7 @@ export const devices: readonly Device[] = [
     author: 'Ginam Ko, Jaeseok Yoon, Byungseok Jung, SangHun Nam',
     title:
       'Variable Offset Method Based on Five-finger Pressure to Enhance Weight Perception in Virtual Reality',
-    mechanism:
-      'Five micro-linear pin actuators individually resist each finger with up to 22 N, coupled with independent pressure sensing and a grip vibrator to deliver individual finger stiffness and dynamic grasp weight cues.',
+    mechanism: 'Five micro linear actuators resist each finger up to 22 N, with a vibrator in the grip module.',
     useCaseText:
       'Rendering individual finger contact compliance, active gripping stiffness, and dynamic weight perception in VR.',
     useCaseTags: ['Stiffness cues', 'Vibration cues'],
@@ -642,8 +626,7 @@ export const devices: readonly Device[] = [
     author: 'Daniel K. Y. Chen, Jean-Baptiste Chossat, Peter B. Shull',
     title:
       'HaptiVec: Presenting Haptic Feedback Vectors in Handheld Controllers using Embedded Tactile Pin Arrays',
-    mechanism:
-      'A 3x5 tactile pin array embedded in the controller handle actuates miniature push-pins into the fingers and palm, rendering continuous 2D directional pressure vectors and multi-directional impact cues.',
+    mechanism: 'A 3 by 5 embedded pin array presses directional pressure vectors into the fingers and palm.',
     useCaseText:
       'Presenting directional force vectors, projectile impact cues, and environmental tactile feedback (e.g. rain) in handheld VR.',
     useCaseTags: ['Impact cues'],
@@ -678,8 +661,7 @@ export const devices: readonly Device[] = [
     category: 'Pin extension',
     author: 'Shigeo Yoshida, Yuqian Sun, Hideaki Kuzuoka',
     title: 'PoCoPo: Handheld Pin-based Shape Display for Haptic Rendering in Virtual Reality',
-    mechanism:
-      'A handheld shape display featuring 36 motorized linear pins distributed across two opposing faces that dynamically extend to render 2.5D physical shapes, contours, and physical button affordances directly in the palm.',
+    mechanism: '36 pins across two opposing faces render 2.5D shapes in the hand, recognised 88.5% without vision.',
     useCaseText:
       'Rendering 2.5D object shapes, physical tool profiles, and tangible interface components in VR without visual aid.',
     useCaseTags: ['Shape cues'],
@@ -715,8 +697,7 @@ export const devices: readonly Device[] = [
     author: 'Hrvoje Benko, Christian Holz, Mike Sinclair, Eyal Ofek',
     title:
       'NormalTouch and TextureTouch: High-fidelity 3D Haptic Shape Rendering on Handheld Virtual Reality Controllers',
-    mechanism:
-      'A 4x4 matrix of independently actuated pins mounted on a handheld VR controller dynamically elevates pins to conform to virtual surface geometries, rendering fine-grained physical textures and 3D surface profiles.',
+    mechanism: 'A 4 by 4 matrix of actuated pins renders object shape including detailed surface structure.',
     useCaseText:
       "Rendering high-fidelity 3D geometric shape details and surface textures directly against the user's fingertip.",
     useCaseTags: ['Shape cues'],
@@ -751,8 +732,7 @@ export const devices: readonly Device[] = [
     category: 'Flywheel torque',
     author: 'Daijiro Koga, Takahiro Itagaki',
     title: 'Virtual Chanbara',
-    mechanism:
-      'A high-speed flywheel mounted inside a Japanese wooden sword (shinai) handle is rapidly braked by a mechanical clutch to transfer rotational angular momentum into sharp collision impact forces.',
+    mechanism: 'The earliest flywheel device here: braking a spinning wheel delivers sword-strike impact in VR.',
     useCaseText:
       'Simulating rigid sword collisions, slashing weapon impacts, and martial arts combat in virtual reality.',
     useCaseTags: ['Impact cues', 'Weapon combat', 'Flywheel braking'],
@@ -783,8 +763,7 @@ export const devices: readonly Device[] = [
     category: 'Flywheel torque',
     author: '',
     title: '',
-    mechanism:
-      'A gimballed flywheel tilts to steer gyroscopic torque across impact, motion and resistance cues.',
+    mechanism: 'A gimballed flywheel tilts to steer gyroscopic torque across impact, motion and resistance cues.',
     useCaseText:
       'Providing active vibration, impact, motion, resistance cues in virtual reality interactions.',
     useCaseTags: ['Vibration cues', 'Impact cues', 'Motion cues', 'Resistance cues'],
@@ -815,8 +794,7 @@ export const devices: readonly Device[] = [
     category: 'Flywheel torque',
     author: 'Kyle N. Winfree, Joseph M. Romano, Jamie Gewirtz, Katherine J. Kuchenbecker',
     title: 'Control of a High-Fidelity Ungrounded Torque Feedback Device: The iTorqU 2.1',
-    mechanism:
-      'A high-speed momentum wheel suspended inside a motorized two-axis Cardan gimbal generates continuous ungrounded gyroscopic precession torques (up to 1.4 Nm) to guide user hand motions.',
+    mechanism: 'A gimballed flywheel redirects its spin axis, producing torque that pulls the hand in a direction.',
     useCaseText:
       'Rendering directional kinesthetic guidance, rotational resistance, and ungrounded steering forces in virtual space.',
     useCaseTags: ['Motion cues', 'Gyroscopic precession', 'Torque guidance'],
@@ -848,8 +826,7 @@ export const devices: readonly Device[] = [
     author: 'Takeru Hashimoto, Shigeo Yoshida, Takuji Narumi',
     title:
       'MetamorphX: An Ungrounded 3-DoF Moment Display that Changes its Physical Properties through Rotational Impedance Control',
-    mechanism:
-      'Opposed high-speed control moment gyroscopes (CMGs) with rotational impedance control dynamically vary apparent rotational inertia, damping, and 3-DoF moment of inertia in real time.',
+    mechanism: 'Opposed gyroscopes generate 3-DoF moment, changing the inertia and viscosity of the wielded object.',
     useCaseText:
       'Simulating dynamic object inertia, fluid viscosity, and changing rotational resistance of virtual tools.',
     useCaseTags: ['Resistance cues', 'Rotational inertia', 'Control moment gyroscope'],
@@ -880,8 +857,7 @@ export const devices: readonly Device[] = [
     category: 'Flywheel torque',
     author: 'Michiru Sobue, Soma Kato, Izumi Mizoguchi, Hiroyuki Kajimoto',
     title: 'Presentation of Hitting Sensation to the Racket by a Single DC Motor Embedded in a Handle',
-    mechanism:
-      'A single high-torque DC motor embedded inside a racket grip is pulsed with asymmetric bidirectional drive waveforms to render sharp impact shocks while suppressing directional torque perception.',
+    mechanism: 'A motor driver brakes the spinning rotor abruptly, and the reverse torque reads as an impact.',
     useCaseText:
       'Rendering realistic racket ball collisions and transient impact shocks in VR sports simulators.',
     useCaseTags: ['Impact cues', 'VR racket sports', 'Motor inertia pulse'],
@@ -912,8 +888,7 @@ export const devices: readonly Device[] = [
     category: 'Flywheel torque',
     author: '',
     title: '',
-    mechanism:
-      'A flywheel is fired and braked to produce directional impact, optimised for physical and felt force.',
+    mechanism: 'A flywheel is fired and braked to produce directional impact, optimised for physical and felt force.',
     useCaseText: 'Providing active impact cues in virtual reality interactions.',
     useCaseTags: ['Impact cues'],
     generalUseCases: ['Gaming', 'Training'],
@@ -943,8 +918,7 @@ export const devices: readonly Device[] = [
     category: 'Flywheel torque',
     author: '',
     title: '',
-    mechanism:
-      'Fully encapsulated flywheel modules attach to objects, prototyping kinesthetic and movement cues.',
+    mechanism: 'Fully encapsulated flywheel modules attach to objects, prototyping kinesthetic and movement cues.',
     useCaseText: 'Providing active impact, resistance cues in virtual reality interactions.',
     useCaseTags: ['Impact cues', 'Resistance cues'],
     generalUseCases: ['Gaming', 'Training'],
@@ -974,8 +948,7 @@ export const devices: readonly Device[] = [
     category: 'Exchangeable actuator modules',
     author: 'Chaeyong Park, Jeongwoo Kim, Jinsoo Kim, Seungmoon Choi',
     title: 'HaptiCraft: A Modular Multimodal Haptic Controller for Immersive Virtual Reality Interactions',
-    mechanism:
-      'Modular interchangeable haptic cubes attach onto a core handheld controller chassis, dynamically combining vibration, impact, thermal, variable inertia, and magnetorheological (MR) fluid variable stiffness actuators.',
+    mechanism: 'Swappable cube modules add vibration, impact, thermal and MR-fluid stiffness to one controller.',
     useCaseText:
       'Rendering multimodal tactile and kinesthetic sensations (heat/cold, impact, stiffness, vibrations) by interchanging hardware modules.',
     useCaseTags: ['Thermal cues', 'Stiffness cues', 'Vibration cues', 'Impact cues'],
@@ -1010,8 +983,7 @@ export const devices: readonly Device[] = [
     category: 'Exchangeable actuator modules',
     author: 'Hyunjae Gil, Abbas Khawaja, Ben Cressman, Andrew Gerungan, Jin Ryong Kim',
     title: 'SensoryBlox: Plug-and-Feel Modular Multi-Sensory User Interface for Immersive Cardboard VR',
-    mechanism:
-      'Plug-and-feel modular tactile blocks snap onto Cardboard VR headsets and controllers, instantly routing power and signals to thermal thermoelectric Peltier units and vibrotactile actuators.',
+    mechanism: 'Plug-and-feel modules clip onto a cardboard VR viewer, adding thermal and vibrotactile channels.',
     useCaseText:
       'Adding affordable, reconfigurable thermal and vibrotactile sensory feedback to low-cost VR headsets and handhelds.',
     useCaseTags: ['Thermal cues', 'Vibration cues'],
@@ -1047,8 +1019,7 @@ export const devices: readonly Device[] = [
     author: 'Martin Feick, Cihan Biyikli, Kiran Gani, Anton Wittig, Anthony Tang, Antonio Krüger',
     title:
       'VoxelHap: A Toolkit for Constructing Proxies Providing Tactile and Kinesthetic Haptic Feedback in Virtual Reality',
-    mechanism:
-      'An open-source toolkit combining functional active Voxels (integrated actuators for vibration, sensing, and resistance) with modular tactile Plates (shape, texture, weight) to rapidly build versatile VR haptic proxy objects.',
+    mechanism: 'Actuated voxels assemble into proxies, mixing tactile vibration with kinesthetic resistance.',
     useCaseText:
       'Constructing modular physical props and proxies that combine tactile textures with kinesthetic resistance for VR tools.',
     useCaseTags: ['Vibration cues', 'Resistance cues'],
@@ -1080,8 +1051,7 @@ export const devices: readonly Device[] = [
     author: 'Diego Monteiro et al.',
     title:
       'Design and Development of a Low-cost Device for Weight and Center of Gravity Simulation in Virtual Reality',
-    mechanism:
-      'Pumps move water between dual reservoirs driven by stepper motor syringes to dynamically modulate total mass up to 500g and shift center of gravity.',
+    mechanism: 'Pumps move water between reservoirs to change both total weight and the centre of gravity.',
     useCaseText:
       'Simulating dynamic heft, shifting balance, and fluid inertia across diverse virtual objects in VR.',
     useCaseTags: ['Weight magnitude cues', 'Weight distribution cues', 'Shape cues'],
@@ -1112,8 +1082,7 @@ export const devices: readonly Device[] = [
     category: 'Liquid mass shifting',
     author: 'Chih-Hao Cheng et al.',
     title: 'GravityCup: A liquid-based haptics for simulating dynamic weight in virtual reality',
-    mechanism:
-      'Bi-directional pumping transfers liquid into and out of a handheld cup bladder, dynamically modulating mass and inertia during pouring and filling.',
+    mechanism: 'Water is pumped into and out of a cup so its weight changes as the virtual vessel fills.',
     useCaseText:
       'Simulating dynamic liquid volume, scooping, and container weight changes in virtual reality.',
     useCaseTags: ['Weight magnitude cues', 'Shape cues'],
@@ -1148,8 +1117,7 @@ export const devices: readonly Device[] = [
     category: 'Liquid mass shifting',
     author: 'Alexander Kalus et al.',
     title: 'MobileGravity: Mobile Simulation of a High Range of Weight in Virtual Reality',
-    mechanism:
-      'Decoupled docking base station transfers liquid up to 1 kg at 235 g/s into untethered handheld controller proxies for unencumbered room-scale VR.',
+    mechanism: 'Liquid transfers in and out of the device to render a high range of absolute weight while mobile.',
     useCaseText:
       'Rendering a high range of realistic object weights in room-scale untethered virtual reality.',
     useCaseTags: ['Weight magnitude cues', 'Shape cues'],
@@ -1185,8 +1153,7 @@ export const devices: readonly Device[] = [
     author: 'Alexander Kalus, Martin Kocur, Johannes Klein, Manuel Mayer, Niels Henze',
     title:
       'PumpVR: Rendering the Weight of Objects and Avatars through Liquid Mass Transfer in Virtual Reality',
-    mechanism:
-      'A high-speed bi-directional water pump coupled with miniature solenoid valves rapidly transfers liquid mass in and out of the handheld controller chambers, dynamically modulating absolute physical weight to render virtual objects and avatar limb weight.',
+    mechanism: "Liquid mass transfers between chambers to render the weight of objects and of the avatar's own limb.",
     useCaseText:
       'Dynamically altering absolute physical controller weight to render heavy objects, avatar limb fatigue, and fluid container filling in VR.',
     useCaseTags: ['Weight magnitude cues', 'Shape cues'],
@@ -1222,8 +1189,7 @@ export const devices: readonly Device[] = [
     author: 'X. Wang, D. Vilela Monteiro, L.-H. Lee, P. Hui, H.-N. Liang',
     title:
       'VibroWeight: Simulating Weight and Center of Gravity Changes of Objects in Virtual Reality for Enhanced Realism',
-    mechanism:
-      'A handheld haptic display utilizing high-density liquid metal transferred between internal chambers to simultaneously modulate absolute mass and center of gravity (CoG), coupled with a voice-coil actuator for high-definition contact vibration cues.',
+    mechanism: 'Liquid shifts both total mass and its balance, while a voice coil adds vibration at contact.',
     useCaseText:
       'Rendering simultaneous weight magnitude shifts, 3D center-of-gravity redistribution, and vibrotactile contact feedback in VR.',
     useCaseTags: ['Vibration cues', 'Weight magnitude cues', 'Weight distribution cues', 'Shape cues'],
@@ -1258,8 +1224,7 @@ export const devices: readonly Device[] = [
     category: 'Solid mass shifting',
     author: 'Yuhu Liu et al.',
     title: 'Augmented Haptic VR Experience Combining Two Weight-Shifting Versatile Controllers',
-    mechanism:
-      'Motorized internal weight-shifting modules in two versatile controllers dynamically modulate center of mass, impact force, and perceived volume.',
+    mechanism: 'A motorised reel raises and drops the mass vertically in two controllers for impact and vibration.',
     useCaseText:
       'Simulating versatile kinesthetic impacts, shifting mass balance, and two-handed multi-configuration tool interactions in VR.',
     useCaseTags: ['Vibration cues', 'Impact cues', 'Weight distribution cues'],
@@ -1295,8 +1260,7 @@ export const devices: readonly Device[] = [
     author: 'André Zenner and Antonio Krüger',
     title:
       'Shifty: A Weight-Shifting Dynamic Passive Haptic Proxy to Enhance Object Perception in Virtual Reality',
-    mechanism:
-      'A motor slides an internal weight along a rod, altering perceived length, thickness and heaviness.',
+    mechanism: 'A motor slides an internal weight along a rod, altering perceived length, thickness and heaviness.',
     useCaseText:
       'Providing active weight magnitude, weight distribution, shape cues in virtual reality interactions.',
     useCaseTags: ['Weight magnitude cues', 'Weight distribution cues', 'Shape cues'],
@@ -1332,8 +1296,7 @@ export const devices: readonly Device[] = [
     author: 'Shahabedin Sagheb, Frank Wencheng Liu, Alireza Bahremand, Assegid Kidane, Robert LiKamWa',
     title:
       'SWISH: A Shifting-Weight Interface of Simulated Hydrodynamics for Haptic Perception of Virtual Fluid Vessels',
-    mechanism:
-      'Motorized dual-axis linear rails rapidly translate internal solid brass masses driven by real-time smoothed-particle hydrodynamics (SPH) physics, recreating the dynamic shifting center-of-gravity of sloshing liquids in handheld virtual vessels.',
+    mechanism: 'Motors relocate the centre of gravity to emulate liquid sloshing inside a handheld vessel.',
     useCaseText:
       'Simulating realistic liquid sloshing, pouring, and viscosity within handheld bottles and cups in VR/MR.',
     useCaseTags: ['Weight distribution cues', 'Shape cues'],
@@ -1370,8 +1333,7 @@ export const devices: readonly Device[] = [
       'Jotaro Shigeyama, Takeru Hashimoto, Shigeo Yoshida, Takuji Narumi, Tomohiro Tanikawa, Michitaka Hirose',
     title:
       'Transcalibur: A Weight Shifting Virtual Reality Controller for 2D Shape Rendering based on Computational Perception Model',
-    mechanism:
-      'Two motorized arms equipped with counterweights expand and rotate in 2-DOF space to dynamically alter mass distribution and rotational inertia, rendering diverse 2D virtual weapon and tool shapes via a computational perception model.',
+    mechanism: 'A 2-DoF weight shift reconfigures mass distribution, rendering 2D shapes via a perception model.',
     useCaseText:
       'Simulating the apparent shape, length, and inertia of diverse virtual handheld objects (swords, shields, wands) in VR.',
     useCaseTags: ['Weight distribution cues', 'Shape cues'],
@@ -1407,8 +1369,7 @@ export const devices: readonly Device[] = [
     author: 'Shuntaro Shimizu et al.',
     title:
       'Unident: Providing Impact Sensations on Handheld Objects via High-Speed Change of the Rotational Inertia',
-    mechanism:
-      'Timing belt drives an internal movable mass along the grip at high speed, altering rotational inertia during user swings to evoke sharp impact sensations.',
+    mechanism: 'A belt drives a weight along the grip, giving directional impact and the size of the held object.',
     useCaseText:
       'Providing realistic ungrounded impact sensations and virtual object length/inertia perception in handheld VR tasks.',
     useCaseTags: ['Impact cues', 'Shape cues'],
@@ -1443,8 +1404,7 @@ export const devices: readonly Device[] = [
     category: 'Solid mass shifting',
     author: 'Ryota Koshiyama et al.',
     title: 'VolRec: Haptic display of virtual inner volume in consideration of angular moment',
-    mechanism:
-      'Linear motion guide moves an internal weight along the central axis to dynamically displace the center of gravity and modulate angular moment.',
+    mechanism: "A motor raises the grasped object's centre of gravity to convey the volume enclosed inside it.",
     useCaseText:
       'Displaying perceived inner volume and liquid filling levels of virtual handheld containers.',
     useCaseTags: ['Weight distribution cues', 'Shape cues'],
@@ -1475,8 +1435,7 @@ export const devices: readonly Device[] = [
     category: 'Solid mass shifting',
     author: 'Michael White et al.',
     title: 'The Case for Haptic Props: Shape, Weight and Vibro-tactile Feedback',
-    mechanism:
-      'Tracked physical props with modular mass distribution calibrate passive weight matching against active vibrotactile feedback.',
+    mechanism: 'Weighted physical props are compared against vibrotactile feedback for shape and weight realism.',
     useCaseText:
       'Evaluating empirical impact of mass distribution, weight realism, and physical grip stance in VR sports and tool simulations.',
     useCaseTags: ['Weight magnitude cues'],
@@ -1508,8 +1467,7 @@ export const devices: readonly Device[] = [
     author: 'Neung Ryu et al.',
     title:
       'GamesBond: Bimanual Haptic Illusion of Physically Connected Objects for Immersive VR Using Grip Deformation',
-    mechanism:
-      'Paired unlinked controllers actuate bending and twisting servo backbones in real-time, creating the haptic illusion of a single connected deformable object between both hands.',
+    mechanism: 'Paired controllers deform their grips in sync, so the hands feel one connected object between them.',
     useCaseText:
       'Rendering bimanual sensations of connected virtual props such as jumping ropes, bows, and elastic bands in VR.',
     useCaseTags: ['Shape cues'],
@@ -1544,8 +1502,7 @@ export const devices: readonly Device[] = [
     category: 'Grip morphing',
     author: 'Benjamin C. Mac Murray et al.',
     title: 'A variable shape and variable stiffness controller for haptic virtual interactions',
-    mechanism:
-      'Soft pneumatic elastomeric handle sleeve dynamically inflates and deflates to modulate grip diameter and compliance between rigid and compressible states.',
+    mechanism: 'A pneumatic chamber in the grip inflates and deflates, varying how firm the held object feels.',
     useCaseText:
       'Providing active stiffness and shape feedback for grasping rigid vs. soft compliant virtual items.',
     useCaseTags: ['Stiffness cues', 'Shape cues'],
@@ -1577,8 +1534,7 @@ export const devices: readonly Device[] = [
     author: 'Yuqian Sun et al.',
     title:
       'PaCaPa: A Handheld Haptic Device for Rendering Size, Shape, and Stiffness of Virtual Tools in Virtual Reality',
-    mechanism:
-      'Two motorized wings adjust their opening angles dynamically via servo motors against the palm and fingers to render object dimensions, geometry, and contact stiffness.',
+    mechanism: 'Two motorised wings open against palm and fingers, rendering the size, shape and stiffness of tools.',
     useCaseText:
       'Simulating the size, contour, and impact stiffness of virtual tools like sticks, swords, and rackets in VR.',
     useCaseTags: ['Stiffness cues', 'Shape cues'],
@@ -1613,8 +1569,7 @@ export const devices: readonly Device[] = [
     category: 'Grip morphing',
     author: 'Filipe Barbosa et al.',
     title: 'Shape-A-Getti: A haptic device for getting multiple shapes using a simple actuator',
-    mechanism:
-      'Single gear motor rotates radial poles along geared tracks to transform the grip into distinct symmetrical 3D cross-sections and contours.',
+    mechanism: 'One actuator rotates radial poles into different profiles, so a single motor renders many shapes.',
     useCaseText:
       'Rendering polymorphic shape profiles and thickness changes for grasping virtual handles, flashlights, and cylinders.',
     useCaseTags: ['Shape cues'],
@@ -1645,8 +1600,7 @@ export const devices: readonly Device[] = [
     category: 'Grip morphing',
     author: 'Jian Zhang et al.',
     title: 'ThumbShift: Modulating Perceived Object Properties Through Dynamic Thumb Repositioning',
-    mechanism:
-      'Internal linear servo actuator repositions the thumb rest along the handle axis to dynamically manipulate grip span and trick visuo-haptic perception of object weight and size.',
+    mechanism: 'A motor and servo reposition the thumb rest, changing perceived object size and heaviness.',
     useCaseText:
       'Modulating perceived heaviness, heft, and scale of handheld objects in virtual reality without large force-feedback motors.',
     useCaseTags: ['Weight magnitude cues', 'Shape cues'],
@@ -1677,8 +1631,7 @@ export const devices: readonly Device[] = [
     category: 'Grip morphing',
     author: 'Eric J. Gonzalez et al.',
     title: 'X-Rings: A Hand-Mounted 360° Shape Display for Grasping in Virtual Reality',
-    mechanism:
-      'A vertical stack of four motorized expandable rings dynamically expands and contracts within ~100 ms to form full 360° graspable shapes with capacitive touch sensing.',
+    mechanism: 'Concentric rings rise and fall around the hand, forming 360 degree grip shapes for grasping.',
     useCaseText:
       'Rendering dynamic 360-degree contours, grasping affordances, and squeezing stiffness for handles, goblets, and spheres.',
     useCaseTags: ['Shape cues'],
@@ -1713,8 +1666,7 @@ export const devices: readonly Device[] = [
     category: 'Electrode stimulation',
     author: 'Zhenxuan He et al.',
     title: 'ShakeSense: An Electrotactile System to Simulate Shaking a Container with Fluid Contents',
-    mechanism:
-      'High-density electrotactile arrays lining the container fingerpad contact surfaces render spatial fluid sloshing pressure and shear waves computed via real-time SPH liquid simulation.',
+    mechanism: 'Two 64-electrode arrays on the cup walls stimulate thumb and index to simulate sloshing contents.',
     useCaseText:
       'Simulating dynamic liquid splashing, sloshing waves, and fluid viscosity inside handheld virtual containers.',
     useCaseTags: ['Friction cues'],
@@ -1745,8 +1697,7 @@ export const devices: readonly Device[] = [
     category: 'Electrode stimulation',
     author: 'Hongnan Lin et al.',
     title: 'Slip-Grip: An Electrotactile Method to Simulate Weight',
-    mechanism:
-      'Dynamic electrotactile stimulation on flexible fingerpad electrode arrays delivers micro-slip sensations when grip force drops below virtual weight thresholds, compelling firmer grip and inducing weight perception.',
+    mechanism: 'Electrotactile stimulation fakes fingertip slip, so the user grips harder and reads it as weight.',
     useCaseText:
       'Rendering weight perception and slip transitions on handheld virtual objects without bulky mechanical actuators.',
     useCaseTags: ['Friction cues', 'Weight magnitude cues'],
@@ -1777,8 +1728,7 @@ export const devices: readonly Device[] = [
     category: 'Peltier cell actuation',
     author: 'Teng Han et al.',
     title: 'Mouillé: Exploring Wetness Illusion on Fingertips to Enhance Immersive Experience in VR',
-    mechanism:
-      'Dual motorized Peltier thermoelectric arrays pressed against fingertips and palm deliver rapid cooling combined with tactile pressure to induce realistic multi-level wetness illusions.',
+    mechanism: 'Rapid cooling at the fingertips evokes an illusion of wetness during virtual contact with liquids.',
     useCaseText:
       'Rendering tactile wetness illusions and temperature sensations during virtual water and fluid interactions.',
     useCaseTags: ['Thermal cues'],
@@ -1814,8 +1764,7 @@ export const devices: readonly Device[] = [
     author: 'Philipp Pascal Hoffmann et al.',
     title:
       'ThermalPen: Investigating the Influence of Thermal Haptic Feedback for Creativity in 3D Sketching',
-    mechanism:
-      'Miniature Peltier thermoelectric element coupled with a compact heat sink and cooling fan mounted on a smart 3D sketch pen provides dynamic thermal heating and cooling to the index finger during VR drawing.',
+    mechanism: 'A Peltier cell in the barrel maps the colour and texture of each 3D sketch stroke to temperature.',
     useCaseText:
       'Augmenting 3D sketching, creative modeling, and material rendering with temperature cues in VR.',
     useCaseTags: ['Thermal cues'],
@@ -1851,8 +1800,7 @@ export const devices: readonly Device[] = [
     author: 'Seungwoo Je et al.',
     title:
       'Aero-plane: A Handheld Force-Feedback Device that Renders Weight Motion Illusion on a Virtual 2D Plane',
-    mechanism:
-      'Two miniature electric ducted fan propellers dynamically shift thrust vectors to generate continuous 2D planar weight motion and inertia illusions up to 14 N within 0.3 s.',
+    mechanism: 'Two propellers push along the board, so a virtual mass seems to roll across a 2D plane.',
     useCaseText:
       'Rendering dynamic weight shifting, inertia, and sliding sensations across 2D planar props like trays and kitchen tools in VR.',
     useCaseTags: ['Motion cues', 'Weight distribution cues', 'Shape cues'],
@@ -1887,8 +1835,7 @@ export const devices: readonly Device[] = [
     category: 'Propeller thrust',
     author: 'Keyvan Arezoo et al.',
     title: 'A Novel Ungrounded Haptic Device for Generation and Orientation of Force and Torque Feedbacks',
-    mechanism:
-      'Dual counter-rotating propellers mounted inside a 2-DoF motorized gimbal cage with linear sliders continuously orient 3D force vectors up to 15 N and decoupled torques up to 1.0 N·m in <370 ms.',
+    mechanism: 'A gimbal orients propeller-generated force and torque in any direction around the handle.',
     useCaseText:
       'Delivering simultaneous multi-axis force vectors and rotational torque cues for ungrounded tools and steering in VR.',
     useCaseTags: ['Motion cues', 'Resistance cues'],
@@ -1920,8 +1867,7 @@ export const devices: readonly Device[] = [
     author: 'Yang Chen, Xinlei Yu, and Heather Culbertson',
     title:
       'CrazyJoystick: A Handheld Flyable Joystick for Providing On-Demand Haptic Feedback in Extended Reality',
-    mechanism:
-      'An autonomous quadrotor flies to the user on demand, then transitions into a handheld joystick whose thrust is dynamically reallocated to render multi-axis kinesthetic forces and torques.',
+    mechanism: 'A quadrotor flies to the user, then reallocates its thrust as handheld torque and force.',
     useCaseText:
       'Providing on-demand flyable joystick interaction and active directional resistance in spatial VR navigation.',
     useCaseTags: ['Motion cues', 'Resistance cues'],
@@ -1956,8 +1902,7 @@ export const devices: readonly Device[] = [
     category: 'Propeller thrust',
     author: 'Jonas Auda et al.',
     title: 'Flyables: Haptic Input Devices for Virtual Reality using Quadcopters',
-    mechanism:
-      "Autonomous micro-quadcopters deliver physical 3D-printed UI elements and tangible interactive handles to the user's hand on demand in mid-air.",
+    mechanism: 'A quadcopter delivers a matching 3D-printed prop on demand, so each UI element has its own form.',
     useCaseText:
       'Supplying physical prop counterparts and tangible shapes on demand for diverse UI widgets in VR.',
     useCaseTags: ['Shape cues'],
@@ -1993,8 +1938,7 @@ export const devices: readonly Device[] = [
     author: 'Christian Eichhorn et al.',
     title:
       'Hydra – A Hybrid Controller for Multi-Haptic Feedback to Mimic Impulsive Forces in Virtual Reality',
-    mechanism:
-      'Hybrid handheld controller integrating four toroidal brushless propellers for continuous aerodynamic thrust combined with an electromagnetic linear solenoid accelerating a 90 g slug to generate 26 N peak impulsive recoil.',
+    mechanism: 'A solenoid fires a 90 g projectile for 26 N impacts while four propellers push the hand.',
     useCaseText:
       'Simulating sharp impulsive collisions, weapon discharges, and sustained aerodynamic drag in VR combat and tool simulations.',
     useCaseTags: ['Impact cues', 'Motion cues'],
@@ -2025,8 +1969,7 @@ export const devices: readonly Device[] = [
     category: 'Propeller thrust',
     author: 'Tomoya Sasaki et al.',
     title: 'LevioPole: Mid-Air Haptic Interactions Using Multirotor',
-    mechanism:
-      'Multirotor thruster assemblies mounted at both ends of a two-handed carbon pole generate dynamic mid-air rotational torque and linear resistance forces up to 15 N.',
+    mechanism: 'Multirotors at both ends of a two-handed pole push against the air for mid-air resistance.',
     useCaseText:
       'Simulating bimanual mid-air sports resistance, kayaking, and heavy virtual pole balancing in VR.',
     useCaseTags: ['Resistance cues'],
@@ -2061,8 +2004,7 @@ export const devices: readonly Device[] = [
     category: 'Propeller thrust',
     author: 'Seongkook Heo et al.',
     title: "Thor's Hammer: An Ungrounded Force Feedback Device Utilizing Propeller-Induced Propulsive Force",
-    mechanism:
-      'Six high-thrust motors and propellers positioned along orthogonal cube faces synthesize arbitrary 3-DoF ungrounded directional force vectors up to 4 N to simulate weight, drag, and impact forces.',
+    mechanism: 'Six propellers combine into a 3-DoF ungrounded force vector, rendering weight, stiffness and motion.',
     useCaseText:
       'Rendering 3D ungrounded force vectors, weight, spring stiffness, and directional wind drag in VR.',
     useCaseTags: ['Stiffness cues', 'Motion cues', 'Resistance cues', 'Weight magnitude cues'],
@@ -2097,8 +2039,7 @@ export const devices: readonly Device[] = [
     category: 'Mass acceleration',
     author: 'Jaesuk Jang, Seokmin Hong, Jaeyoung Park',
     title: 'OrbitStick: A Hand-Held Haptic Impact Display With Mass Shifting Mechanism',
-    mechanism:
-      'A 2-DOF spherical mass shifting mechanism moves a guided impact mass along hemispherical coordinates and rapidly decelerates it, delivering high-magnitude 3D directional impact forces and torque sensations to the hand.',
+    mechanism: 'A spherical mass runs on an invisible hemisphere and abruptly changes direction to render impact.',
     useCaseText:
       'Rendering multi-directional ungrounded impact forces, collisions, and recoil sensations in VR.',
     useCaseTags: ['Impact cues', 'Motion cues'],
@@ -2129,8 +2070,7 @@ export const devices: readonly Device[] = [
     category: 'Mass acceleration',
     author: 'Yuning Su, Weizhi Nai, Xiaoying Sun, Zuowei Sun',
     title: 'Design and Modeling of an Ungrounded Haptic Gun that Simulates Recoil Using Asymmetric Force',
-    mechanism:
-      'An ungrounded voice-coil linear actuator drives an internal inertial mass with sharp acceleration pulses and slow sub-threshold return strokes, generating convincing directional firearm recoil kicks.',
+    mechanism: 'A voice coil drives asymmetric force in a gun-shaped controller, rendering recoil rather than buzz.',
     useCaseText: 'Simulating realistic ungrounded firearm recoil sensations in VR shooting simulations.',
     useCaseTags: ['Impact cues'],
     generalUseCases: ['Gaming', 'Shooting simulation', 'Tactical training'],
@@ -2160,8 +2100,7 @@ export const devices: readonly Device[] = [
     category: 'Mass acceleration',
     author: 'Tomohiro Amemiya and Taro Maeda',
     title: 'Asymmetric Oscillation Distorts the Perceived Heaviness of Handheld Objects',
-    mechanism:
-      'Asymmetric vertical acceleration pulses via voice-coil / linear shaker distort perceived object heaviness through nonlinear biological force integration.',
+    mechanism: 'Asymmetric oscillation of an internal mass distorts how heavy the handheld object feels.',
     useCaseText:
       'Distorting perceived heaviness and inducing weight illusions on handheld controllers without external grounding.',
     useCaseTags: ['Weight magnitude cues'],
@@ -2193,8 +2132,7 @@ export const devices: readonly Device[] = [
     author: 'Daichi Inoue, Kazuki Nishimoto, Takuto Nakamura, Koki Fukuda, Takuji Narumi',
     title:
       'HapReel: A Racket-shaped Haptic Display Controller for Presenting Vibrotactile and Force Feedback through Fingertip Deformation',
-    mechanism:
-      "A motorized tape-reel mechanism embedded in the grip dynamically winds and unwinds a flexible band across the user's fingertip, applying controlled shear traction and deformation.",
+    mechanism: 'Two motors deform the fingertip on a racket-shaped body for vibrotactile and impact feedback.',
     useCaseText:
       'Rendering continuous surface sliding, friction resistance, and fingertip tactile shear during virtual sports.',
     useCaseTags: ['Friction cues', 'Fingertip shear', 'Tape reel deformation'],
@@ -2225,8 +2163,7 @@ export const devices: readonly Device[] = [
     category: 'Surface rotation',
     author: 'Donald Degraen, Anna Reindl, Akhmajon Makhsadov, André Zenner, Antonio Krüger',
     title: 'Envisioning Haptic Design for Immersive Virtual Environments',
-    mechanism:
-      'A rotating mechanical multi-texture disc positioned under the index finger indexes multiple tangible swatch materials, rendering active surface texture and micro-roughness transitions.',
+    mechanism: 'A rotating disc brings physical texture samples under the finger during virtual surface exploration.',
     useCaseText:
       'Tactile surface exploration, texture switching, and material inspection in immersive virtual environments.',
     useCaseTags: ['Friction cues', 'Texture rendering', 'Rotating texture disc'],
@@ -2257,8 +2194,7 @@ export const devices: readonly Device[] = [
     category: 'Surface rotation',
     author: 'Eric Whitmire, Hrvoje Benko, Christian Holz, Eyal Ofek, Mike Sinclair',
     title: 'Haptic Revolver: Touch, Shear, Texture, and Shape Display for Virtual Reality',
-    mechanism:
-      'An actuated wheel embedded in the controller raises to contact the index finger and spins in two directions to render continuous shear friction, contact normal pressure, and surface textures.',
+    mechanism: 'An interchangeable wheel raises and spins under the fingertip for touch, shear, texture and shape.',
     useCaseText:
       'Rendering fingertip contact, surface shear friction, and tangible contours during virtual object touching.',
     useCaseTags: ['Friction cues', 'Shape cues', 'Surface shear'],
@@ -2290,8 +2226,7 @@ export const devices: readonly Device[] = [
     author:
       'Yuhu Liu, Makoto Wakabayashi, Tomokazu Kake, Masaomi Nishidate, Yusuke Watanabe, Osamu Ito, Yusuke Nakagawa, Hideki Mori',
     title: 'Handheld Shear Force Feedback Controller with Double Roller Modules: A Demonstration',
-    mechanism:
-      "Dual independent motorized roller modules arranged symmetrically along the grip drive high-friction cylindrical rollers against the user's palm to present continuous bi-directional shear force.",
+    mechanism: 'Twin unlimited-rotation rollers render shear force and low-frequency vibration against the palm.',
     useCaseText:
       'Simulating continuous traction, slip friction, and directional shear drag during virtual tool manipulation.',
     useCaseTags: ['Friction cues', 'Dual rollers', 'Palm shear force'],
@@ -2322,8 +2257,7 @@ export const devices: readonly Device[] = [
     category: 'Surface rotation',
     author: 'Karon E. MacLean, Michael J. Shaver, Dinesh K. Pai',
     title: 'Handheld Haptics: A USB Media Controller with Force Sensing',
-    mechanism:
-      'A motorized active thumbwheel driven by a precision DC motor is coupled with orthogonal optical force sensing cantilevers, synthesizing programmable detents, spring forces, and friction drag.',
+    mechanism: 'A motorised thumbwheel renders texture and detents as the thumb actively explores a surface.',
     useCaseText:
       'Navigating virtual timelines, media browsing, and rate-controlled scrolling with active haptic resistance.',
     useCaseTags: ['Friction cues', 'Thumbwheel', 'Force sensing'],
@@ -2354,8 +2288,7 @@ export const devices: readonly Device[] = [
     category: 'Surface rotation',
     author: 'Katsuya Maezono, Hikaru Nagano, Masashi Konyo',
     title: 'MateREAL Touch: Handheld Haptic Texture Display with Active Rollers',
-    mechanism:
-      "Active motorized textured rollers integrated on a handheld wand continuously rotate against the user's skin at controlled relative velocities to simulate diverse tactile roughness and sliding friction.",
+    mechanism: 'A tape of up to 30 real material samples rolls under the finger, moving in sync with its motion.',
     useCaseText:
       'Realistic tactile material exploration, surface stroking, and fine texture rendering in virtual shopping and design.',
     useCaseTags: ['Friction cues', 'Active rollers', 'Texture rendering'],
@@ -2386,8 +2319,7 @@ export const devices: readonly Device[] = [
     category: 'Surface rotation',
     author: 'Jo-Yu Lo, Da-Yuan Huang, Chien-Chieh Sun, Bing-Yu Chen',
     title: 'RollingStone: Using Single Slip Taxel for Enhancing Surface Texture Rendering',
-    mechanism:
-      "A miniature trackball taxel driven by dual high-speed micro motors rotates beneath the user's fingertip, rendering omnidirectional continuous shear slip and fine surface micro-textures.",
+    mechanism: 'A pair of motors spins a ball under the fingertip, rendering 2-DoF slip and surface texture.',
     useCaseText:
       'Enhancing virtual surface inspection, 3D contour tracing, and fine fabric texture exploration in VR.',
     useCaseTags: ['Friction cues', 'Omnidirectional slip', 'Fingertip taxel'],
@@ -2418,8 +2350,7 @@ export const devices: readonly Device[] = [
     category: 'Surface rotation',
     author: 'Myung Jin Kim, Neung Ryu, Jinwook Chang, Andrea Bianchi',
     title: 'SpinOcchio: Understanding Haptic-Visual Congruency for Surface Exploration in VR',
-    mechanism:
-      "Two high-friction counter-rotating slip rings actuated by miniature gearmotors contact the user's thumb and index finger to deliver continuous skin stretch and kinetic friction cues.",
+    mechanism: 'Spinning discs deliver skin-slip to two opposing fingertips as the grip tightens or lets go.',
     useCaseText:
       'Providing realistic slippage, rotational friction, and dynamic skin shear during virtual surface touching.',
     useCaseTags: ['Friction cues', 'Counter-rotating rings', 'Skin stretch'],
@@ -2450,8 +2381,7 @@ export const devices: readonly Device[] = [
     category: 'Plate shearing',
     author: 'Pornthep Preechayasomboon, Ali Israr, Eric Whitmire',
     title: 'Chasm: A Screw Based Expressive Compact Haptic Actuator',
-    mechanism:
-      'A motorized leadscrew actuator translates and shears a contact pad against the fingertip, independently controlling normal indentation and lateral shear displacement up to 10 mm.',
+    mechanism: 'A miniature leadscrew drives a nut carriage that stretches the skin and vibrates it in one unit.',
     useCaseText:
       'Presenting combined normal pressure, tangential skin stretch, and surface friction during tactile exploration.',
     useCaseTags: ['Friction cues', 'Leadscrew shear', 'Tangential stretch'],
@@ -2482,8 +2412,7 @@ export const devices: readonly Device[] = [
     category: 'Plate shearing',
     author: 'Yuichi Kurita, Satoshi Yonezawa, Atsutoshi Ikeda, Tsukasa Ogasawara',
     title: 'Weight and Friction Display Device by Controlling the Slip Condition of a Fingertip',
-    mechanism:
-      'A linear voice-coil driven sliding plate modulates the kinetic friction and slip ratio beneath the fingertip pad, inducing an illusion of shifting weight and lateral shear resistance.',
+    mechanism: 'Plates control the slip condition at the fingertip, producing weight and friction illusions.',
     useCaseText:
       'Simulating virtual object weight and surface friction via fingertip slip ratio manipulation.',
     useCaseTags: ['Friction cues', 'Fingertip slip', 'Shear plate'],
@@ -2514,8 +2443,7 @@ export const devices: readonly Device[] = [
     category: 'Plate shearing',
     author: 'Chia-Wei Lin, Shana Smith',
     title: 'The Effect of Kinetic Friction on Lateral Stroking Perception in a Virtual Environment',
-    mechanism:
-      "A motorized linear stage moves physical texture plates across the participant's restrained finger pad, measuring perceptual thresholds for lateral friction stroking in virtual environments.",
+    mechanism: 'One module stretches the fingerpad for kinetic friction while a second vibrates for texture.',
     useCaseText:
       'Evaluating psychophysical tactile perception, lateral friction cues, and texture discrimination in VR.',
     useCaseTags: ['Friction cues', 'Lateral stroking', 'Linear friction stage'],
@@ -2546,8 +2474,7 @@ export const devices: readonly Device[] = [
     category: 'Spring loading',
     author: 'Ke Shi, Tongshu Chen, Yichen Xiang, Ye Li, Lifeng Zhu, Aiguo Song',
     title: 'iGripper: A Semi-Active Handheld Haptic VR Controller Based on Variable Stiffness Mechanism',
-    mechanism:
-      "A variable stiffness mechanism uses a miniature linear actuator to shift the position of a compression spring along a lever arm, modulating physical stiffness from zero up to the spring's maximum limit, while a blocking latch renders complete rigidity.",
+    mechanism: 'A linear actuator slides a spring along a lever arm, so its reaction sets the felt stiffness.',
     useCaseText:
       'Rendering dynamic variable stiffness, elasticity, and rigid boundary stops when gripping, clamping, or pressing tools and compliant objects in virtual reality.',
     useCaseTags: ['Stiffness cues', 'Elastic resistance', 'Rigid stop cues', 'Object simulation'],
@@ -2579,8 +2506,7 @@ export const devices: readonly Device[] = [
     author: 'Ke Shi, Quan Xiong, Maozeng Zhang, Aiguo Song, Lifeng Zhu',
     title:
       'A Handheld Stiffness Display with a Programmable Spring and Electrostatic Clutches for Haptic Interaction in Virtual Reality',
-    mechanism:
-      'Combines a programmable spring (PS) actuated by an adjustable lever arm with dual electrostatic clutches (ECs) to render three distinct haptic states: free motion (ECs off), controllable elastic force (1st EC active), and rigid locking (both ECs active).',
+    mechanism: 'A programmable spring with electrostatic clutches resists finger flexion in elastic and rigid modes.',
     useCaseText:
       'Providing high-force, low-power stiffness feedback across a wide dynamic range for grasping objects with variable elasticity and rigid geometry in VR.',
     useCaseTags: ['Stiffness cues', 'Elastic resistance', 'Rigid boundary cues', 'Low-power haptics'],
@@ -2612,8 +2538,7 @@ export const devices: readonly Device[] = [
     author: 'Carolin Stellmacher, Michael Bonfert, Ernst Kruijff, Johannes Schöning',
     title:
       'Triggermuscle: Exploring Weight Perception for Virtual Reality Through Adaptive Trigger Resistance in a Haptic VR Controller',
-    mechanism:
-      'A motorized dynamic spring mechanism integrated inside an HTC Vive controller chassis dynamically and continuously alters trigger pull resistance proportionally to simulated virtual object weight, demanding proportional index-finger grasping force.',
+    mechanism: 'A spring mechanism inside a Vive controller varies trigger resistance as the finger pulls.',
     useCaseText:
       'Rendering virtual weight sensations and object heft through dynamic index-finger trigger resistance adjustments in virtual environments.',
     useCaseTags: ['Resistance cues', 'Weight magnitude cues', 'Trigger feedback', 'Object manipulation'],
@@ -2648,7 +2573,7 @@ export const devices: readonly Device[] = [
     category: 'Mass striking',
     author: '',
     title: '',
-    mechanism: 'Pneumatic cylinder drives 240g weight for sharp impact recoil in gun controller.',
+    mechanism: 'A pneumatic cylinder displaces a weight along a gun barrel, replicating shape, weight and recoil.',
     useCaseText: 'Providing active impact cues in virtual reality interactions.',
     useCaseTags: ['Impact cues'],
     generalUseCases: ['Gaming', 'Training'],
@@ -2678,8 +2603,7 @@ export const devices: readonly Device[] = [
     category: 'Mass striking',
     author: 'Jasper Flügge, Luca Hilbrich, Alexander Kalus, Katrin Wolf',
     title: 'FeelCoilins: Enhancing Virtual Drumming with Ungrounded Force Feedback via Solenoid Actuation',
-    mechanism:
-      'Push-pull electromagnetic solenoids embedded inside drumstick controllers accelerate steel plungers to strike internal impact plates, rendering transient ungrounded drumhead collision recoil.',
+    mechanism: 'Two solenoids in each drumstick strike the housing at the moment of virtual drum contact.',
     useCaseText:
       'Providing realistic impact rebound and tactile feedback during virtual drumming and rhythm gaming.',
     useCaseTags: ['Impact cues', 'Solenoid plunger', 'Virtual drumming'],
@@ -2710,7 +2634,7 @@ export const devices: readonly Device[] = [
     category: 'Mass striking',
     author: '',
     title: '',
-    mechanism: 'Internal mass strikes handle stop for rigid collision feedback.',
+    mechanism: 'A servo releases a 394 g hammerhead against the wooden handle, giving a rigid tool collision.',
     useCaseText: 'Providing active impact cues in virtual reality interactions.',
     useCaseTags: ['Impact cues'],
     generalUseCases: ['Gaming', 'Training'],
@@ -2741,8 +2665,7 @@ export const devices: readonly Device[] = [
     author: 'Dong-Geun Kim, Jungeun Lee, Seungmoon Choi',
     title:
       'MMGrip: A Handheld Multimodal Haptic Device Combining Vibration, Impact, and Shear for Realistic Expression of Contact',
-    mechanism:
-      'An integrated multimodal controller combining a voice coil for vibrotactile textures, a solenoid impactor for rigid collisions, and a linear servo shear pad for frictional skin stretch.',
+    mechanism: 'Vibration, impact and shear are combined in one grip so contact events read as realistic.',
     useCaseText:
       'Rendering synchronized high-bandwidth vibration, collision impacts, and lateral shear in virtual reality.',
     useCaseTags: ['Impact cues', 'Multimodal haptics', 'Tri-actuator architecture'],
@@ -2774,8 +2697,7 @@ export const devices: readonly Device[] = [
     author: 'Hong-Xian Chen, Shih-Kang Chiu, Chi-Ching Wen, Hsin-Ruey Tsai',
     title:
       'transPAF: Rendering Omnidirectional Impact Feedback with Dynamic Point of Application of Force All Round a Controller',
-    mechanism:
-      'A motorized circular carriage rotates an electromagnetic impact striker 360 degrees around the cylindrical grip, steering ungrounded ballistic impact forces to any contact point on the hand.',
+    mechanism: 'Rotatable tracks carry an impactor all round the controller, placing impact at any point.',
     useCaseText:
       'Delivering omnidirectional impact cues from projectiles, sword parries, and spatial collisions in VR.',
     useCaseTags: ['Impact cues', 'Omnidirectional carriage', '360-degree impact'],
@@ -2808,8 +2730,7 @@ export const devices: readonly Device[] = [
       'Hiroki Ota, Yutaro Hirao, Monica Perusquía-Hernández, Hideaki Uchiyama, Kiyoshi Kiyokawa, Maud Marchal',
     title:
       'FresnelDeformable: A Softness Presentation Technique Combining Fingertip Plane Tilt Manipulation and Pseudo-Stiffness',
-    mechanism:
-      "Miniature servomotors tilt a contact plate beneath the user's fingertip in response to applied pinch force, modulating local contact area to evoke perceptual softness compliance.",
+    mechanism: 'Servos tilt each fingertip contact plane in response to applied force, presenting softness.',
     useCaseText:
       'Simulating elastic softness and variable material compliance through fingertip contact-plane tilt.',
     useCaseTags: ['Stiffness cues', 'Contact plane tilt', 'Pseudo-stiffness'],
@@ -2841,8 +2762,7 @@ export const devices: readonly Device[] = [
     author:
       'Hiroki Ota, Yutaro Hirao, Monica Perusquía-Hernández, Hideaki Uchiyama, Kiyoshi Kiyokawa, Maud Marchal',
     title: 'FresnelShape: A Contact-Plane Tilt Haptic Display for Enhancing Visuo-Haptic Coherence',
-    mechanism:
-      'Three independent servo-actuated contact plates contact the thumb, index, and middle fingertips, dynamically tilting to match local 3D surface tangent planes of touched virtual objects.',
+    mechanism: 'Fins tilt at three fingertips to render the local orientation of the virtual surface touched.',
     useCaseText:
       'Enhancing visuo-haptic coherence and realistic 3D surface curvature during multi-finger VR manipulation.',
     useCaseTags: ['Shape cues', '3-finger tilting plates', 'Surface tangent tracking'],
@@ -2874,8 +2794,7 @@ export const devices: readonly Device[] = [
     author: 'Hrvoje Benko, Christian Holz, Mike Sinclair, Eyal Ofek',
     title:
       'NormalTouch and TextureTouch: High-fidelity 3D Haptic Shape Rendering on Handheld Virtual Reality Controllers',
-    mechanism:
-      'A 3-DoF Stewart platform beneath the index fingertip tilts and extrudes vertically to match virtual surface normals and contact pressure, simulating rigid 3D object geometry.',
+    mechanism: 'A tilting, extruding platform under the fingertip traces the geometry of virtual objects.',
     useCaseText:
       'Rendering accurate 3D surface normals, planar contours, and rigid shape boundaries in virtual environments.',
     useCaseTags: ['Shape cues', 'Stewart platform', 'Surface normal tilt'],
@@ -2906,8 +2825,7 @@ export const devices: readonly Device[] = [
     category: 'Plate tilting',
     author: 'Ulan Kelesbekov, Gabriele Marini, Zhongyi Bai, Wafa Johal, Eduardo Velloso, Jarrod Knibbe',
     title: 'Stuet: Dual Stewart Platforms for Pinch Grasping Objects in VR',
-    mechanism:
-      'Dual miniature 3-DoF Stewart platforms mounted on the controller handle articulate against both thumb and index fingertips simultaneously, rendering grasp width, tilt, and surface contours.',
+    mechanism: 'Dual Stewart platforms set pinch width and tilt, rendering the form held between two fingers.',
     useCaseText:
       'Enabling high-fidelity two-finger pinch grasping and shape exploration of virtual objects in VR.',
     useCaseTags: ['Shape cues', 'Dual Stewart platforms', 'Pinch grasping'],
@@ -2938,8 +2856,7 @@ export const devices: readonly Device[] = [
     category: 'Vibration',
     author: 'Pierre-Antoine Cabaret, Thomas Howard, Claudio Pacchierotti, Marie Babel, Maud Marchal',
     title: 'Perception of Spatialized Vibrotactile Impacts in a Hand-Held Tangible for Virtual Reality',
-    mechanism:
-      'Dual voice-coil actuators located at opposite ends of a cylindrical handle deliver coordinated vibrotactile impact pulses, synthesizing apparent spatialized impact locations along the hand via amplitude panning.',
+    mechanism: 'Two voice coils in a tracked handle spatialise a vibrotactile impact to a point in the hand.',
     useCaseText: 'Simulating spatialized point-of-impact sensations along a handheld virtual tool or sword.',
     useCaseTags: ['Impact cues', 'Spatialized vibration', 'Dual voice-coil actuators'],
     generalUseCases: ['Gaming', 'Training'],
@@ -2969,7 +2886,7 @@ export const devices: readonly Device[] = [
     category: 'Vibration',
     author: '',
     title: '',
-    mechanism: 'Dual voice coils generate acoustic vibrations for texture and pseudo-force.',
+    mechanism: 'Four actuators combine asymmetric pseudo-force with texture vibration to fake dynamic mass.',
     useCaseText: 'Providing active vibration, weight magnitude cues in virtual reality interactions.',
     useCaseTags: ['Vibration cues', 'Weight magnitude cues'],
     generalUseCases: ['Gaming', 'Training'],
@@ -2999,8 +2916,7 @@ export const devices: readonly Device[] = [
     category: 'Vibration',
     author: 'Fong Wee Teck',
     title: 'Force and Torque Simulation in Virtual Tennis',
-    mechanism:
-      'High-force push-pull electromagnetic solenoids embedded in a racket shaft accelerate masses along orthogonal axes to generate realistic ungrounded impact shocks and off-center torsional torques.',
+    mechanism: 'Four tennis prototypes, the first a push-pull solenoid, simulate racket force and torque.',
     useCaseText:
       'Simulating dynamic ball impact force, racket twist, and ball sweet-spot collisions in virtual tennis.',
     useCaseTags: ['Impact cues', 'Push-pull solenoid', 'Tennis racket simulation'],
@@ -3031,7 +2947,7 @@ export const devices: readonly Device[] = [
     category: 'Vibration',
     author: '',
     title: '',
-    mechanism: 'Vibromotors create spatial tactile patterns.',
+    mechanism: 'Ten actuators touch the hand directly, so spatial vibration patterns do not blur through the body.',
     useCaseText: 'Providing active vibration cues in virtual reality interactions.',
     useCaseTags: ['Vibration cues'],
     generalUseCases: ['Gaming', 'Training'],
@@ -3063,8 +2979,7 @@ export const devices: readonly Device[] = [
       'Mayank Patel, Asim Unmesh, A. Ipsita, Levi Erickson, Priyam Maheshwari, Rahul Jain, Jingyu Shi, Laura H. Blumenschein, Karthik Ramani',
     title:
       'PowVRtool: A Handheld Haptic Device for Realistic Power Tool Feedback in VR-based Manufacturing Training',
-    mechanism:
-      'A hybrid multimodal actuator architecture combining an ERM motor for sustained rotational rumble, an LRA for trigger clicks, and a high-force solenoid ram for hammer-drill kickback.',
+    mechanism: 'An LRA, an ERM motor and a magnetic ram together render power-tool vibration and impulse.',
     useCaseText:
       'Industrial power tool simulation, manufacturing assembly training, and vocational education in VR.',
     useCaseTags: ['Vibration cues', 'Impact cues', 'Hybrid power tool actuators'],
@@ -3095,8 +3010,7 @@ export const devices: readonly Device[] = [
     category: 'Vibration',
     author: 'Jaeyeon Lee, Mike Sinclair, Mar Gonzalez-Franco, Eyal Ofek, Christian Holz',
     title: 'TORC: A Virtual Reality Controller for In-Hand High-Dexterity Finger Interaction',
-    mechanism:
-      'Force-sensing pads with collocated voice-coil actuators on thumb and finger rests synthesize pseudo-compliance and detailed micro-textures through synchronized force-modulated vibrotactile feedback.',
+    mechanism: 'Voice coils under each finger rest render texture, and stiffness as an illusion, no moving parts.',
     useCaseText:
       'Enabling high-dexterity virtual object squeezing, compliant surface feeling, and in-hand manipulation.',
     useCaseTags: ['Stiffness cues', 'Vibration cues', 'Collocated voice-coil'],
@@ -3127,8 +3041,7 @@ export const devices: readonly Device[] = [
     category: 'Vibration',
     author: 'Adilzhan Adilkhanov, Amir Yelenov, Ramakanth Singal Reddy, Alexander Terekhov, Zhanat Kappassov',
     title: 'VibeRo: Vibrotactile Stiffness Perception Interface for Virtual Reality',
-    mechanism:
-      'A dual-pinned voice-coil actuator coupled with force sensing resistors (FSRs) laterally squeezes the index and thumb pads, rendering variable pseudo-stiffness profiles as pinch force increases.',
+    mechanism: 'A voice coil squeezes the fingertips, turning vibrotactile output into perceived softness.',
     useCaseText: 'Presenting variable virtual elasticity and compliant object grasping in VR simulations.',
     useCaseTags: ['Stiffness cues', 'Dual-pinned voice-coil', 'Fingertip squeeze'],
     generalUseCases: ['Gaming', 'Training'],

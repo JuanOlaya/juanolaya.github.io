@@ -29,7 +29,7 @@ const active = defineModel<string>({ required: true });
       :data-tab="tab.id"
       :class="[
         variant === 'card'
-          ? '-mb-px min-h-9 border-b-2 px-2 text-xs font-semibold transition-colors first:pl-0'
+          ? '-mb-px min-h-8 border-b-2 px-1.5 text-[11px] font-semibold whitespace-nowrap transition-colors first:pl-0'
           : 'keycap flex min-h-9 items-center gap-1.5 px-3 text-xs font-semibold select-none',
         variant === 'card' &&
           (tab.id === active
