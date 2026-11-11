@@ -107,19 +107,41 @@ classDiagram
 
 ---
 
-## 4. Pilar 3: Modern Web Guidance en Todo el Repositorio
+## 4. Pilar 3: Modern Web Guidance y Modernización de Productos
 
-Implementación de las directrices de [Google Chrome Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance) en los módulos clave:
+Implementación sistemática de las directrices de [Google Chrome Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance) y modernización funcional en los productos del repositorio:
 
-### 4.1. `Haptic_Cards/`
-- **Modo Claro (Light Mode):** Implementar selector de tema (*Dark / Light / System*) y tokens semánticos completos (`--surface`, `--surface-card`, `--border`, `--ink`, `--ink-muted`) con soporte automático para `prefers-color-scheme`. Esto permitirá estudiar e investigar las fichas hápticas en entornos luminosos o para lectura impresa/PDF con contraste óptimo (WCAG AAA).
+### 4.1. `Haptic_Cards/` (Referencia de Modern Web Guidance)
+- **Modo Claro / Oscuro Nativo (`dark-mode` & `dark-mode-toggle`):**
+  - Mapeo nativo en `:root` mediante `color-scheme: light dark` y función CSS `light-dark()`.
+  - Script síncrono inline mínimo en el `<head>` para prevención de FOUC (*Flash of Unstyled Content*).
+  - Selector de tema (*Dark / Light / System auto*) con persistencia en `localStorage`.
+  - Transición visual suave o circular mediante la **View Transitions API** (`document.startViewTransition()`).
 - **Diálogos Nativos (`<dialog>`):** Migrar `IntroModal.vue` y `MediaLightbox.vue` al elemento nativo `<dialog>` con `.showModal()`, backdrop con `overscroll-behavior: contain` y soporte nativo de `Escape`.
-- **Container Queries:** `container-type: inline-size` en `.card-item` para que las tarjetas adapten su tipografía y columnas según el ancho de celda real.
-- **View Transitions:** `document.startViewTransition()` al paginar y filtrar familias de controladores hápticos o al alternar entre modo claro y oscuro.
-- **CSS Moderno:** Sustitución de selectores `:nth-child` estáticos por `animation-delay: calc(sibling-index() * 40ms)`.
+- **Container Queries:** `container-type: inline-size` en `.card-item` para que las tarjetas adapten su tipografía y densidad según el ancho de columna real, no del viewport global.
+- **Deep Linking:** Sincronización de hash en la URL (`#device=claw-controller`) para compartir dispositivos directamente.
+- **Hoja de Estilos de Impresión (`@media print`):** Formato optimizado en blanco y negro para exportación o impresión de fichas hápticas para laboratorio.
 
-### 4.2. Portada (`/`) y Proyectos Interactivos (`UX/`, `Project_Management/`, `EurekaWall/`)
-- **Estilos Compartidos:** Consolidación de tokens visuales en `src/shared/styles/tokens.css` (colores de superficie, borde, tinta, acentos y radios).
+### 4.2. `PlatformGame` (Simulador de Física & OOP/DDD)
+- **Desacoplamiento DDD de Dominio Físico:** Lógica de `Vector`, `AABB`, `Collision`, `Gravity` y `PlayerState` 100% aislada de canvas/p5.
+- **Panel de Inspección de Física en Tiempo Real:** Pausa, avance frame a frame (*step-by-step*), selector de gravedad y visualización de vectores de velocidad y cajas de colisión.
+- **Máquina de Estados Visual:** Diagrama interactivo del estado del personaje (*Idle, Run, Jump, Fall*).
+
+### 4.3. `Deutsch_lernen` (MemoDeutsch)
+- **Web Speech API (`speechSynthesis`):** Pronunciación nativa alemana (`de-DE`) para verbos, conjugaciones y ejemplos con solo un clic.
+- **Repaso Espaciado (SRS):** Algoritmo ligero de repaso (estilo Leitner) para priorizar verbos difíciles.
+- **PWA Offline:** Precache completo de audio y tablas de conjugación.
+
+### 4.4. `EurekaWall / pixelGrid` (Pizarra Interactiva)
+- **Exportación Vectorial SVG & PNG:** Botón para descargar el diseño creado en la cuadrícula.
+- **Pointer Events Level 3:** Soporte para presión de stylus y gestos multitáctiles enriquecidos.
+
+### 4.5. `Balconity` & `UX/`
+- **`Balconity`:** Conexión con Open-Meteo API / cálculo astronómico de ciclo solar y paleta perceptualmente uniforme `oklch`.
+- **`UX/`:** View Transitions en el cambio de pestañas de casos de estudio y Scroll-driven Animations (`animation-timeline`) para la barra de lectura.
+
+### 4.6. Infraestructura Global del Repositorio
+- **Tokens Centralizados:** Consolidación de tokens visuales en `src/shared/styles/tokens.css`.
 - **Tipografía Moderna:** Aplicación sistemática de `text-wrap: balance` en títulos y `text-wrap: pretty` en cuerpos de texto.
 
 ---
