@@ -127,14 +127,15 @@ Implementación sistemática de las directrices de [Google Chrome Modern Web Gui
 - **Panel de Inspección de Física en Tiempo Real:** Pausa, avance frame a frame (*step-by-step*), selector de gravedad y visualización de vectores de velocidad y cajas de colisión.
 - **Máquina de Estados Visual:** Diagrama interactivo del estado del personaje (*Idle, Run, Jump, Fall*).
 
-### 4.3. `Deutsch_lernen` (MemoDeutsch)
-- **Web Speech API (`speechSynthesis`):** Pronunciación nativa alemana (`de-DE`) para verbos, conjugaciones y ejemplos con solo un clic.
-- **Repaso Espaciado (SRS):** Algoritmo ligero de repaso (estilo Leitner) para priorizar verbos difíciles.
-- **PWA Offline:** Precache completo de audio y tablas de conjugación.
+### 4.3. `Deutsch_lernen` (MemoDeutsch) — [CONGELADO / FUERA DE ALCANCE]
+> [!IMPORTANT]
+> **No se realizarán cambios de modernización ni nuevas funcionalidades en `Deutsch_lernen` dentro de este repositorio.**
+> El proyecto fue migrado exitosamente a un repositorio independiente desarrollado en **Dart / Flutter** para ofrecer una experiencia móvil nativa, compilada y optimizada.
+> Este módulo se mantiene congelado aquí únicamente para preservar enlaces web históricos y compatibilidad, manteniendo exclusivamente la regla de calidad de invalidación de índices (`verbs_index.json`).
 
 ### 4.4. `EurekaWall / pixelGrid` (Pizarra Interactiva)
-- **Exportación Vectorial SVG & PNG:** Botón para descargar el diseño creado en la cuadrícula.
-- **Pointer Events Level 3:** Soporte para presión de stylus y gestos multitáctiles enriquecidos.
+- **Refactorización OOP & DDD (`PixelGridModel`, `PixelCell`):** Desacoplamiento total del modelo de celdas respecto a p5.js (ver Sección 3).
+- **Pointer Events Level 3:** Soporte para presión de stylus y gestos multitáctiles fluidos.
 
 ### 4.5. `Balconity` & `UX/`
 - **`Balconity`:** Conexión con Open-Meteo API / cálculo astronómico de ciclo solar y paleta perceptualmente uniforme `oklch`.
@@ -192,6 +193,14 @@ sequenceDiagram
   - Gestionar bucles de retroalimentación: si la UI encuentra un vacío conceptual en el modelo de objetos, reabre la tarea con `oop-domain-engineer` con la duda delimitada en vez de permitir soluciones parche en la vista.
   - Consolidar el informe ejecutivo final hacia el usuario con trazabilidad completa.
 * **Criterio de éxito:** Flujo de trabajo 100% coordinado, sin desalineaciones de especificación ni regresiones de código.
+
+#### 🏛️ Agente Arquitecto: `system-architect` (Architecture & ADR Sentinel)
+* **Objetivo:** Evaluar la salud estructural del repositorio, juzgar la idoneidad de frameworks y bibliotecas (evaluaciones de Vue, TypeScript, Flutter, etc.), delimitar los *Bounded Contexts* y documentar decisiones en Architecture Decision Records (ADRs).
+* **Responsabilidades:**
+  - Auditar la separación entre capas: asegurar que los motores de canvas/física no se contaminen con reactividad pesada de frameworks y que las UIs utilicen componentes reactivos solo donde aportan valor real.
+  - Evaluar y documentar decisiones estructurales pasadas y futuras (ej. por qué migrar ciertas páginas a Vue 3, por qué mantener canvas en Pure TS y por qué delegar MemoDeutsch a Flutter).
+  - Prevenir la dispersión tecnológica y vigilar los límites de bundle size de Vite.
+* **Criterio de éxito:** Cero acoplamientos indebidos entre capas y justificación técnica documentada de cada herramienta tecnológica en el repositorio.
 
 #### 📐 Agente 1: `sdd-architect` (Spec-Driven Architect)
 * **Objetivo:** Asegurar que ninguna línea de código se escriba sin especificación previa verificable, siguiendo la metodología de [`github/spec-kit`](https://github.com/github/spec-kit).
