@@ -1,6 +1,6 @@
 import type p5 from 'p5';
 import { backgroundHex, cellCenter, colorHex, type Grid } from './grid.ts';
-import { PALETTE } from './palette.ts';
+import { getPalette, type PaletteId } from './palette.ts';
 
 const HEAVY_STROKE = 0.1;
 const LIGHT_STROKE = 0.04;
@@ -54,10 +54,16 @@ function drawShape(p: p5, shape: number, d: number): void {
 }
 
 /** Every shape is filled and outlined in the cell's colour (the outline keeps thin shapes visible). */
-export function drawGrid(p: p5, grid: Grid, background: number, scaleOf: (index: number) => number): void {
+export function drawGrid(
+  p: p5,
+  grid: Grid,
+  background: number,
+  scaleOf: (index: number) => number,
+  paletteId: PaletteId = 'modern',
+): void {
   const { layout } = grid;
   grid.cells.forEach((cell, index) => {
-    const hex = colorHex(cell.color, background);
+    const hex = colorHex(cell.color, background, paletteId);
     const { x, y } = cellCenter(layout, index);
     p.push();
     p.translate(x, y);
@@ -70,11 +76,17 @@ export function drawGrid(p: p5, grid: Grid, background: number, scaleOf: (index:
 }
 
 /** The eraser handle: a strip on the left edge with three grip ticks; while dragged, a bar follows the pointer. */
-export function drawEraser(p: p5, stripWidth: number, dragX: number | null): void {
+export function drawEraser(
+  p: p5,
+  stripWidth: number,
+  dragX: number | null,
+  paletteId: PaletteId = 'modern',
+): void {
+  const pal = getPalette(paletteId);
   p.noStroke();
-  p.fill(PALETTE.surface);
+  p.fill(pal.eraserSurface);
   p.rect(0, 0, stripWidth, p.height);
-  p.stroke(PALETTE.accent);
+  p.stroke(pal.eraserAccent);
   p.strokeWeight(3);
   const x = stripWidth / 2;
   for (const fraction of [0.25, 0.5, 0.75]) {
@@ -86,6 +98,6 @@ export function drawEraser(p: p5, stripWidth: number, dragX: number | null): voi
   p.line(dragX, 0, dragX, p.height);
 }
 
-export function clearCanvas(p: p5, background: number): void {
-  p.background(backgroundHex(background));
+export function clearCanvas(p: p5, background: number, paletteId: PaletteId = 'modern'): void {
+  p.background(backgroundHex(background, paletteId));
 }

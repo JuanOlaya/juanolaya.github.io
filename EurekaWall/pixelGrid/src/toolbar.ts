@@ -1,5 +1,11 @@
 import { BACKGROUND_COLOR } from './grid.ts';
-import { PAINT_COLORS, PAINT_NAMES } from './palette.ts';
+import {
+  PAINT_COLORS,
+  PAINT_NAMES,
+  PALETTE_IDS,
+  getPalette,
+  type PaletteId,
+} from './palette.ts';
 
 export interface ShapeTool {
   shape: number;
@@ -29,6 +35,17 @@ const ASSETS_URL = '/EurekaWall/assets/';
 export interface Tool {
   shape: number;
   color: number;
+}
+
+export interface ToolbarOptions {
+  paletteId?: PaletteId;
+  onPaletteChange?: (paletteId: PaletteId) => void;
+}
+
+export interface ToolbarHandle {
+  (): void;
+  unmount: () => void;
+  setPalette: (id: PaletteId) => void;
 }
 
 function toolButton(label: string, pressed: boolean, pick: () => void): HTMLButtonElement {
@@ -66,28 +83,62 @@ function group(label: string, buttons: readonly HTMLButtonElement[]): HTMLDivEle
   return div;
 }
 
-/** Colour swatches and shape icons as toggle buttons; `tool` is updated in place so the sketch reads it live. */
-export function mountToolbar(host: HTMLElement, tool: Tool): () => void {
+/** Colour swatches, shape icons and palette selector; `tool` is updated in place so the sketch reads it live. */
+export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOptions): ToolbarHandle {
+  let activePaletteId: PaletteId = options?.paletteId ?? 'modern';
+  const paletteButtons = new Map<PaletteId, HTMLButtonElement>();
   const colorButtons = new Map<number, HTMLButtonElement>();
   const shapeButtons = new Map<number, HTMLButtonElement>();
+
   const sync = () => {
     for (const [color, button] of colorButtons) button.setAttribute('aria-pressed', String(color === tool.color));
     for (const [shape, button] of shapeButtons) button.setAttribute('aria-pressed', String(shape === tool.shape));
   };
-  PAINT_COLORS.forEach((hex, color) => {
-    const button = toolButton(`${PAINT_NAMES[color]} paint`, color === tool.color, () => {
+
+  const updatePaletteUi = (id: PaletteId) => {
+    activePaletteId = id;
+    const pal = getPalette(id);
+    for (const [palId, btn] of paletteButtons) {
+      btn.setAttribute('aria-pressed', String(palId === id));
+    }
+    pal.paints.forEach((hex, color) => {
+      const btn = colorButtons.get(color);
+      if (btn) {
+        btn.setAttribute('aria-label', `${pal.paintNames[color]} paint`);
+        const span = btn.querySelector('.tool__swatch') as HTMLSpanElement | null;
+        if (span) span.style.backgroundColor = hex;
+      }
+    });
+  };
+
+  for (const palId of PALETTE_IDS) {
+    const pal = getPalette(palId);
+    const button = toolButton(`${pal.label} palette`, palId === activePaletteId, () => {
+      updatePaletteUi(palId);
+      options?.onPaletteChange?.(palId);
+    });
+    button.classList.add('tool--text');
+    button.textContent = pal.label;
+    paletteButtons.set(palId, button);
+  }
+
+  const initialPalette = getPalette(activePaletteId);
+  initialPalette.paints.forEach((hex, color) => {
+    const button = toolButton(`${initialPalette.paintNames[color]} paint`, color === tool.color, () => {
       tool.color = color;
       sync();
     });
     button.append(swatch(hex));
     colorButtons.set(color, button);
   });
+
   const blank = toolButton('Blank (background colour)', tool.color === BACKGROUND_COLOR, () => {
     tool.color = BACKGROUND_COLOR;
     sync();
   });
   blank.append(swatch(null));
   colorButtons.set(BACKGROUND_COLOR, blank);
+
   for (const { shape, label, asset } of SHAPE_TOOLS) {
     const button = toolButton(label, shape === tool.shape, () => {
       tool.shape = shape;
@@ -96,9 +147,22 @@ export function mountToolbar(host: HTMLElement, tool: Tool): () => void {
     button.append(icon(asset));
     shapeButtons.set(shape, button);
   }
-  const groups = [group('Colour', [...colorButtons.values()]), group('Shape', [...shapeButtons.values()])];
+
+  const groups = [
+    group('Palette', [...paletteButtons.values()]),
+    group('Colour', [...colorButtons.values()]),
+    group('Shape', [...shapeButtons.values()]),
+  ];
   host.append(...groups);
-  return () => {
+
+  const unmount = () => {
     for (const node of groups) node.remove();
   };
+
+  return Object.assign(unmount, {
+    unmount,
+    setPalette: (id: PaletteId) => {
+      updatePaletteUi(id);
+    },
+  });
 }

@@ -23,7 +23,7 @@ import {
   strokePaint,
   type Grid,
 } from './grid.ts';
-import { BACKGROUNDS, PAINT_COLORS } from './palette.ts';
+import { BACKGROUNDS, PAINT_COLORS, PALETTES, getPalette, nextPalette } from './palette.ts';
 
 const alwaysPaint = () => 0.99;
 const alwaysBackground = () => 0;
@@ -244,18 +244,43 @@ describe('colours', () => {
     expect(colorHex(BACKGROUND_COLOR, 1)).toBe(BACKGROUNDS[1]);
   });
 
+  it('supports the classic original palette with purple, yellow, pink, green and orange', () => {
+    expect(colorHex(0, 0, 'classic')).toBe(PALETTES.classic.paints[0]);
+    expect(colorHex(0, 0, 'classic')).toBe('#484B78');
+    expect(colorHex(1, 0, 'classic')).toBe('#E4AA2D');
+    expect(colorHex(2, 0, 'classic')).toBe('#C62F40');
+    expect(colorHex(3, 0, 'classic')).toBe('#58875D');
+    expect(colorHex(4, 0, 'classic')).toBe('#D0692E');
+    expect(colorHex(BACKGROUND_COLOR, 0, 'classic')).toBe('#1E1E1E');
+    expect(colorHex(BACKGROUND_COLOR, 2, 'classic')).toBe('#FF6600');
+  });
+
+  it('toggles between modern and classic palettes', () => {
+    expect(nextPalette('modern')).toBe('classic');
+    expect(nextPalette('classic')).toBe('modern');
+    expect(getPalette('modern').label).toBe('Modern');
+    expect(getPalette('classic').label).toBe('Classic');
+  });
+
   it.each([-1, 6, Number.NaN])('draws an invalid colour index %s as the background', (color) => {
     expect(colorHex(color, 0)).toBe(BACKGROUNDS[0]);
   });
 
   it('falls back to the first background when the background index is invalid', () => {
     expect(colorHex(BACKGROUND_COLOR, 99)).toBe(BACKGROUNDS[0]);
+    expect(colorHex(BACKGROUND_COLOR, 99, 'classic')).toBe(PALETTES.classic.backgrounds[0]);
   });
 
   it('cycles backgrounds and wraps', () => {
     let index = 0;
     for (let step = 0; step < BACKGROUNDS.length; step += 1) index = nextBackground(index);
     expect(index).toBe(0);
+
+    let classicIndex = 0;
+    for (let step = 0; step < PALETTES.classic.backgrounds.length; step += 1) {
+      classicIndex = nextBackground(classicIndex, 'classic');
+    }
+    expect(classicIndex).toBe(0);
   });
 });
 

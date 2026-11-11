@@ -17,15 +17,28 @@ import {
   type Stroke,
 } from './grid.ts';
 import { ERASER_STRIP_PX, createPointerState, reducePointer, type PointerAction, type PointerIntent } from './input.ts';
+import { nextPalette, type PaletteId } from './palette.ts';
 import { clearCanvas, drawEraser, drawGrid } from './render.ts';
 import { mountToolbar, type Tool } from './toolbar.ts';
 
 const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
 const POINTER_TYPES = ['pointerdown', 'pointermove', 'pointerup', 'pointercancel'] as const;
+const PALETTE_STORAGE_KEY = 'shapy_presence_palette';
+
+function initialPalette(): PaletteId {
+  try {
+    const saved = localStorage.getItem(PALETTE_STORAGE_KEY);
+    if (saved === 'classic' || saved === 'modern') return saved;
+  } catch {
+    // Ignore storage errors in sandboxed environments
+  }
+  return 'modern';
+}
 
 interface ShapyState {
   grid: Grid;
   background: number;
+  paletteId: PaletteId;
   tool: Tool;
   pointer: ReturnType<typeof createPointerState>;
   paint: Stroke;
@@ -43,6 +56,7 @@ function createState(reduced: boolean): ShapyState {
   return {
     grid: createGrid(layoutGrid(0, 0), Math.random),
     background: 0,
+    paletteId: initialPalette(),
     tool: { shape: 1, color: 0 },
     pointer: createPointerState(),
     paint: { lastCell: -1 },
@@ -132,9 +146,9 @@ function createSketch(state: ShapyState, stage: HTMLElement, cleanups: (() => vo
       cleanups.push(() => observer.disconnect(), attachPointers(canvas.elt as HTMLElement, state));
     };
     p.draw = () => {
-      clearCanvas(p, state.background);
-      drawEraser(p, ERASER_STRIP_PX, state.eraserX);
-      drawGrid(p, state.grid, state.background, scaleOf(state, performance.now()));
+      clearCanvas(p, state.background, state.paletteId);
+      drawEraser(p, ERASER_STRIP_PX, state.eraserX, state.paletteId);
+      drawGrid(p, state.grid, state.background, scaleOf(state, performance.now()), state.paletteId);
     };
   };
 }
@@ -165,19 +179,51 @@ export function mountShapyPresence(hosts: ShapyHosts): Unmount {
     instance = p;
     createSketch(state, hosts.stage, cleanups)(p);
   }, hosts.stage);
+
+  const setPalette = (id: PaletteId) => {
+    state.paletteId = id;
+    try {
+      localStorage.setItem(PALETTE_STORAGE_KEY, id);
+    } catch {
+      // Ignore storage errors
+    }
+    toolbar.setPalette(id);
+    state.invalidate();
+  };
+
+  const toolbar = mountToolbar(hosts.tools, state.tool, {
+    paletteId: state.paletteId,
+    onPaletteChange: (id) => {
+      state.paletteId = id;
+      try {
+        localStorage.setItem(PALETTE_STORAGE_KEY, id);
+      } catch {
+        // Ignore storage errors
+      }
+      state.invalidate();
+    },
+  });
+
   cleanups.push(
     watchReducedMotion(state, (reduced) => (reduced ? instance?.noLoop() : instance?.loop())),
-    mountToolbar(hosts.tools, state.tool),
+    toolbar,
     mountSketchUi(hosts.panel, {
       title: 'ShapyPresence',
       caption:
         'A shared board for remote presence. Tap a cell to paint it, pinch a cell with two fingers to change its shape, drag the handle on the left to wipe.',
       controls: [
         {
+          label: 'Palette',
+          key: 'p',
+          action: () => {
+            setPalette(nextPalette(state.paletteId));
+          },
+        },
+        {
           label: 'Background',
           key: 'b',
           action: () => {
-            state.background = nextBackground(state.background);
+            state.background = nextBackground(state.background, state.paletteId);
             state.invalidate();
           },
         },

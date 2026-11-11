@@ -1,4 +1,4 @@
-import { BACKGROUNDS, PAINT_COLORS } from './palette.ts';
+import { BACKGROUNDS, PAINT_COLORS, getPalette, type PaletteId } from './palette.ts';
 
 export const SHAPE_COUNT = 12;
 /** Colour index that means "painted with the background": the cell looks empty on any background. */
@@ -186,17 +186,20 @@ export function resizeGrid(grid: Grid, layout: GridLayout): Grid {
   return { layout, cells };
 }
 
-export function backgroundHex(background: number): string {
-  return BACKGROUNDS[background] ?? BACKGROUNDS[0];
+export function backgroundHex(background: number, paletteId: PaletteId = 'modern'): string {
+  const pal = getPalette(paletteId);
+  return pal.backgrounds[background] ?? pal.backgrounds[0];
 }
 
 /** Anything that is not a paint (including the blank index and garbage) renders as the background. */
-export function colorHex(color: number, background: number): string {
-  return PAINT_COLORS[color] ?? backgroundHex(background);
+export function colorHex(color: number, background: number, paletteId: PaletteId = 'modern'): string {
+  const pal = getPalette(paletteId);
+  return pal.paints[color] ?? backgroundHex(background, paletteId);
 }
 
-export function nextBackground(background: number): number {
-  return Number.isInteger(background) && background >= 0 ? (background + 1) % BACKGROUNDS.length : 0;
+export function nextBackground(background: number, paletteId: PaletteId = 'modern'): number {
+  const pal = getPalette(paletteId);
+  return Number.isInteger(background) && background >= 0 ? (background + 1) % pal.backgrounds.length : 0;
 }
 
 /** Scale of a cell `ageMs` after it was painted; always 1 under reduced motion. */
