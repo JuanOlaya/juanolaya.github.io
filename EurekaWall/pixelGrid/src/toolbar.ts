@@ -1,7 +1,5 @@
 import { BACKGROUND_COLOR } from './grid.ts';
 import {
-  PAINT_COLORS,
-  PAINT_NAMES,
   PALETTE_IDS,
   getPalette,
   type PaletteId,

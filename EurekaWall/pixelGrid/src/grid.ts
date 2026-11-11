@@ -1,4 +1,4 @@
-import { BACKGROUNDS, PAINT_COLORS, getPalette, type PaletteId } from './palette.ts';
+import { PAINT_COLORS, getPalette, type PaletteId } from './palette.ts';
 
 export const SHAPE_COUNT = 12;
 /** Colour index that means "painted with the background": the cell looks empty on any background. */
