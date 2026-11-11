@@ -68,14 +68,16 @@ export function layoutGrid(width: number, height: number, leftInset = 0): GridLa
 
 const BLANK_RATIO = 0.4;
 
-/** The original seeded two cells in five as blank and the rest in a random paint. */
-function randomCell(random: () => number): Cell {
+/** The original seeded two cells in five as blank and the rest in a random paint from the active palette. */
+function randomCell(random: () => number, paletteId: PaletteId = 'classic'): Cell {
   if (random() < BLANK_RATIO) return { shape: 1, color: BACKGROUND_COLOR };
-  return { shape: 1, color: Math.min(Math.floor(random() * ALL_PAINTS.length), ALL_PAINTS.length - 1) };
+  const pal = getPalette(paletteId);
+  const slot = Math.min(Math.floor(random() * pal.indices.length), pal.indices.length - 1);
+  return { shape: 1, color: pal.indices[slot] };
 }
 
-export function createGrid(layout: GridLayout, random: () => number): Grid {
-  const cells = Array.from({ length: layout.cols * layout.rows }, () => randomCell(random));
+export function createGrid(layout: GridLayout, random: () => number, paletteId: PaletteId = 'classic'): Grid {
+  const cells = Array.from({ length: layout.cols * layout.rows }, () => randomCell(random, paletteId));
   return { layout, cells };
 }
 

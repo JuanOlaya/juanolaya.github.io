@@ -17,7 +17,7 @@ import {
   type Stroke,
 } from './grid.ts';
 import { ERASER_STRIP_PX, createPointerState, reducePointer, type PointerAction, type PointerIntent } from './input.ts';
-import { nextPalette, type PaletteId } from './palette.ts';
+import { getPalette, nextPalette, type PaletteId } from './palette.ts';
 import { clearCanvas, drawEraser, drawGrid } from './render.ts';
 import { mountToolbar, type Tool } from './toolbar.ts';
 
@@ -32,7 +32,7 @@ function initialPalette(): PaletteId {
   } catch {
     // Ignore storage errors in sandboxed environments
   }
-  return 'modern';
+  return 'classic';
 }
 
 interface ShapyState {
@@ -53,11 +53,13 @@ interface ShapyState {
 }
 
 function createState(reduced: boolean): ShapyState {
+  const paletteId = initialPalette();
+  const pal = getPalette(paletteId);
   return {
-    grid: createGrid(layoutGrid(0, 0), Math.random),
+    grid: createGrid(layoutGrid(0, 0), Math.random, paletteId),
     background: 0,
-    paletteId: initialPalette(),
-    tool: { shape: 1, color: 0 },
+    paletteId,
+    tool: { shape: 1, color: pal.indices[0] },
     pointer: createPointerState(),
     paint: { lastCell: -1 },
     pinch: { lastCell: -1 },
@@ -135,7 +137,7 @@ function createSketch(state: ShapyState, stage: HTMLElement, cleanups: (() => vo
     p.setup = () => {
       const canvas = p.createCanvas(stage.clientWidth, stage.clientHeight);
       p.pixelDensity(pixelDensityFor(window.devicePixelRatio));
-      state.grid = createGrid(layoutGrid(p.width, p.height, ERASER_STRIP_PX), Math.random);
+      state.grid = createGrid(layoutGrid(p.width, p.height, ERASER_STRIP_PX), Math.random, state.paletteId);
       // Under reduced motion nothing moves on its own, so frames are drawn only when something changes.
       state.invalidate = () => {
         if (state.reduced) p.redraw();
@@ -211,6 +213,7 @@ export function mountShapyPresence(hosts: ShapyHosts): Unmount {
       title: 'ShapyPresence',
       caption:
         'A shared board for remote presence. Tap a cell to paint it, pinch a cell with two fingers to change its shape, drag the handle on the left to wipe.',
+      initialCollapsed: true,
       controls: [
         {
           label: 'Palette',

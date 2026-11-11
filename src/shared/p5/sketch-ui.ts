@@ -15,6 +15,8 @@ export interface SketchUiOptions {
   controls: readonly SketchControl[];
   /** Corner the panel sits in; `top` keeps it clear of toolbars drawn along the bottom. */
   placement?: 'top' | 'bottom';
+  /** Start with the panel collapsed down to its title and "Show" button. */
+  initialCollapsed?: boolean;
 }
 
 const HIDE_KEY = 'h';
@@ -74,15 +76,18 @@ export function isTypingTarget(target: EventTarget | null): boolean {
 }
 
 /** Folds the panel down to its title so it never hides part of the sketch for good. */
-function collapseButton(panel: HTMLElement, body: HTMLElement): HTMLButtonElement {
+function collapseButton(panel: HTMLElement, body: HTMLElement, initialCollapsed = false): HTMLButtonElement {
   const button = element('button', 'sketch-ui__button sketch-ui__collapse');
-  const label = element('span', '', 'Hide');
+  const label = element('span', '', initialCollapsed ? 'Show' : 'Hide');
   button.type = 'button';
   button.append(label, ' ', element('kbd', '', keyLabel(HIDE_KEY)));
   body.id = `sketch-ui-body-${Math.random().toString(36).slice(2)}`;
   button.setAttribute('aria-controls', body.id);
-  button.setAttribute('aria-expanded', 'true');
+  button.setAttribute('aria-expanded', String(!initialCollapsed));
   button.setAttribute('aria-keyshortcuts', keyLabel(HIDE_KEY));
+  if (initialCollapsed) {
+    panel.classList.add('sketch-ui--collapsed');
+  }
   for (const type of STOPPED_EVENTS) button.addEventListener(type, (event) => event.stopPropagation());
   button.addEventListener('click', () => {
     const collapsed = panel.classList.toggle('sketch-ui--collapsed');
@@ -115,7 +120,7 @@ export function mountSketchUi(host: HTMLElement, options: SketchUiOptions): () =
   row.append(...buttons.values());
   body.append(element('p', 'sketch-ui__caption', options.caption), row);
   const header = element('div', 'sketch-ui__header');
-  const hide = collapseButton(panel, body);
+  const hide = collapseButton(panel, body, options.initialCollapsed ?? false);
   header.append(element('h1', 'sketch-ui__title', options.title), hide);
   panel.append(header, body);
   host.append(panel);

@@ -120,7 +120,7 @@ function paletteIcon(): SVGElement {
 
 /** Colour swatches with palette toggle button and shape icons */
 export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOptions): ToolbarHandle {
-  let activePaletteId: PaletteId = options?.paletteId ?? 'modern';
+  let activePaletteId: PaletteId = options?.paletteId ?? 'classic';
   const colorButtons = new Map<number, HTMLButtonElement>();
   const shapeButtons = new Map<number, HTMLButtonElement>();
 
