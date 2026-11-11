@@ -35,40 +35,38 @@ const kinesthetic = computed(() => props.audit.sensations.filter((sensation) => 
       </div>
     </div>
 
-    <!-- Shape as well as hue: round = cutaneous (skin), square = kinesthetic (muscle). -->
-    <div class="space-y-2">
-      <div class="flex flex-col gap-1">
+    <!-- Shape as well as hue on headers: round = cutaneous (skin), square = kinesthetic (muscle). -->
+    <div class="grid grid-cols-2 gap-3">
+      <div class="flex flex-col gap-1.5">
         <div class="flex items-center gap-1.5">
           <span class="h-1.5 w-1.5 rounded-full bg-cut" aria-hidden="true"></span>
           <span class="spec-label text-cut">Cutaneous</span>
         </div>
-        <div class="flex min-h-[22px] flex-wrap items-center gap-1">
+        <div class="flex min-h-[22px] flex-wrap items-start gap-1">
           <span
             v-for="sensation in cutaneous"
             :key="sensation"
             class="tag bg-cut-tint text-cut"
             title="Cutaneous sensation (Audited)"
           >
-            <span class="h-1.5 w-1.5 rounded-full bg-current" aria-hidden="true"></span>
             {{ sensation }}
           </span>
           <span v-if="cutaneous.length === 0" class="font-mono text-xs text-ink-3">—</span>
         </div>
       </div>
 
-      <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-1.5 border-l border-line pl-3">
         <div class="flex items-center gap-1.5">
           <span class="h-1.5 w-1.5 rounded-none bg-kin" aria-hidden="true"></span>
           <span class="spec-label text-kin">Kinesthetic</span>
         </div>
-        <div class="flex min-h-[22px] flex-wrap items-center gap-1">
+        <div class="flex min-h-[22px] flex-wrap items-start gap-1">
           <span
             v-for="sensation in kinesthetic"
             :key="sensation"
             class="tag bg-kin-tint text-kin"
             title="Kinesthetic sensation (Audited)"
           >
-            <span class="h-1.5 w-1.5 rounded-none bg-current" aria-hidden="true"></span>
             {{ sensation }}
           </span>
           <span v-if="kinesthetic.length === 0" class="font-mono text-xs text-ink-3">—</span>
