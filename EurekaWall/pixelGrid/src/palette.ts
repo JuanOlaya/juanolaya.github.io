@@ -23,11 +23,10 @@ export interface PaletteDef {
 }
 
 export const BACKGROUNDS: readonly string[] = [
-  '#1E1E1E',
   '#282828',
+  '#1E1E1E',
   '#18111D',
-  '#FF6600',
-  '#E1CFA3',
+  '#F5F2EB',
 ] as const;
 
 export const MODERN_PALETTE: PaletteDef = {
