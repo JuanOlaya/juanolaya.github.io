@@ -112,9 +112,10 @@ classDiagram
 Implementación de las directrices de [Google Chrome Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance) en los módulos clave:
 
 ### 4.1. `Haptic_Cards/`
+- **Modo Claro (Light Mode):** Implementar selector de tema (*Dark / Light / System*) y tokens semánticos completos (`--surface`, `--surface-card`, `--border`, `--ink`, `--ink-muted`) con soporte automático para `prefers-color-scheme`. Esto permitirá estudiar e investigar las fichas hápticas en entornos luminosos o para lectura impresa/PDF con contraste óptimo (WCAG AAA).
 - **Diálogos Nativos (`<dialog>`):** Migrar `IntroModal.vue` y `MediaLightbox.vue` al elemento nativo `<dialog>` con `.showModal()`, backdrop con `overscroll-behavior: contain` y soporte nativo de `Escape`.
 - **Container Queries:** `container-type: inline-size` en `.card-item` para que las tarjetas adapten su tipografía y columnas según el ancho de celda real.
-- **View Transitions:** `document.startViewTransition()` al paginar y filtrar familias de controladores hápticos.
+- **View Transitions:** `document.startViewTransition()` al paginar y filtrar familias de controladores hápticos o al alternar entre modo claro y oscuro.
 - **CSS Moderno:** Sustitución de selectores `:nth-child` estáticos por `animation-delay: calc(sibling-index() * 40ms)`.
 
 ### 4.2. Portada (`/`) y Proyectos Interactivos (`UX/`, `Project_Management/`, `EurekaWall/`)
@@ -213,7 +214,7 @@ sequenceDiagram
 | **Fase 0: Orquestación del Flujo** | Todo el repositorio | `lead-orchestrator` | Matriz de Quality Gates y asignación de tareas a especialistas. |
 | **Fase 1: Constitución SDD** | Raíz del proyecto | `sdd-architect` | Creación de `.specs/constitution.md` y estructura de especificación. |
 | **Fase 2: Refactor OOP de ShapyPresence** | `EurekaWall/pixelGrid/` | `oop-domain-engineer` | Modelo de dominio `PixelCell`, `PixelGridModel`, `PaletteManager` con tests puros. |
-| **Fase 3: Modern Web en Haptic Cards** | `Haptic_Cards/` | `modern-web-specialist` | Diálogos nativos `<dialog>`, Container Queries y View Transitions en catálogo. |
+| **Fase 3: Modern Web & Light Mode en Haptic Cards** | `Haptic_Cards/` | `modern-web-specialist` | Modo Claro (Light Mode) con tokens CSS semánticos, diálogos nativos `<dialog>`, Container Queries y View Transitions en catálogo. |
 | **Fase 4: Consolidación de Tokens Globales** | `src/shared/styles/` | `modern-web-specialist` | Hoja `tokens.css` centralizada para eliminar redundancias en todos los proyectos. |
 | **Fase 5: Verificación Continua y Despliegue** | Todo el repositorio | `qa-gatekeeper` | Ejecución de pipelines, validación cruzada y entrega en GitHub Pages. |
 
