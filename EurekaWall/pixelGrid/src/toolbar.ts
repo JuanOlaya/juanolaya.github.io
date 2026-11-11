@@ -81,41 +81,54 @@ function group(label: string, buttons: readonly (HTMLElement | HTMLButtonElement
   return div;
 }
 
-function arrowIcon(): SVGElement {
+function paletteIcon(): SVGElement {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', '0 0 24 24');
-  svg.setAttribute('width', '18');
-  svg.setAttribute('height', '18');
-  svg.setAttribute('fill', 'currentColor');
+  svg.setAttribute('width', '20');
+  svg.setAttribute('height', '20');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2');
+  svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round');
   svg.setAttribute('aria-hidden', 'true');
+
   const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  path.setAttribute('d', 'M7 10l5 5 5-5z');
+  path.setAttribute(
+    'd',
+    'M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z',
+  );
   svg.append(path);
+
+  const dots = [
+    [13.5, 6.5],
+    [17.5, 10.5],
+    [8.5, 7.5],
+    [6.5, 12.5],
+  ];
+  for (const [cx, cy] of dots) {
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', String(cx));
+    circle.setAttribute('cy', String(cy));
+    circle.setAttribute('r', '1');
+    circle.setAttribute('fill', 'currentColor');
+    svg.append(circle);
+  }
+
   return svg;
 }
 
-/** Colour swatches with expandable palette drawer and shape icons */
+/** Colour swatches with palette toggle button and shape icons */
 export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOptions): ToolbarHandle {
   let activePaletteId: PaletteId = options?.paletteId ?? 'modern';
   const colorButtons = new Map<number, HTMLButtonElement>();
   const shapeButtons = new Map<number, HTMLButtonElement>();
 
-  // Arrow button to unfold the other palette
-  const arrowButton = document.createElement('button');
-  arrowButton.type = 'button';
-  arrowButton.className = 'tool tool--arrow';
-  arrowButton.setAttribute('aria-expanded', 'false');
-  arrowButton.append(arrowIcon());
-
-  // Flyout container that unfolds above the toolbar
-  const flyout = document.createElement('div');
-  flyout.className = 'palette-flyout';
-  flyout.hidden = true;
-
-  const closeFlyout = () => {
-    flyout.hidden = true;
-    arrowButton.setAttribute('aria-expanded', 'false');
-  };
+  // Button to toggle palette (monochrome artist palette icon)
+  const paletteButton = document.createElement('button');
+  paletteButton.type = 'button';
+  paletteButton.className = 'tool tool--palette';
+  paletteButton.append(paletteIcon());
 
   const sync = () => {
     for (const [color, button] of colorButtons) {
@@ -125,52 +138,6 @@ export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOpt
       button.setAttribute('aria-pressed', String(shape === tool.shape));
     }
   };
-
-  const populateFlyout = () => {
-    flyout.replaceChildren();
-    const otherId = nextPalette(activePaletteId);
-    const otherPal = getPalette(otherId);
-
-    const title = document.createElement('span');
-    title.className = 'palette-flyout__title';
-    title.textContent = `${otherPal.label}:`;
-    flyout.append(title);
-
-    otherPal.indices.forEach((globalIndex, i) => {
-      const hex = otherPal.paints[i];
-      const name = otherPal.paintNames[i];
-      const btn = toolButton(`${name} paint (${otherPal.label})`, tool.color === globalIndex, () => {
-        tool.color = globalIndex;
-        setMainPalette(otherId);
-        closeFlyout();
-        options?.onPaletteChange?.(otherId);
-      });
-      btn.append(swatch(hex));
-      flyout.append(btn);
-    });
-  };
-
-  const toggleFlyout = () => {
-    if (flyout.hidden) {
-      populateFlyout();
-      flyout.hidden = false;
-      arrowButton.setAttribute('aria-expanded', 'true');
-    } else {
-      closeFlyout();
-    }
-  };
-
-  arrowButton.addEventListener('click', (e) => {
-    e.stopPropagation();
-    toggleFlyout();
-  });
-
-  const onDocClick = (e: MouseEvent) => {
-    if (!flyout.hidden && !colorGroup.contains(e.target as Node)) {
-      closeFlyout();
-    }
-  };
-  document.addEventListener('click', onDocClick);
 
   // 5 main color swatch buttons
   const mainSwatchButtons: HTMLButtonElement[] = [];
@@ -192,8 +159,8 @@ export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOpt
     activePaletteId = id;
     const pal = getPalette(id);
     const otherPal = getPalette(nextPalette(id));
-    arrowButton.setAttribute('aria-label', `Desplegar paleta ${otherPal.label}`);
-    arrowButton.title = `Desplegar paleta ${otherPal.label}`;
+    paletteButton.setAttribute('aria-label', `Cambiar paleta (actual: ${pal.label}, siguiente: ${otherPal.label})`);
+    paletteButton.title = `Cambiar a paleta ${otherPal.label} (actual: ${pal.label})`;
 
     colorButtons.clear();
 
@@ -219,6 +186,19 @@ export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOpt
     sync();
   };
 
+  paletteButton.addEventListener('click', () => {
+    const oldPal = getPalette(activePaletteId);
+    const currentSlot = oldPal.indices.indexOf(tool.color);
+    const nextId = nextPalette(activePaletteId);
+    setMainPalette(nextId);
+    if (tool.color !== BACKGROUND_COLOR) {
+      const newPal = getPalette(nextId);
+      tool.color = currentSlot >= 0 ? newPal.indices[currentSlot] : newPal.indices[0];
+    }
+    sync();
+    options?.onPaletteChange?.(nextId);
+  });
+
   for (const { shape, label, asset } of SHAPE_TOOLS) {
     const button = toolButton(label, shape === tool.shape, () => {
       tool.shape = shape;
@@ -228,8 +208,7 @@ export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOpt
     shapeButtons.set(shape, button);
   }
 
-  const colorGroup = group('Colour', [arrowButton, ...mainSwatchButtons, blank, flyout]);
-  colorGroup.classList.add('tools__group--color');
+  const colorGroup = group('Colour', [paletteButton, ...mainSwatchButtons, blank]);
 
   const shapeGroup = group('Shape', [...shapeButtons.values()]);
   const groups = [colorGroup, shapeGroup];
@@ -239,7 +218,6 @@ export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOpt
   setMainPalette(activePaletteId);
 
   const unmount = () => {
-    document.removeEventListener('click', onDocClick);
     for (const node of groups) node.remove();
   };
 
