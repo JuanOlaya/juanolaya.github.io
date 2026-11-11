@@ -123,18 +123,81 @@ Implementación de las directrices de [Google Chrome Modern Web Guidance](https:
 
 ---
 
-## 5. Hoja de Ruta de Ejecución
+## 5. Arquitectura de Agentes de IA (Multi-Agent Team)
 
-| Fase | Alcance | Entregable Clave |
-| :--- | :--- | :--- |
-| **Fase 1: Constitución SDD** | Raíz del proyecto | Creación de `.specs/constitution.md` con los estándares de arquitectura y directrices de testing. |
-| **Fase 2: Refactor OOP de ShapyPresence** | `EurekaWall/pixelGrid/` | Modelo de dominio `PixelCell`, `PixelGridModel`, `PaletteManager` con pruebas unitarias desacopladas de p5. |
-| **Fase 3: Modern Web en Haptic Cards** | `Haptic_Cards/` | Diálogos nativos `<dialog>`, Container Queries y View Transitions en catálogo. |
-| **Fase 4: Consolidación de Tokens Globales** | `src/shared/styles/` | Hoja `tokens.css` centralizada para eliminar redundancias en todos los proyectos. |
+Para ejecutar este plan con máxima velocidad y sin degradación de calidad, se define un equipo de agentes especializados que colaboran secuencialmente:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Dev as Desarrollador
+    participant SDD as Agente SDD (sdd-architect)
+    participant OOP as Agente OOP (oop-domain-engineer)
+    participant Web as Agente Modern Web (modern-web-specialist)
+    participant QA as Agente QA (qa-gatekeeper)
+
+    Dev->>SDD: Solicitar nueva funcionalidad o refactor
+    SDD->>SDD: Redactar .specs/ (constitution, spec, plan, tasks)
+    SDD->>OOP: Entregar especificación técnica y contratos
+    OOP->>OOP: Implementar entidades de dominio y tests unitarios puros
+    OOP->>Web: Entregar modelo de dominio validado
+    Web->>Web: Integrar vistas, canvas/p5, <dialog> y estilos modernos
+    Web->>QA: Solicitar validación integral
+    QA->>QA: Ejecutar lint, typecheck, vitest (77 suites) y build
+    QA->>Dev: Commit atómico, push a master y link a GitHub Actions
+```
+
+### 5.1. Agentes Especializados
+
+#### 📐 Agente 1: `sdd-architect` (Spec-Driven Architect)
+* **Objetivo:** Asegurar que ninguna línea de código se escriba sin especificación previa verificable, siguiendo la metodología de [`github/spec-kit`](https://github.com/github/spec-kit).
+* **Responsabilidades:**
+  - Crear y mantener `.specs/constitution.md` (principios inviolables: TypeScript estricto, cero dependencias innecesarias, tests automatizados obligatorios, invalidación de caché).
+  - Redactar especificaciones funcionales (`spec.md`) con historias de usuario, entradas, salidas, invariantes y criterios de aceptación.
+  - Generar el desglose de tareas ejecutables (`tasks.md`) para los demás agentes.
+* **Criterio de éxito:** Cualquier desarrollador o agente puede implementar la funcionalidad basándose únicamente en la especificación, sin ambigüedades.
+
+#### 🧱 Agente 2: `oop-domain-engineer` (Domain-Driven Object Engineer)
+* **Objetivo:** Modelar la lógica de negocio y simulación física mediante Programación Orientada a Objetos y Domain-Driven Design (DDD), completamente desacoplada de frameworks de renderizado o del DOM.
+* **Responsabilidades:**
+  - Diseñar entidades y agregados ricos con alta cohesión y bajo acoplamiento (ej. `PixelCell`, `PixelGridModel`, `PaletteManager`).
+  - Separar estrictamente el **Dominio** (coordenadas, reglas de pintura, ciclos de formas, transformaciones espaciales) de la **Infraestructura** (canvas, p5.js, eventos de puntero).
+  - Escribir pruebas unitarias puras y deterministas en Vitest que validen el dominio sin necesidad de simular el navegador.
+* **Criterio de éxito:** Cobertura del 100% de la lógica de dominio ejecutable de forma instantánea en Node/Vitest.
+
+#### 🌐 Agente 3: `modern-web-specialist` (Frontend Standards Specialist)
+* **Objetivo:** Aplicar las directrices de [Google Chrome Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance) y estándares W3C modernos en los componentes de usuario.
+* **Responsabilidades:**
+  - Conectar el modelo de dominio con la capa de presentación (renderizado p5.js y UI del navegador).
+  - Migrar modales y capas superpuestas al elemento nativo `<dialog>` con `.showModal()`, backdrop nativo y manejo accesible de teclado.
+  - Implementar Container Queries (`@container`) para diseño responsivo modular y View Transitions API para transiciones fluidas.
+  - Aplicar tokens visuales centralizados y tipografía moderna (`text-wrap: balance / pretty`).
+* **Criterio de éxito:** Cero hacks de CSS/JS para funcionalidades que la plataforma web ya ofrece de forma nativa.
+
+#### 🛡️ Agente 4: `qa-gatekeeper` (Verification & Deployment Sentinel)
+* **Objetivo:** Proteger la estabilidad del repositorio, aplicar las reglas del proyecto y garantizar despliegues continuos sin fallos.
+* **Responsabilidades:**
+  - Ejecutar la suite integral de calidad: `npm test` (77 suites / 674 tests), `npm run lint` y `npm run typecheck`.
+  - Aplicar las reglas obligatorias del repositorio (como la invalidación de índices en `Deutsch_lernen/verben/A1_A2_B1/json/verbs_index.json`).
+  - Generar builds de producción (`npm run build`) para verificar la compilación de Vite y PWA.
+  - Realizar commits atómicos y descriptivos y desplegar a la rama remota (`git push origin master`).
+* **Criterio de éxito:** Cero fallos en GitHub Actions CI/CD y despliegue exitoso en GitHub Pages.
 
 ---
 
-## 6. Comandos de Verificación y Calidad
+## 6. Hoja de Ruta de Ejecución
+
+| Fase | Alcance | Agente Responsable | Entregable Clave |
+| :--- | :--- | :--- | :--- |
+| **Fase 1: Constitución SDD** | Raíz del proyecto | `sdd-architect` | Creación de `.specs/constitution.md` y estructura de especificación. |
+| **Fase 2: Refactor OOP de ShapyPresence** | `EurekaWall/pixelGrid/` | `oop-domain-engineer` | Modelo de dominio `PixelCell`, `PixelGridModel`, `PaletteManager` con tests puros. |
+| **Fase 3: Modern Web en Haptic Cards** | `Haptic_Cards/` | `modern-web-specialist` | Diálogos nativos `<dialog>`, Container Queries y View Transitions en catálogo. |
+| **Fase 4: Consolidación de Tokens Globales** | `src/shared/styles/` | `modern-web-specialist` | Hoja `tokens.css` centralizada para eliminar redundancias en todos los proyectos. |
+| **Fase 5: Verificación Continua y Despliegue** | Todo el repositorio | `qa-gatekeeper` | Ejecución de pipelines, validación cruzada y entrega en GitHub Pages. |
+
+---
+
+## 7. Comandos de Verificación y Calidad
 
 Todo cambio derivado de este plan debe cumplir con la suite de verificación obligatoria:
 
