@@ -1,6 +1,6 @@
 import { pixelDensityFor } from '@shared/p5/display.ts';
 import { mountSketch, type Unmount } from '@shared/p5/mount.ts';
-import { mountSketchUi } from '@shared/p5/sketch-ui.ts';
+import { mountSketchUi, isTypingTarget } from '@shared/p5/sketch-ui.ts';
 import type p5 from 'p5';
 import {
   POP_MS,
@@ -193,6 +193,11 @@ export function mountShapyPresence(hosts: ShapyHosts): Unmount {
     state.invalidate();
   };
 
+  const cycleBackground = () => {
+    state.background = nextBackground(state.background, state.paletteId);
+    state.invalidate();
+  };
+
   const toolbar = mountToolbar(hosts.tools, state.tool, {
     paletteId: state.paletteId,
     onPaletteChange: (id) => {
@@ -204,9 +209,28 @@ export function mountShapyPresence(hosts: ShapyHosts): Unmount {
       }
       state.invalidate();
     },
+    onBackgroundCycle: cycleBackground,
   });
 
+  const onKey = (event: KeyboardEvent) => {
+    if (typeof event.key !== 'string' || event.repeat || isTypingTarget(event.target)) return;
+    if (event.ctrlKey || event.metaKey || event.altKey) return;
+    if (event.key.toLowerCase() === 'b') {
+      cycleBackground();
+    } else if (event.key.toLowerCase() === 'p') {
+      setPalette(nextPalette(state.paletteId));
+    } else if (event.key.toLowerCase() === 'f') {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+  };
+  window.addEventListener('keydown', onKey);
+
   cleanups.push(
+    () => window.removeEventListener('keydown', onKey),
     watchReducedMotion(state, (reduced) => (reduced ? instance?.noLoop() : instance?.loop())),
     toolbar,
     mountSketchUi(hosts.panel, {
@@ -215,21 +239,6 @@ export function mountShapyPresence(hosts: ShapyHosts): Unmount {
         'A shared board for remote presence. Tap a cell to paint it, pinch a cell with two fingers to change its shape, drag the handle on the left to wipe.',
       initialCollapsed: true,
       controls: [
-        {
-          label: 'Palette',
-          key: 'p',
-          action: () => {
-            setPalette(nextPalette(state.paletteId));
-          },
-        },
-        {
-          label: 'Background',
-          key: 'b',
-          action: () => {
-            state.background = nextBackground(state.background, state.paletteId);
-            state.invalidate();
-          },
-        },
         {
           label: 'Clear',
           key: 'c',

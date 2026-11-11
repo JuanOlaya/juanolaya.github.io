@@ -34,10 +34,10 @@ describe('PALETTES', () => {
     expect(typeof pal.label).toBe('string');
     expect(pal.paints).toHaveLength(5);
     expect(pal.paintNames).toHaveLength(5);
-    expect(pal.backgrounds).toHaveLength(4);
+    expect(pal.backgrounds).toHaveLength(5);
     expect(new Set(pal.paints).size).toBe(5);
     expect(new Set(pal.paintNames).size).toBe(5);
-    expect(new Set(pal.backgrounds).size).toBe(4);
+    expect(new Set(pal.backgrounds).size).toBe(5);
 
     const hexRegex = /^#[0-9a-fA-F]{6}$/;
     for (const hex of pal.paints) expect(hex).toMatch(hexRegex);
@@ -50,7 +50,7 @@ describe('PALETTES', () => {
     const classic = PALETTES.classic;
     expect(classic.paints).toEqual(['#484B78', '#E4AA2D', '#C62F40', '#58875D', '#D0692E']);
     expect(classic.paintNames).toEqual(['Purple', 'Yellow', 'Pink', 'Green', 'Orange']);
-    expect(classic.backgrounds).toEqual(['#1E1E1E', '#18111D', '#FF6600', '#E1CFA3']);
+    expect(classic.backgrounds).toEqual(['#1E1E1E', '#282828', '#18111D', '#FF6600', '#E1CFA3']);
   });
 
   it('toggles back and forth between palettes', () => {

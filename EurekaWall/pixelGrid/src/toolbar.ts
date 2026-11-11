@@ -38,6 +38,7 @@ export interface Tool {
 export interface ToolbarOptions {
   paletteId?: PaletteId;
   onPaletteChange?: (paletteId: PaletteId) => void;
+  onBackgroundCycle?: () => void;
 }
 
 export interface ToolbarHandle {
@@ -115,6 +116,28 @@ function paletteIcon(): SVGElement {
     svg.append(circle);
   }
 
+  return svg;
+}
+
+function fullscreenIcon(exit = false): SVGElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('width', '18');
+  svg.setAttribute('height', '18');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2');
+  svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round');
+  svg.setAttribute('aria-hidden', 'true');
+
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  if (exit) {
+    path.setAttribute('d', 'M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3');
+  } else {
+    path.setAttribute('d', 'M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3');
+  }
+  svg.append(path);
   return svg;
 }
 
@@ -211,13 +234,52 @@ export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOpt
   const colorGroup = group('Colour', [paletteButton, ...mainSwatchButtons, blank]);
 
   const shapeGroup = group('Shape', [...shapeButtons.values()]);
-  const groups = [colorGroup, shapeGroup];
+
+  // Actions group on the right: Background and Fullscreen buttons
+  const bgButton = document.createElement('button');
+  bgButton.type = 'button';
+  bgButton.className = 'tool tool--text tool--background';
+  bgButton.setAttribute('aria-label', 'Background colour (B)');
+  bgButton.title = 'Background colour (B)';
+  bgButton.textContent = 'Background';
+  bgButton.addEventListener('click', () => {
+    options?.onBackgroundCycle?.();
+  });
+
+  const fullscreenButton = document.createElement('button');
+  fullscreenButton.type = 'button';
+  fullscreenButton.className = 'tool tool--fullscreen';
+
+  const updateFullscreenUi = () => {
+    const isFs = Boolean(document.fullscreenElement);
+    fullscreenButton.setAttribute('aria-label', isFs ? 'Exit fullscreen (F)' : 'Fullscreen (F)');
+    fullscreenButton.title = isFs ? 'Exit fullscreen (F)' : 'Fullscreen (F)';
+    fullscreenButton.replaceChildren(fullscreenIcon(isFs));
+  };
+  updateFullscreenUi();
+
+  fullscreenButton.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  });
+
+  const onFsChange = () => updateFullscreenUi();
+  document.addEventListener('fullscreenchange', onFsChange);
+
+  const actionGroup = group('Actions', [bgButton, fullscreenButton]);
+  actionGroup.classList.add('tools__group--actions');
+
+  const groups = [colorGroup, shapeGroup, actionGroup];
   host.append(...groups);
 
   // Initialize main palette
   setMainPalette(activePaletteId);
 
   const unmount = () => {
+    document.removeEventListener('fullscreenchange', onFsChange);
     for (const node of groups) node.remove();
   };
 

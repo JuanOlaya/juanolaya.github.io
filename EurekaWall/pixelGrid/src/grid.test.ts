@@ -255,7 +255,8 @@ describe('colours', () => {
     expect(colorHex(0, 0, 'classic')).toBe('#c48208');
     expect(colorHex(5, 0, 'modern')).toBe('#484B78');
     expect(colorHex(BACKGROUND_COLOR, 0, 'classic')).toBe('#1E1E1E');
-    expect(colorHex(BACKGROUND_COLOR, 2, 'classic')).toBe('#FF6600');
+    expect(colorHex(BACKGROUND_COLOR, 1, 'classic')).toBe('#282828');
+    expect(colorHex(BACKGROUND_COLOR, 3, 'classic')).toBe('#FF6600');
   });
 
   it('toggles between modern and classic palettes', () => {

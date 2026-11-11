@@ -186,6 +186,19 @@ body {
   color: var(--ink);
 }
 
+.tools__group--actions {
+  display: flex;
+  flex: none;
+  gap: 8px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .tools__group--actions {
+    margin-left: auto;
+  }
+}
+
 .tool__swatch {
   width: 22px;
   height: 22px;

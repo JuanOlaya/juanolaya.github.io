@@ -22,13 +22,21 @@ export interface PaletteDef {
   eraserAccent: string;
 }
 
+export const BACKGROUNDS: readonly string[] = [
+  '#1E1E1E',
+  '#282828',
+  '#18111D',
+  '#FF6600',
+  '#E1CFA3',
+] as const;
+
 export const MODERN_PALETTE: PaletteDef = {
   id: 'modern',
   label: 'Modern',
   indices: [0, 1, 2, 3, 4] as const,
   paints: ['#c48208', '#198bc6', '#7bd389', '#ff7b72', '#f8ecde'] as const,
   paintNames: ['Orange', 'Blue', 'Green', 'Red', 'Cream'] as const,
-  backgrounds: ['#282828', '#33333d', '#198bc6', '#f8ecde'] as const,
+  backgrounds: BACKGROUNDS,
   eraserSurface: '#33333d',
   eraserAccent: '#c48208',
 };
@@ -39,7 +47,7 @@ export const CLASSIC_PALETTE: PaletteDef = {
   indices: [5, 6, 7, 8, 9] as const,
   paints: ['#484B78', '#E4AA2D', '#C62F40', '#58875D', '#D0692E'] as const,
   paintNames: ['Purple', 'Yellow', 'Pink', 'Green', 'Orange'] as const,
-  backgrounds: ['#1E1E1E', '#18111D', '#FF6600', '#E1CFA3'] as const,
+  backgrounds: BACKGROUNDS,
   eraserSurface: '#18111D',
   eraserAccent: '#de5a04',
 };
@@ -86,4 +94,3 @@ export const PALETTE = {
 
 export const PAINT_COLORS = ALL_PAINTS;
 export const PAINT_NAMES = ALL_PAINT_NAMES;
-export const BACKGROUNDS = MODERN_PALETTE.backgrounds;
