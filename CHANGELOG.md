@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.12.0...v0.13.0) (2026-11-11)
+
+
+### Features
+
+* **pixelGrid:** remove #FF6600 and #E1CFA3, add #F5F2EB bone-white background, and set [#282828](https://github.com/JuanOlaya/juanolaya.github.io/issues/282828) default ([7163909](https://github.com/JuanOlaya/juanolaya.github.io/commit/7163909f794d8989925e4c2b9263229cdb23983e))
+
 ## [0.12.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.11.0...v0.12.0) (2026-11-11)
 
 
