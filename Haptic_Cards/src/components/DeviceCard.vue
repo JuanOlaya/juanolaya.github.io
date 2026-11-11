@@ -21,7 +21,11 @@ const focus = computed(() => researchFocus(props.device));
 </script>
 
 <template>
-  <article class="card-item relative flex flex-col overflow-hidden" :data-pattern="device.category">
+  <article
+    tabindex="0"
+    class="card-item relative flex flex-col overflow-hidden"
+    :data-pattern="device.category"
+  >
     <div class="flex flex-col bg-plate px-2.5 pb-2.5">
       <div class="flex items-baseline justify-between gap-3 px-1.5 pt-3 pb-2.5">
         <h2
@@ -38,7 +42,13 @@ const focus = computed(() => researchFocus(props.device));
         </span>
       </div>
       <div class="media-frame">
-        <Carousel :media="device.media" :fallback-icon="MECHANISM_ICON" />
+        <Carousel
+          :media="device.media"
+          :fallback-icon="MECHANISM_ICON"
+          :device-name="device.name"
+          :category="device.category"
+          :mechanism="device.mechanism"
+        />
       </div>
     </div>
 
