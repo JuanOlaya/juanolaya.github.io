@@ -1,8 +1,8 @@
-import { PAINT_COLORS, getPalette, type PaletteId } from './palette.ts';
+import { ALL_PAINTS, getPalette, type PaletteId } from './palette.ts';
 
 export const SHAPE_COUNT = 12;
 /** Colour index that means "painted with the background": the cell looks empty on any background. */
-export const BACKGROUND_COLOR = PAINT_COLORS.length;
+export const BACKGROUND_COLOR = ALL_PAINTS.length;
 /** Cells are touch targets, so they stay at least 44 CSS px on any screen: fewer columns, never smaller cells. */
 export const CELL_PX = 48;
 export const GAP_PX = 8;
@@ -71,7 +71,7 @@ const BLANK_RATIO = 0.4;
 /** The original seeded two cells in five as blank and the rest in a random paint. */
 function randomCell(random: () => number): Cell {
   if (random() < BLANK_RATIO) return { shape: 1, color: BACKGROUND_COLOR };
-  return { shape: 1, color: Math.min(Math.floor(random() * PAINT_COLORS.length), PAINT_COLORS.length - 1) };
+  return { shape: 1, color: Math.min(Math.floor(random() * ALL_PAINTS.length), ALL_PAINTS.length - 1) };
 }
 
 export function createGrid(layout: GridLayout, random: () => number): Grid {
@@ -193,8 +193,7 @@ export function backgroundHex(background: number, paletteId: PaletteId = 'modern
 
 /** Anything that is not a paint (including the blank index and garbage) renders as the background. */
 export function colorHex(color: number, background: number, paletteId: PaletteId = 'modern'): string {
-  const pal = getPalette(paletteId);
-  return pal.paints[color] ?? backgroundHex(background, paletteId);
+  return ALL_PAINTS[color] ?? backgroundHex(background, paletteId);
 }
 
 export function nextBackground(background: number, paletteId: PaletteId = 'modern'): number {

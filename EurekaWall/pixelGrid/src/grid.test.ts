@@ -118,7 +118,7 @@ describe('paintCell', () => {
     expect(grid.cells).toEqual(before);
   });
 
-  it.each([-1, 6, 2.5, Number.NaN])('rejects the invalid colour %s without changing the cell', (color) => {
+  it.each([-1, 11, 2.5, Number.NaN])('rejects the invalid colour %s without changing the cell', (color) => {
     const grid = blankGrid();
     expect(paintCell(grid, 0, 2, color)).toBe(false);
     expect(grid.cells[0]).toEqual({ shape: 1, color: BACKGROUND_COLOR });
@@ -244,13 +244,16 @@ describe('colours', () => {
     expect(colorHex(BACKGROUND_COLOR, 1)).toBe(BACKGROUNDS[1]);
   });
 
-  it('supports the classic original palette with purple, yellow, pink, green and orange', () => {
-    expect(colorHex(0, 0, 'classic')).toBe(PALETTES.classic.paints[0]);
-    expect(colorHex(0, 0, 'classic')).toBe('#484B78');
-    expect(colorHex(1, 0, 'classic')).toBe('#E4AA2D');
-    expect(colorHex(2, 0, 'classic')).toBe('#C62F40');
-    expect(colorHex(3, 0, 'classic')).toBe('#58875D');
-    expect(colorHex(4, 0, 'classic')).toBe('#D0692E');
+  it('supports the classic original palette with purple, yellow, pink, green and orange on global indices 5-9', () => {
+    expect(colorHex(5, 0)).toBe(PALETTES.classic.paints[0]);
+    expect(colorHex(5, 0)).toBe('#484B78');
+    expect(colorHex(6, 0)).toBe('#E4AA2D');
+    expect(colorHex(7, 0)).toBe('#C62F40');
+    expect(colorHex(8, 0)).toBe('#58875D');
+    expect(colorHex(9, 0)).toBe('#D0692E');
+    // Cells preserve their original colors regardless of the active palette parameter
+    expect(colorHex(0, 0, 'classic')).toBe('#c48208');
+    expect(colorHex(5, 0, 'modern')).toBe('#484B78');
     expect(colorHex(BACKGROUND_COLOR, 0, 'classic')).toBe('#1E1E1E');
     expect(colorHex(BACKGROUND_COLOR, 2, 'classic')).toBe('#FF6600');
   });
@@ -262,7 +265,7 @@ describe('colours', () => {
     expect(getPalette('classic').label).toBe('Classic');
   });
 
-  it.each([-1, 6, Number.NaN])('draws an invalid colour index %s as the background', (color) => {
+  it.each([-1, 11, Number.NaN])('draws an invalid colour index %s as the background', (color) => {
     expect(colorHex(color, 0)).toBe(BACKGROUNDS[0]);
   });
 

@@ -1,7 +1,7 @@
 import { BACKGROUND_COLOR } from './grid.ts';
 import {
-  PALETTE_IDS,
   getPalette,
+  nextPalette,
   type PaletteId,
 } from './palette.ts';
 
@@ -72,7 +72,7 @@ function icon(asset: string): HTMLImageElement {
   return img;
 }
 
-function group(label: string, buttons: readonly HTMLButtonElement[]): HTMLDivElement {
+function group(label: string, buttons: readonly (HTMLElement | HTMLButtonElement)[]): HTMLDivElement {
   const div = document.createElement('div');
   div.className = 'tools__group';
   div.setAttribute('role', 'group');
@@ -81,61 +81,143 @@ function group(label: string, buttons: readonly HTMLButtonElement[]): HTMLDivEle
   return div;
 }
 
-/** Colour swatches, shape icons and palette selector; `tool` is updated in place so the sketch reads it live. */
+function arrowIcon(): SVGElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('width', '18');
+  svg.setAttribute('height', '18');
+  svg.setAttribute('fill', 'currentColor');
+  svg.setAttribute('aria-hidden', 'true');
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', 'M7 10l5 5 5-5z');
+  svg.append(path);
+  return svg;
+}
+
+/** Colour swatches with expandable palette drawer and shape icons */
 export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOptions): ToolbarHandle {
   let activePaletteId: PaletteId = options?.paletteId ?? 'modern';
-  const paletteButtons = new Map<PaletteId, HTMLButtonElement>();
   const colorButtons = new Map<number, HTMLButtonElement>();
   const shapeButtons = new Map<number, HTMLButtonElement>();
 
+  // Arrow button to unfold the other palette
+  const arrowButton = document.createElement('button');
+  arrowButton.type = 'button';
+  arrowButton.className = 'tool tool--arrow';
+  arrowButton.setAttribute('aria-expanded', 'false');
+  arrowButton.append(arrowIcon());
+
+  // Flyout container that unfolds above the toolbar
+  const flyout = document.createElement('div');
+  flyout.className = 'palette-flyout';
+  flyout.hidden = true;
+
+  const closeFlyout = () => {
+    flyout.hidden = true;
+    arrowButton.setAttribute('aria-expanded', 'false');
+  };
+
   const sync = () => {
-    for (const [color, button] of colorButtons) button.setAttribute('aria-pressed', String(color === tool.color));
-    for (const [shape, button] of shapeButtons) button.setAttribute('aria-pressed', String(shape === tool.shape));
-  };
-
-  const updatePaletteUi = (id: PaletteId) => {
-    activePaletteId = id;
-    const pal = getPalette(id);
-    for (const [palId, btn] of paletteButtons) {
-      btn.setAttribute('aria-pressed', String(palId === id));
+    for (const [color, button] of colorButtons) {
+      button.setAttribute('aria-pressed', String(color === tool.color));
     }
-    pal.paints.forEach((hex, color) => {
-      const btn = colorButtons.get(color);
-      if (btn) {
-        btn.setAttribute('aria-label', `${pal.paintNames[color]} paint`);
-        const span = btn.querySelector('.tool__swatch') as HTMLSpanElement | null;
-        if (span) span.style.backgroundColor = hex;
-      }
+    for (const [shape, button] of shapeButtons) {
+      button.setAttribute('aria-pressed', String(shape === tool.shape));
+    }
+  };
+
+  const populateFlyout = () => {
+    flyout.replaceChildren();
+    const otherId = nextPalette(activePaletteId);
+    const otherPal = getPalette(otherId);
+
+    const title = document.createElement('span');
+    title.className = 'palette-flyout__title';
+    title.textContent = `${otherPal.label}:`;
+    flyout.append(title);
+
+    otherPal.indices.forEach((globalIndex, i) => {
+      const hex = otherPal.paints[i];
+      const name = otherPal.paintNames[i];
+      const btn = toolButton(`${name} paint (${otherPal.label})`, tool.color === globalIndex, () => {
+        tool.color = globalIndex;
+        setMainPalette(otherId);
+        closeFlyout();
+        options?.onPaletteChange?.(otherId);
+      });
+      btn.append(swatch(hex));
+      flyout.append(btn);
     });
   };
 
-  for (const palId of PALETTE_IDS) {
-    const pal = getPalette(palId);
-    const button = toolButton(`${pal.label} palette`, palId === activePaletteId, () => {
-      updatePaletteUi(palId);
-      options?.onPaletteChange?.(palId);
-    });
-    button.classList.add('tool--text');
-    button.textContent = pal.label;
-    paletteButtons.set(palId, button);
-  }
+  const toggleFlyout = () => {
+    if (flyout.hidden) {
+      populateFlyout();
+      flyout.hidden = false;
+      arrowButton.setAttribute('aria-expanded', 'true');
+    } else {
+      closeFlyout();
+    }
+  };
 
-  const initialPalette = getPalette(activePaletteId);
-  initialPalette.paints.forEach((hex, color) => {
-    const button = toolButton(`${initialPalette.paintNames[color]} paint`, color === tool.color, () => {
-      tool.color = color;
-      sync();
-    });
-    button.append(swatch(hex));
-    colorButtons.set(color, button);
+  arrowButton.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleFlyout();
   });
+
+  const onDocClick = (e: MouseEvent) => {
+    if (!flyout.hidden && !colorGroup.contains(e.target as Node)) {
+      closeFlyout();
+    }
+  };
+  document.addEventListener('click', onDocClick);
+
+  // 5 main color swatch buttons
+  const mainSwatchButtons: HTMLButtonElement[] = [];
+  for (let slot = 0; slot < 5; slot += 1) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'tool';
+    btn.append(swatch(null));
+    mainSwatchButtons.push(btn);
+  }
 
   const blank = toolButton('Blank (background colour)', tool.color === BACKGROUND_COLOR, () => {
     tool.color = BACKGROUND_COLOR;
     sync();
   });
   blank.append(swatch(null));
-  colorButtons.set(BACKGROUND_COLOR, blank);
+
+  const setMainPalette = (id: PaletteId) => {
+    activePaletteId = id;
+    const pal = getPalette(id);
+    const otherPal = getPalette(nextPalette(id));
+    arrowButton.setAttribute('aria-label', `Desplegar paleta ${otherPal.label}`);
+    arrowButton.title = `Desplegar paleta ${otherPal.label}`;
+
+    colorButtons.clear();
+
+    pal.indices.forEach((globalIndex, slot) => {
+      const btn = mainSwatchButtons[slot];
+      const hex = pal.paints[slot];
+      const name = pal.paintNames[slot];
+
+      btn.setAttribute('aria-label', `${name} paint`);
+      const span = btn.querySelector('.tool__swatch') as HTMLSpanElement | null;
+      if (span) {
+        span.className = 'tool__swatch';
+        span.style.backgroundColor = hex;
+      }
+      btn.onclick = () => {
+        tool.color = globalIndex;
+        sync();
+      };
+      colorButtons.set(globalIndex, btn);
+    });
+
+    colorButtons.set(BACKGROUND_COLOR, blank);
+    sync();
+  };
 
   for (const { shape, label, asset } of SHAPE_TOOLS) {
     const button = toolButton(label, shape === tool.shape, () => {
@@ -146,21 +228,32 @@ export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOpt
     shapeButtons.set(shape, button);
   }
 
-  const groups = [
-    group('Palette', [...paletteButtons.values()]),
-    group('Colour', [...colorButtons.values()]),
-    group('Shape', [...shapeButtons.values()]),
-  ];
+  const colorGroup = group('Colour', [arrowButton, ...mainSwatchButtons, blank, flyout]);
+  colorGroup.classList.add('tools__group--color');
+
+  const shapeGroup = group('Shape', [...shapeButtons.values()]);
+  const groups = [colorGroup, shapeGroup];
   host.append(...groups);
 
+  // Initialize main palette
+  setMainPalette(activePaletteId);
+
   const unmount = () => {
+    document.removeEventListener('click', onDocClick);
     for (const node of groups) node.remove();
   };
 
   return Object.assign(unmount, {
     unmount,
     setPalette: (id: PaletteId) => {
-      updatePaletteUi(id);
+      setMainPalette(id);
+      if (tool.color !== BACKGROUND_COLOR) {
+        const pal = getPalette(id);
+        if (!pal.indices.includes(tool.color)) {
+          tool.color = pal.indices[0];
+        }
+      }
+      sync();
     },
   });
 }

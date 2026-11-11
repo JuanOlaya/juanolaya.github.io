@@ -176,6 +176,47 @@ body {
   letter-spacing: 0.02em;
 }
 
+.tool--arrow svg {
+  transition: transform 0.2s ease;
+}
+
+.tool--arrow[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+
+.tools__group--color {
+  position: relative;
+}
+
+.palette-flyout {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: #242429;
+  border: 1px solid var(--white-16);
+  border-radius: var(--radius-card);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  z-index: 100;
+  white-space: nowrap;
+}
+
+.palette-flyout[hidden] {
+  display: none !important;
+}
+
+.palette-flyout__title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-2);
+  margin-right: 2px;
+}
+
 .tool__swatch {
   width: 22px;
   height: 22px;
