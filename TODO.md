@@ -76,14 +76,8 @@ Este documento recopila los proyectos retirados temporalmente de la sección de 
 
 ## 7. Pendientes detectados tras la ronda de mejoras (#97–#102)
 
-* **MemoDeutsch**
-  - [ ] Adaptar al contrato visual oscuro las ~48 páginas legacy que aún usan Tailwind por CDN y la paleta clara (gramática, vocabulario, Einbürgerungstest).
-  - [ ] Adaptar la paleta del entrenador de verbos (`verben/A1_A2_B1/`) al contrato visual.
-  - [ ] Corregir el recorte de la primera tarjeta del carrusel del entrenador en móvil horizontal (640×360).
 * **ShapyPresence**
   - [ ] Probar a mano en Firefox y Safari (iOS incluido); hasta ahora solo se verificó en Chrome.
-* **HCI BHT**
-  - [ ] El SVG del logo usa la fuente Ubuntu-Bold y se ve con serifa si no está instalada: convertir el texto a trazos o incrustar la fuente.
 * **Platform Game**
   - [ ] Decidir si el HUD del canvas se mantiene, ya que duplica los datos del panel de física.
 * **Estilos compartidos**
