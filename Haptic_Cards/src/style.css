@@ -195,7 +195,9 @@
     transition:
       transform 220ms var(--ease-tactile),
       box-shadow 220ms var(--ease-tactile),
-      border-color 220ms ease;
+      border-color 220ms ease,
+      opacity 240ms var(--ease-tactile),
+      filter 240ms var(--ease-tactile);
     animation: hc-rise 320ms var(--ease-tactile) backwards;
   }
 
@@ -213,9 +215,16 @@
 
   .card-item:hover,
   .card-item:focus-within {
-    border-color: var(--hc-line-strong);
+    border-color: color-mix(in srgb, var(--hc-signal) 55%, var(--hc-line-strong));
     box-shadow: var(--hc-shadow-lift);
     transform: translateY(-3px);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cards-grid:has(.card-item:hover) .card-item:not(:hover) {
+      opacity: 0.72;
+      filter: brightness(0.68) saturate(0.75);
+    }
   }
 
   /* Registration ticks on the media frame, like a calibration target. */

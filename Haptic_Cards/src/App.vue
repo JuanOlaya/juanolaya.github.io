@@ -181,7 +181,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown));
 
     <main class="my-auto flex grow flex-col justify-center pb-5">
       <div
-        class="grid min-h-[500px] w-full grid-cols-1 items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4"
+        class="cards-grid grid min-h-[500px] w-full grid-cols-1 items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4"
         data-testid="cards"
       >
         <DeviceCard v-for="device in pageDevices" :key="device.name" :device="device" />
