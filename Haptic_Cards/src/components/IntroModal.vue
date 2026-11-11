@@ -4,9 +4,38 @@ import { intro } from '../data/intro';
 
 defineEmits<{ close: [] }>();
 
-const slides = ['Definition', 'Categorization'] as const;
+const slides = ['Definition', 'Categorization', 'HX Evaluation (HXI)'] as const;
 const slide = ref(0);
 const WEARABLE_SURVEY = 'https://ieeexplore.ieee.org/document/7922602';
+const HXI_PAPER = 'https://doi.org/10.1145/3706598.3713834';
+
+const hxiDimensions = [
+  {
+    name: 'Autotelics',
+    alpha: 'α = 0.93',
+    desc: 'Hedonic pleasure and tactile comfort experienced as an end in itself, regardless of function.',
+  },
+  {
+    name: 'Involvement',
+    alpha: 'α = 0.88',
+    desc: 'Attentional focus, engagement, and task absorption mediated by haptic feedback.',
+  },
+  {
+    name: 'Realism',
+    alpha: 'α = 0.90',
+    desc: 'Physical plausibility and verisimilitude compared to real-world touch expectations.',
+  },
+  {
+    name: 'Harmony',
+    alpha: 'α = 0.86',
+    desc: 'Multimodal synergy and seamless coordination with visual and auditory cues.',
+  },
+  {
+    name: 'Discord',
+    alpha: 'α = 0.84 · Diagnostic',
+    desc: 'Sensory clash, desynchronization, or latency mismatch (lower scores are desirable).',
+  },
+] as const;
 </script>
 
 <template>
@@ -39,11 +68,34 @@ const WEARABLE_SURVEY = 'https://ieeexplore.ieee.org/document/7922602';
             <path stroke-linecap="round" d="M6 6l12 12M18 6 6 18" />
           </svg>
         </button>
-        <div class="mb-4 pr-12">
+        <div class="mb-3 pr-12">
           <span class="spec-label">{{ intro.category }}</span>
           <h2 id="intro-title" class="text-2xl font-semibold tracking-tight text-ink [font-stretch:88%]">
             {{ intro.name }}
           </h2>
+        </div>
+
+        <div
+          role="tablist"
+          aria-label="Categorization sections"
+          class="mb-4 flex items-stretch border-b border-line select-none"
+        >
+          <button
+            v-for="(title, index) in slides"
+            :key="title"
+            type="button"
+            role="tab"
+            :aria-selected="index === slide"
+            class="-mb-px min-h-8 border-b-2 px-2.5 text-xs font-semibold transition-colors first:pl-0"
+            :class="
+              index === slide
+                ? 'border-signal text-ink'
+                : 'border-transparent text-ink-3 hover:border-line-strong hover:text-ink'
+            "
+            @click="slide = index"
+          >
+            {{ title }}
+          </button>
         </div>
 
         <div class="flex min-h-[300px] flex-col justify-between">
@@ -81,7 +133,7 @@ const WEARABLE_SURVEY = 'https://ieeexplore.ieee.org/document/7922602';
               </div>
             </div>
 
-            <div v-else>
+            <div v-else-if="slide === 1">
               <p class="mb-3 text-sm leading-relaxed text-ink-2">
                 We classify controllers according to their haptic modality (cutaneous or kinesthetic) and the
                 sensations they render.
@@ -131,6 +183,42 @@ const WEARABLE_SURVEY = 'https://ieeexplore.ieee.org/document/7922602';
                     Pacchierotti et al. (IEEE ToH 2017) <span aria-hidden="true">↗</span>
                   </a>
                 </div>
+              </div>
+            </div>
+
+            <div v-else>
+              <p class="mb-2.5 text-sm leading-relaxed text-ink-2">
+                To evaluate subjective <strong class="text-ink">Haptic Experience (HX)</strong> across
+                vibrotactile and force-feedback controllers with measurement invariance, the
+                <strong class="text-ink">Haptic Experience Inventory (HXI)</strong> defines 5 validated
+                psychometric dimensions:
+              </p>
+              <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <div
+                  v-for="dim in hxiDimensions"
+                  :key="dim.name"
+                  class="rounded-key border border-line bg-sunken/60 p-2.5"
+                  :class="{ 'sm:col-span-2': dim.name === 'Discord' }"
+                >
+                  <div class="mb-1 flex items-center justify-between gap-2">
+                    <span class="text-xs font-semibold text-ink">{{ dim.name }}</span>
+                    <span class="font-mono text-[10px] text-ink-3">{{ dim.alpha }}</span>
+                  </div>
+                  <p class="text-xs leading-relaxed text-ink-2">{{ dim.desc }}</p>
+                </div>
+              </div>
+              <div
+                class="mt-2.5 flex flex-wrap items-center justify-between gap-1 border-t border-line pt-2 text-xs text-ink-2"
+              >
+                <span>Psychometric HX instrument (20 items, 7-point Likert):</span>
+                <a
+                  :href="HXI_PAPER"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-0.5 font-semibold text-signal-ink underline-offset-2 hover:underline"
+                >
+                  Shi &amp; Schneider (ACM CHI 2025) <span aria-hidden="true">↗</span>
+                </a>
               </div>
             </div>
           </div>
