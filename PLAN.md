@@ -125,29 +125,50 @@ Implementación de las directrices de [Google Chrome Modern Web Guidance](https:
 
 ## 5. Arquitectura de Agentes de IA (Multi-Agent Team)
 
-Para ejecutar este plan con máxima velocidad y sin degradación de calidad, se define un equipo de agentes especializados que colaboran secuencialmente:
+Para ejecutar este plan con máxima velocidad, trazabilidad y cero degradación de calidad, se adopta un modelo **Hub-and-Spoke (Director de Orquesta)** gobernado por un Agente Orquestador y cuatro agentes especialistas:
+
+![Flujo del Agente Orquestador y los Agentes Especializados](./orchestrator-flow.png)
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Dev as Desarrollador
-    participant SDD as Agente SDD (sdd-architect)
-    participant OOP as Agente OOP (oop-domain-engineer)
-    participant Web as Agente Modern Web (modern-web-specialist)
-    participant QA as Agente QA (qa-gatekeeper)
+    actor Dev as Desarrollador / Usuario
+    participant Orch as 👑 Agente Orquestador (lead-orchestrator)
+    participant SDD as 📐 Agente SDD (sdd-architect)
+    participant OOP as 🧱 Agente OOP (oop-domain-engineer)
+    participant Web as 🌐 Agente Modern Web (modern-web-specialist)
+    participant QA as 🛡️ Agente QA (qa-gatekeeper)
 
-    Dev->>SDD: Solicitar nueva funcionalidad o refactor
-    SDD->>SDD: Redactar .specs/ (constitution, spec, plan, tasks)
-    SDD->>OOP: Entregar especificación técnica y contratos
-    OOP->>OOP: Implementar entidades de dominio y tests unitarios puros
-    OOP->>Web: Entregar modelo de dominio validado
-    Web->>Web: Integrar vistas, canvas/p5, <dialog> y estilos modernos
-    Web->>QA: Solicitar validación integral
-    QA->>QA: Ejecutar lint, typecheck, vitest (77 suites) y build
-    QA->>Dev: Commit atómico, push a master y link a GitHub Actions
+    Dev->>Orch: Solicitar funcionalidad, refactor o issue
+    Orch->>SDD: Fase 1: Ordenar especificación (.specs/)
+    SDD-->>Orch: Entrega spec.md, plan.md, tasks.md
+    Note over Orch: Gate 1 Aprobado: Spec Completa
+
+    Orch->>OOP: Fase 2: Ordenar modelo de dominio puro
+    OOP-->>Orch: Entrega entidades, lógica espacial y Vitest al 100%
+    Note over Orch: Gate 2 Aprobado: Dominio Testeado
+
+    Orch->>Web: Fase 3: Ordenar integración web y UI
+    Web-->>Orch: Entrega canvas p5, <dialog> nativo, CSS moderno
+    Note over Orch: Gate 3 Aprobado: UI Conectada
+
+    Orch->>QA: Fase 4: Ordenar suite integral y entrega
+    QA-->>Orch: Reporte de 77 suites Vitest, lint, typecheck, build y push
+    Note over Orch: Gate 4 Aprobado: Despliegue Exitoso
+    Orch->>Dev: Reporte consolidado, métricas y link a GitHub Actions
 ```
 
-### 5.1. Agentes Especializados
+### 5.1. Catálogo de Agentes
+
+#### 👑 Agente Director: `lead-orchestrator` (Chief Conductor)
+* **Objetivo:** Actuar como el único punto de contacto con el desarrollador, gobernar la máquina de estados del proyecto, asignar contexto exacto a cada especialista y validar los *Quality Gates* antes de pasar a la siguiente fase.
+* **Responsabilidades:**
+  - Descomponer requerimientos complejos en tickets atómicos mapeados a la hoja de ruta.
+  - Invocar secuencialmente a los agentes especialistas (`invoke_subagent` / `send_message`).
+  - Proteger los contextos de los agentes entregando únicamente los artefactos de la fase anterior (sin ruido de conversaciones pasadas).
+  - Gestionar bucles de retroalimentación: si la UI encuentra un vacío conceptual en el modelo de objetos, reabre la tarea con `oop-domain-engineer` con la duda delimitada en vez de permitir soluciones parche en la vista.
+  - Consolidar el informe ejecutivo final hacia el usuario con trazabilidad completa.
+* **Criterio de éxito:** Flujo de trabajo 100% coordinado, sin desalineaciones de especificación ni regresiones de código.
 
 #### 📐 Agente 1: `sdd-architect` (Spec-Driven Architect)
 * **Objetivo:** Asegurar que ninguna línea de código se escriba sin especificación previa verificable, siguiendo la metodología de [`github/spec-kit`](https://github.com/github/spec-kit).
@@ -189,6 +210,7 @@ sequenceDiagram
 
 | Fase | Alcance | Agente Responsable | Entregable Clave |
 | :--- | :--- | :--- | :--- |
+| **Fase 0: Orquestación del Flujo** | Todo el repositorio | `lead-orchestrator` | Matriz de Quality Gates y asignación de tareas a especialistas. |
 | **Fase 1: Constitución SDD** | Raíz del proyecto | `sdd-architect` | Creación de `.specs/constitution.md` y estructura de especificación. |
 | **Fase 2: Refactor OOP de ShapyPresence** | `EurekaWall/pixelGrid/` | `oop-domain-engineer` | Modelo de dominio `PixelCell`, `PixelGridModel`, `PaletteManager` con tests puros. |
 | **Fase 3: Modern Web en Haptic Cards** | `Haptic_Cards/` | `modern-web-specialist` | Diálogos nativos `<dialog>`, Container Queries y View Transitions en catálogo. |
