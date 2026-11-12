@@ -511,30 +511,6 @@ import { closeVerbModal, loadProgress, navigateToLevel, renderVerbGroup, setupPr
 
  });
 
- // Kompakt Light Mode Selector
-
- const kompaktLightSwitch = document.getElementById('kompakt-light-switch');
-
- if (kompaktLightSwitch) {
-
- const savedLightState = memoStorage.getToggle('kompakt-light');
-
- kompaktLightSwitch.checked = savedLightState === true;
-
- document.body.classList.toggle('compact-light-mode', kompaktLightSwitch.checked);
-
- kompaktLightSwitch.addEventListener('change', (e) => {
-
- const isChecked = e.currentTarget.checked;
-
- document.body.classList.toggle('compact-light-mode', isChecked);
-
- memoStorage.setToggle('kompakt-light', isChecked);
-
- });
-
- }
-
  // Version selector (Normal, Leichte, Niedliche)
 
  const versionRadios = document.querySelectorAll('input[name="card-version"]');

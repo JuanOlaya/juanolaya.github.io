@@ -158,15 +158,16 @@
 		`<p>Heute Morgen <span class="highlighted-word">habe ich</span> lange <span class="highlighted-word">geschlafen</span>. Zum Frühstück <span class="highlighted-word">habe ich</span> ein Brötchen <span class="highlighted-word">gegessen</span>. Dann <span class="highlighted-word">habe ich</span> eine E-Mail an meine Familie <span class="highlighted-word">geschrieben</span>. Ich <span class="highlighted-word">habe</span> ihnen <span class="highlighted-word">gesagt</span>, dass ich bald nach Hause <span class="highlighted-word">komme</span>. Später <span class="highlighted-word">habe ich</span> die Zeitung <span class="highlighted-word">gelesen</span>.</p>`,
 		`<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> für eine Prüfung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefüragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklärt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`
 	];
+	/** Group header colours: STYLE-CONTRACT tokens, all carrying dark `on-accent` text at AA contrast. */
 	var standardColors = [
-		"#8b5cf6",
-		"#ec4899",
-		"#f59e0b",
-		"#3b82f6",
-		"#ea580c",
-		"#22C55E",
-		"#a855f7",
-		"#facc15"
+		"#b597d8",
+		"#ff7b72",
+		"#e5a53a",
+		"#6cb6ff",
+		"#c48208",
+		"#7bd389",
+		"#198bc6",
+		"#d4870a"
 	];
 	/** Verbs that have a Konjunktiv II tab. */
 	var konjunktivVerbs = [
@@ -268,28 +269,29 @@
 			levelConfig
 		};
 	}
-	/** Cards per page of the compact carousel for a viewport `width`, and the device class it implies. */
+	/** Width one compact card takes in the carousel: 350px card plus its 10px side margins (`styles.css`). */
+	var CARD_SLOT_WIDTH = 370;
+	var MAX_CARDS_PER_PAGE = 4;
+	/**
+	* Cards per page of the compact carousel for a viewport `width`, and the device class it implies. Only as
+	* many cards as fit side by side: a wider row is clipped by the container, which cut the first card at 640px.
+	*/
 	function pageSizeForWidth(width) {
-		if (width < 600) return {
-			pageSize: 1,
-			isPhone: true,
-			isTablet: false,
-			isDesktop: false
-		};
+		const pageSize = Math.min(MAX_CARDS_PER_PAGE, Math.max(1, Math.floor(width / CARD_SLOT_WIDTH)));
 		if (width < 768) return {
-			pageSize: 2,
+			pageSize,
 			isPhone: true,
 			isTablet: false,
 			isDesktop: false
 		};
 		if (width <= 1024) return {
-			pageSize: 3,
+			pageSize,
 			isPhone: false,
 			isTablet: true,
 			isDesktop: false
 		};
 		return {
-			pageSize: 4,
+			pageSize,
 			isPhone: false,
 			isTablet: false,
 			isDesktop: true

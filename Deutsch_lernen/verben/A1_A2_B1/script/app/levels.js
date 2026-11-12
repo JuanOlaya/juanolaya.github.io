@@ -25,13 +25,13 @@ export function applyModalThemePalette(verbData) {
 
  const themeColor = getThemeColorForVerbData(verbData);
 
- const softColor = mixHexColors(themeColor, '#ffffff', 0.78);
+ const softColor = mixHexColors(themeColor, '#33333d', 0.78);
 
- const paleColor = mixHexColors(themeColor, '#ffffff', 0.9);
+ const paleColor = mixHexColors(themeColor, '#33333d', 0.9);
 
- const strongColor = mixHexColors(themeColor, '#0f172a', 0.22);
+ const strongColor = mixHexColors(themeColor, '#1a1a1a', 0.22);
 
- const borderColor = mixHexColors(themeColor, '#cbd5e1', 0.55);
+ const borderColor = mixHexColors(themeColor, '#41414e', 0.55);
 
  modalContentEl.style.setProperty('--modal-theme', themeColor);
 

@@ -92,10 +92,16 @@ describe('pageSizeForWidth', () => {
     [0, 1, 'phone'],
     [320, 1, 'phone'],
     [599, 1, 'phone'],
-    [600, 2, 'phone'],
-    [768, 3, 'tablet'],
-    [1024, 3, 'tablet'],
-    [1025, 4, 'desktop'],
+    [640, 1, 'phone'],
+    [739, 1, 'phone'],
+    [740, 2, 'phone'],
+    [767, 2, 'phone'],
+    [768, 2, 'tablet'],
+    [1024, 2, 'tablet'],
+    [1025, 2, 'desktop'],
+    [1110, 3, 'desktop'],
+    [1480, 4, 'desktop'],
+    [3000, 4, 'desktop'],
   ] as const)('width %i shows %i cards (%s)', (width, pageSize, device) => {
     const result = pageSizeForWidth(width);
     expect(result.pageSize).toBe(pageSize);
