@@ -1,10 +1,10 @@
 import type p5 from 'p5';
-import { GRAVITY, RADIUS, type Player } from './domain/player.ts';
+import { RADIUS } from './domain/player.ts';
 import { VIEW_HEIGHT, VIEW_WIDTH } from './domain/view.ts';
 import type { World } from './domain/world.ts';
 import type { Particle } from './particles.ts';
 
-/** The canvas keeps its warm sky and red platforms (DESIGN-LOG exception); the HUD uses the site tokens. */
+/** The canvas keeps its warm sky and red platforms (DESIGN-LOG exception). */
 export const COLORS = {
   skyTop: '#FFE48A',
   skyBottom: '#FFD04F',
@@ -12,15 +12,11 @@ export const COLORS = {
   platform: '#E85243',
   platformTop: '#F7735F',
   player: '#198BC6',
-  hud: 'rgba(22, 22, 26, 0.78)',
-  hudText: '#f8ecde',
-  hudMuted: '#b9b2a6',
   ink: '#2A1A0C',
 } as const;
 
-// p5 quotes the whole name, so these must be single families (loaded in main.ts before first use).
+// p5 quotes the whole name, so this must be a single family (loaded in main.ts before first use).
 export const SANS = 'Instrument Sans Variable';
-export const MONO = 'IBM Plex Mono';
 const WALL = 80;
 
 function context(p: p5): CanvasRenderingContext2D {
@@ -74,31 +70,6 @@ export function drawParticles(p: p5, particles: readonly Particle[]): void {
     p.fill(color);
     p.circle(particle.x, particle.y, 4 + 6 * (particle.life / particle.maxLife));
   }
-}
-
-/** The original's physics readout, same values, in a readable card. */
-export function drawHud(p: p5, player: Player): void {
-  const rows: [string, string][] = [
-    ['Velocity X', String(Math.round(player.velocity.x))],
-    ['Velocity Y', String(Math.round(player.velocity.y))],
-    ['Acceleration X', String(GRAVITY.x)],
-    ['Acceleration Y', String(GRAVITY.y)],
-    ['Min. speed going down', String(Math.round(player.minSpeed * 10) / 10)],
-  ];
-  p.noStroke();
-  p.fill(COLORS.hud);
-  p.rect(20, 20, 330, 34 + rows.length * 24, 12);
-  p.textFont(MONO);
-  p.textSize(16);
-  rows.forEach(([label, value], index) => {
-    const y = 48 + index * 24;
-    p.textAlign(p.LEFT, p.BASELINE);
-    p.fill(COLORS.hudMuted);
-    p.text(label, 38, y);
-    p.textAlign(p.RIGHT, p.BASELINE);
-    p.fill(COLORS.hudText);
-    p.text(value, 332, y);
-  });
 }
 
 /** Start and pause screens; `visibility` 0..1 is already eased so the card fades and settles in. */

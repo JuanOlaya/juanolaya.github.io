@@ -9,15 +9,7 @@ import { VIEW_HEIGHT, VIEW_WIDTH } from './domain/view.ts';
 import type { InputState, StepReport, World } from './domain/world.ts';
 import { attachControls, type Controls } from './input.ts';
 import { burst, stepParticles, type Particle } from './particles.ts';
-import {
-  drawHud,
-  drawOverlay,
-  drawParticles,
-  drawPlayer,
-  drawSky,
-  drawWorld,
-  easeOutCubic,
-} from './render.ts';
+import { drawOverlay, drawParticles, drawPlayer, drawSky, drawWorld, easeOutCubic } from './render.ts';
 
 const MAX_FRAME_SECONDS = 0.1;
 const OVERLAY_SECONDS = 0.25;
@@ -153,13 +145,8 @@ function draw(p: p5, state: GameState): void {
   drawParticles(p, state.particles);
   drawPlayer(p, x, y, state.squash, state.flash);
   p.pop();
-  // Text would be unreadably small on a phone-sized canvas, so the HUD and cards grow back up to 1.6x.
+  // Text would be unreadably small on a phone-sized canvas, so the cards grow back up to 1.6x.
   const uiScale = Math.min(Math.max(MIN_TEXT_SCALE / scale, 1), MAX_UI_SCALE);
-  // The HUD goes under the start/pause card: scaled up on phones it would otherwise cover the title.
-  p.push();
-  p.scale(scale * uiScale);
-  drawHud(p, state.world.player);
-  p.pop();
   p.push();
   p.scale(scale);
   const [title, hint] = overlayText(state);
