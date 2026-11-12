@@ -987,7 +987,7 @@ body.compact-view .content-block {
 
 
 
-    color: var(--info-text);
+    color: var(--ink);
 
 
 
@@ -1099,7 +1099,7 @@ body.compact-view .content-block {
 
 
 
-    color: var(--info-text);
+    color: var(--ink);
 
 
 
@@ -2227,7 +2227,7 @@ body.compact-view .content-block {
 
 
 
-    background-color: var(--info);
+    background-color: var(--border);
 
 
 
@@ -2825,7 +2825,7 @@ body.compact-view .content-block {
 
 .kompakt-level-card.light-header .card-footer-level {
     background: none !important;
-    color: var(--info-text);
+    color: var(--ink);
 }
 
 
@@ -5452,7 +5452,7 @@ body.compact-view .content-block {
 
 
 
-    --modal-theme: var(--border);
+    --modal-theme: var(--info);
 
 
 
@@ -6544,7 +6544,7 @@ body.compact-view .content-block {
 
 
 
-    border-bottom: 2px solid var(--modal-theme-border, var(--info));
+    border-bottom: 2px solid var(--modal-theme-border, var(--border));
 
 
 
@@ -6596,7 +6596,7 @@ body.compact-view .content-block {
 
 
 
-    border-bottom: 2px solid var(--modal-theme-border, var(--info));
+    border-bottom: 2px solid var(--modal-theme-border, var(--border));
 
 
 
@@ -6696,7 +6696,7 @@ body.compact-view .content-block {
 
 
 
-    color: var(--info-text);
+    color: var(--ink-2);
 
 
 
@@ -7140,7 +7140,7 @@ body.compact-view .content-block {
 
 
 
-    border-bottom: 2px solid var(--info);
+    border-bottom: 2px solid var(--border);
 
 
 
@@ -8342,7 +8342,7 @@ input:checked+.slider:before {
 
 
 
-    border-color: var(--info);
+    border-color: var(--border);
 
 
 
@@ -8698,7 +8698,7 @@ input:checked+.slider:before {
 
 
 
-    border-left: 5px solid var(--info);
+    border-left: 5px solid var(--border);
 
 
 
@@ -9398,7 +9398,7 @@ details[open]>summary .details-arrow {
 
 
 
-    border-left: 3px solid var(--info);
+    border-left: 3px solid var(--border);
 
 
 
@@ -11670,7 +11670,7 @@ details[open]>summary .details-arrow {
 
 
 
-    color: var(--info-text) !important;
+    color: var(--ink) !important;
 
 
 
@@ -12194,7 +12194,7 @@ details[open]>summary .details-arrow {
 
 
 
-    color: var(--info-text);
+    color: var(--ink);
 
 
 
@@ -13414,7 +13414,7 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 
 
 
-    background-color: var(--info);
+    background-color: var(--bg);
 
 
 
@@ -14986,7 +14986,7 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 
 
 
-    color: var(--info-text);
+    color: var(--ink);
 
 
 
@@ -15034,7 +15034,7 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 
 
 
-    color: var(--info-text);
+    color: var(--ink);
 
 
 
@@ -15050,7 +15050,7 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 
 
 
-    color: var(--info-text);
+    color: var(--ink);
 
 
 
@@ -15062,7 +15062,7 @@ body.compact-view .modal-tab-btn.active {
 
 
 
-    background-color: var(--info);
+    background-color: var(--bg);
 
 
 
@@ -15086,7 +15086,7 @@ body.compact-view .tab-content {
 
 
 
-    background-color: var(--info);
+    background-color: var(--bg);
 
 
 
@@ -15142,7 +15142,7 @@ body.compact-view #wortfamilie-summary {
 
 
 
-    background: var(--info);
+    background: var(--bg);
 
 
 
@@ -15170,7 +15170,7 @@ body.compact-view #wortfamilie-content {
 
 
 
-    background-color: var(--info);
+    background-color: var(--bg);
 
 
 
@@ -15186,7 +15186,7 @@ body.compact-view .wf-word-german {
 
 
 
-    color: var(--info-text);
+    color: var(--ink);
 
 
 
@@ -15214,7 +15214,7 @@ body.compact-view #modal-konjunktiv-konjugation-table-tab table {
 
 
 
-    background-color: var(--info);
+    background-color: var(--bg);
 
 
 
@@ -15226,7 +15226,7 @@ body.compact-view .modal-tab-btn {
 
 
 
-    background-color: var(--info);
+    background-color: var(--bg);
 
 
 
@@ -15262,11 +15262,11 @@ body.compact-view .modal-tabs-nav {
 
 
 
-    background-color: var(--info);
+    background-color: var(--bg);
 
 
 
-    border-bottom-color: var(--info);
+    border-bottom-color: var(--border);
 
 
 
@@ -15866,7 +15866,7 @@ body.light-version-global-dark {
 
 
 
-    background-color: var(--info) !important;
+    background-color: var(--bg) !important;
 
 
 
@@ -16274,7 +16274,7 @@ body.compact-view {
 
 
 
-    background-color: var(--info) !important;
+    background-color: var(--bg) !important;
 
 
 
@@ -16402,7 +16402,7 @@ body.compact-view #verb-modal .modal-content {
 
 
 
-    background-color: var(--info);
+    background-color: var(--bg);
 
 
 
@@ -16507,7 +16507,7 @@ body.compact-view .cards-container {
 
 
 
-    background-color: var(--info);
+    background-color: var(--bg);
 
 
 
@@ -18038,7 +18038,7 @@ body:not(.hide-separable-prefixes) .separable-prefix,
 
 
 
-    background-color: var(--info) !important; /* Dark Slate */
+    background-color: var(--bg) !important; /* Dark Slate */
 
 
 
@@ -18662,7 +18662,7 @@ body:not(.hide-separable-prefixes) .separable-prefix,
 
 
 
-    background-color: var(--info) !important; /* Dark Slate card background */
+    background-color: var(--bg) !important; /* Dark Slate card background */
 
 
 
@@ -20086,7 +20086,7 @@ body:not(.hide-separable-prefixes) .separable-prefix,
 
 
 
-    background-color: var(--info) !important; /* Dark Slate */
+    background-color: var(--bg) !important; /* Dark Slate */
 
 
 
@@ -20838,7 +20838,7 @@ body:not(.hide-separable-prefixes) .separable-prefix,
 
 
 
-    background-color: var(--info) !important; /* Solid Slate bg */
+    background-color: var(--bg) !important; /* Solid Slate bg */
 
 
 
@@ -21538,7 +21538,7 @@ body:not(.hide-separable-prefixes) .separable-prefix,
 
 
 
-    background: var(--info);
+    background: var(--bg);
 
 
 
@@ -23339,7 +23339,7 @@ body.compact-view .cards-container {
     transition: background 0.2s, transform 0.2s;
 }
 .settings-info-btn:hover {
-    background: var(--info);
+    background: var(--border);
     transform: scale(1.02);
 }
 
@@ -23372,7 +23372,7 @@ body.compact-view .main-container {
     margin: 0 !important;
     max-width: 100% !important;
     width: 100% !important;
-    background-color: var(--info) !important; /* solid slate background */
+    background-color: var(--bg) !important; /* solid slate background */
 }
 
 body.compact-view .content-block {
@@ -23441,7 +23441,7 @@ body.compact-view .compact-nav-bar {
     left: 0 !important;
     right: 0 !important;
     height: 70px !important;
-    background-color: var(--info) !important;
+    background-color: var(--bg) !important;
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5) !important;
     padding: 0 40px !important;
@@ -23496,7 +23496,7 @@ body.compact-view .top-navigation-header {
     left: 0 !important;
     right: 0 !important;
     height: 70px !important;
-    background-color: var(--info) !important;
+    background-color: var(--bg) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
     padding: 0 40px !important;
@@ -23616,7 +23616,7 @@ body.compact-view .main-container {
     display: flex !important;
     flex-direction: column !important;
     box-sizing: border-box !important;
-    background-color: var(--info) !important;
+    background-color: var(--bg) !important;
 }
 
 body.compact-view .content-block {
@@ -23640,7 +23640,7 @@ body.compact-view .top-navigation-header {
     right: auto !important;
     height: 70px !important;
     width: 100% !important;
-    background-color: var(--info) !important;
+    background-color: var(--bg) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
     padding: 0 40px !important;
@@ -23672,7 +23672,7 @@ body.compact-view .compact-nav-bar {
     right: auto !important;
     height: 70px !important;
     width: 100% !important;
-    background-color: var(--info) !important;
+    background-color: var(--bg) !important;
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5) !important;
     padding: 0 40px !important;
@@ -23768,7 +23768,7 @@ body.compact-view .top-navigation-header {
     left: 0 !important;
     right: 0 !important;
     height: 70px !important;
-    background-color: var(--info) !important;
+    background-color: var(--bg) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
     padding: 0 40px !important;
@@ -23789,7 +23789,7 @@ body.compact-view .compact-nav-bar {
     right: 0 !important;
     height: 70px !important;
     width: 100% !important;
-    background-color: var(--info) !important;
+    background-color: var(--bg) !important;
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5) !important;
     padding: 0 40px !important;
@@ -23846,7 +23846,7 @@ body.compact-view .top-navigation-header {
     left: 0 !important;
     right: 0 !important;
     height: 70px !important;
-    background-color: var(--info) !important;
+    background-color: var(--bg) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
     padding: 0 40px !important;
@@ -23867,7 +23867,7 @@ body.compact-view .compact-nav-bar {
     right: 0 !important;
     height: 70px !important;
     width: 100% !important;
-    background-color: var(--info) !important;
+    background-color: var(--bg) !important;
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5) !important;
     padding: 0 40px !important;
@@ -24045,6 +24045,14 @@ dialog::backdrop {
         padding-top: 128px !important;
     }
     body.compact-view .kompakt-level-card {
+        min-height: 0 !important;
+    }
+}
+
+/* Short landscape viewports (phones on their side): the fixed header and nav bar leave ~220px, so the card shrinks to fit instead of sliding under them */
+@media (max-height: 420px) {
+    body.compact-view .kompakt-level-card {
+        height: calc(100dvh - 140px) !important;
         min-height: 0 !important;
     }
 }
