@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>German Akkusativ Case Table — A1–A2 Improved</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/dark-contract.css" />
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; }
+        body { font-family: var(--font-ui); background-color: var(--surface); }
         #table-container { width: fit-content; min-width: 100%; overflow-x: visible; }
         table { width: 100%; table-layout: fixed; }
         td, th { overflow: visible; }
@@ -20,29 +25,29 @@
         .merged-possessive-cell { padding: 0.4rem 0.6rem; white-space: normal; vertical-align: top; font-size: 0.9rem; line-height: 1.2; min-height: 5.5rem; }
         .merged-pronoun-cell { padding: 0.3rem 0.4rem; min-height: 5rem; display: flex; flex-direction: column; justify-content: center; white-space: normal; }
         .stacked-content-line { margin-bottom: 2px; line-height: 1.2; }
-        .german-phrase, .article-german-lines { color: #1f2937; font-size: 1.0rem; line-height: 1.2; }
-        .base-article-german { background-color: #fef2f2; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #991b1b; font-size: 1.0rem; }
-        .akkusativ-pronoun-visible { font-weight: 700; color: #1D4ED8; background-color: #f0fdfa; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
-        .trad-pronoun-visible { font-weight: 400; color: #000000; font-style: italic; font-size: 0.9rem; }
-        .pronoun-hidden-part { color: #000000; font-size: 0.8rem; opacity: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; }
+        .german-phrase, .article-german-lines { color: var(--ink); font-size: 1.0rem; line-height: 1.2; }
+        .base-article-german { background-color: var(--surface); display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: var(--danger); font-size: 1.0rem; }
+        .akkusativ-pronoun-visible { font-weight: 700; color: var(--info-text); background-color: color-mix(in srgb, var(--success) 6%, var(--surface)); display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
+        .trad-pronoun-visible { font-weight: 400; color: var(--ink); font-style: italic; font-size: 0.9rem; }
+        .pronoun-hidden-part { color: var(--ink); font-size: 0.8rem; opacity: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; }
         .merged-pronoun-cell:hover .pronoun-hidden-part, .merged-pronoun-cell.active .pronoun-hidden-part { max-height: 8rem; opacity: 1; margin-top: 0.2rem; }
-        .article-hidden-part { color: #000000; font-style: italic; font-size: 0.8rem; opacity: 0; transition: opacity 0.3s ease-out; line-height: 1.2; white-space: normal; margin-left: 0.25rem; }
-        .spanish-translation { color: #000000; font-style: italic; font-size: 0.8rem; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; margin-top: 0.1rem; }
+        .article-hidden-part { color: var(--ink); font-style: italic; font-size: 0.8rem; opacity: 0; transition: opacity 0.3s ease-out; line-height: 1.2; white-space: normal; margin-left: 0.25rem; }
+        .spanish-translation { color: var(--ink); font-style: italic; font-size: 0.8rem; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; margin-top: 0.1rem; }
         .study-cell:hover .spanish-translation, .study-cell.active .spanish-translation { max-height: 10rem; opacity: 1; }
         .article-study-cell-wrapper:hover .article-hidden-part, .article-study-cell-wrapper.active .article-hidden-part { opacity: 1; }
         .subject-study-cell:hover .subject-translation-hidden, .subject-study-cell.active .subject-translation-hidden { max-height: 5rem; opacity: 1; }
         .article-study-cell-wrapper { cursor: pointer; padding: 0.4rem 0.6rem; transition: background-color 0.15s ease-in-out; min-height: 5.5rem; display: flex; flex-direction: column; justify-content: center; }
-        .article-study-cell-wrapper:hover, .article-study-cell-wrapper.active { background-color: #e5e5e5; }
+        .article-study-cell-wrapper:hover, .article-study-cell-wrapper.active { background-color: rgb(255 255 255 / 0.08); }
         .article-study-cell-wrapper .stacked-translation-line { display: block; text-align: left; }
-        .pronunciation-hint { font-size: 0.8rem; color: #000000; font-weight: 500; display: inline; }
+        .pronunciation-hint { font-size: 0.8rem; color: var(--ink); font-weight: 500; display: inline; }
         .pronunciation-hint.subject-translation-hidden { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; display: inline; }
-        .subject-spanish-translation { font-size: 0.8rem; color: #000000; font-style: italic; margin-top: 0.1rem; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
-        .subject-parenthesis-italic { font-size: 0.8rem; color: #000000; font-style: italic; margin-top: 0.1rem; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
+        .subject-spanish-translation { font-size: 0.8rem; color: var(--ink); font-style: italic; margin-top: 0.1rem; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
+        .subject-parenthesis-italic { font-size: 0.8rem; color: var(--ink); font-style: italic; margin-top: 0.1rem; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
         .nominativ-translation-hidden { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
         .possessive-study-wrapper:hover .nominativ-translation-hidden, .possessive-study-wrapper.active .nominativ-translation-hidden { max-height: 5rem; opacity: 1; }
-        .akkusativ-determiner { font-weight: 700; color: #991b1b; background-color: #fef2f2; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
-        .article-row { background-color: #f7f7f7; }
-        .possessive-row { background-color: #e0f2fe; }
+        .akkusativ-determiner { font-weight: 700; color: var(--danger); background-color: var(--surface); display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
+        .article-row { background-color: var(--surface); }
+        .possessive-row { background-color: color-mix(in srgb, var(--info) 6%, var(--surface)); }
         .subject-study-cell { min-height: 5.5rem; padding: 0.4rem 0.6rem; cursor: pointer; transition: background-color 0.15s ease-in-out; }
         .force-open .subject-translation-hidden, .force-open .article-hidden-part, .force-open .pronoun-hidden-part, .force-open .spanish-translation, .force-open .nominativ-translation-hidden { max-height: 10rem !important; opacity: 1 !important; margin-top: 0.1rem !important; }
         .small-pronoun-header { font-size: 0.7rem; line-height: 1; }
@@ -50,15 +55,15 @@
         /* Modal styles */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
         .modal-overlay.active { display: flex; }
-        .modal-content { background-color: white; border-radius: 1rem; padding: 2rem; max-width: 600px; width: 90%; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); position: relative; max-height: 80vh; overflow-y: auto; }
-        .modal-close { position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem; cursor: pointer; color: #6b7280; transition: color 0.15s ease-in-out; }
-        .modal-close:hover { color: #1f2937; }
-        .modal-title { font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem; }
+        .modal-content { background-color: var(--surface); border-radius: 1rem; padding: 2rem; max-width: 600px; width: 90%; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); position: relative; max-height: 80vh; overflow-y: auto; }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem; cursor: pointer; color: var(--ink-2); transition: color 0.15s ease-in-out; }
+        .modal-close:hover { color: var(--ink); }
+        .modal-title { font-size: 1.5rem; font-weight: 700; color: var(--ink); margin-bottom: 1rem; }
         .modal-section { margin-bottom: 1.5rem; }
-        .modal-label { font-size: 0.875rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-        .modal-text { font-size: 1rem; color: #1f2937; line-height: 1.5; }
-        .category-tag { display: inline-block; padding: 0.25rem 0.5rem; background-color: #dbeafe; color: #1e40af; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 500; margin-top: 0.25rem; }
-        .separator-row { border-top: 3px solid #991b1b !important; }
+        .modal-label { font-size: 0.875rem; font-weight: 600; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .modal-text { font-size: 1rem; color: var(--ink); line-height: 1.5; }
+        .category-tag { display: inline-block; padding: 0.25rem 0.5rem; background-color: color-mix(in srgb, var(--info) 6%, var(--surface)); color: var(--info-text); border-radius: 0.375rem; font-size: 0.75rem; font-weight: 500; margin-top: 0.25rem; }
+        .separator-row { border-top: 3px solid var(--danger) !important; }
     </style>
 </head>
 <body class="p-4 sm:p-8">
@@ -95,7 +100,7 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="modal-close" onclick="closeNullartikelInfoModal()">&times;</span>
             <div id="nullartikel-info-body">
-                <h2 class="modal-title" style="color: #991b1b;">Nullartikel (Sin Artículo)</h2>
+                <h2 class="modal-title" style="color: var(--danger);">Nullartikel (Sin Artículo)</h2>
 
                 <div class="modal-section">
                     <div class="modal-label">¿Qué es el Nullartikel?</div>
@@ -141,50 +146,50 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="modal-close" onclick="closePrepositionsModal()">&times;</span>
             <div id="prepositions-modal-body">
-                <h2 class="modal-title" style="color: #991b1b;">Preposiciones de Akkusativ</h2>
+                <h2 class="modal-title" style="color: var(--danger);">Preposiciones de Akkusativ</h2>
 
                 <div class="modal-section">
                     <div class="modal-label">durch (a través de)</div>
                     <div class="modal-text"><strong>Ich gehe durch den Park.</strong></div>
-                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Voy a través del parque.</div>
+                    <div class="modal-text" style="font-style: italic; color: var(--ink-2);">Voy a través del parque.</div>
                 </div>
 
                 <div class="modal-section">
                     <div class="modal-label">für (para)</div>
                     <div class="modal-text"><strong>Das Geschenk ist für meinen Bruder.</strong></div>
-                    <div class="modal-text" style="font-style: italic; color: #6b7280;">El regalo es para mi hermano.</div>
+                    <div class="modal-text" style="font-style: italic; color: var(--ink-2);">El regalo es para mi hermano.</div>
                 </div>
 
                 <div class="modal-section">
                     <div class="modal-label">gegen (contra)</div>
                     <div class="modal-text"><strong>Wir spielen gegen die andere Mannschaft.</strong></div>
-                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Jugamos contra el otro equipo.</div>
+                    <div class="modal-text" style="font-style: italic; color: var(--ink-2);">Jugamos contra el otro equipo.</div>
                 </div>
 
                 <div class="modal-section">
                     <div class="modal-label">ohne (sin)</div>
                     <div class="modal-text"><strong>Ich komme ohne meinen Hund.</strong></div>
-                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Vengo sin mi perro.</div>
+                    <div class="modal-text" style="font-style: italic; color: var(--ink-2);">Vengo sin mi perro.</div>
                 </div>
 
                 <div class="modal-section">
                     <div class="modal-label">um (alrededor de / a las)</div>
                     <div class="modal-text"><strong>Wir gehen um den See.</strong></div>
-                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Caminamos alrededor del lago.</div>
+                    <div class="modal-text" style="font-style: italic; color: var(--ink-2);">Caminamos alrededor del lago.</div>
                     <div class="modal-text" style="margin-top: 0.5rem;"><strong>Um 8 Uhr.</strong></div>
-                    <div class="modal-text" style="font-style: italic; color: #6b7280;">A las 8.</div>
+                    <div class="modal-text" style="font-style: italic; color: var(--ink-2);">A las 8.</div>
                 </div>
 
                 <div class="modal-section">
                     <div class="modal-label">bis (hasta)</div>
                     <div class="modal-text"><strong>Bis nächsten Montag.</strong></div>
-                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Hasta el próximo lunes.</div>
+                    <div class="modal-text" style="font-style: italic; color: var(--ink-2);">Hasta el próximo lunes.</div>
                 </div>
 
                 <div class="modal-section">
                     <div class="modal-label">entlang (a lo largo de)</div>
                     <div class="modal-text"><strong>Wir laufen den Fluss entlang.</strong></div>
-                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Corremos a lo largo del río.</div>
+                    <div class="modal-text" style="font-style: italic; color: var(--ink-2);">Corremos a lo largo del río.</div>
                 </div>
             </div>
         </div>
@@ -612,8 +617,8 @@
             html += `<th colspan="4" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-red-100">Akkusativ</th>`;
             html += '</tr>';
             html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE; width: 7%;"><span class="small-pronoun-header">Sujeto</span></th>`;
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE; width: 8%;"><span class="small-pronoun-header">-</span></th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: color-mix(in srgb, var(--info) 6%, var(--surface)); width: 7%;"><span class="small-pronoun-header">Sujeto</span></th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: color-mix(in srgb, var(--info) 6%, var(--surface)); width: 8%;"><span class="small-pronoun-header">-</span></th>`;
             html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200" style="width: 9%;">Base</th>`;
             const genders = [
                 { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1, width: '19%' },
@@ -672,7 +677,7 @@
                                     </div>
                                 </div>`;
                         }
-                        styleAttr = ' style="background-color: #CCE5FE;"';
+                        styleAttr = ' style="background-color: color-mix(in srgb, var(--info) 6%, var(--surface));"';
                     }
                     else if (determinerKeys.includes(key)) {
                         const mergedData = mergedDeterminerKeys.find(d => d.key === key);
@@ -757,7 +762,7 @@
                                 contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(value)}</div>`;
                             }
                             cellClass += ' wrap-cell align-top p-0';
-                            styleAttr = ' style="background-color: #E0F2FE;"';
+                            styleAttr = ' style="background-color: color-mix(in srgb, var(--info) 6%, var(--surface));"';
                         }
                     }
                     html += `<td class="${cellClass}"${styleAttr}>${contentHtml}</td>`;
@@ -786,8 +791,8 @@
             html += `<th colspan="4" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-red-100">Akkusativ</th>`;
             html += '</tr>';
             html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE; width: 2.4%;"><span class="small-pronoun-header">PRON (NOM)</span></th>`;
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE; width: 5%;"><span class="small-pronoun-header">PRON (AKK)</span></th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: color-mix(in srgb, var(--info) 6%, var(--surface)); width: 2.4%;"><span class="small-pronoun-header">PRON (NOM)</span></th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: color-mix(in srgb, var(--info) 6%, var(--surface)); width: 5%;"><span class="small-pronoun-header">PRON (AKK)</span></th>`;
             html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200" style="width: 6%;">Base/Posesivo</th>`;
             const genders = [
                 { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1, width: '21.4%' },
@@ -840,7 +845,7 @@
                                     <div class="text-black italic">${tradExample}</div>
                                 </div>
                             </div>`;
-                        styleAttr = ' style="background-color: #CCE5FE;"';
+                        styleAttr = ' style="background-color: color-mix(in srgb, var(--info) 6%, var(--surface));"';
                     }
                     else if (determinerKeys.includes(key)) {
                         const mergedData = mergedDeterminerKeys.find(d => d.key === key);
@@ -881,7 +886,7 @@
                             const displayValue = row["Sujeto Display"] || value;
                             contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(value)}</div>`;
                             cellClass += ' wrap-cell align-top p-0';
-                            styleAttr = ' style="background-color: #E0F2FE;"';
+                            styleAttr = ' style="background-color: color-mix(in srgb, var(--info) 6%, var(--surface));"';
                         }
                     }
                     html += `<td class="${cellClass}"${styleAttr}>${contentHtml}</td>`;
@@ -901,7 +906,7 @@
 
                 <div class="modal-section">
                     <div class="modal-label">Alemán (Sin Artículo)</div>
-                    <div class="modal-text" style="font-weight: 600; color: #1e40af;">${german}</div>
+                    <div class="modal-text" style="font-weight: 600; color: var(--info-text);">${german}</div>
                 </div>
 
                 <div class="modal-section">

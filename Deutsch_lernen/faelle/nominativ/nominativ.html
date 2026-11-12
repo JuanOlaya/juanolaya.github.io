@@ -6,13 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>German Nominativ Infographics</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/dark-contract.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: #f0f4f8;
-            color: #1e293b;
+            font-family: var(--font-ui);
+            background-color: var(--surface);
+            color: var(--ink);
         }
 
         .info-card {
@@ -25,57 +30,57 @@
         }
 
         .col-masc {
-            background-color: #eff6ff;
-            border-color: #bfdbfe;
-            color: #1e40af;
+            background-color: color-mix(in srgb, var(--info) 6%, var(--surface));
+            border-color: color-mix(in srgb, var(--info) 30%, var(--border));
+            color: var(--info-text);
         }
 
         .col-fem {
-            background-color: #fef2f2;
-            border-color: #fecaca;
-            color: #991b1b;
+            background-color: var(--surface);
+            border-color: color-mix(in srgb, var(--danger) 30%, var(--border));
+            color: var(--danger);
         }
 
         .col-neu {
-            background-color: #f0fdf4;
-            border-color: #bbf7d0;
-            color: #166534;
+            background-color: color-mix(in srgb, var(--success) 6%, var(--surface));
+            border-color: color-mix(in srgb, var(--success) 30%, var(--border));
+            color: var(--success);
         }
 
         .col-plu {
-            background-color: #fffbeb;
-            border-color: #fde68a;
-            color: #92400e;
+            background-color: color-mix(in srgb, var(--accent) 6%, var(--surface));
+            border-color: var(--accent);
+            color: var(--accent-text);
         }
 
         .header-masc-pastel {
-            background-color: #eff6ff;
-            color: #1e40af;
-            border-bottom: 2px solid #bfdbfe;
+            background-color: color-mix(in srgb, var(--info) 6%, var(--surface));
+            color: var(--info-text);
+            border-bottom: 2px solid color-mix(in srgb, var(--info) 30%, var(--border));
         }
 
         .header-fem-pastel {
-            background-color: #fef2f2;
-            color: #991b1b;
-            border-bottom: 2px solid #fecaca;
+            background-color: var(--surface);
+            color: var(--danger);
+            border-bottom: 2px solid color-mix(in srgb, var(--danger) 30%, var(--border));
         }
 
         .header-neu-pastel {
-            background-color: #f0fdf4;
-            color: #166534;
-            border-bottom: 2px solid #bbf7d0;
+            background-color: color-mix(in srgb, var(--success) 6%, var(--surface));
+            color: var(--success);
+            border-bottom: 2px solid color-mix(in srgb, var(--success) 30%, var(--border));
         }
 
         .header-plu-pastel {
-            background-color: #fffbeb;
-            color: #92400e;
-            border-bottom: 2px solid #fde68a;
+            background-color: color-mix(in srgb, var(--accent) 6%, var(--surface));
+            color: var(--accent-text);
+            border-bottom: 2px solid var(--accent);
         }
 
         .base-highlight {
-            background-color: white;
-            border: 2px solid #2563eb;
-            color: #2563eb;
+            background-color: var(--surface);
+            border: 2px solid var(--info);
+            color: var(--info-text);
             font-weight: 800;
             padding: 0.15rem 0.5rem;
             border-radius: 0.375rem;
@@ -98,7 +103,7 @@
 
         .scroll-container {
             scrollbar-width: thin;
-            scrollbar-color: #cbd5e1 transparent;
+            scrollbar-color: color-mix(in srgb, var(--info) 10%, var(--surface)) transparent;
         }
 
         .scroll-container::-webkit-scrollbar {
@@ -106,19 +111,19 @@
         }
 
         .scroll-container::-webkit-scrollbar-thumb {
-            background-color: #cbd5e1;
+            background-color: color-mix(in srgb, var(--info) 10%, var(--surface));
             border-radius: 4px;
         }
 
         .segmented-control {
-            background: #e2e8f0;
+            background: rgb(255 255 255 / 0.08);
             border-radius: 0.75rem;
             padding: 0.25rem;
         }
 
         .mode-button {
             border-radius: 0.5rem;
-            color: #64748b;
+            color: var(--ink-2);
             font-weight: 800;
             padding: 0.45rem 0.85rem;
             transition: all 0.18s ease;
@@ -126,8 +131,8 @@
         }
 
         .mode-button.active {
-            background: white;
-            color: #1e293b;
+            background: var(--surface);
+            color: var(--ink);
             box-shadow: 0 1px 5px rgba(15, 23, 42, 0.14);
         }
 

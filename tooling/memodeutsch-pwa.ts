@@ -8,6 +8,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 export const MEMODEUTSCH_PRECACHE: readonly string[] = [
   'index.html',
   'styles.css',
+  'assets/dark-contract.css',
   'manifest.json',
   'images/german_flag.png',
   'verben/A1_A2_B1/verben.html',

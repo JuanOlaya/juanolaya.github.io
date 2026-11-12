@@ -6,57 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interjecciones!!!</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/dark-contract.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --header-bg: #020617;
-            --section-bg: #0f172a;
-            --rule-bg: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%);
-            --text-main: #f1f5f9;
-            --text-muted: #C2CAD6;
-            --border-color: #334155;
+            --bg-color: var(--bg);
+            --card-bg: var(--surface);
+            --header-bg: color-mix(in srgb, var(--info) 12%, var(--bg));
+            --section-bg: var(--bg);
+            --rule-bg: linear-gradient(135deg, var(--bg) 0%, color-mix(in srgb, var(--info) 12%, var(--bg)) 100%);
+            --text-main: var(--ink);
+            --text-muted: var(--ink-2);
+            --border-color: var(--border);
 
-            --cat-acuerdo: #3b82f6;
-            --cat-sorpresa: #a855f7;
-            --cat-social: #10b981;
-            --cat-reacciones: #f97316;
-            --cat-avisos: #ef4444;
-            --cat-kinder: #ec4899;
-            --cat-despedidas: #14b8a6;
-            --cat-igualmente: #6366f1;
-            --cat-particulamal1: #8b5cf6;
-            --cat-particulamal2: #4f46e5;
-            --cat-ordenes: #ec4899;
-            --cat-repetir: #d97706;
+            --cat-acuerdo: color-mix(in srgb, var(--info) 18%, var(--surface));
+            --cat-sorpresa: color-mix(in srgb, var(--link-visited) 10%, var(--surface));
+            --cat-social: color-mix(in srgb, var(--success) 18%, var(--surface));
+            --cat-reacciones: color-mix(in srgb, var(--accent) 18%, var(--surface));
+            --cat-avisos: color-mix(in srgb, var(--danger) 10%, var(--surface));
+            --cat-kinder: color-mix(in srgb, var(--link-visited) 10%, var(--surface));
+            --cat-despedidas: color-mix(in srgb, var(--info) 18%, var(--surface));
+            --cat-igualmente: color-mix(in srgb, var(--info) 10%, var(--surface));
+            --cat-particulamal1: color-mix(in srgb, var(--link-visited) 10%, var(--surface));
+            --cat-particulamal2: color-mix(in srgb, var(--info) 18%, var(--surface));
+            --cat-ordenes: color-mix(in srgb, var(--link-visited) 10%, var(--surface));
+            --cat-repetir: color-mix(in srgb, var(--accent) 18%, var(--surface));
 
-            --level-a1: #3b82f6;
-            --level-a2: #eab308;
+            --level-a1: color-mix(in srgb, var(--info) 18%, var(--surface));
+            --level-a2: color-mix(in srgb, var(--accent) 18%, var(--surface));
 
-            --accent-green: #00FFA1;
-            --accent-orange: #f97316;
+            --accent-green: color-mix(in srgb, var(--success) 18%, var(--surface));
+            --accent-orange: color-mix(in srgb, var(--accent) 18%, var(--surface));
             --shadow-color: rgba(0, 0, 0, 0.5);
             --glow-strength: 20px;
             --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         body.light-mode {
-            --bg-color: #f1f5f9;
-            --card-bg: #ffffff;
-            --header-bg: #ffffff;
-            --section-bg: #e2e8f0;
-            --rule-bg: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #cbd5e1;
-            --accent-green: #059669;
+            --bg-color: var(--surface);
+            --card-bg: var(--surface);
+            --header-bg: var(--surface);
+            --section-bg: rgb(255 255 255 / 0.08);
+            --rule-bg: linear-gradient(135deg, var(--surface) 0%, color-mix(in srgb, var(--info) 6%, var(--surface)) 100%);
+            --text-main: var(--ink);
+            --text-muted: var(--ink-2);
+            --border-color: color-mix(in srgb, var(--info) 30%, var(--border));
+            --accent-green: color-mix(in srgb, var(--success) 18%, var(--surface));
             --shadow-color: rgba(0, 0, 0, 0.1);
             --glow-strength: 0px;
         }
 
         body {
-            font-family: var(--font-main);
+            font-family: var(--font-ui);
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -83,7 +89,7 @@
             background: var(--header-bg);
             padding: 40px 30px;
             text-align: center;
-            border-bottom: 2px solid var(--accent-green);
+            border-bottom: 2px solid var(--accent-var(--success));
             position: relative;
         }
 
@@ -116,16 +122,16 @@
         }
 
         .info-btn {
-            background-color: var(--accent-orange);
-            border-color: var(--accent-orange);
-            color: white;
+            background-color: var(--accent-color-mix(in srgb, var(--accent) 18%, var(--surface)));
+            border-color: var(--accent-var(--accent));
+            color: var(--ink);
             width: auto;
             padding: 0 15px;
             border-radius: 10px;
             font-weight: 800;
             font-size: 0.85rem;
             letter-spacing: 0.05em;
-            animation: pulse-orange 2s infinite;
+            animation: pulse-color-mix(in srgb, var(--accent) 18%, var(--surface)) 2s infinite;
         }
 
         /* Lang Toggle Switch */
@@ -148,8 +154,8 @@
         }
 
         .lang-option.active {
-            background: var(--accent-green);
-            color: #020617;
+            background: var(--accent-color-mix(in srgb, var(--success) 18%, var(--surface)));
+            color: var(--info-text);
         }
 
         @keyframes pulse-orange {
@@ -170,7 +176,7 @@
             margin: 0;
             font-size: 2.2rem;
             font-weight: 800;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
             text-transform: uppercase;
         }
@@ -213,7 +219,7 @@
             padding: 12px 15px;
             font-weight: 800;
             text-transform: uppercase;
-            color: white;
+            color: var(--ink);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -241,7 +247,7 @@
             justify-content: center;
             padding: 10px 15px 12px;
             border-top: 1px solid var(--border-color);
-            color: white;
+            color: var(--ink);
             font-size: 0.8rem;
         }
 
@@ -276,7 +282,7 @@
         }
 
         .card-level-badge {
-            background: rgba(255, 255, 255, 0.18);
+            background: rgb(255 255 255 / 0.08);
             border: 1px solid rgba(255, 255, 255, 0.28);
             border-radius: 999px;
             padding: 4px 10px;
@@ -286,7 +292,7 @@
         }
 
         .card-footer-tag {
-            background: rgba(255, 255, 255, 0.18);
+            background: rgb(255 255 255 / 0.08);
             border: 1px solid rgba(255, 255, 255, 0.28);
             border-radius: 999px;
             padding: 5px 12px;
@@ -298,7 +304,7 @@
         }
 
         .card-footer-level {
-            color: #ffffff;
+            color: var(--ink);
             font-weight: 900;
             letter-spacing: 0.04em;
             font-size: 1.05rem;
@@ -423,7 +429,7 @@
 
         .german-word {
             font-weight: 700;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             font-size: 1.05rem;
             cursor: pointer;
             display: inline-flex;
@@ -478,7 +484,7 @@
 
         .modal-content {
             background: var(--card-bg);
-            border: 1px solid var(--accent-green);
+            border: 1px solid var(--accent-var(--success));
             width: 95%;
             max-width: 550px;
             border-radius: 28px;
@@ -561,7 +567,7 @@
         }
 
         .modal-header.theme-na {
-            background: var(--accent-green);
+            background: var(--accent-color-mix(in srgb, var(--success) 18%, var(--surface)));
         }
 
         .modal-body {
@@ -573,7 +579,7 @@
         .modal-de {
             font-size: 2.5rem;
             font-weight: 900;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             text-align: center;
         }
 
@@ -581,7 +587,7 @@
             font-size: 1.2rem;
             color: var(--text-main);
             margin-bottom: 20px;
-            opacity: 0.9;
+            opacity: 1;
             text-align: center;
             font-weight: 600;
             font-style: italic;
@@ -601,7 +607,7 @@
             background: rgba(255, 255, 255, 0.05);
             padding: 15px;
             border-radius: 12px;
-            border-left: 3px solid var(--accent-green);
+            border-left: 3px solid var(--accent-var(--success));
         }
 
         .modal-example-box {
@@ -640,7 +646,7 @@
         .info-title {
             font-weight: 800;
             font-size: 1.3rem;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -654,31 +660,31 @@
         .info-bullet {
             margin-bottom: 12px;
             padding-left: 15px;
-            border-left: 3px solid var(--accent-green);
+            border-left: 3px solid var(--accent-var(--success));
         }
 
         .syntax-box {
-            background: #020617;
+            background: color-mix(in srgb, var(--info) 12%, var(--bg));
             padding: 15px;
             border-radius: 12px;
-            border: 1px dashed var(--accent-green);
+            border: 1px dashed var(--accent-var(--success));
             font-family: ui-monospace, monospace;
             margin: 15px 0;
             font-size: 0.9rem;
         }
 
         .pos-0 {
-            color: #f43f5e;
+            color: var(--danger);
             font-weight: 800;
         }
 
         .pos-1 {
-            color: #3b82f6;
+            color: var(--info-text);
             font-weight: 800;
         }
 
         .pos-2 {
-            color: #fbbf24;
+            color: var(--accent-text);
             font-weight: 800;
         }
 
@@ -688,8 +694,8 @@
         }
 
         .play-btn-large {
-            background: var(--accent-green);
-            color: #020617;
+            background: var(--accent-color-mix(in srgb, var(--success) 18%, var(--surface)));
+            color: var(--info-text);
             border: none;
             padding: 12px 25px;
             border-radius: 50px;
@@ -706,7 +712,7 @@
             bottom: 20px;
             right: 20px;
             background: var(--header-bg);
-            border: 1px solid var(--accent-green);
+            border: 1px solid var(--accent-var(--success));
             padding: 12px 20px;
             border-radius: 12px;
             transform: translateY(150%);
@@ -730,7 +736,7 @@
 
         .is-loading {
             animation: loading-pulse 1s infinite;
-            color: #10b981 !important;
+            color: var(--success) !important;
         }
 
         /* Mini Cards for Doch */
@@ -753,7 +759,7 @@
 
         .mini-card-title {
             font-weight: 700;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             font-size: 0.9rem;
             margin-bottom: 4px;
             display: block;
@@ -1806,7 +1812,7 @@
 
         function showStatus(msg, color) {
             const box = document.getElementById('statusBox');
-            const colors = { blue: '#3b82f6', green: '#10b981', red: '#ef4444' };
+            const colors = { blue: 'var(--info-text)', green: 'var(--success)', red: 'var(--danger)' };
             document.getElementById('statusText').innerText = msg;
             document.getElementById('statusIndicator').style.backgroundColor = colors[color];
             box.style.transform = 'translateY(0)';

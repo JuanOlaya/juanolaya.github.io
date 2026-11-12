@@ -1,0 +1,428 @@
+/* Dark contract for the legacy MemoDeutsch pages that still load cdn.tailwindcss.com (STYLE-CONTRACT sections 1-3, 9B).
+   Published raw, so the contract values are pasted here. The Tailwind CDN injects its stylesheet after this one, hence
+   the html:root prefix (higher specificity) on every override. Generated rules map each Tailwind colour utility to a
+   contract token; do not add hex values outside the token table. */
+:root {
+  color-scheme: dark;
+  --bg: #282828; --surface: #33333d; --border: #41414e;
+  --ink: #f8ecde; --ink-2: #b9b2a6;
+  --link: #f4f0f9; --link-visited: #b597d8; --link-hover: #a5a5a5;
+  --accent: #c48208; --accent-hover: #d4870a; --accent-text: #e5a53a; --on-accent: #1a1a1a;
+  --info: #198bc6; --info-text: #6cb6ff; --success: #7bd389; --danger: #ff7b72;
+  --focus: rgb(243 228 206 / 0.9);
+  --maskulin-color: var(--info-text); --feminin-color: var(--danger);
+  --neutrum-color: var(--success); --plural-color: var(--accent-text);
+  --font-ui: 'Noto Sans KR', 'Instrument Sans Variable', system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+}
+html:where(:root) *, html:where(:root) ::before, html:where(:root) ::after { border-color: var(--border); }
+html:root, html:root body, html:root body[class] {
+  background-color: var(--bg); color: var(--ink); font-family: var(--font-ui); font-weight: 300;
+  font-size: clamp(15px, 0.9rem + 0.2vw, 17px); line-height: 1.4;
+}
+html:root h1, html:root h2, html:root h3, html:root h4, html:root h5, html:root h6, html:root b, html:root strong,
+html:root .font-bold, html:root .font-semibold, html:root .font-extrabold, html:root .font-black, html:root .font-medium { font-weight: 500; }
+html:root .font-sans { font-family: var(--font-ui); }
+html:root .font-mono, html:root code, html:root kbd, html:root pre { font-family: var(--font-mono); }
+html:root a:not([class]) { color: var(--link); text-decoration: underline; }
+html:root a:not([class]):visited { color: var(--link-visited); }
+html:root a:not([class]):hover { color: var(--link-hover); }
+html:root :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+html:where(:root) input, html:where(:root) select, html:where(:root) textarea { background-color: var(--bg); color: var(--ink); border-color: var(--border); }
+html:where(:root) ::placeholder { color: var(--ink-2); opacity: 1; }
+/* The contract is dark only: the legacy light/dark switches are hidden. */
+html:root #theme-toggle, html:root .theme-btn { display: none; }
+/* Dimmed text keeps AA contrast. */
+html:root .opacity-60, html:root .opacity-70, html:root .opacity-75, html:root .opacity-80, html:root .opacity-85, html:root .opacity-90 { opacity: 1; }
+/* Flat surfaces: no gradients, no decorative shadows. */
+html:root [class*='bg-gradient-to'] { background-image: none; background-color: var(--surface); }
+html:root .bg-clip-text.text-transparent { background-image: none; color: var(--ink); -webkit-text-fill-color: var(--ink); }
+html:root [class*='shadow'] { --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+
+/* Tailwind colour utilities */
+html:root .bg-amber-100{background-color:color-mix(in srgb, var(--accent) 6%, var(--surface));}
+html:root .bg-amber-200{background-color:color-mix(in srgb, var(--accent) 9%, var(--surface));}
+html:root .bg-amber-50{background-color:color-mix(in srgb, var(--accent) 4%, var(--surface));}
+html:root .bg-amber-50\/70{background-color:color-mix(in srgb, color-mix(in srgb, var(--accent) 4%, var(--surface)) 70%, transparent);}
+html:root .bg-amber-500{background-color:var(--accent);color:var(--on-accent);}
+html:root .bg-amber-500\/10{background-color:color-mix(in srgb, color-mix(in srgb, var(--accent) 18%, var(--surface)) 10%, transparent);}
+html:root .bg-amber-500\/5{background-color:color-mix(in srgb, color-mix(in srgb, var(--accent) 18%, var(--surface)) 5%, transparent);}
+html:root .bg-amber-600{background-color:var(--accent);color:var(--on-accent);}
+html:root .bg-amber-900{background-color:color-mix(in srgb, var(--accent) 12%, var(--bg));}
+html:root .bg-blue-100{background-color:color-mix(in srgb, var(--info) 6%, var(--surface));}
+html:root .bg-blue-200{background-color:color-mix(in srgb, var(--info) 9%, var(--surface));}
+html:root .bg-blue-50{background-color:color-mix(in srgb, var(--info) 4%, var(--surface));}
+html:root .bg-blue-500{background-color:var(--accent);color:var(--on-accent);}
+html:root .bg-blue-500\/20{background-color:color-mix(in srgb, color-mix(in srgb, var(--info) 18%, var(--surface)) 20%, transparent);}
+html:root .bg-blue-600{background-color:var(--accent);color:var(--on-accent);}
+html:root .bg-blue-900{background-color:color-mix(in srgb, var(--info) 12%, var(--bg));}
+html:root .bg-emerald-100{background-color:color-mix(in srgb, var(--success) 6%, var(--surface));}
+html:root .bg-emerald-50{background-color:color-mix(in srgb, var(--success) 4%, var(--surface));}
+html:root .bg-emerald-50\/50{background-color:color-mix(in srgb, color-mix(in srgb, var(--success) 4%, var(--surface)) 50%, transparent);}
+html:root .bg-emerald-500{background-color:color-mix(in srgb, var(--success) 18%, var(--surface));}
+html:root .bg-emerald-500\/10{background-color:color-mix(in srgb, color-mix(in srgb, var(--success) 18%, var(--surface)) 10%, transparent);}
+html:root .bg-emerald-500\/40{background-color:color-mix(in srgb, color-mix(in srgb, var(--success) 18%, var(--surface)) 40%, transparent);}
+html:root .bg-emerald-600{background-color:color-mix(in srgb, var(--success) 18%, var(--surface));}
+html:root .bg-emerald-700{background-color:color-mix(in srgb, var(--success) 12%, var(--bg));}
+html:root .bg-emerald-950{background-color:color-mix(in srgb, var(--success) 12%, var(--bg));}
+html:root .bg-gray-100{background-color:var(--surface);}
+html:root .bg-gray-200{background-color:var(--border);}
+html:root .bg-gray-50{background-color:rgb(255 255 255 / 0.04);}
+html:root .bg-gray-500{background-color:var(--border);}
+html:root .bg-gray-800{background-color:var(--surface);}
+html:root .bg-green-100{background-color:color-mix(in srgb, var(--success) 6%, var(--surface));}
+html:root .bg-green-200{background-color:color-mix(in srgb, var(--success) 9%, var(--surface));}
+html:root .bg-green-50{background-color:color-mix(in srgb, var(--success) 4%, var(--surface));}
+html:root .bg-green-500{background-color:color-mix(in srgb, var(--success) 18%, var(--surface));}
+html:root .bg-green-600{background-color:color-mix(in srgb, var(--success) 18%, var(--surface));}
+html:root .bg-indigo-50{background-color:color-mix(in srgb, var(--info) 4%, var(--surface));}
+html:root .bg-indigo-50\/70{background-color:color-mix(in srgb, color-mix(in srgb, var(--info) 4%, var(--surface)) 70%, transparent);}
+html:root .bg-indigo-500{background-color:var(--accent);color:var(--on-accent);}
+html:root .bg-indigo-600{background-color:var(--accent);color:var(--on-accent);}
+html:root .bg-indigo-700{background-color:color-mix(in srgb, var(--info) 12%, var(--bg));}
+html:root .bg-orange-100{background-color:color-mix(in srgb, var(--accent) 6%, var(--surface));}
+html:root .bg-orange-50{background-color:color-mix(in srgb, var(--accent) 4%, var(--surface));}
+html:root .bg-orange-500{background-color:color-mix(in srgb, var(--accent) 18%, var(--surface));}
+html:root .bg-orange-600{background-color:color-mix(in srgb, var(--accent) 18%, var(--surface));}
+html:root .bg-pink-100{background-color:color-mix(in srgb, var(--danger) 6%, var(--surface));}
+html:root .bg-pink-300{background-color:color-mix(in srgb, var(--danger) 12%, var(--surface));}
+html:root .bg-pink-600{background-color:color-mix(in srgb, var(--danger) 18%, var(--surface));}
+html:root .bg-purple-100{background-color:color-mix(in srgb, var(--link-visited) 6%, var(--surface));}
+html:root .bg-purple-600{background-color:color-mix(in srgb, var(--link-visited) 18%, var(--surface));}
+html:root .bg-red-100{background-color:color-mix(in srgb, var(--danger) 6%, var(--surface));}
+html:root .bg-red-200{background-color:color-mix(in srgb, var(--danger) 5%, var(--surface));}
+html:root .bg-red-300{background-color:color-mix(in srgb, var(--danger) 12%, var(--surface));}
+html:root .bg-red-400{background-color:color-mix(in srgb, var(--danger) 18%, var(--surface));}
+html:root .bg-red-50{background-color:color-mix(in srgb, var(--danger) 4%, var(--surface));}
+html:root .bg-red-50\/50{background-color:color-mix(in srgb, color-mix(in srgb, var(--danger) 4%, var(--surface)) 50%, transparent);}
+html:root .bg-red-500{background-color:color-mix(in srgb, var(--danger) 18%, var(--surface));}
+html:root .bg-red-500\/40{background-color:color-mix(in srgb, color-mix(in srgb, var(--danger) 18%, var(--surface)) 40%, transparent);}
+html:root .bg-red-600{background-color:color-mix(in srgb, var(--danger) 18%, var(--surface));}
+html:root .bg-rose-100{background-color:color-mix(in srgb, var(--danger) 6%, var(--surface));}
+html:root .bg-rose-500{background-color:color-mix(in srgb, var(--danger) 18%, var(--surface));}
+html:root .bg-rose-500\/10{background-color:color-mix(in srgb, color-mix(in srgb, var(--danger) 18%, var(--surface)) 10%, transparent);}
+html:root .bg-rose-950{background-color:color-mix(in srgb, var(--danger) 12%, var(--bg));}
+html:root .bg-sky-300{background-color:color-mix(in srgb, var(--info) 12%, var(--surface));}
+html:root .bg-sky-500{background-color:color-mix(in srgb, var(--info) 18%, var(--surface));}
+html:root .bg-slate-100{background-color:var(--surface);}
+html:root .bg-slate-200{background-color:var(--border);}
+html:root .bg-slate-50{background-color:rgb(255 255 255 / 0.04);}
+html:root .bg-slate-50\/40{background-color:rgb(255 255 255 / 0.04);}
+html:root .bg-slate-50\/50{background-color:rgb(255 255 255 / 0.04);}
+html:root .bg-slate-50\/80{background-color:rgb(255 255 255 / 0.04);}
+html:root .bg-slate-800{background-color:var(--surface);}
+html:root .bg-slate-800\/80{background-color:color-mix(in srgb, var(--surface) 80%, transparent);}
+html:root .bg-slate-900{background-color:var(--bg);}
+html:root .bg-slate-900\/60{background-color:color-mix(in srgb, var(--bg) 60%, transparent);}
+html:root .bg-slate-900\/90{background-color:color-mix(in srgb, var(--bg) 90%, transparent);}
+html:root .bg-stone-50{background-color:rgb(255 255 255 / 0.04);}
+html:root .bg-teal-100\/90{background-color:color-mix(in srgb, color-mix(in srgb, var(--success) 6%, var(--surface)) 90%, transparent);}
+html:root .bg-teal-200{background-color:color-mix(in srgb, var(--success) 9%, var(--surface));}
+html:root .bg-teal-800{background-color:color-mix(in srgb, var(--success) 12%, var(--bg));}
+html:root .bg-white{background-color:var(--surface);}
+html:root .bg-white\/10{background-color:color-mix(in srgb, var(--surface) 10%, transparent);}
+html:root .bg-white\/60{background-color:color-mix(in srgb, var(--surface) 60%, transparent);}
+html:root .bg-yellow-100{background-color:color-mix(in srgb, var(--accent) 6%, var(--surface));}
+html:root .bg-yellow-200{background-color:color-mix(in srgb, var(--accent) 9%, var(--surface));}
+html:root .bg-yellow-255{background-color:color-mix(in srgb, var(--accent) 12%, var(--surface));}
+html:root .bg-yellow-400{background-color:color-mix(in srgb, var(--accent) 18%, var(--surface));}
+html:root .bg-yellow-50{background-color:color-mix(in srgb, var(--accent) 4%, var(--surface));}
+html:root .bg-yellow-50\/50{background-color:color-mix(in srgb, color-mix(in srgb, var(--accent) 4%, var(--surface)) 50%, transparent);}
+html:root .bg-yellow-500{background-color:color-mix(in srgb, var(--accent) 18%, var(--surface));}
+html:root .bg-yellow-500\/40{background-color:color-mix(in srgb, color-mix(in srgb, var(--accent) 18%, var(--surface)) 40%, transparent);}
+html:root .bg-yellow-600{background-color:color-mix(in srgb, var(--accent) 18%, var(--surface));}
+html:root .border-amber-100{border-color:color-mix(in srgb, var(--accent) 30%, var(--border));}
+html:root .border-amber-200{border-color:color-mix(in srgb, var(--accent) 30%, var(--border));}
+html:root .border-amber-200\/80{border-color:color-mix(in srgb, var(--accent) 30%, var(--border));}
+html:root .border-amber-400{border-color:color-mix(in srgb, var(--accent) 60%, var(--border));}
+html:root .border-amber-500{border-color:var(--accent);}
+html:root .border-amber-500\/30{border-color:var(--accent);}
+html:root .border-amber-600{border-color:var(--accent);}
+html:root .border-blue-100{border-color:color-mix(in srgb, var(--info) 30%, var(--border));}
+html:root .border-blue-200{border-color:color-mix(in srgb, var(--info) 30%, var(--border));}
+html:root .border-blue-300{border-color:color-mix(in srgb, var(--info) 60%, var(--border));}
+html:root .border-blue-400{border-color:color-mix(in srgb, var(--info) 60%, var(--border));}
+html:root .border-blue-400\/30{border-color:color-mix(in srgb, var(--info) 60%, var(--border));}
+html:root .border-blue-500{border-color:var(--info);}
+html:root .border-blue-600{border-color:var(--info);}
+html:root .border-blue-700{border-color:var(--info);}
+html:root .border-blue-900\/20{border-color:var(--info);}
+html:root .border-cyan-500{border-color:var(--info);}
+html:root .border-emerald-100{border-color:color-mix(in srgb, var(--success) 30%, var(--border));}
+html:root .border-emerald-400{border-color:color-mix(in srgb, var(--success) 60%, var(--border));}
+html:root .border-emerald-400\/30{border-color:color-mix(in srgb, var(--success) 60%, var(--border));}
+html:root .border-emerald-500{border-color:var(--success);}
+html:root .border-emerald-500\/30{border-color:var(--success);}
+html:root .border-emerald-900\/20{border-color:var(--success);}
+html:root .border-gray-100{border-color:var(--border);}
+html:root .border-gray-200{border-color:var(--border);}
+html:root .border-gray-300{border-color:var(--border);}
+html:root .border-gray-400{border-color:var(--border);}
+html:root .border-gray-500{border-color:var(--border);}
+html:root .border-green-200{border-color:color-mix(in srgb, var(--success) 30%, var(--border));}
+html:root .border-green-400{border-color:color-mix(in srgb, var(--success) 60%, var(--border));}
+html:root .border-green-500{border-color:var(--success);}
+html:root .border-indigo-100{border-color:color-mix(in srgb, var(--info) 30%, var(--border));}
+html:root .border-indigo-500{border-color:var(--info);}
+html:root .border-orange-300{border-color:color-mix(in srgb, var(--accent) 60%, var(--border));}
+html:root .border-orange-400{border-color:color-mix(in srgb, var(--accent) 60%, var(--border));}
+html:root .border-orange-500{border-color:var(--accent);}
+html:root .border-orange-700{border-color:var(--accent);}
+html:root .border-orange-900{border-color:var(--accent);}
+html:root .border-pink-200{border-color:color-mix(in srgb, var(--danger) 30%, var(--border));}
+html:root .border-pink-250{border-color:color-mix(in srgb, var(--danger) 60%, var(--border));}
+html:root .border-purple-500{border-color:var(--link-visited);}
+html:root .border-red-100{border-color:color-mix(in srgb, var(--danger) 30%, var(--border));}
+html:root .border-red-200{border-color:color-mix(in srgb, var(--danger) 30%, var(--border));}
+html:root .border-red-300{border-color:color-mix(in srgb, var(--danger) 60%, var(--border));}
+html:root .border-red-400{border-color:color-mix(in srgb, var(--danger) 60%, var(--border));}
+html:root .border-red-500{border-color:var(--danger);}
+html:root .border-rose-400{border-color:color-mix(in srgb, var(--danger) 60%, var(--border));}
+html:root .border-rose-400\/30{border-color:color-mix(in srgb, var(--danger) 60%, var(--border));}
+html:root .border-rose-500{border-color:var(--danger);}
+html:root .border-rose-500\/30{border-color:var(--danger);}
+html:root .border-sky-400{border-color:color-mix(in srgb, var(--info) 60%, var(--border));}
+html:root .border-sky-400\/30{border-color:color-mix(in srgb, var(--info) 60%, var(--border));}
+html:root .border-sky-400\/50{border-color:color-mix(in srgb, var(--info) 60%, var(--border));}
+html:root .border-slate-100{border-color:var(--border);}
+html:root .border-slate-200{border-color:var(--border);}
+html:root .border-slate-300{border-color:var(--border);}
+html:root .border-slate-400{border-color:var(--border);}
+html:root .border-slate-50{border-color:var(--border);}
+html:root .border-slate-500{border-color:var(--border);}
+html:root .border-slate-700{border-color:var(--border);}
+html:root .border-slate-800{border-color:var(--border);}
+html:root .border-slate-950\/15{border-color:var(--border);}
+html:root .border-teal-200{border-color:color-mix(in srgb, var(--success) 30%, var(--border));}
+html:root .border-teal-400{border-color:color-mix(in srgb, var(--success) 60%, var(--border));}
+html:root .border-teal-500{border-color:var(--success);}
+html:root .border-teal-700{border-color:var(--success);}
+html:root .border-teal-900\/20{border-color:var(--success);}
+html:root .border-white{border-color:var(--border);}
+html:root .border-white\/10{border-color:var(--border);}
+html:root .border-white\/20{border-color:var(--border);}
+html:root .border-yellow-200{border-color:color-mix(in srgb, var(--accent) 30%, var(--border));}
+html:root .border-yellow-300{border-color:color-mix(in srgb, var(--accent) 60%, var(--border));}
+html:root .border-yellow-400{border-color:color-mix(in srgb, var(--accent) 60%, var(--border));}
+html:root .border-yellow-500{border-color:var(--accent);}
+html:root .divide-gray-200 > :not([hidden]) ~ :not([hidden]){border-color:var(--border);}
+html:root .divide-gray-300 > :not([hidden]) ~ :not([hidden]){border-color:var(--border);}
+html:root .divide-slate-100 > :not([hidden]) ~ :not([hidden]){border-color:var(--border);}
+html:root .divide-slate-200 > :not([hidden]) ~ :not([hidden]){border-color:var(--border);}
+html:root .fill-slate-400{fill:var(--ink-2);}
+html:root .focus\:ring-indigo-500:focus{--tw-ring-color:var(--info);}
+html:root .group:hover .group-hover\:bg-blue-600{background-color:color-mix(in srgb, var(--info) 18%, var(--surface));}
+html:root .group:hover .group-hover\:bg-indigo-600{background-color:color-mix(in srgb, var(--info) 18%, var(--surface));}
+html:root .group:hover .group-hover\:text-blue-600{color:var(--info-text);}
+html:root .group:hover .group-hover\:text-emerald-300{color:var(--success);}
+html:root .group:hover .group-hover\:text-indigo-600{color:var(--info-text);}
+html:root .group:hover .group-hover\:text-white{color:inherit;}
+html:root .hover\:bg-amber-400:hover{background-color:var(--accent-hover);color:var(--on-accent);}
+html:root .hover\:bg-blue-100:hover{background-color:color-mix(in srgb, var(--info) 6%, var(--surface));}
+html:root .hover\:bg-blue-50\/30:hover{background-color:color-mix(in srgb, color-mix(in srgb, var(--info) 4%, var(--surface)) 30%, transparent);}
+html:root .hover\:bg-blue-500:hover{background-color:var(--accent-hover);color:var(--on-accent);}
+html:root .hover\:bg-blue-600:hover{background-color:var(--accent-hover);color:var(--on-accent);}
+html:root .hover\:bg-blue-700:hover{background-color:var(--accent-hover);color:var(--on-accent);}
+html:root .hover\:bg-gray-100:hover{background-color:var(--surface);}
+html:root .hover\:bg-gray-200:hover{background-color:var(--border);}
+html:root .hover\:bg-gray-50:hover{background-color:rgb(255 255 255 / 0.04);}
+html:root .hover\:bg-green-50\/30:hover{background-color:color-mix(in srgb, color-mix(in srgb, var(--success) 4%, var(--surface)) 30%, transparent);}
+html:root .hover\:bg-indigo-700:hover{background-color:var(--accent-hover);color:var(--on-accent);}
+html:root .hover\:bg-orange-50\/30:hover{background-color:color-mix(in srgb, color-mix(in srgb, var(--accent) 4%, var(--surface)) 30%, transparent);}
+html:root .hover\:bg-slate-100:hover{background-color:var(--surface);}
+html:root .hover\:bg-slate-200:hover{background-color:var(--border);}
+html:root .hover\:bg-slate-300:hover{background-color:var(--border);}
+html:root .hover\:bg-slate-50:hover{background-color:rgb(255 255 255 / 0.04);}
+html:root .hover\:bg-slate-800:hover{background-color:var(--surface);}
+html:root .hover\:bg-white:hover{background-color:var(--surface);}
+html:root .hover\:bg-white\/20:hover{background-color:color-mix(in srgb, var(--surface) 20%, transparent);}
+html:root .hover\:bg-white\/5:hover{background-color:color-mix(in srgb, var(--surface) 5%, transparent);}
+html:root .hover\:bg-white\/80:hover{background-color:color-mix(in srgb, var(--surface) 80%, transparent);}
+html:root .hover\:bg-yellow-700:hover{background-color:color-mix(in srgb, var(--accent) 12%, var(--bg));}
+html:root .hover\:border-amber-400:hover{border-color:color-mix(in srgb, var(--accent) 60%, var(--border));}
+html:root .hover\:border-blue-200:hover{border-color:color-mix(in srgb, var(--info) 30%, var(--border));}
+html:root .hover\:border-blue-400:hover{border-color:color-mix(in srgb, var(--info) 60%, var(--border));}
+html:root .hover\:border-emerald-400:hover{border-color:color-mix(in srgb, var(--success) 60%, var(--border));}
+html:root .hover\:border-emerald-400\/50:hover{border-color:color-mix(in srgb, var(--success) 60%, var(--border));}
+html:root .hover\:border-slate-300:hover{border-color:var(--border);}
+html:root .hover\:text-blue-700:hover{color:var(--info-text);}
+html:root .hover\:text-blue-800:hover{color:var(--info-text);}
+html:root .hover\:text-blue-900:hover{color:var(--info-text);}
+html:root .hover\:text-indigo-200:hover{color:var(--info-text);}
+html:root .hover\:text-red-800:hover{color:var(--danger);}
+html:root .hover\:text-red-900:hover{color:var(--danger);}
+html:root .hover\:text-slate-800:hover{color:var(--ink);}
+html:root .hover\:text-stone-950:hover{color:var(--ink);}
+html:root .hover\:text-white:hover{color:inherit;}
+html:root .ring-emerald-100{--tw-ring-color:color-mix(in srgb, var(--success) 30%, var(--border));}
+html:root .selection\:bg-amber-500 *::selection, html:root .selection\:bg-amber-500::selection{background-color:color-mix(in srgb, var(--accent) 18%, var(--surface));}
+html:root .selection\:text-slate-950 *::selection, html:root .selection\:text-slate-950::selection{color:var(--ink);}
+html:root .text-amber-500{color:var(--accent-text);}
+html:root .text-amber-600{color:var(--accent-text);}
+html:root .text-amber-700{color:var(--accent-text);}
+html:root .text-amber-700\/70{color:var(--accent-text);}
+html:root .text-amber-800{color:var(--accent-text);}
+html:root .text-amber-800\/50{color:var(--accent-text);}
+html:root .text-amber-850{color:var(--accent-text);}
+html:root .text-amber-900{color:var(--accent-text);}
+html:root .text-amber-950{color:var(--accent-text);}
+html:root .text-black{color:var(--ink);}
+html:root .text-blue-100{color:var(--info-text);}
+html:root .text-blue-50{color:var(--info-text);}
+html:root .text-blue-500{color:var(--info-text);}
+html:root .text-blue-600{color:var(--info-text);}
+html:root .text-blue-600\/70{color:var(--info-text);}
+html:root .text-blue-700{color:var(--info-text);}
+html:root .text-blue-750{color:var(--info-text);}
+html:root .text-blue-800{color:var(--info-text);}
+html:root .text-blue-900{color:var(--info-text);}
+html:root .text-blue-950{color:var(--info-text);}
+html:root .text-emerald-100{color:var(--success);}
+html:root .text-emerald-100\/90{color:var(--success);}
+html:root .text-emerald-100\/95{color:var(--success);}
+html:root .text-emerald-400{color:var(--success);}
+html:root .text-emerald-50{color:var(--success);}
+html:root .text-emerald-500{color:var(--success);}
+html:root .text-emerald-600{color:var(--success);}
+html:root .text-emerald-700{color:var(--success);}
+html:root .text-emerald-800{color:var(--success);}
+html:root .text-emerald-900{color:var(--success);}
+html:root .text-gray-100{color:var(--ink);}
+html:root .text-gray-400{color:var(--ink-2);}
+html:root .text-gray-500{color:var(--ink-2);}
+html:root .text-gray-600{color:var(--ink-2);}
+html:root .text-gray-700{color:var(--ink);}
+html:root .text-gray-800{color:var(--ink);}
+html:root .text-gray-900{color:var(--ink);}
+html:root .text-green-500{color:var(--success);}
+html:root .text-green-600{color:var(--success);}
+html:root .text-green-600\/70{color:var(--success);}
+html:root .text-green-700{color:var(--success);}
+html:root .text-green-750{color:var(--success);}
+html:root .text-green-800{color:var(--success);}
+html:root .text-indigo-300{color:var(--info-text);}
+html:root .text-indigo-400{color:var(--info-text);}
+html:root .text-indigo-500{color:var(--info-text);}
+html:root .text-indigo-600{color:var(--info-text);}
+html:root .text-indigo-700{color:var(--info-text);}
+html:root .text-indigo-800{color:var(--info-text);}
+html:root .text-indigo-950\/80{color:var(--info-text);}
+html:root .text-orange-400{color:var(--accent-text);}
+html:root .text-orange-500{color:var(--accent-text);}
+html:root .text-orange-700{color:var(--accent-text);}
+html:root .text-orange-800{color:var(--accent-text);}
+html:root .text-orange-850{color:var(--accent-text);}
+html:root .text-orange-900{color:var(--accent-text);}
+html:root .text-pink-500{color:var(--danger);}
+html:root .text-pink-600{color:var(--danger);}
+html:root .text-pink-700{color:var(--danger);}
+html:root .text-pink-800{color:var(--danger);}
+html:root .text-red-500{color:var(--danger);}
+html:root .text-red-600{color:var(--danger);}
+html:root .text-red-600\/70{color:var(--danger);}
+html:root .text-red-700{color:var(--danger);}
+html:root .text-red-750{color:var(--danger);}
+html:root .text-red-800{color:var(--danger);}
+html:root .text-rose-400{color:var(--danger);}
+html:root .text-rose-500{color:var(--danger);}
+html:root .text-rose-600{color:var(--danger);}
+html:root .text-rose-800{color:var(--danger);}
+html:root .text-sky-600{color:var(--info-text);}
+html:root .text-slate-200{color:var(--ink);}
+html:root .text-slate-300{color:var(--ink);}
+html:root .text-slate-400{color:var(--ink-2);}
+html:root .text-slate-500{color:var(--ink-2);}
+html:root .text-slate-550{color:var(--ink-2);}
+html:root .text-slate-600{color:var(--ink-2);}
+html:root .text-slate-605{color:var(--ink-2);}
+html:root .text-slate-650{color:var(--ink-2);}
+html:root .text-slate-655{color:var(--ink);}
+html:root .text-slate-700{color:var(--ink);}
+html:root .text-slate-750{color:var(--ink);}
+html:root .text-slate-800{color:var(--ink);}
+html:root .text-slate-900{color:var(--ink);}
+html:root .text-slate-950{color:var(--ink);}
+html:root .text-stone-800{color:var(--ink);}
+html:root .text-teal-100{color:var(--success);}
+html:root .text-teal-50\/90{color:var(--success);}
+html:root .text-teal-600{color:var(--success);}
+html:root .text-teal-700{color:var(--success);}
+html:root .text-teal-900{color:var(--success);}
+html:root .text-teal-950{color:var(--success);}
+html:root .text-white{color:inherit;}
+html:root .text-white\/90{color:inherit;}
+html:root .text-yellow-400{color:var(--accent-text);}
+html:root .text-yellow-500{color:var(--accent-text);}
+html:root .text-yellow-600{color:var(--accent-text);}
+html:root .text-yellow-700{color:var(--accent-text);}
+html:root .text-yellow-800{color:var(--accent-text);}
+html:root .text-yellow-850{color:var(--accent-text);}
+html:root .text-yellow-900{color:var(--accent-text);}
+/* Solid fills (dark text on token fill) */
+
+/* dark: variants */
+html:root .dark\:bg-amber-900{background-color:color-mix(in srgb, var(--accent) 12%, var(--bg));}
+html:root .dark\:bg-amber-900\/30{background-color:color-mix(in srgb, color-mix(in srgb, var(--accent) 12%, var(--bg)) 30%, transparent);}
+html:root .dark\:bg-emerald-950\/80{background-color:color-mix(in srgb, color-mix(in srgb, var(--success) 12%, var(--bg)) 80%, transparent);}
+html:root .dark\:bg-gray-700{background-color:var(--surface);}
+html:root .dark\:bg-gray-700\/50{background-color:color-mix(in srgb, var(--surface) 50%, transparent);}
+html:root .dark\:bg-gray-800{background-color:var(--surface);}
+html:root .dark\:bg-gray-900{background-color:var(--bg);}
+html:root .dark\:bg-slate-800{background-color:var(--surface);}
+html:root .dark\:bg-slate-800\/20{background-color:color-mix(in srgb, var(--surface) 20%, transparent);}
+html:root .dark\:bg-slate-800\/30{background-color:color-mix(in srgb, var(--surface) 30%, transparent);}
+html:root .dark\:bg-slate-800\/50{background-color:color-mix(in srgb, var(--surface) 50%, transparent);}
+html:root .dark\:bg-slate-800\/80{background-color:color-mix(in srgb, var(--surface) 80%, transparent);}
+html:root .dark\:bg-slate-900{background-color:var(--bg);}
+html:root .dark\:bg-slate-900\/60{background-color:color-mix(in srgb, var(--bg) 60%, transparent);}
+html:root .dark\:bg-slate-900\/90{background-color:color-mix(in srgb, var(--bg) 90%, transparent);}
+html:root .dark\:bg-slate-950{background-color:var(--bg);}
+html:root .dark\:bg-slate-950\/30{background-color:color-mix(in srgb, var(--bg) 30%, transparent);}
+html:root .dark\:bg-slate-950\/40{background-color:color-mix(in srgb, var(--bg) 40%, transparent);}
+html:root .dark\:bg-slate-950\/50{background-color:color-mix(in srgb, var(--bg) 50%, transparent);}
+html:root .dark\:border-amber-500\/20{border-color:var(--accent);}
+html:root .dark\:border-amber-500\/50{border-color:var(--accent);}
+html:root .dark\:border-emerald-500\/60{border-color:var(--success);}
+html:root .dark\:border-gray-700{border-color:var(--border);}
+html:root .dark\:border-slate-700{border-color:var(--border);}
+html:root .dark\:border-slate-700\/50{border-color:var(--border);}
+html:root .dark\:border-slate-700\/60{border-color:var(--border);}
+html:root .dark\:border-slate-800{border-color:var(--border);}
+html:root .dark\:border-slate-800\/80{border-color:var(--border);}
+html:root .dark\:divide-slate-800 > :not([hidden]) ~ :not([hidden]){border-color:var(--border);}
+html:root .dark\:hover\:bg-gray-600:hover{background-color:var(--border);}
+html:root .dark\:hover\:bg-gray-700:hover{background-color:var(--surface);}
+html:root .dark\:hover\:bg-slate-700:hover{background-color:var(--surface);}
+html:root .dark\:hover\:bg-slate-800:hover{background-color:var(--surface);}
+html:root .dark\:hover\:bg-slate-800\/30:hover{background-color:color-mix(in srgb, var(--surface) 30%, transparent);}
+html:root .dark\:hover\:border-slate-700\/60:hover{border-color:var(--border);}
+html:root .dark\:hover\:text-white:hover{color:inherit;}
+html:root .dark\:text-amber-200{color:var(--accent-text);}
+html:root .dark\:text-amber-400{color:var(--accent-text);}
+html:root .dark\:text-amber-500{color:var(--accent-text);}
+html:root .dark\:text-emerald-400{color:var(--success);}
+html:root .dark\:text-emerald-500{color:var(--success);}
+html:root .dark\:text-gray-100{color:var(--ink);}
+html:root .dark\:text-gray-200{color:var(--ink);}
+html:root .dark\:text-gray-300{color:var(--ink);}
+html:root .dark\:text-gray-400{color:var(--ink-2);}
+html:root .dark\:text-rose-400{color:var(--danger);}
+html:root .dark\:text-sky-400{color:var(--info-text);}
+html:root .dark\:text-slate-100{color:var(--ink);}
+html:root .dark\:text-slate-200{color:var(--ink);}
+html:root .dark\:text-slate-300{color:var(--ink);}
+html:root .dark\:text-slate-400{color:var(--ink-2);}
+html:root .dark\:text-slate-500{color:var(--ink-2);}
+html:root .dark\:text-slate-600{color:var(--ink-2);}
+html:root .dark\:text-white{color:inherit;}
+/* Page backdrop wins over bg-* utilities on <body> */
+html:root body, html:root body[class] { background-color: var(--bg); color: var(--ink); }
+/* Text on the accent fill is always on-accent, including children and utility text colours. */
+html:root :is(.bg-amber-500, .bg-amber-600, .bg-blue-500, .bg-blue-600, .bg-indigo-500, .bg-indigo-600), html:root :is(.bg-amber-500, .bg-amber-600, .bg-blue-500, .bg-blue-600, .bg-indigo-500, .bg-indigo-600) * { color: var(--on-accent); }
+html:root :is(.hover:bg-amber-400:hover, .hover:bg-blue-500:hover, .hover:bg-blue-600:hover, .hover:bg-blue-700:hover, .hover:bg-indigo-700:hover), html:root :is(.hover:bg-amber-400:hover, .hover:bg-blue-500:hover, .hover:bg-blue-600:hover, .hover:bg-blue-700:hover, .hover:bg-indigo-700:hover) * { color: var(--on-accent); }
+/* Disabled controls: muted on a surface, still AA. */
+html:root button:disabled { opacity: 1; background-color: var(--surface); color: var(--ink-2); }
+html:root button:disabled * { color: var(--ink-2); }
+/* Solid red badges: danger fill with on-accent text. */
+html:root :is(.bg-red-500, .bg-red-600), html:root :is(.bg-red-500, .bg-red-600) * { background-color: var(--danger); color: var(--on-accent); }

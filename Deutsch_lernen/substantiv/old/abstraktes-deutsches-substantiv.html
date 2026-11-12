@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abstraktes deutsches Substantiv - Deutsche Sprachreferenz für A1</title>
 <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/dark-contract.css" />
 <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -12,7 +18,7 @@
   <a href="substantiv.html" class="back-home">🏠 Zurück zu Substantiv / Back to Substantiv</a>
 
   <div class="toggle-container" style="margin: 1.5rem 0; text-align: center; display: flex; align-items: center; justify-content: center; gap: 1rem;">
-    <span style="font-weight: 500; color: #374151;">👁️ Artikel anzeigen / Show Articles</span>
+    <span style="font-weight: 500; color: var(--ink);">👁️ Artikel anzeigen / Show Articles</span>
     <label class="toggle-switch" style="position: relative; display: inline-block; width: 60px; height: 34px;">
       <input type="checkbox" id="articleToggle" style="opacity: 0; width: 0; height: 0;">
       <span class="slider" style="
@@ -38,12 +44,12 @@
           <tr>
             <th data-label="Substantiv">🇩🇪 Substantiv <br/> 🇬🇧 Noun</th>
             <th data-label="Aussprache Englisch Spanisch">🇩🇪 Aussprache <br/> 🇬🇧 Englisch <br/> 🇪🇸 Spanisch</th>
-            <th data-label="Definiter Artikel (Nominativ)">Definiter Artikel (Nominativ) <br/> <a href="../faelle/faelle.html#nominative" style="color: #3b82f6; text-decoration: underline; font-size: 0.9em;" title="Nominativo: ¿Quién o qué realiza la acción? (Who or what performs the action?)">Sujeto</a></th>
-            <th data-label="Definiter Artikel (Akkusativ)">Definiter Artikel (Akkusativ) <br/> <a href="../faelle/faelle.html#accusative" style="color: #3b82f6; text-decoration: underline; font-size: 0.9em;" title="Acusativo: ¿Quién o qué recibe directamente la acción? (Who or what directly receives the action?)">Objeto Directo</a></th>
-            <th data-label="Indefiniter Artikel (Nominativ)">Indefiniter Artikel (Nominativ) <br/> <a href="../faelle/faelle.html#nominative" style="color: #3b82f6; text-decoration: underline; font-size: 0.9em;" title="Nominativo: ¿Quién o qué realiza la acción? (Who or what performs the action?)">Sujeto</a></th>
-            <th data-label="Indefiniter Artikel (Akkusativ)">Indefiniter Artikel (Akkusativ) <br/> <a href="../faelle/faelle.html#accusative" style="color: #3b82f6; text-decoration: underline; font-size: 0.9em;" title="Acusativo: ¿Quién o qué recibe directamente la acción? (Who or what directly receives the action?)">Objeto Directo</a></th>
-            <th data-label="Negation (Nominativ)">Negation (Nominativ) <br/> <a href="../faelle/faelle.html#nominative" style="color: #3b82f6; text-decoration: underline; font-size: 0.9em;" title="Nominativo: ¿Quién o qué realiza la acción? (Who or what performs the action?)">Sujeto</a></th>
-            <th data-label="Negation (Akkusativ)">Negation (Akkusativ) <br/> <a href="../faelle/faelle.html#accusative" style="color: #3b82f6; text-decoration: underline; font-size: 0.9em;" title="Acusativo: ¿Quién o qué recibe directamente la acción? (Who or what directly receives the action?)">Objeto Directo</a></th>
+            <th data-label="Definiter Artikel (Nominativ)">Definiter Artikel (Nominativ) <br/> <a href="../faelle/faelle.html#nominative" style="color: var(--info-text); text-decoration: underline; font-size: 0.9em;" title="Nominativo: ¿Quién o qué realiza la acción? (Who or what performs the action?)">Sujeto</a></th>
+            <th data-label="Definiter Artikel (Akkusativ)">Definiter Artikel (Akkusativ) <br/> <a href="../faelle/faelle.html#accusative" style="color: var(--info-text); text-decoration: underline; font-size: 0.9em;" title="Acusativo: ¿Quién o qué recibe directamente la acción? (Who or what directly receives the action?)">Objeto Directo</a></th>
+            <th data-label="Indefiniter Artikel (Nominativ)">Indefiniter Artikel (Nominativ) <br/> <a href="../faelle/faelle.html#nominative" style="color: var(--info-text); text-decoration: underline; font-size: 0.9em;" title="Nominativo: ¿Quién o qué realiza la acción? (Who or what performs the action?)">Sujeto</a></th>
+            <th data-label="Indefiniter Artikel (Akkusativ)">Indefiniter Artikel (Akkusativ) <br/> <a href="../faelle/faelle.html#accusative" style="color: var(--info-text); text-decoration: underline; font-size: 0.9em;" title="Acusativo: ¿Quién o qué recibe directamente la acción? (Who or what directly receives the action?)">Objeto Directo</a></th>
+            <th data-label="Negation (Nominativ)">Negation (Nominativ) <br/> <a href="../faelle/faelle.html#nominative" style="color: var(--info-text); text-decoration: underline; font-size: 0.9em;" title="Nominativo: ¿Quién o qué realiza la acción? (Who or what performs the action?)">Sujeto</a></th>
+            <th data-label="Negation (Akkusativ)">Negation (Akkusativ) <br/> <a href="../faelle/faelle.html#accusative" style="color: var(--info-text); text-decoration: underline; font-size: 0.9em;" title="Acusativo: ¿Quién o qué recibe directamente la acción? (Who or what directly receives the action?)">Objeto Directo</a></th>
             <th data-label="Ejemplos">Mehr</th>
           </tr>
         </thead>
@@ -359,9 +365,9 @@
     --emoji-size: 0.78;
     --arrow-button-size: 1.2;
     --substantiv-text-size: 0.8;
-    --toggle-red: #dc2626;
-    --toggle-green: #4ade80;
-    --link-color: #3b82f6;
+    --toggle-red: color-mix(in srgb, var(--danger) 18%, var(--surface));
+    --toggle-green: color-mix(in srgb, var(--success) 18%, var(--surface));
+    --link-color: var(--info-text);
 }
 
 /* =================================== */
@@ -384,15 +390,15 @@
 
 /* Specific color preservations for underlines */
 .articles-hidden .article.der-color {
-    text-decoration-color: #3b82f6 !important; /* Blue for der */
+    text-decoration-color: var(--info-text) !important; /* Blue for der */
 }
 
 .articles-hidden .article.die-color {
-    text-decoration-color: #dc2626 !important; /* Red for die */
+    text-decoration-color: var(--danger) !important; /* Red for die */
 }
 
 .articles-hidden .article.das-color {
-    text-decoration-color: #059669 !important; /* Green for das */
+    text-decoration-color: var(--success) !important; /* Green for das */
 }
 
 /* Keep nouns always visible */
@@ -437,7 +443,7 @@ td[data-label="Substantiv"]:hover {
 /* Visual indicator for active translation state */
 tr.show-translations td[data-label="Substantiv"] {
     background-color: rgba(59, 130, 246, 0.15) !important;
-    border-left: 3px solid #3b82f6;
+    border-left: 3px solid var(--info);
 }
 
 /* Show translations when row is in translation mode */
@@ -462,7 +468,7 @@ body.articles-hidden tr.show-translations .article-underline {
 /* Show articles on row hover as a secondary backup */
 body.articles-hidden tr:hover .article,
 body.articles-hidden tr:hover .article-underline {
-    opacity: 0.6;
+    opacity: 1;
     color: inherit !important;
     text-decoration: none !important;
     background-color: inherit !important;
@@ -518,7 +524,7 @@ td[data-label="Aussprache Englisch Spanisch"] {
 .articles-hidden td:hover .article-underline,
 .articles-hidden td.show-articles .article-underline {
     color: inherit !important;
-    opacity: 0.7;
+    opacity: 1;
 }
 
 
@@ -555,7 +561,7 @@ td[data-label="Substantiv"] .emoji-small {
 }
 
 .arrow-btn:hover {
-    background-color: #f3f4f6;
+    background-color: var(--surface);
     transform: scale(1.1);
 }
 
@@ -569,7 +575,7 @@ td[data-label="Substantiv"] .emoji-small {
 
 /* Toggle Switch Styles */
 .slider {
-    background-color: #dc2626;
+    background-color: color-mix(in srgb, var(--danger) 18%, var(--surface));
 }
 
 .slider::before {
@@ -579,14 +585,14 @@ td[data-label="Substantiv"] .emoji-small {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: var(--surface);
     transition: .4s;
     border-radius: 50%;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 #articleToggle:checked + .slider {
-    background-color: #4ade80;
+    background-color: color-mix(in srgb, var(--success) 18%, var(--surface));
 }
 
 #articleToggle:checked + .slider::before {
@@ -594,11 +600,11 @@ td[data-label="Substantiv"] .emoji-small {
 }
 
 .slider:hover {
-    background-color: #b91c1c;
+    background-color: color-mix(in srgb, var(--danger) 18%, var(--surface));
 }
 
 #articleToggle:checked + .slider:hover {
-    background-color: #22c55e;
+    background-color: color-mix(in srgb, var(--success) 18%, var(--surface));
 }
 </style>
 

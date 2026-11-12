@@ -2,23 +2,23 @@
 
 /* Gender and Plural Color System */
 :root {
-  --maskulin-color: #360FE6;     /* Blue for masculine */
-  --feminin-color: #FF0A0A;      /* Red for feminine */
-  --neutrum-color: #007A00;      /* Green for neuter */
-  --plural-color: #FF8C00;       /* Dark orange for plural */
+  --maskulin-color: var(--info-text);     /* Blue for masculine */
+  --feminin-color: var(--danger);      /* Red for feminine */
+  --neutrum-color: var(--success);      /* Green for neuter */
+  --plural-color: var(--accent-text);       /* Dark orange for plural */
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-ui);
   margin: 20px;
-  background-color: #f0f4f8;
-  color: #333;
+  background-color: var(--surface);
+  color: var(--ink);
   line-height: 1.6;
   padding: 20px;
 }
 
 h1 {
-  color: #2c3e50;
+  color: var(--ink);
   font-size: 2.5rem;
   margin-bottom: 20px;
   text-align: center;
@@ -26,8 +26,8 @@ h1 {
 
 /* Navigation Menu Styles */
 .nav-menu {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 8px;
   margin-bottom: 30px;
   padding: 20px;
@@ -35,7 +35,7 @@ h1 {
 }
 
 .nav-menu h2 {
-  color: #2c3e50;
+  color: var(--ink);
   margin-bottom: 15px;
   font-size: 1.5em;
 }
@@ -47,17 +47,17 @@ h1 {
 }
 
 .nav-item {
-  background-color: #f8f9fa;
-  border: 1px solid #e0e0e0;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 6px;
   padding: 15px;
   text-decoration: none;
-  color: #2c3e50;
+  color: var(--ink);
   transition: all 0.2s ease;
 }
 
 .nav-item:hover {
-  background-color: #e9ecef;
+  background-color: rgb(255 255 255 / 0.12);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
@@ -71,7 +71,7 @@ h1 {
 .nav-item p {
   margin: 0;
   font-size: 0.9em;
-  color: #666;
+  color: var(--ink);
 }
 
 /* Back to Home Link */
@@ -79,8 +79,8 @@ h1 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: #4299e1;
-  color: white;
+  background-color: color-mix(in srgb, var(--info) 18%, var(--surface));
+  color: var(--ink);
   padding: 10px 18px;
   border-radius: 8px;
   text-decoration: none;
@@ -91,34 +91,34 @@ h1 {
 }
 
 .back-home:hover {
-  background-color: #3182ce;
+  background-color: color-mix(in srgb, var(--info) 28%, var(--surface))
   transform: translateY(-2px);
 }
 
 /* External Link Styles */
 .external-link {
-  color: #3182ce;
+  color: var(--info-text);
   text-decoration: underline;
   font-weight: 500;
   display: inline-block;
   margin: 10px 0;
   padding: 8px 12px;
   border-radius: 6px;
-  background-color: #f7fafc;
-  border: 1px solid #e2e8f0;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
   transition: all 0.3s ease;
 }
 
 .external-link:hover {
-  color: #2c5aa0;
-  background-color: #edf2f7;
+  color: var(--info-text);
+  background-color: rgb(255 255 255 / 0.06);
   text-decoration: underline;
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .external-link:visited {
-  color: #553c9a;
+  color: var(--link-visited);
 }
 
 .external-link:active {
@@ -127,7 +127,7 @@ h1 {
 
 /* Style for the collapsible sections */
 details {
-  background-color: #ffffff;
+  background-color: var(--surface);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   margin-bottom: 20px;
@@ -135,8 +135,8 @@ details {
 }
 
 summary {
-  background-color: #e2e8f0;
-  color: #2c3e50;
+  background-color: rgb(255 255 255 / 0.06);
+  color: var(--ink);
   padding: 18px 25px;
   font-size: 1.3rem;
   font-weight: 600;
@@ -146,11 +146,11 @@ summary {
   display: block; /* Ensures full clickable area */
   position: relative;
   user-select: none;
-  border-bottom: 1px solid #cbd5e0;
+  border-bottom: 1px solid color-mix(in srgb, var(--info) 30%, var(--border));
 }
 
 summary:hover {
-  background-color: #d1d9e2;
+  background-color: rgb(255 255 255 / 0.12);
 }
 
 summary::-webkit-details-marker {
@@ -186,31 +186,31 @@ table {
 th, td {
   padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border);
 }
 
 th {
-  background-color: #f8faff;
+  background-color: var(--surface);
   font-weight: 600;
-  color: #4a5568;
+  color: var(--ink);
   text-transform: uppercase;
   font-size: 0.9rem;
 }
 
 tr:nth-child(even) {
-  background-color: #fbfdff;
+  background-color: var(--surface);
 }
 
 tr:hover {
-  background-color: #f0f4f8;
+  background-color: rgb(255 255 255 / 0.06);
 }
 
 .red-ending {
-  color: red;
+  color: var(--danger);
 }
 
 .blue-change {
-  color: blue;
+  color: var(--info-text);
 }
 
 /* Updated Gender and Plural Classes */
@@ -240,10 +240,10 @@ strong {
 
 h3 {
   font-size: 1.2rem;
-  color: #2c3e50;
+  color: var(--ink);
   margin-top: 25px;
   margin-bottom: 15px;
-  border-bottom: 1px dashed #cbd5e0;
+  border-bottom: 1px dashed color-mix(in srgb, var(--info) 30%, var(--border));
   padding-bottom: 5px;
 }
 
@@ -402,7 +402,7 @@ td[data-label="Emoji"] {
   }
   
   tr {
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border);
     margin-bottom: 10px;
     border-radius: 8px;
     overflow: hidden;
@@ -410,7 +410,7 @@ td[data-label="Emoji"] {
   
   td {
     border: none;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border);
     position: relative;
     padding-left: 50%;
     text-align: right;
@@ -429,7 +429,7 @@ td[data-label="Emoji"] {
     white-space: nowrap;
     text-align: left;
     font-weight: 600;
-    color: #4a5568;
+    color: var(--ink);
   }
 }
 
@@ -439,9 +439,9 @@ table td:hover {
   z-index: 10;
   min-width: max-content;
   white-space: nowrap;
-  background-color: #ffffff !important;
+  background-color: var(--surface) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 2px solid #4299e1;
+  border: 2px solid var(--info);
   padding: 15px 18px;
   border-radius: 6px;
   transform: scale(1.02);
@@ -454,9 +454,9 @@ table td.expanded {
   z-index: 10;
   min-width: max-content;
   white-space: nowrap;
-  background-color: #ffffff !important;
+  background-color: var(--surface) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 2px solid #4299e1;
+  border: 2px solid var(--info);
   padding: 15px 18px;
   border-radius: 6px;
   transform: scale(1.02);
@@ -475,9 +475,9 @@ table td.expanded {
   table td.expanded:after {
     content: " ✕";
     font-size: 0.8em;
-    opacity: 0.8;
+    opacity: 1;
     margin-left: 4px;
-    color: #4299e1;
+    color: var(--info-text);
   }
 }
 

@@ -6,44 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nominativ: Pronombres y Posesivos</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/dark-contract.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: white;
-            color: #1e293b;
+            font-family: var(--font-ui);
+            background-color: var(--surface);
+            color: var(--ink);
         }
 
         .col-masc {
-            background-color: #eff6ff !important;
-            border-color: #bfdbfe !important;
-            color: #1e40af !important;
+            background-color: color-mix(in srgb, var(--info) 6%, var(--surface)) !important;
+            border-color: color-mix(in srgb, var(--info) 30%, var(--border)) !important;
+            color: var(--info-text) !important;
         }
 
         .col-fem {
-            background-color: #fef2f2 !important;
-            border-color: #fecaca !important;
-            color: #991b1b !important;
+            background-color: var(--surface) !important;
+            border-color: color-mix(in srgb, var(--danger) 30%, var(--border)) !important;
+            color: var(--danger) !important;
         }
 
         .col-neu {
-            background-color: #f0fdf4 !important;
-            border-color: #bbf7d0 !important;
-            color: #166534 !important;
+            background-color: color-mix(in srgb, var(--success) 6%, var(--surface)) !important;
+            border-color: color-mix(in srgb, var(--success) 30%, var(--border)) !important;
+            color: var(--success) !important;
         }
 
         .col-plu {
-            background-color: #fffbeb !important;
-            border-color: #fde68a !important;
-            color: #92400e !important;
+            background-color: color-mix(in srgb, var(--accent) 6%, var(--surface)) !important;
+            border-color: var(--accent) !important;
+            color: var(--accent-text) !important;
         }
 
         .base-highlight {
             position: relative;
-            background-color: white !important;
-            border: 2px solid #2563eb !important;
-            color: #2563eb !important;
+            background-color: var(--surface) !important;
+            border: 2px solid var(--info) !important;
+            color: var(--info-text) !important;
             font-weight: 800;
             padding: 0.1rem 0.4rem;
             border-radius: 0.375rem;
@@ -62,7 +67,7 @@
                 margin: 0.4cm 0.2cm;
             }
             body {
-                background: white;
+                background: var(--surface);
                 padding: 0;
                 margin: 0;
                 -webkit-print-color-adjust: exact;

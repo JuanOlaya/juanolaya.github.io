@@ -6,29 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deutsche Adjektive (A1-B1)</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/dark-contract.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="../images/german_flag.png" type="image/png">
     <style>
         :root {
             /* --- DEFAULT DARK MODE PALETTE --- */
-            --bg-color: #0f172a;
+            --bg-color: var(--bg);
             /* Slate 900 */
-            --card-bg: #1e293b;
+            --card-bg: var(--surface);
             /* Slate 800 */
-            --header-bg: #020617;
+            --header-bg: color-mix(in srgb, var(--info) 12%, var(--bg));
             /* Slate 950 */
-            --section-bg: #0f172a;
+            --section-bg: var(--bg);
             /* Slate 900 */
-            --rule-bg: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%);
-            --text-main: #f1f5f9;
+            --rule-bg: linear-gradient(135deg, var(--bg) 0%, color-mix(in srgb, var(--info) 12%, var(--bg)) 100%);
+            --text-main: var(--ink);
             /* Slate 100 */
-            --text-muted: #94a3b8;
+            --text-muted: var(--info-text);
             /* Slate 400 */
-            --border-color: #334155;
+            --border-color: var(--border);
             /* Slate 700 */
             --shadow-color: rgba(0, 0, 0, 0.5);
             --glow-strength: 20px;
-            --accent-green: #22c55e;
+            --accent-green: color-mix(in srgb, var(--success) 18%, var(--surface));
             --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
@@ -59,7 +65,7 @@
         }
 
         .search-input:focus {
-            border-color: var(--accent-green);
+            border-color: var(--accent-var(--success));
             box-shadow: 0 0 0 3px rgba(0, 255, 161, 0.2);
         }
 
@@ -84,7 +90,7 @@
             border-radius: 40px;
             transition: all 0.2s ease;
             color: var(--text-muted);
-            opacity: 0.7;
+            opacity: 1;
         }
 
         .lang-option:hover {
@@ -93,8 +99,8 @@
         }
 
         .lang-option.active {
-            background: var(--accent-green);
-            color: #020617;
+            background: var(--accent-color-mix(in srgb, var(--success) 18%, var(--surface)));
+            color: var(--info-text);
             /* Dark text on green */
             opacity: 1;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -102,21 +108,21 @@
 
         /* --- LIGHT MODE OVERRIDES --- */
         body.light-mode {
-            --bg-color: #f1f5f9;
-            --card-bg: #ffffff;
-            --header-bg: #ffffff;
-            --section-bg: #e2e8f0;
-            --rule-bg: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #cbd5e1;
-            --accent-green: #059669;
+            --bg-color: var(--surface);
+            --card-bg: var(--surface);
+            --header-bg: var(--surface);
+            --section-bg: rgb(255 255 255 / 0.08);
+            --rule-bg: linear-gradient(135deg, var(--surface) 0%, color-mix(in srgb, var(--info) 6%, var(--surface)) 100%);
+            --text-main: var(--ink);
+            --text-muted: var(--ink-2);
+            --border-color: color-mix(in srgb, var(--info) 30%, var(--border));
+            --accent-green: color-mix(in srgb, var(--success) 18%, var(--surface));
             --shadow-color: rgba(0, 0, 0, 0.1);
             --glow-strength: 0px;
         }
 
         body {
-            font-family: var(--font-main);
+            font-family: var(--font-ui);
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -146,7 +152,7 @@
             background: var(--header-bg);
             padding: 40px 30px;
             text-align: center;
-            border-bottom: 2px solid var(--accent-green);
+            border-bottom: 2px solid var(--accent-var(--success));
             position: relative;
         }
 
@@ -180,7 +186,7 @@
 
         .theme-btn:hover {
             transform: scale(1.05);
-            border-color: var(--accent-green);
+            border-color: var(--accent-var(--success));
         }
 
         .settings-btn {
@@ -257,7 +263,7 @@
         .level-header {
             padding: 15px 20px;
             font-weight: 800;
-            color: white;
+            color: var(--ink);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -313,7 +319,7 @@
 
         .german-word {
             font-weight: 700;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -378,7 +384,7 @@
         .word-tag-lid {
             background: rgba(15, 118, 110, 0.22);
             border-color: rgba(20, 184, 166, 0.45);
-            color: #ccfbf1;
+            color: var(--success);
         }
 
         body.hide-lid-tags .word-tag-lid {
@@ -393,7 +399,7 @@
         }
 
         .example-clickable:hover {
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
         }
 
         .example-trans {
@@ -421,7 +427,7 @@
 
         .modal-content {
             background: var(--card-bg);
-            border: 1px solid var(--accent-green);
+            border: 1px solid var(--accent-var(--success));
             width: 90%;
             max-width: 500px;
             border-radius: 20px;
@@ -446,7 +452,7 @@
             margin: 0 0 16px;
             font-size: 1rem;
             font-weight: 800;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             letter-spacing: 0.04em;
             text-transform: uppercase;
         }
@@ -481,7 +487,7 @@
 
         .modal-header h2 {
             margin: 0;
-            color: white;
+            color: var(--ink);
             font-size: 1.4rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -489,9 +495,9 @@
         }
 
         .close-modal {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgb(255 255 255 / 0.08);
             border: none;
-            color: white;
+            color: var(--ink);
             font-size: 1.5rem;
             cursor: pointer;
             transition: background 0.2s;
@@ -505,7 +511,7 @@
         }
 
         .close-modal:hover {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgb(255 255 255 / 0.08);
         }
 
         .modal-body {
@@ -513,7 +519,7 @@
             text-align: center;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: var(--accent-green) var(--bg-color);
+            scrollbar-color: var(--accent-color-mix(in srgb, var(--success) 18%, var(--surface))) var(--bg-color);
         }
 
         .modal-body::-webkit-scrollbar {
@@ -526,14 +532,14 @@
         }
 
         .modal-body::-webkit-scrollbar-thumb {
-            background-color: var(--accent-green);
+            background-color: var(--accent-color-mix(in srgb, var(--success) 18%, var(--surface)));
             border-radius: 4px;
         }
 
         .modal-main-word {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             margin-bottom: 5px;
         }
 
@@ -575,7 +581,7 @@
             font-size: 2.2rem;
             font-weight: 800;
             letter-spacing: -0.025em;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
             text-transform: uppercase;
         }
@@ -685,13 +691,13 @@
         }
 
         input:checked+.slider {
-            background-color: var(--accent-green);
-            border-color: var(--accent-green);
+            background-color: var(--accent-color-mix(in srgb, var(--success) 18%, var(--surface)));
+            border-color: var(--accent-var(--success));
         }
 
         input:checked+.slider:before {
             transform: translateX(24px);
-            background-color: white;
+            background-color: var(--surface);
         }
 
         /* Navigation Arrows (Alt View) */
@@ -734,10 +740,10 @@
         }
 
         .nav-button:hover {
-            background: var(--accent-green);
-            color: #020617;
+            background: var(--accent-color-mix(in srgb, var(--success) 18%, var(--surface)));
+            color: var(--info-text);
             transform: scale(1.1);
-            border-color: var(--accent-green);
+            border-color: var(--accent-var(--success));
         }
 
         .group-indicator {
@@ -792,7 +798,7 @@
                     <div id="modalExampleDe" class="modal-ex-de">Ejemplo Alemán</div>
                     <div id="modalExampleEs" class="modal-ex-es">Traducción Ejemplo</div>
                     <div class="modal-note-declension"
-                        style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted); opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                        style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted); opacity: 1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
                         <i class="fas fa-info-circle" style="margin-right: 5px;"></i>
                         adjetivos (que se declinan cambiando según el género y caso)
                     </div>
@@ -820,7 +826,7 @@
             border-radius: 8px;
             padding: 12px;
             margin-bottom: 10px;
-            border-left: 3px solid var(--accent-green);
+            border-left: 3px solid var(--accent-var(--success));
         }
 
         .case-header {
@@ -842,7 +848,7 @@
 
         .case-name {
             font-weight: 700;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             font-size: 0.95rem;
         }
 
@@ -948,8 +954,8 @@
                 "description": "Valoracion",
                 "level": "A1-A2",
                 "badge": "BASICS",
-                "colorMain": "#10b981",
-                "colorDark": "#047857",
+                "colorMain": "color-mix(in srgb, var(--success) 18%, var(--surface))",
+                "colorDark": "var(--success)",
                 "adjectives": [
                     {
                         "word": "gut",
@@ -1247,8 +1253,8 @@
                 "description": "Medidas",
                 "level": "A1",
                 "badge": "BASICS",
-                "colorMain": "#0ea5e9",
-                "colorDark": "#0369a1",
+                "colorMain": "color-mix(in srgb, var(--info) 18%, var(--surface))",
+                "colorDark": "var(--info-text)",
                 "adjectives": [
                     {
                         "word": "groß",
@@ -1502,8 +1508,8 @@
                 "description": "Tiempo",
                 "level": "A1",
                 "badge": "BASICS",
-                "colorMain": "#8b5cf6",
-                "colorDark": "#6d28d9",
+                "colorMain": "color-mix(in srgb, var(--link-visited) 10%, var(--surface))",
+                "colorDark": "var(--link-visited)",
                 "adjectives": [
                     {
                         "word": "neu",
@@ -1827,8 +1833,8 @@
                 "description": "Ubicacion",
                 "level": "A1-A2",
                 "badge": "BASICS",
-                "colorMain": "#7c3aed",
-                "colorDark": "#5b21b6",
+                "colorMain": "color-mix(in srgb, var(--link-visited) 18%, var(--surface))",
+                "colorDark": "var(--link-visited)",
                 "adjectives": [
                     {
                         "word": "nah",
@@ -1907,8 +1913,8 @@
                 "description": "Entorno",
                 "level": "A1-B1",
                 "badge": "SPEZIFISCH",
-                "colorMain": "#0ea5a4",
-                "colorDark": "#115e59",
+                "colorMain": "color-mix(in srgb, var(--info) 18%, var(--surface))",
+                "colorDark": "var(--info-text)",
                 "adjectives": [
                     {
                         "word": "heiß",
@@ -2162,8 +2168,8 @@
                 "description": "Colores",
                 "level": "A1",
                 "badge": "FARBEN",
-                "colorMain": "#ec4899",
-                "colorDark": "#be185d",
+                "colorMain": "color-mix(in srgb, var(--link-visited) 10%, var(--surface))",
+                "colorDark": "var(--link-visited)",
                 "adjectives": [
                     {
                         "word": "rot",
@@ -2417,8 +2423,8 @@
                 "description": "Apariencia",
                 "level": "A1-A2",
                 "badge": "FARBEN",
-                "colorMain": "#f97316",
-                "colorDark": "#c2410c",
+                "colorMain": "color-mix(in srgb, var(--accent) 18%, var(--surface))",
+                "colorDark": "var(--danger)",
                 "adjectives": [
                     {
                         "word": "bunt",
@@ -2567,8 +2573,8 @@
                 "description": "Cuerpo",
                 "level": "A1-A2",
                 "badge": "CHARAKTER",
-                "colorMain": "#14b8a6",
-                "colorDark": "#0f766e",
+                "colorMain": "color-mix(in srgb, var(--info) 18%, var(--surface))",
+                "colorDark": "var(--info-text)",
                 "adjectives": [
                     {
                         "word": "dick",
@@ -2752,8 +2758,8 @@
                 "description": "Caracter",
                 "level": "A1-A2",
                 "badge": "CHARAKTER",
-                "colorMain": "#22c55e",
-                "colorDark": "#15803d",
+                "colorMain": "color-mix(in srgb, var(--success) 18%, var(--surface))",
+                "colorDark": "var(--success)",
                 "adjectives": [
                     {
                         "word": "nett",
@@ -3007,8 +3013,8 @@
                 "description": "Comportamiento",
                 "level": "A1-A2",
                 "badge": "CHARAKTER",
-                "colorMain": "#84cc16",
-                "colorDark": "#4d7c0f",
+                "colorMain": "color-mix(in srgb, var(--success) 18%, var(--surface))",
+                "colorDark": "var(--success)",
                 "adjectives": [
                     {
                         "word": "böse",
@@ -3227,8 +3233,8 @@
                 "description": "Estado fisico",
                 "level": "A1-A2",
                 "badge": "ZUSTÄNDE",
-                "colorMain": "#06b6d4",
-                "colorDark": "#0e7490",
+                "colorMain": "color-mix(in srgb, var(--info) 18%, var(--surface))",
+                "colorDark": "var(--info-text)",
                 "adjectives": [
                     {
                         "word": "müde",
@@ -3421,8 +3427,8 @@
                 "description": "Emociones",
                 "level": "A1-A2",
                 "badge": "ZUSTÄNDE",
-                "colorMain": "#6366f1",
-                "colorDark": "#4338ca",
+                "colorMain": "color-mix(in srgb, var(--info) 10%, var(--surface))",
+                "colorDark": "var(--info-text)",
                 "adjectives": [
                     {
                         "word": "glücklich",
@@ -3659,8 +3665,8 @@
                 "description": "Necesidades",
                 "level": "A1-A2",
                 "badge": "ZUSTÄNDE",
-                "colorMain": "#f59e0b",
-                "colorDark": "#b45309",
+                "colorMain": "color-mix(in srgb, var(--accent) 18%, var(--surface))",
+                "colorDark": "var(--accent-text)",
                 "adjectives": [
                     {
                         "word": "hungrig",
@@ -3774,8 +3780,8 @@
                 "description": "Estado social",
                 "level": "A2",
                 "badge": "SPEZIFISCH",
-                "colorMain": "#ef4444",
-                "colorDark": "#b91c1c",
+                "colorMain": "color-mix(in srgb, var(--danger) 10%, var(--surface))",
+                "colorDark": "var(--danger)",
                 "adjectives": [
                     {
                         "word": "ledig",
@@ -4056,8 +4062,8 @@
                 "description": "Condicion",
                 "level": "A2",
                 "badge": "SPEZIFISCH",
-                "colorMain": "#64748b",
-                "colorDark": "#475569",
+                "colorMain": "var(--surface)",
+                "colorDark": "var(--ink)",
                 "adjectives": [
                     {
                         "word": "offen",
@@ -4233,8 +4239,8 @@
                 "description": "Dificultad",
                 "level": "A2",
                 "badge": "SPEZIFISCH",
-                "colorMain": "#f97316",
-                "colorDark": "#ea580c",
+                "colorMain": "color-mix(in srgb, var(--accent) 18%, var(--surface))",
+                "colorDark": "var(--accent-text)",
                 "adjectives": [
                     {
                         "word": "einfach",
@@ -4453,8 +4459,8 @@
                 "description": "Vida diaria",
                 "level": "A2-B1",
                 "badge": "SPEZIFISCH",
-                "colorMain": "#3b82f6",
-                "colorDark": "#1d4ed8",
+                "colorMain": "color-mix(in srgb, var(--info) 18%, var(--surface))",
+                "colorDark": "var(--info-text)",
                 "adjectives": [
                     {
                         "word": "langsam",
@@ -4568,8 +4574,8 @@
                 "description": "Estilo de vida",
                 "level": "B1",
                 "badge": "DEUTSCHLAND",
-                "colorMain": "#0f766e",
-                "colorDark": "#115e59",
+                "colorMain": "color-mix(in srgb, var(--info) 18%, var(--surface))",
+                "colorDark": "var(--info-text)",
                 "adjectives": [
                     {
                         "word": "gemütlich",
@@ -4788,8 +4794,8 @@
                 "description": "Compromiso",
                 "level": "B1",
                 "badge": "DEUTSCHLAND",
-                "colorMain": "#0d9488",
-                "colorDark": "#115e59",
+                "colorMain": "color-mix(in srgb, var(--info) 18%, var(--surface))",
+                "colorDark": "var(--info-text)",
                 "adjectives": [
                     {
                         "word": "ehrenamtlich",
@@ -4906,8 +4912,8 @@
                 "description": "Cantidad",
                 "level": "A2-B1",
                 "badge": "INDEFINIT",
-                "colorMain": "#8b5cf6",
-                "colorDark": "#7c3aed",
+                "colorMain": "color-mix(in srgb, var(--link-visited) 10%, var(--surface))",
+                "colorDark": "var(--link-visited)",
                 "adjectives": [
                     {
                         "word": "viel",
@@ -5031,8 +5037,8 @@
                 "description": "Distribucion",
                 "level": "A2-B1",
                 "badge": "INDEFINIT",
-                "colorMain": "#a855f7",
-                "colorDark": "#7e22ce",
+                "colorMain": "color-mix(in srgb, var(--link-visited) 10%, var(--surface))",
+                "colorDark": "var(--link-visited)",
                 "adjectives": [
                     {
                         "word": "jeder",
@@ -5164,8 +5170,8 @@
                 "description": "Comparacion",
                 "level": "A2-B1",
                 "badge": "KOMPARATIV",
-                "colorMain": "#d946ef",
-                "colorDark": "#a21caf",
+                "colorMain": "color-mix(in srgb, var(--link-visited) 10%, var(--surface))",
+                "colorDark": "var(--link-visited)",
                 "adjectives": [
                     {
                         "word": "besser",
@@ -5306,8 +5312,8 @@
                 "description": "Especiales",
                 "level": "B1",
                 "badge": "PARTIZIP",
-                "colorMain": "#eab308",
-                "colorDark": "#a16207",
+                "colorMain": "color-mix(in srgb, var(--accent) 18%, var(--surface))",
+                "colorDark": "var(--accent-text)",
                 "adjectives": [
                     {
                         "word": "spannend",
@@ -5544,8 +5550,8 @@
                 "description": "Leyes y Justiza",
                 "level": "B1",
                 "badge": "JURISTISCH",
-                "colorMain": "#ef4444",
-                "colorDark": "#991b1b",
+                "colorMain": "color-mix(in srgb, var(--danger) 10%, var(--surface))",
+                "colorDark": "var(--danger)",
                 "adjectives": [
                     {
                         "word": "begangen",
@@ -5965,7 +5971,7 @@
             const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             const regex = new RegExp(escapedQuery, 'gi');
             return text.replace(regex, (match) =>
-                `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${match}</span>`
+                `<span style="background: linear-gradient(135deg, color-mix(in srgb, var(--danger) 10%, var(--surface)) 0%, color-mix(in srgb, var(--accent) 10%, var(--surface)) 100%); color: var(--accent-text); padding: 0;">${match}</span>`
             );
         }
 
@@ -6060,7 +6066,7 @@
             const pattern = '\\b(' + stems.join('|') + ')[a-zäöüß]*';
             const regex = new RegExp(pattern, 'gi');
 
-            return text.replace(regex, (match) => `<b style="color:var(--accent-green); font-weight:900;">${match}</b>`);
+            return text.replace(regex, (match) => `<b style="color:var(--accent-var(--success)); font-weight:900;">${match}</b>`);
         }
 
         // --- MODAL ---

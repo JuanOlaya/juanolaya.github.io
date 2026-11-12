@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Körperteile - Interaktive Infografik</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/dark-contract.css" />
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -14,7 +19,7 @@
     </script>
     <style>
         body {
-            font-family: 'Nunito', sans-serif;
+            font-family: var(--font-ui);
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
@@ -33,44 +38,44 @@
 
         .active-part {
             fill: rgba(245, 158, 11, 0.3) !important;
-            stroke: #f59e0b !important;
+            stroke: var(--accent-text) !important;
             stroke-width: 3 !important;
         }
 
         /* Human Figure Theming */
         .human-path {
-            fill: #e5e7eb;
-            stroke: #9ca3af;
+            fill: var(--ink);
+            stroke: var(--ink-2);
             transition: fill 0.3s ease, stroke 0.3s ease;
         }
 
         .dark .human-path {
-            fill: #374151;
-            stroke: #6b7280;
+            fill: var(--ink);
+            stroke: var(--ink-2);
         }
 
         .article-der {
-            color: #3b82f6;
+            color: var(--info-text);
         }
 
         .article-die {
-            color: #ef4444;
+            color: var(--danger);
         }
 
         .article-das {
-            color: #22c55e;
+            color: var(--success);
         }
 
         .bg-der {
-            background-color: #3b82f6;
+            background-color: color-mix(in srgb, var(--info) 18%, var(--surface));
         }
 
         .bg-die {
-            background-color: #ef4444;
+            background-color: color-mix(in srgb, var(--danger) 10%, var(--surface));
         }
 
         .bg-das {
-            background-color: #22c55e;
+            background-color: color-mix(in srgb, var(--success) 18%, var(--surface));
         }
 
         .card-shadow {
@@ -129,7 +134,7 @@
 
                     <!-- NECK (Hals) -->
                     <!-- Positioned behind head and torso -->
-                    <path class="human-path" d="M185,120 L185,150 L215,150 L215,120 Z" fill="#e0c298" stroke="none" />
+                    <path class="human-path" d="M185,120 L185,150 L215,150 L215,120 Z" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" stroke="none" />
                     <!-- Clickable Neck Area -->
                     <path data-part="hals" class="body-part-hotspot" d="M185,120 L185,150 L215,150 L215,120 Z"
                         fill="transparent" onclick="selectPart('hals')" />
@@ -137,19 +142,19 @@
                     <!-- TORSO (Upper Body) -->
                     <path class="human-path"
                         d="M160,150 L240,150 Q260,150 260,180 L260,300 Q260,320 230,320 L170,320 Q140,320 140,300 L140,180 Q140,150 160,150"
-                        fill="#3b82f6" stroke="none" />
+                        fill="color-mix(in srgb, var(--info) 18%, var(--surface))" stroke="none" />
 
                     <!-- ARMS -->
                     <!-- Left Arm -->
-                    <path class="human-path" d="M140,160 L100,250 Q90,260 110,270 L140,180" fill="#3b82f6"
+                    <path class="human-path" d="M140,160 L100,250 Q90,260 110,270 L140,180" fill="color-mix(in srgb, var(--info) 18%, var(--surface))"
                         stroke="none" />
                     <!-- Right Arm -->
-                    <path class="human-path" d="M260,160 L300,250 Q310,260 290,270 L260,180" fill="#3b82f6"
+                    <path class="human-path" d="M260,160 L300,250 Q310,260 290,270 L260,180" fill="color-mix(in srgb, var(--info) 18%, var(--surface))"
                         stroke="none" />
 
                     <!-- HANDS -->
                     <!-- Left Hand (Simple) -->
-                    <path class="human-path" d="M90,250 Q80,260 90,275 Q100,290 115,280 L110,270 Z" fill="#ffdbac"
+                    <path class="human-path" d="M90,250 Q80,260 90,275 Q100,290 115,280 L110,270 Z" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))"
                         stroke="none" />
                     <circle data-part="hand" class="body-part-hotspot" cx="100" cy="270" r="15" fill="transparent"
                         onclick="selectPart('hand')" />
@@ -157,14 +162,14 @@
                     <!-- Right Hand (WITH FINGERS) - Hand at x=290, y=270 area -->
                     <g transform="translate(290, 260) rotate(-20)">
                         <!-- Palm -->
-                        <path d="M0,0 Q-5,20 10,25 L20,20 L10,-5 Z" fill="#ffdbac" />
+                        <path d="M0,0 Q-5,20 10,25 L20,20 L10,-5 Z" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" />
                         <!-- Fingers -->
-                        <path d="M5,25 L5,35 L9,35 L9,25 Z" fill="#ffdbac" /> <!-- Finger 1 -->
-                        <path d="M10,25 L10,37 L14,37 L14,23 Z" fill="#ffdbac" /> <!-- Finger 2 -->
-                        <path d="M15,22 L15,36 L19,36 L19,20 Z" fill="#ffdbac" /> <!-- Finger 3 -->
-                        <path d="M20,18 L20,30 L24,30 L24,18 Z" fill="#ffdbac" /> <!-- Finger 4 -->
+                        <path d="M5,25 L5,35 L9,35 L9,25 Z" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" /> <!-- Finger 1 -->
+                        <path d="M10,25 L10,37 L14,37 L14,23 Z" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" /> <!-- Finger 2 -->
+                        <path d="M15,22 L15,36 L19,36 L19,20 Z" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" /> <!-- Finger 3 -->
+                        <path d="M20,18 L20,30 L24,30 L24,18 Z" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" /> <!-- Finger 4 -->
                         <!-- Thumb -->
-                        <path d="M20,5 L30,10 L28,15 L18,10 Z" fill="#ffdbac" />
+                        <path d="M20,5 L30,10 L28,15 L18,10 Z" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" />
                     </g>
                     <!-- Clickable Finger Area -->
                     <circle data-part="finger" class="body-part-hotspot" cx="310" cy="290" r="15" fill="transparent"
@@ -176,23 +181,23 @@
 
                     <!-- LEGS -->
                     <!-- Left Leg -->
-                    <path class="human-path" d="M170,320 L160,550 L195,550 L195,320" fill="#1e3a8a" stroke="none" />
+                    <path class="human-path" d="M170,320 L160,550 L195,550 L195,320" fill="color-mix(in srgb, var(--info) 18%, var(--surface))" stroke="none" />
                     <!-- Right Leg -->
-                    <path class="human-path" d="M205,320 L205,550 L240,550 L230,320" fill="#1e3a8a" stroke="none" />
+                    <path class="human-path" d="M205,320 L205,550 L240,550 L230,320" fill="color-mix(in srgb, var(--info) 18%, var(--surface))" stroke="none" />
 
                     <!-- FEET -->
                     <!-- Left Foot -->
-                    <path class="human-path" d="M150,550 L195,550 L195,570 Q160,580 150,550" fill="#4b5563"
+                    <path class="human-path" d="M150,550 L195,550 L195,570 Q160,580 150,550" fill="var(--surface)"
                         stroke="none" />
                     <!-- Right Foot -->
-                    <path class="human-path" d="M205,550 L250,550 L250,570 Q215,580 205,550" fill="#4b5563"
+                    <path class="human-path" d="M205,550 L250,550 L250,570 Q215,580 205,550" fill="var(--surface)"
                         stroke="none" />
 
 
                     <!-- HEAD & FACE (Big & Colorful) - Centered at 200,80. Size approx 100x110 -->
 
                     <!-- SKIN/HEAD BASE -->
-                    <ellipse cx="200" cy="70" rx="55" ry="65" fill="#ffdbac" stroke="none" />
+                    <ellipse cx="200" cy="70" rx="55" ry="65" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" stroke="none" />
                     <path data-part="kopf" class="body-part-hotspot" d="M155,20 H245 V120 H155 Z" fill="transparent"
                         onclick="selectPart('kopf')" />
                     <!-- Haut helper -->
@@ -201,16 +206,16 @@
 
                     <!-- HAIR -->
                     <path d="M150,60 Q150,10 200,10 Q250,10 250,60 Q260,30 250,10 Q200,-10 150,10 Q140,30 150,60"
-                        fill="#4a3b2a" />
+                        fill="color-mix(in srgb, var(--accent) 12%, var(--bg))" />
                     <path data-part="haar" class="body-part-hotspot" d="M140,0 H260 V60 H140 Z" fill="transparent"
                         onclick="selectPart('haar')" />
 
                     <!-- EARS -->
-                    <ellipse cx="145" cy="70" rx="6" ry="10" fill="#ffdbac" stroke="#e5e7eb" stroke-width="1" />
+                    <ellipse cx="145" cy="70" rx="6" ry="10" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" stroke="rgb(255 255 255 / 0.08)" stroke-width="1" />
                     <circle data-part="ohr" class="body-part-hotspot" cx="145" cy="70" r="10" fill="transparent"
                         onclick="selectPart('ohr')" />
 
-                    <ellipse cx="255" cy="70" rx="6" ry="10" fill="#ffdbac" stroke="#e5e7eb" stroke-width="1" />
+                    <ellipse cx="255" cy="70" rx="6" ry="10" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" stroke="rgb(255 255 255 / 0.08)" stroke-width="1" />
                     <circle data-part="ohr" class="body-part-hotspot" cx="255" cy="70" r="10" fill="transparent"
                         onclick="selectPart('ohr')" />
 
@@ -220,8 +225,8 @@
                     <ellipse cx="180" cy="65" rx="10" ry="6" fill="white" />
                     <ellipse cx="220" cy="65" rx="10" ry="6" fill="white" />
                     <!-- Iris -->
-                    <circle cx="180" cy="65" r="3" fill="#3b82f6" />
-                    <circle cx="220" cy="65" r="3" fill="#3b82f6" />
+                    <circle cx="180" cy="65" r="3" fill="color-mix(in srgb, var(--info) 18%, var(--surface))" />
+                    <circle cx="220" cy="65" r="3" fill="color-mix(in srgb, var(--info) 18%, var(--surface))" />
                     <!-- Hotspots -->
                     <circle data-part="auge" class="body-part-hotspot" cx="180" cy="65" r="12" fill="transparent"
                         onclick="selectPart('auge')" />
@@ -230,14 +235,14 @@
 
 
                     <!-- NOSE -->
-                    <path d="M200,75 L195,90 L205,90 Z" fill="#e0c298" />
+                    <path d="M200,75 L195,90 L205,90 Z" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" />
                     <circle data-part="nase" class="body-part-hotspot" cx="200" cy="82" r="10" fill="transparent"
                         onclick="selectPart('nase')" />
 
 
                     <!-- MOUTH & TEETH -->
                     <!-- Mouth Shape -->
-                    <path d="M185,100 Q200,115 215,100 Q200,105 185,100" fill="#be123c" />
+                    <path d="M185,100 Q200,115 215,100 Q200,105 185,100" fill="color-mix(in srgb, var(--danger) 18%, var(--surface))" />
                     <!-- Teeth (small white strip inside) -->
                     <path d="M190,102 Q200,105 210,102" stroke="white" stroke-width="3" fill="none" />
                     <!-- Hotspots -->
@@ -251,7 +256,7 @@
                     <!-- HEART (Herz) - Visual visible heart -->
                     <path
                         d="M215,180 C215,180 200,165 200,158 Q200,150 208,150 Q215,150 215,158 Q215,150 222,150 Q230,150 230,158 C230,165 215,180 215,180 Z"
-                        fill="#ef4444" stroke="#be123c" stroke-width="1" />
+                        fill="color-mix(in srgb, var(--danger) 10%, var(--surface))" stroke="color-mix(in srgb, var(--danger) 18%, var(--surface))" stroke-width="1" />
 
                     <rect data-part="bauch" class="body-part-hotspot" x="170" y="160" width="60" height="100"
                         fill="transparent" onclick="selectPart('bauch')" />
@@ -426,7 +431,7 @@
             displayExEs.textContent = part.example_es;
 
             // Color Coding the Card
-            card.style.borderLeftColor = part.article === 'der' ? '#3b82f6' : (part.article === 'die' ? '#ef4444' : '#22c55e');
+            card.style.borderLeftColor = part.article === 'der' ? 'var(--info)' : (part.article === 'die' ? 'var(--danger)' : 'var(--success)');
             displayArticle.className = `text-2xl font-bold opacity-70 article-${part.article}`;
 
             // Highlight in SVG - Handle multiple hotspots per part
