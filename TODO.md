@@ -77,6 +77,6 @@ Este documento recopila los proyectos retirados temporalmente de la sección de 
 ## 7. Pendientes detectados tras la ronda de mejoras (#97–#102)
 
 * **ShapyPresence**
-  - [ ] Probar a mano en Firefox y Safari (iOS incluido); hasta ahora solo se verificó en Chrome.
+  - [x] Probar a mano en Firefox y Safari (iOS incluido); hasta ahora solo se verificó en Chrome. (#116, Firefox y WebKit con Playwright; iOS físico sin probar)
 * **Estilos compartidos**
-  - [ ] Consolidar los tokens del contrato visual (incluido `--text-caption` de UX) en una hoja común `src/shared/styles/` para no repetirlos en cada proyecto.
+  - [x] Consolidar los tokens del contrato visual (incluido `--text-caption` de UX) en una hoja común `src/shared/styles/` para no repetirlos en cada proyecto. (#114)
