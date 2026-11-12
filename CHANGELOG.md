@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.14.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.13.0...v0.14.0) (2026-11-12)
+
+
+### Features
+
+* **memodeutsch:** dark contract for legacy Tailwind CDN pages ([#117](https://github.com/JuanOlaya/juanolaya.github.io/issues/117)) ([d64f032](https://github.com/JuanOlaya/juanolaya.github.io/commit/d64f032f09af55f7736f624884d431d43dd5bf45))
+* **verben:** style contract palette and carousel clip fix ([#120](https://github.com/JuanOlaya/juanolaya.github.io/issues/120)) ([25ad166](https://github.com/JuanOlaya/juanolaya.github.io/commit/25ad166762e8220dadba3f049005173923891b8d))
+
+
+### Bug Fixes
+
+* **hci-bht:** outline logo text so it no longer depends on Ubuntu-Bold ([#118](https://github.com/JuanOlaya/juanolaya.github.io/issues/118)) ([9e86ee3](https://github.com/JuanOlaya/juanolaya.github.io/commit/9e86ee3b0bec0b739e64290701853eebe6fa8255))
+
 ## [0.13.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.12.0...v0.13.0) (2026-11-11)
 
 
