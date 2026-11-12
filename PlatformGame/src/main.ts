@@ -3,11 +3,10 @@ import '@fontsource/ibm-plex-mono/500.css';
 import { prefersReducedMotion } from '@shared/p5/display.ts';
 import { mountPlatformGame } from './game.ts';
 import { mountLearnPanels } from './panels/learn.ts';
-import { MONO, SANS } from './render.ts';
+import { SANS } from './render.ts';
 import './style.css';
 
 // Canvas text does not trigger webfont downloads the way DOM text does.
-void document.fonts.load(`16px "${MONO}"`);
 void document.fonts.load(`bold 16px "${SANS}"`);
 
 const stage = document.querySelector<HTMLElement>('.game__stage');

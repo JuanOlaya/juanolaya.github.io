@@ -78,7 +78,5 @@ Este documento recopila los proyectos retirados temporalmente de la sección de 
 
 * **ShapyPresence**
   - [ ] Probar a mano en Firefox y Safari (iOS incluido); hasta ahora solo se verificó en Chrome.
-* **Platform Game**
-  - [ ] Decidir si el HUD del canvas se mantiene, ya que duplica los datos del panel de física.
 * **Estilos compartidos**
   - [ ] Consolidar los tokens del contrato visual (incluido `--text-caption` de UX) en una hoja común `src/shared/styles/` para no repetirlos en cada proyecto.
