@@ -268,28 +268,29 @@
 			levelConfig
 		};
 	}
-	/** Cards per page of the compact carousel for a viewport `width`, and the device class it implies. */
+	/** Width one compact card takes in the carousel: 350px card plus its 10px side margins (`styles.css`). */
+	var CARD_SLOT_WIDTH = 370;
+	var MAX_CARDS_PER_PAGE = 4;
+	/**
+	* Cards per page of the compact carousel for a viewport `width`, and the device class it implies. Only as
+	* many cards as fit side by side: a wider row is clipped by the container, which cut the first card at 640px.
+	*/
 	function pageSizeForWidth(width) {
-		if (width < 600) return {
-			pageSize: 1,
-			isPhone: true,
-			isTablet: false,
-			isDesktop: false
-		};
+		const pageSize = Math.min(MAX_CARDS_PER_PAGE, Math.max(1, Math.floor(width / CARD_SLOT_WIDTH)));
 		if (width < 768) return {
-			pageSize: 2,
+			pageSize,
 			isPhone: true,
 			isTablet: false,
 			isDesktop: false
 		};
 		if (width <= 1024) return {
-			pageSize: 3,
+			pageSize,
 			isPhone: false,
 			isTablet: true,
 			isDesktop: false
 		};
 		return {
-			pageSize: 4,
+			pageSize,
 			isPhone: false,
 			isTablet: false,
 			isDesktop: true
