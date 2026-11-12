@@ -142,7 +142,7 @@ Implementación sistemática de las directrices de [Google Chrome Modern Web Gui
 - **`UX/`:** View Transitions en el cambio de pestañas de casos de estudio y Scroll-driven Animations (`animation-timeline`) para la barra de lectura.
 
 ### 4.6. Infraestructura Global del Repositorio
-- **Tokens Centralizados:** Consolidación de tokens visuales en `src/shared/styles/tokens.css`.
+- **Tokens Centralizados:** Consolidación de tokens visuales en `src/shared/styles/tokens.css` (hecho para UX, Project_Management y Deutsch_lernen/src/app; es la fuente del bloque `@theme` del contrato; las páginas legacy y los sketches p5 conservan valores propios).
 - **Tipografía Moderna:** Aplicación sistemática de `text-wrap: balance` en títulos y `text-wrap: pretty` en cuerpos de texto.
 
 ---
