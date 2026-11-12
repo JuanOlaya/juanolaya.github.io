@@ -57,7 +57,7 @@ h1 {
 }
 
 .nav-item:hover {
-  background-color: rgb(255 255 255 / 0.08);
+  background-color: rgb(255 255 255 / 0.12);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
@@ -91,7 +91,7 @@ h1 {
 }
 
 .back-home:hover {
-  background-color: color-mix(in srgb, var(--info) 18%, var(--surface));
+  background-color: color-mix(in srgb, var(--info) 28%, var(--surface))
   transform: translateY(-2px);
 }
 
@@ -111,7 +111,7 @@ h1 {
 
 .external-link:hover {
   color: var(--info-text);
-  background-color: var(--surface);
+  background-color: rgb(255 255 255 / 0.06);
   text-decoration: underline;
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -135,7 +135,7 @@ details {
 }
 
 summary {
-  background-color: rgb(255 255 255 / 0.08);
+  background-color: rgb(255 255 255 / 0.06);
   color: var(--ink);
   padding: 18px 25px;
   font-size: 1.3rem;
@@ -150,7 +150,7 @@ summary {
 }
 
 summary:hover {
-  background-color: rgb(255 255 255 / 0.08);
+  background-color: rgb(255 255 255 / 0.12);
 }
 
 summary::-webkit-details-marker {
@@ -202,7 +202,7 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-  background-color: var(--surface);
+  background-color: rgb(255 255 255 / 0.06);
 }
 
 .red-ending {

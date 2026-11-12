@@ -45,17 +45,17 @@ html:root .bg-amber-100{background-color:color-mix(in srgb, var(--accent) 6%, va
 html:root .bg-amber-200{background-color:color-mix(in srgb, var(--accent) 9%, var(--surface));}
 html:root .bg-amber-50{background-color:color-mix(in srgb, var(--accent) 4%, var(--surface));}
 html:root .bg-amber-50\/70{background-color:color-mix(in srgb, color-mix(in srgb, var(--accent) 4%, var(--surface)) 70%, transparent);}
-html:root .bg-amber-500{background-color:color-mix(in srgb, var(--accent) 18%, var(--surface));}
+html:root .bg-amber-500{background-color:var(--accent);color:var(--on-accent);}
 html:root .bg-amber-500\/10{background-color:color-mix(in srgb, color-mix(in srgb, var(--accent) 18%, var(--surface)) 10%, transparent);}
 html:root .bg-amber-500\/5{background-color:color-mix(in srgb, color-mix(in srgb, var(--accent) 18%, var(--surface)) 5%, transparent);}
-html:root .bg-amber-600{background-color:color-mix(in srgb, var(--accent) 18%, var(--surface));}
+html:root .bg-amber-600{background-color:var(--accent);color:var(--on-accent);}
 html:root .bg-amber-900{background-color:color-mix(in srgb, var(--accent) 12%, var(--bg));}
 html:root .bg-blue-100{background-color:color-mix(in srgb, var(--info) 6%, var(--surface));}
 html:root .bg-blue-200{background-color:color-mix(in srgb, var(--info) 9%, var(--surface));}
 html:root .bg-blue-50{background-color:color-mix(in srgb, var(--info) 4%, var(--surface));}
-html:root .bg-blue-500{background-color:color-mix(in srgb, var(--info) 18%, var(--surface));}
+html:root .bg-blue-500{background-color:var(--accent);color:var(--on-accent);}
 html:root .bg-blue-500\/20{background-color:color-mix(in srgb, color-mix(in srgb, var(--info) 18%, var(--surface)) 20%, transparent);}
-html:root .bg-blue-600{background-color:color-mix(in srgb, var(--info) 18%, var(--surface));}
+html:root .bg-blue-600{background-color:var(--accent);color:var(--on-accent);}
 html:root .bg-blue-900{background-color:color-mix(in srgb, var(--info) 12%, var(--bg));}
 html:root .bg-emerald-100{background-color:color-mix(in srgb, var(--success) 6%, var(--surface));}
 html:root .bg-emerald-50{background-color:color-mix(in srgb, var(--success) 4%, var(--surface));}
@@ -78,8 +78,8 @@ html:root .bg-green-500{background-color:color-mix(in srgb, var(--success) 18%, 
 html:root .bg-green-600{background-color:color-mix(in srgb, var(--success) 18%, var(--surface));}
 html:root .bg-indigo-50{background-color:color-mix(in srgb, var(--info) 4%, var(--surface));}
 html:root .bg-indigo-50\/70{background-color:color-mix(in srgb, color-mix(in srgb, var(--info) 4%, var(--surface)) 70%, transparent);}
-html:root .bg-indigo-500{background-color:color-mix(in srgb, var(--info) 18%, var(--surface));}
-html:root .bg-indigo-600{background-color:color-mix(in srgb, var(--info) 18%, var(--surface));}
+html:root .bg-indigo-500{background-color:var(--accent);color:var(--on-accent);}
+html:root .bg-indigo-600{background-color:var(--accent);color:var(--on-accent);}
 html:root .bg-indigo-700{background-color:color-mix(in srgb, var(--info) 12%, var(--bg));}
 html:root .bg-orange-100{background-color:color-mix(in srgb, var(--accent) 6%, var(--surface));}
 html:root .bg-orange-50{background-color:color-mix(in srgb, var(--accent) 4%, var(--surface));}
@@ -91,7 +91,7 @@ html:root .bg-pink-600{background-color:color-mix(in srgb, var(--danger) 18%, va
 html:root .bg-purple-100{background-color:color-mix(in srgb, var(--link-visited) 6%, var(--surface));}
 html:root .bg-purple-600{background-color:color-mix(in srgb, var(--link-visited) 18%, var(--surface));}
 html:root .bg-red-100{background-color:color-mix(in srgb, var(--danger) 6%, var(--surface));}
-html:root .bg-red-200{background-color:color-mix(in srgb, var(--danger) 9%, var(--surface));}
+html:root .bg-red-200{background-color:color-mix(in srgb, var(--danger) 5%, var(--surface));}
 html:root .bg-red-300{background-color:color-mix(in srgb, var(--danger) 12%, var(--surface));}
 html:root .bg-red-400{background-color:color-mix(in srgb, var(--danger) 18%, var(--surface));}
 html:root .bg-red-50{background-color:color-mix(in srgb, var(--danger) 4%, var(--surface));}
@@ -218,17 +218,17 @@ html:root .group:hover .group-hover\:text-blue-600{color:var(--info-text);}
 html:root .group:hover .group-hover\:text-emerald-300{color:var(--success);}
 html:root .group:hover .group-hover\:text-indigo-600{color:var(--info-text);}
 html:root .group:hover .group-hover\:text-white{color:inherit;}
-html:root .hover\:bg-amber-400:hover{background-color:color-mix(in srgb, var(--accent) 18%, var(--surface));}
+html:root .hover\:bg-amber-400:hover{background-color:var(--accent-hover);color:var(--on-accent);}
 html:root .hover\:bg-blue-100:hover{background-color:color-mix(in srgb, var(--info) 6%, var(--surface));}
 html:root .hover\:bg-blue-50\/30:hover{background-color:color-mix(in srgb, color-mix(in srgb, var(--info) 4%, var(--surface)) 30%, transparent);}
-html:root .hover\:bg-blue-500:hover{background-color:color-mix(in srgb, var(--info) 18%, var(--surface));}
-html:root .hover\:bg-blue-600:hover{background-color:color-mix(in srgb, var(--info) 18%, var(--surface));}
-html:root .hover\:bg-blue-700:hover{background-color:color-mix(in srgb, var(--info) 12%, var(--bg));}
+html:root .hover\:bg-blue-500:hover{background-color:var(--accent-hover);color:var(--on-accent);}
+html:root .hover\:bg-blue-600:hover{background-color:var(--accent-hover);color:var(--on-accent);}
+html:root .hover\:bg-blue-700:hover{background-color:var(--accent-hover);color:var(--on-accent);}
 html:root .hover\:bg-gray-100:hover{background-color:var(--surface);}
 html:root .hover\:bg-gray-200:hover{background-color:var(--border);}
 html:root .hover\:bg-gray-50:hover{background-color:rgb(255 255 255 / 0.04);}
 html:root .hover\:bg-green-50\/30:hover{background-color:color-mix(in srgb, color-mix(in srgb, var(--success) 4%, var(--surface)) 30%, transparent);}
-html:root .hover\:bg-indigo-700:hover{background-color:color-mix(in srgb, var(--info) 12%, var(--bg));}
+html:root .hover\:bg-indigo-700:hover{background-color:var(--accent-hover);color:var(--on-accent);}
 html:root .hover\:bg-orange-50\/30:hover{background-color:color-mix(in srgb, color-mix(in srgb, var(--accent) 4%, var(--surface)) 30%, transparent);}
 html:root .hover\:bg-slate-100:hover{background-color:var(--surface);}
 html:root .hover\:bg-slate-200:hover{background-color:var(--border);}
@@ -418,3 +418,5 @@ html:root .dark\:text-slate-600{color:var(--ink-2);}
 html:root .dark\:text-white{color:inherit;}
 /* Page backdrop wins over bg-* utilities on <body> */
 html:root body, html:root body[class] { background-color: var(--bg); color: var(--ink); }
+/* Disabled controls stay legible. */
+html:root button:disabled { opacity: 0.7; }
