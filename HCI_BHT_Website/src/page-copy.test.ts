@@ -21,9 +21,8 @@ describe('HCI BHT page copy', () => {
     const html = read('index.html');
     expect(html).toContain('<title>HCI BHT</title>');
     expect(html).toContain('alt="HCI_logo"');
-    expect(read('assets/HCI_logo.svg').match(/<tspan[^>]*>([^<]*)<\/tspan>/g)).toEqual([
-      '<tspan x="0" y="0">HCI</tspan>',
-    ]);
+    // The logo text is outlined to paths so it renders without the Ubuntu font installed.
+    expect(read('assets/HCI_logo.svg')).not.toMatch(/<text|<tspan|font-family/);
     expect(PANEL_TITLE).toBe('HCI · BHT Berlin');
     expect(PANEL_CAPTION).toBe('Press the dashed spot to make the circles shrink away.');
   });
