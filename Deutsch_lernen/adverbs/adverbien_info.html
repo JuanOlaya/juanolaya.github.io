@@ -6,49 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deutsche Adverbien - Info (A1-B1)</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/dark-contract.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="../images/german_flag.png" type="image/png">
     <style>
         :root {
             /* --- DEFAULT DARK MODE PALETTE --- */
-            --bg-color: #0f172a;
+            --bg-color: var(--bg);
             /* Slate 900 */
-            --card-bg: #1e293b;
+            --card-bg: var(--surface);
             /* Slate 800 */
-            --header-bg: #020617;
+            --header-bg: color-mix(in srgb, var(--info) 12%, var(--bg));
             /* Slate 950 */
-            --section-bg: #0f172a;
+            --section-bg: var(--bg);
             /* Slate 900 */
-            --rule-bg: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%);
-            --text-main: #f1f5f9;
+            --rule-bg: linear-gradient(135deg, var(--bg) 0%, color-mix(in srgb, var(--info) 12%, var(--bg)) 100%);
+            --text-main: var(--ink);
             /* Slate 100 */
-            --text-muted: #94a3b8;
+            --text-muted: var(--info-text);
             /* Slate 400 */
-            --border-color: #334155;
+            --border-color: var(--border);
             /* Slate 700 */
             --shadow-color: rgba(0, 0, 0, 0.5);
             --glow-strength: 20px;
-            --accent-green: #22c55e;
+            --accent-green: color-mix(in srgb, var(--success) 18%, var(--surface));
             --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         /* --- LIGHT MODE OVERRIDES --- */
         body.light-mode {
-            --bg-color: #f1f5f9;
-            --card-bg: #ffffff;
-            --header-bg: #ffffff;
-            --section-bg: #e2e8f0;
-            --rule-bg: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #cbd5e1;
-            --accent-green: #059669;
+            --bg-color: var(--surface);
+            --card-bg: var(--surface);
+            --header-bg: var(--surface);
+            --section-bg: rgb(255 255 255 / 0.08);
+            --rule-bg: linear-gradient(135deg, var(--surface) 0%, color-mix(in srgb, var(--info) 6%, var(--surface)) 100%);
+            --text-main: var(--ink);
+            --text-muted: var(--ink-2);
+            --border-color: color-mix(in srgb, var(--info) 30%, var(--border));
+            --accent-green: color-mix(in srgb, var(--success) 18%, var(--surface));
             --shadow-color: rgba(0, 0, 0, 0.1);
             --glow-strength: 0px;
         }
 
         body {
-            font-family: var(--font-main);
+            font-family: var(--font-ui);
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -78,7 +84,7 @@
             background: var(--header-bg);
             padding: 40px 30px;
             text-align: center;
-            border-bottom: 2px solid var(--accent-green);
+            border-bottom: 2px solid var(--accent-var(--success));
             position: relative;
         }
 
@@ -87,7 +93,7 @@
             font-size: 2.2rem;
             font-weight: 800;
             letter-spacing: -0.025em;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
             text-transform: uppercase;
         }
@@ -116,8 +122,8 @@
 
         .back-btn:hover {
             transform: scale(1.05);
-            border-color: var(--accent-green);
-            color: var(--accent-green);
+            border-color: var(--accent-var(--success));
+            color: var(--accent-var(--success));
         }
 
         /* --- CONTENT STYLES --- */
@@ -130,7 +136,7 @@
             font-weight: 800;
             font-size: 1.5rem;
             /* Slightly larger than modal */
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -150,7 +156,7 @@
         .info-bullet {
             margin-bottom: 12px;
             padding-left: 15px;
-            border-left: 3px solid var(--accent-green);
+            border-left: 3px solid var(--accent-var(--success));
             font-size: 1.1rem;
             /* Better readability */
         }
@@ -168,7 +174,7 @@
         }
 
         .check-icon {
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             font-weight: bold;
         }
 
@@ -272,7 +278,7 @@
         .scale-bar {
             flex-grow: 1;
             height: 8px;
-            background: linear-gradient(90deg, #ef4444 0%, #f59e0b 50%, #22c55e 100%);
+            background: linear-gradient(90deg, color-mix(in srgb, var(--danger) 10%, var(--surface)) 0%, color-mix(in srgb, var(--accent) 18%, var(--surface)) 50%, color-mix(in srgb, var(--success) 18%, var(--surface)) 100%);
             border-radius: 5px;
             position: relative;
             margin: 0 15px;
@@ -303,7 +309,7 @@
 
         .marker:hover {
             transform: translateX(-50%) scale(1.1);
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             z-index: 10;
         }
 
@@ -312,7 +318,7 @@
             font-size: 0.75rem;
             display: block;
             margin-top: 3px;
-            opacity: 0.8;
+            opacity: 1;
             font-weight: normal;
             font-style: italic;
         }
@@ -375,7 +381,7 @@
                 <div class="info-bullet">Son palabras que describen <strong>cuándo, dónde, cómo o con qué
                         frecuencia</strong> ocurre algo.</div>
                 <div class="info-bullet">🚫 <strong><span
-                            style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 2px 5px; border-radius: 4px;">Los
+                            style="background: linear-gradient(135deg, color-mix(in srgb, var(--danger) 10%, var(--surface)) 0%, color-mix(in srgb, var(--accent) 10%, var(--surface)) 100%); color: var(--accent-text); padding: 2px 5px; border-radius: 4px;">Los
                             <strong><em>adverbios</em></strong> nunca cambian</span>:</strong> A diferencia de los
                     <strong><em>verbos</em></strong> (que se conjugan por <span
                         style="text-decoration:underline">persona</span>) o los
@@ -391,37 +397,37 @@
             <!-- 2. VERB POSITION GUIDE (BELOW) -->
             <div class="visual-guide-section">
                 <div class="guide-title">
-                    <i class="fas fa-random" style="color:var(--accent-green);"></i> Wortstellung: Wo steht das Verb?
+                    <i class="fas fa-random" style="color:var(--accent-var(--success));"></i> Wortstellung: Wo steht das Verb?
                 </div>
                 <div class="position-cards">
 
                     <!-- Position 1 (Inversion) -->
                     <div class="pos-card pos-1">
                         <div
-                            style="position:absolute; top:0; left:0; width:100%; height:5px; background:var(--accent-green);">
+                            style="position:absolute; top:0; left:0; width:100%; height:5px; background:var(--accent-color-mix(in srgb, var(--success) 18%, var(--surface)));">
                         </div>
-                        <span class="pos-icon" style="color: var(--accent-green);">1️⃣</span>
+                        <span class="pos-icon" style="color: var(--accent-var(--success));">1️⃣</span>
                         <span class="pos-name">Inversion (Position 1)</span>
                         <span class="pos-desc">Adverb am Anfang <br>→ <strong
-                                style="color:var(--accent-green);">Verb</strong> kommt sofort!</span>
+                                style="color:var(--accent-var(--success));">Verb</strong> kommt sofort!</span>
 
                         <div class="syntax-box">
                             <span
-                                style="color:var(--accent-green); font-weight:bold; border-bottom:2px solid var(--accent-green);">Heute</span>
+                                style="color:var(--accent-var(--success)); font-weight:bold; border-bottom:2px solid var(--accent-var(--success));">Heute</span>
                             + <span
                                 style="color:var(--text-main); font-weight:bold; background:rgba(255,255,255,0.1); padding:2px 5px; border-radius:4px;">lerne</span>
                             + ich...
                         </div>
                         <div
                             style="margin-top:15px; font-size:0.9rem; color:var(--text-muted); line-height:1.4; border-top:1px solid var(--border-color); padding-top:10px;">
-                            <strong style="color:var(--accent-green);">Muy común (40-50%)</strong><br>
+                            <strong style="color:var(--accent-var(--success));">Muy común (40-50%)</strong><br>
                             Se usa para <strong>enfatizar</strong> el adverbio o conectar con la frase anterior.
                         </div>
                     </div>
 
                     <!-- Middle Position -->
                     <div class="pos-card pos-middle">
-                        <div style="position:absolute; top:0; left:0; width:100%; height:5px; background:#f59e0b;">
+                        <div style="position:absolute; top:0; left:0; width:100%; height:5px; background:color-mix(in srgb, var(--accent) 18%, var(--surface));">
                         </div>
                         <span class="pos-icon" style="text-shadow:0 0 20px rgba(245,158,11,0.3);">🧩</span>
                         <span class="pos-name">Satzmitte (Posición Normal)</span>
@@ -431,11 +437,11 @@
                             Ich + <span
                                 style="color:var(--text-main); font-weight:bold; background:rgba(255,255,255,0.1); padding:2px 5px; border-radius:4px;">lerne</span>
                             + <span
-                                style="color:#f59e0b; font-weight:bold; border-bottom:2px solid #f59e0b;">heute</span>...
+                                style="color:var(--accent-text); font-weight:bold; border-bottom:2px solid var(--accent);">heute</span>...
                         </div>
                         <div
                             style="margin-top:15px; font-size:0.9rem; color:var(--text-muted); line-height:1.4; border-top:1px solid var(--border-color); padding-top:10px;">
-                            <strong style="color:#f59e0b;">Estándar / Neutro</strong><br>
+                            <strong style="color:var(--accent-text);">Estándar / Neutro</strong><br>
                             Es la estructura básica sin énfasis especial.
                         </div>
                     </div>
@@ -459,7 +465,7 @@
                     <div style="display: grid; gap: 10px;">
                         <div class="rule-example">
                             <span class="check-icon">✅</span>
-                            <span><strong style="color: var(--accent-green);">Heute</strong> gehe ich nach Hause.</span>
+                            <span><strong style="color: var(--accent-var(--success));">Heute</strong> gehe ich nach Hause.</span>
                         </div>
                         <div
                             style="font-size: 0.85rem; color: var(--text-muted); padding-left: 35px; margin-bottom: 10px;">
@@ -467,7 +473,7 @@
 
                         <div class="rule-example">
                             <span class="check-icon">✅</span>
-                            <span>Ich gehe <strong style="color: var(--accent-green);">heute</strong> nach Hause.</span>
+                            <span>Ich gehe <strong style="color: var(--accent-var(--success));">heute</strong> nach Hause.</span>
                         </div>
                         <div style="font-size: 0.85rem; color: var(--text-muted); padding-left: 35px;">(Sujeto en
                             Posición 1 → Verbo en Posición 2)</div>
@@ -483,11 +489,11 @@
                     <div style="display: grid; gap: 10px;">
                         <div class="rule-example">
                             <span class="check-icon">✅</span>
-                            <span><strong style="color: var(--accent-green);">Morgen</strong> habe ich frei.</span>
+                            <span><strong style="color: var(--accent-var(--success));">Morgen</strong> habe ich frei.</span>
                         </div>
                         <div class="rule-example">
                             <span class="check-icon">✅</span>
-                            <span>Ich habe <strong style="color: var(--accent-green);">morgen</strong> frei.</span>
+                            <span>Ich habe <strong style="color: var(--accent-var(--success));">morgen</strong> frei.</span>
                         </div>
                     </div>
                 </div>
@@ -500,12 +506,12 @@
                     <div style="display: grid; gap: 10px;">
                         <div class="rule-example">
                             <span class="check-icon">✅</span>
-                            <span><strong style="color: var(--accent-green);">Oft</strong> besuche ich meine
+                            <span><strong style="color: var(--accent-var(--success));">Oft</strong> besuche ich meine
                                 Eltern.</span>
                         </div>
                         <div class="rule-example">
                             <span class="check-icon">✅</span>
-                            <span>Ich besuche <strong style="color: var(--accent-green);">oft</strong> meine
+                            <span>Ich besuche <strong style="color: var(--accent-var(--success));">oft</strong> meine
                                 Eltern.</span>
                         </div>
                     </div>

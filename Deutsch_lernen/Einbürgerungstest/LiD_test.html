@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Das Politische System Deutschlands - Estructura</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/dark-contract.css" />
     <style>
         body {
-            background-color: #f8fafc;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--surface);
+            font-family: var(--font-ui);
         }
         .node {
             transition: all 0.3s ease;
@@ -18,12 +24,12 @@
             transform: scale(1.02);
             filter: brightness(1.05);
         }
-        .federal-bg { background-color: #1e3a8a; color: white; }
-        .state-bg { background-color: #0f766e; color: white; }
-        .head-bg { background-color: #065f46; color: white; }
-        .court-bg { background-color: #c2410c; color: white; }
-        .people-bg { background-color: #334155; color: white; }
-        .opp-bg { background-color: #475569; color: white; }
+        .federal-bg { background-color: color-mix(in srgb, var(--info) 18%, var(--surface)); color: var(--ink); }
+        .state-bg { background-color: color-mix(in srgb, var(--info) 18%, var(--surface)); color: var(--ink); }
+        .head-bg { background-color: color-mix(in srgb, var(--success) 12%, var(--bg)); color: var(--ink); }
+        .court-bg { background-color: color-mix(in srgb, var(--danger) 18%, var(--surface)); color: var(--ink); }
+        .people-bg { background-color: var(--surface); color: var(--ink); }
+        .opp-bg { background-color: var(--surface); color: var(--ink); }
 
         svg {
             position: absolute;
@@ -37,10 +43,10 @@
         /* Estilo para el texto de las flechas (Regla: Alem&aacute;n arriba, Espa&ntilde;ol abajo) */
         .arrow-text {
             font-size: 13px;
-            fill: #1e293b;
+            fill: var(--ink);
             font-weight: 800;
             paint-order: stroke;
-            stroke: #ffffff;
+            stroke: var(--bg);
             stroke-width: 5px;
             stroke-linecap: round;
             stroke-linejoin: round;
@@ -286,7 +292,7 @@
         </div>
     </section>
     <script>
-        function drawLine(fromId, toId, text = "", color = "#94a3b8", dash = false, weight = 2) {
+        function drawLine(fromId, toId, text = "", color = "var(--info-text)", dash = false, weight = 2) {
             const from = document.getElementById(fromId);
             const to = document.getElementById(toId);
             const svg = document.getElementById("lines-svg");
@@ -366,7 +372,7 @@
             };
         }
 
-        function drawCurvedLine(fromId, toId, text = "", color = "#94a3b8", curveOffset = 60, weight = 2, fromAnchor = "center", toAnchor = "center") {
+        function drawCurvedLine(fromId, toId, text = "", color = "var(--info-text)", curveOffset = 60, weight = 2, fromAnchor = "center", toAnchor = "center") {
             const from = document.getElementById(fromId);
             const to = document.getElementById(toId);
             const svg = document.getElementById("lines-svg");
@@ -440,20 +446,20 @@
             if (!svg) return;
             svg.innerHTML = "";
 
-            drawLine("people", "bundestag", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
-            drawLine("people", "landtag", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
-            drawLine("bundestag", "bundeskanzler", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
-            drawLine("bundestag", "bundesversammlung", "stellt Mitglieder (aporta miembros)", "#10b981", false, 2);
-            drawLine("bundeskanzler", "bundesminister", "schl\u00E4gt vor / leitet (propone / dirige)", "#94a3b8", false, 2);
-            drawLine("landtag", "min-pres", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
-            drawLine("landtag", "bundesversammlung", "entsendet Vertreter (env\u00EDa representantes)", "#10b981", false, 2);
-            drawCurvedLine("landesregierung-tag", "bundesrat", "bildet den Bundesrat (forma el Bundesrat)", "#0f766e", 90, 2, "bottom", "right");
-            drawCurvedLine("bundesrat", "landesregierung-tag", "vertritt Interessen (representa intereses)", "#0f766e", -90, 2, "left", "bottom");
-            drawLine("bundesversammlung", "bundespraesident", "W\u00C4HLT (elige)", "#2563eb", false, 4);
-            drawLine("bundespraesident", "bundeskanzler", "schl\u00E4gt zur Wahl vor / ernennt (propone / nombra)", "#f59e0b", true, 2);
-            drawLine("bundestag", "bundesrat", "", "#cbd5e1", true, 2);
-            drawLine("opposition", "bundestag", "kontrolliert (controla)", "#475569", false, 2);
-            drawLine("verfassungsgericht", "grundgesetz", "interpretiert (interpreta)", "#f97316", false, 3);
+            drawLine("people", "bundestag", "w\u00E4hlt (elige)", "var(--info-text)", false, 3);
+            drawLine("people", "landtag", "w\u00E4hlt (elige)", "var(--info-text)", false, 3);
+            drawLine("bundestag", "bundeskanzler", "w\u00E4hlt (elige)", "var(--info-text)", false, 3);
+            drawLine("bundestag", "bundesversammlung", "stellt Mitglieder (aporta miembros)", "var(--success)", false, 2);
+            drawLine("bundeskanzler", "bundesminister", "schl\u00E4gt vor / leitet (propone / dirige)", "var(--info-text)", false, 2);
+            drawLine("landtag", "min-pres", "w\u00E4hlt (elige)", "var(--info-text)", false, 3);
+            drawLine("landtag", "bundesversammlung", "entsendet Vertreter (env\u00EDa representantes)", "var(--success)", false, 2);
+            drawCurvedLine("landesregierung-tag", "bundesrat", "bildet den Bundesrat (forma el Bundesrat)", "var(--info-text)", 90, 2, "bottom", "right");
+            drawCurvedLine("bundesrat", "landesregierung-tag", "vertritt Interessen (representa intereses)", "var(--info-text)", -90, 2, "left", "bottom");
+            drawLine("bundesversammlung", "bundespraesident", "W\u00C4HLT (elige)", "var(--info-text)", false, 4);
+            drawLine("bundespraesident", "bundeskanzler", "schl\u00E4gt zur Wahl vor / ernennt (propone / nombra)", "var(--accent-text)", true, 2);
+            drawLine("bundestag", "bundesrat", "", "var(--info-text)", true, 2);
+            drawLine("opposition", "bundestag", "kontrolliert (controla)", "var(--ink)", false, 2);
+            drawLine("verfassungsgericht", "grundgesetz", "interpretiert (interpreta)", "var(--accent-text)", false, 3);
         }
 
         function bindGermanSpeech() {

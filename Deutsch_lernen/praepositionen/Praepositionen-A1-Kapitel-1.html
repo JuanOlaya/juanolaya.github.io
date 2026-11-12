@@ -5,18 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wechselpräpositionen (Two-Way Prepositions) - Deutsche Sprachreferenz für A1</title>
 <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/dark-contract.css" />
 <style>
   /* General Styles */
-  body { font-family: 'Inter', sans-serif; margin: 20px; background-color: #f0f4f8; color: #333; line-height: 1.6; padding: 20px; }
-  h1 { color: #2c3e50; font-size: 2.5rem; margin-bottom: 20px; text-align: center; }
+  body { font-family: var(--font-ui); margin: 20px; background-color: var(--surface); color: var(--ink); line-height: 1.6; padding: 20px; }
+  h1 { color: var(--ink); font-size: 2.5rem; margin-bottom: 20px; text-align: center; }
   .back-link { margin-bottom: 20px; }
-  .back-link a { color: #3182ce; text-decoration: none; font-weight: 500; }
+  .back-link a { color: var(--info-text); text-decoration: none; font-weight: 500; }
   .back-link a:hover { text-decoration: underline; }
 
   /* Collapsible Section */
-  details { background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); margin-bottom: 20px; overflow: hidden; }
-  summary { background-color: #e2e8f0; color: #2c3e50; padding: 18px 25px; font-size: 1.3rem; font-weight: 600; cursor: pointer; outline: none; transition: background-color 0.3s ease; display: block; position: relative; user-select: none; border-bottom: 1px solid #cbd5e0; }
-  summary:hover { background-color: #d1d9e2; }
+  details { background-color: var(--surface); border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); margin-bottom: 20px; overflow: hidden; }
+  summary { background-color: rgb(255 255 255 / 0.08); color: var(--ink); padding: 18px 25px; font-size: 1.3rem; font-weight: 600; cursor: pointer; outline: none; transition: background-color 0.3s ease; display: block; position: relative; user-select: none; border-bottom: 1px solid color-mix(in srgb, var(--info) 30%, var(--border)); }
+  summary:hover { background-color: rgb(255 255 255 / 0.08); }
   summary::-webkit-details-marker { display: none; }
   summary::before { content: '▶'; position: absolute; right: 20px; font-size: 1rem; transition: transform 0.3s ease; }
   details[open] > summary::before { transform: rotate(90deg); }
@@ -24,11 +30,11 @@
 
   /* Table Styles */
   table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 20px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
-  th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
-  th { background-color: #f8faff; font-weight: 600; color: #4a5568; text-transform: uppercase; font-size: 0.9rem; }
-  tr:nth-child(even) { background-color: #fbfdff; }
-  tr:hover { background-color: #f0f4f8; }
-  td .translation { display: block; font-size: 0.9em; color: #555; font-style: italic; margin-top: 4px; }
+  th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { background-color: var(--surface); font-weight: 600; color: var(--ink); text-transform: uppercase; font-size: 0.9rem; }
+  tr:nth-child(even) { background-color: var(--surface); }
+  tr:hover { background-color: var(--surface); }
+  td .translation { display: block; font-size: 0.9em; color: var(--ink); font-style: italic; margin-top: 4px; }
   strong { font-weight: 700; }
 
   /* Show translations by default */
@@ -55,10 +61,10 @@
   /* Responsive Table */
   @media (max-width: 900px) {
       thead { display: none; }
-      tr { display: block; border: 1px solid #e2e8f0; margin-bottom: 15px; border-radius: 8px; overflow: hidden; }
-      td { display: block; text-align: right; padding-left: 50%; position: relative; border-bottom: 1px solid #eee; }
+      tr { display: block; border: 1px solid var(--border); margin-bottom: 15px; border-radius: 8px; overflow: hidden; }
+      td { display: block; text-align: right; padding-left: 50%; position: relative; border-bottom: 1px solid var(--border); }
       td:last-child { border-bottom: 0; }
-      td:before { content: attr(data-label); position: absolute; left: 15px; width: 45%; padding-right: 10px; white-space: nowrap; text-align: left; font-weight: 600; color: #4a5568; }
+      td:before { content: attr(data-label); position: absolute; left: 15px; width: 45%; padding-right: 10px; white-space: nowrap; text-align: left; font-weight: 600; color: var(--ink); }
       td .translation { text-align: right; }
   }
 </style>
@@ -71,16 +77,16 @@
     <a href="../index.html">← Zurück zur Hauptseite</a>
   </div>
 
-  <div style="text-align: center; margin: 20px 0; padding: 15px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
-    <p style="margin-bottom: 15px; font-weight: 600; color: #2c3e50;">📖 German Prepositions Reference Chart</p>
+  <div style="text-align: center; margin: 20px 0; padding: 15px; background-color: var(--surface); border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+    <p style="margin-bottom: 15px; font-weight: 600; color: var(--ink);">📖 German Prepositions Reference Chart</p>
     <img src="../images/Deutsche_Präpositionen.png" alt="German Prepositions Chart" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">Complete overview of German prepositions by case</p>
-    <p style="margin-top: 5px; font-size: 0.8em; color: #888;">Source: <a href="https://emmalovesgerman.com/german-prepositions/" target="_blank" style="color: #3182ce;">EmmaLovesGerman.com</a></p>
+    <p style="margin-top: 10px; font-size: 0.9em; color: var(--ink);">Complete overview of German prepositions by case</p>
+    <p style="margin-top: 5px; font-size: 0.8em; color: var(--ink-2);">Source: <a href="https://emmalovesgerman.com/german-prepositions/" target="_blank" style="color: var(--info-text);">EmmaLovesGerman.com</a></p>
   </div>
 
-  <div style="display: flex; justify-content: center; margin: 20px 0; padding: 15px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+  <div style="display: flex; justify-content: center; margin: 20px 0; padding: 15px; background-color: var(--surface); border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
     <div class="toggle-container" style="margin: 0;">
-      <label for="toggle-translations" style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 500; color: #2c3e50;">
+      <label for="toggle-translations" style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 500; color: var(--ink);">
         <input type="checkbox" id="toggle-translations" style="transform: scale(1.2);">
         <span>🌐 Übersetzungen ausblenden / Hide Translations</span>
       </label>

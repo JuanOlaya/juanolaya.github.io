@@ -6,29 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DTZ B1 Deutsche Adverbien</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/dark-contract.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="../images/german_flag.png" type="image/png">
     <style>
         :root {
             /* --- DEFAULT DARK MODE PALETTE --- */
-            --bg-color: #0f172a;
+            --bg-color: var(--bg);
             /* Slate 900 */
-            --card-bg: #1e293b;
+            --card-bg: var(--surface);
             /* Slate 800 */
-            --header-bg: #020617;
+            --header-bg: color-mix(in srgb, var(--info) 12%, var(--bg));
             /* Slate 950 */
-            --section-bg: #0f172a;
+            --section-bg: var(--bg);
             /* Slate 900 */
-            --rule-bg: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%);
-            --text-main: #f1f5f9;
+            --rule-bg: linear-gradient(135deg, var(--bg) 0%, color-mix(in srgb, var(--info) 12%, var(--bg)) 100%);
+            --text-main: var(--ink);
             /* Slate 100 */
-            --text-muted: #94a3b8;
+            --text-muted: var(--info-text);
             /* Slate 400 */
-            --border-color: #334155;
+            --border-color: var(--border);
             /* Slate 700 */
             --shadow-color: rgba(0, 0, 0, 0.5);
             --glow-strength: 20px;
-            --accent-green: #22c55e;
+            --accent-green: color-mix(in srgb, var(--success) 18%, var(--surface));
             --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
@@ -59,7 +65,7 @@
         }
 
         .search-input:focus {
-            border-color: var(--accent-green);
+            border-color: var(--accent-var(--success));
             box-shadow: 0 0 0 3px rgba(0, 255, 161, 0.2);
         }
 
@@ -85,7 +91,7 @@
             border-radius: 40px;
             transition: all 0.2s ease;
             color: var(--text-muted);
-            opacity: 0.7;
+            opacity: 1;
         }
 
         .lang-option:hover {
@@ -94,34 +100,34 @@
         }
 
         .lang-option.active {
-            background: var(--accent-green);
-            color: #020617;
+            background: var(--accent-color-mix(in srgb, var(--success) 18%, var(--surface)));
+            color: var(--info-text);
             /* Dark text on green */
             opacity: 1;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         body.light-mode .light-option.active {
-            color: white;
+            color: var(--ink);
         }
 
         /* --- LIGHT MODE OVERRIDES --- */
         body.light-mode {
-            --bg-color: #f1f5f9;
-            --card-bg: #ffffff;
-            --header-bg: #ffffff;
-            --section-bg: #e2e8f0;
-            --rule-bg: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #cbd5e1;
-            --accent-green: #059669;
+            --bg-color: var(--surface);
+            --card-bg: var(--surface);
+            --header-bg: var(--surface);
+            --section-bg: rgb(255 255 255 / 0.08);
+            --rule-bg: linear-gradient(135deg, var(--surface) 0%, color-mix(in srgb, var(--info) 6%, var(--surface)) 100%);
+            --text-main: var(--ink);
+            --text-muted: var(--ink-2);
+            --border-color: color-mix(in srgb, var(--info) 30%, var(--border));
+            --accent-green: color-mix(in srgb, var(--success) 18%, var(--surface));
             --shadow-color: rgba(0, 0, 0, 0.1);
             --glow-strength: 0px;
         }
 
         body {
-            font-family: var(--font-main);
+            font-family: var(--font-ui);
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -151,7 +157,7 @@
             background: var(--header-bg);
             padding: 40px 30px;
             text-align: center;
-            border-bottom: 2px solid var(--accent-green);
+            border-bottom: 2px solid var(--accent-var(--success));
             position: relative;
         }
 
@@ -185,7 +191,7 @@
 
         .theme-btn:hover {
             transform: scale(1.05);
-            border-color: var(--accent-green);
+            border-color: var(--accent-var(--success));
         }
 
         body:not(.light-mode) .icon-sun {
@@ -205,9 +211,9 @@
         }
 
         .info-btn {
-            background-color: #f97316;
+            background-color: color-mix(in srgb, var(--accent) 18%, var(--surface));
             border: none;
-            color: white;
+            color: var(--ink);
             padding: 8px 15px;
             border-radius: 10px;
             font-weight: 800;
@@ -216,7 +222,7 @@
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s, box-shadow 0.2s;
-            animation: pulse-orange 2s infinite;
+            animation: pulse-color-mix(in srgb, var(--accent) 18%, var(--surface)) 2s infinite;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -246,7 +252,7 @@
             font-size: 2.2rem;
             font-weight: 800;
             letter-spacing: -0.025em;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
             text-transform: uppercase;
         }
@@ -268,7 +274,7 @@
         .rule-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-left: 6px solid var(--accent-green);
+            border-left: 6px solid var(--accent-var(--success));
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 6px var(--shadow-color);
@@ -279,7 +285,7 @@
         .rule-title {
             font-weight: 800;
             font-size: 1.2rem;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -303,7 +309,7 @@
         }
 
         .check-icon {
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             font-weight: bold;
         }
 
@@ -347,7 +353,7 @@
 
         .level-header {
             padding: 15px 20px;
-            color: white;
+            color: var(--ink);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -365,7 +371,7 @@
         .theme-header-german {
             background: none;
             border: none;
-            color: white;
+            color: var(--ink);
             font-size: 1.5rem;
             font-weight: 900;
             letter-spacing: 0.04em;
@@ -396,13 +402,13 @@
         }
 
         .theme-header-translation:hover {
-            color: white;
+            color: var(--ink);
             text-decoration: underline;
         }
 
         .theme-header-part {
             flex-shrink: 0;
-            background: rgba(255, 255, 255, 0.18);
+            background: rgb(255 255 255 / 0.08);
             border: 1px solid rgba(255, 255, 255, 0.28);
             border-radius: 999px;
             padding: 5px 10px;
@@ -415,7 +421,7 @@
         .theme-modal-title {
             font-size: 2rem;
             font-weight: 800;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             margin-bottom: 12px;
             text-transform: uppercase;
             letter-spacing: 0.06em;
@@ -469,7 +475,7 @@
 
         .theme-modal-card h3 {
             margin: 0 0 8px;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             font-size: 1.1rem;
         }
 
@@ -514,12 +520,12 @@
             justify-content: space-between;
             padding: 10px 15px 12px;
             border-top: 1px solid rgba(255, 255, 255, 0.18);
-            color: white;
+            color: var(--ink);
             font-size: 0.8rem;
         }
 
         .card-footer-tag {
-            background: rgba(255, 255, 255, 0.18);
+            background: rgb(255 255 255 / 0.08);
             border: 1px solid rgba(255, 255, 255, 0.28);
             border-radius: 999px;
             padding: 5px 12px;
@@ -531,10 +537,10 @@
         }
 
         .card-footer-level {
-            background: rgba(255, 255, 255, 0.28);
+            background: rgb(255 255 255 / 0.08);
             border: 1px solid rgba(255, 255, 255, 0.42);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px rgba(0, 0, 0, 0.12);
-            color: #ffffff;
+            color: var(--ink);
             font-weight: 900;
             letter-spacing: 0.04em;
         }
@@ -609,9 +615,9 @@
 
         .row-level-tag {
             flex-shrink: 0;
-            background: #2563eb;
-            color: #ffffff;
-            border: 1px solid #60a5fa;
+            background: color-mix(in srgb, var(--info) 18%, var(--surface));
+            color: var(--ink);
+            border: 1px solid var(--info);
             border-radius: 999px;
             padding: 5px 10px;
             font-size: 0.72rem;
@@ -624,24 +630,24 @@
         }
 
         .row-level-tag.level-a1 {
-            background: #22C55E;
-            color: #ffffff;
-            border-color: #16a34a;
+            background: color-mix(in srgb, var(--success) 18%, var(--surface));
+            color: var(--ink);
+            border-color: var(--success);
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 4px 10px rgba(34, 197, 94, 0.28);
         }
 
         .row-level-tag.level-a2 {
-            background: #e11d74;
-            color: #ffffff;
-            border-color: #be185d;
+            background: color-mix(in srgb, var(--link-visited) 18%, var(--surface));
+            color: var(--ink);
+            border-color: var(--link-visited);
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 4px 10px rgba(190, 24, 93, 0.28);
         }
 
         .row-level-tag.level-b1,
         .row-level-tag.level-b2 {
-            background: #2563eb;
-            color: #ffffff;
-            border-color: #1d4ed8;
+            background: color-mix(in srgb, var(--info) 18%, var(--surface));
+            color: var(--ink);
+            border-color: var(--info);
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 4px 10px rgba(37, 99, 235, 0.35);
         }
 
@@ -653,7 +659,7 @@
         }
 
         .example-clickable:hover {
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
         }
 
         .example-trans {
@@ -691,7 +697,7 @@
 
         .modal-content {
             background: var(--card-bg);
-            border: 1px solid var(--accent-green);
+            border: 1px solid var(--accent-var(--success));
             width: 90%;
             max-width: 500px;
             border-radius: 20px;
@@ -726,7 +732,7 @@
 
         .modal-header h2 {
             margin: 0;
-            color: white;
+            color: var(--ink);
             font-size: 1.4rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -734,9 +740,9 @@
         }
 
         .close-modal {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgb(255 255 255 / 0.08);
             border: none;
-            color: white;
+            color: var(--ink);
             font-size: 1.5rem;
             cursor: pointer;
             transition: background 0.2s;
@@ -750,7 +756,7 @@
         }
 
         .close-modal:hover {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgb(255 255 255 / 0.08);
         }
 
         .modal-body {
@@ -758,7 +764,7 @@
             text-align: center;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: var(--accent-green) var(--bg-color);
+            scrollbar-color: var(--accent-color-mix(in srgb, var(--success) 18%, var(--surface))) var(--bg-color);
         }
 
         .modal-body::-webkit-scrollbar {
@@ -771,14 +777,14 @@
         }
 
         .modal-body::-webkit-scrollbar-thumb {
-            background-color: var(--accent-green);
+            background-color: var(--accent-color-mix(in srgb, var(--success) 18%, var(--surface)));
             border-radius: 4px;
         }
 
         .modal-main-word {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             margin-bottom: 5px;
             cursor: pointer;
         }
@@ -838,7 +844,7 @@
         .info-title {
             font-weight: 800;
             font-size: 1.3rem;
-            color: var(--accent-green);
+            color: var(--accent-var(--success));
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -852,7 +858,7 @@
         .info-bullet {
             margin-bottom: 12px;
             padding-left: 15px;
-            border-left: 3px solid var(--accent-green);
+            border-left: 3px solid var(--accent-var(--success));
         }
 
         .modal-level-badge {
@@ -963,8 +969,8 @@
                 "title": "Temporal",
                 "description": "Adverbios de tiempo",
                 "level": "A1-A2",
-                "colorMain": "#06b6d4",
-                "colorPastel": "#cffafe",
+                "colorMain": "color-mix(in srgb, var(--info) 18%, var(--surface))",
+                "colorPastel": "color-mix(in srgb, var(--info) 6%, var(--surface))",
                 "badge": "TEMPORAL",
                 "emoji": "time",
                 "adverbs": [
@@ -1289,8 +1295,8 @@
                 "title": "Frequenz",
                 "description": "Adverbios de frecuencia",
                 "level": "A1-A2",
-                "colorMain": "#8b5cf6",
-                "colorPastel": "#ede9fe",
+                "colorMain": "color-mix(in srgb, var(--link-visited) 10%, var(--surface))",
+                "colorPastel": "color-mix(in srgb, var(--link-visited) 6%, var(--surface))",
                 "badge": "FREQUENZ",
                 "emoji": "repeat",
                 "adverbs": [
@@ -1433,8 +1439,8 @@
                 "title": "Lokal",
                 "description": "Adverbios de lugar",
                 "level": "A1",
-                "colorMain": "#ec4899",
-                "colorPastel": "#fce7f3",
+                "colorMain": "color-mix(in srgb, var(--link-visited) 10%, var(--surface))",
+                "colorPastel": "color-mix(in srgb, var(--link-visited) 6%, var(--surface))",
                 "badge": "LOKAL",
                 "emoji": "map",
                 "adverbs": [
@@ -1725,8 +1731,8 @@
                 "title": "Modal & Kausal",
                 "description": "De modo y causa",
                 "level": "A1-B1",
-                "colorMain": "#f59e0b",
-                "colorPastel": "#fef3c7",
+                "colorMain": "color-mix(in srgb, var(--accent) 18%, var(--surface))",
+                "colorPastel": "color-mix(in srgb, var(--accent) 6%, var(--surface))",
                 "badge": "MODAL",
                 "emoji": "bulb",
                 "adverbs": [
@@ -2303,8 +2309,8 @@
                 "title": "Pronominal",
                 "description": "Adverbios pronominales",
                 "level": "A2-B1",
-                "colorMain": "#6366f1",
-                "colorPastel": "#e0e7ff",
+                "colorMain": "color-mix(in srgb, var(--info) 10%, var(--surface))",
+                "colorPastel": "color-mix(in srgb, var(--info) 6%, var(--surface))",
                 "badge": "PRONOMINAL",
                 "emoji": "link",
                 "adverbs": [
@@ -2393,8 +2399,8 @@
                 "title": "Zahl",
                 "description": "Adverbios de Cantidad (Veces)",
                 "level": "A1",
-                "colorMain": "#ea580c",
-                "colorPastel": "#ffedd5",
+                "colorMain": "color-mix(in srgb, var(--accent) 18%, var(--surface))",
+                "colorPastel": "color-mix(in srgb, var(--accent) 6%, var(--surface))",
                 "badge": "ZAHL",
                 "emoji": "123",
                 "adverbs": [
@@ -2449,8 +2455,8 @@
                 "title": "Ordinalzahlen",
                 "description": "Adverbios de Orden / Enumeración",
                 "level": "A2",
-                "colorMain": "#22C55E",
-                "colorPastel": "#dcfce7",
+                "colorMain": "color-mix(in srgb, var(--success) 18%, var(--surface))",
+                "colorPastel": "color-mix(in srgb, var(--success) 6%, var(--surface))",
                 "badge": "ORDINAL",
                 "emoji": "🔢",
                 "adverbs": [
@@ -2504,24 +2510,24 @@
         ];
 
         const themeBlueprints = [
-            { title: 'Gegenwart', translation: '(presente)', level: 'A1-B1', colorMain: '#0ea5e9', badge: 'GEGENWART', words: ['jetzt', 'heute', 'gerade', 'sofort', 'bald', 'noch', 'mittlerweile'] },
-            { title: 'Abfolge', translation: '(secuencia)', level: 'A1-A2', colorMain: '#0284c7', badge: 'ABFOLGE', words: ['gestern', 'morgen', 'dann', 'danach', 'später', 'zuerst', 'zuletzt'] },
-            { title: 'Wandel', translation: '(cambio/frecuencia)', level: 'A1-A2', colorMain: '#0f766e', badge: 'WANDEL', words: ['schon', 'bereits', 'früher', 'immer', 'nie', 'oft', 'manchmal'] },
-            { title: 'Frequenz', translation: '(ritmo/rutina)', level: 'A2-B1', colorMain: '#9333ea', badge: 'FREQUENZ', words: ['normalerweise', 'regelmäßig', 'jedenfalls', 'sowieso', 'lieber', 'gern'] },
-            { title: 'Raum', translation: '(ubicación)', level: 'A1', colorMain: '#f43f5e', badge: 'RAUM', words: ['hier', 'dort', 'da', 'oben', 'unten', 'überall'] },
-            { title: 'Umgebung', translation: '(entorno)', level: 'A1-B1', colorMain: '#be123c', badge: 'POSITION', words: ['draußen', 'drinnen', 'nebenan', 'unterwegs', 'zurück'] },
-            { title: 'Grad & Fokus', translation: '(grado/enfoque)', level: 'A1-B1', colorMain: '#ea580c', badge: 'GRAD', words: ['sehr', 'fast', 'ganz', 'einfach', 'wirklich', 'nur', 'auch'] },
-            { title: 'Haltung', translation: '(actitud/opinión)', level: 'A1-B1', colorMain: '#059669', badge: 'HALTUNG', words: ['nat\u00fcrlich', 'leider', 'vielleicht', 'wahrscheinlich', 'eigentlich', 'zusammen', 'überhaupt'] },
-            { title: 'Verbindung', translation: '(conectores)', level: 'A2-B1', colorMain: '#f59e0b', badge: 'LOGIK', words: ['allerdings', 'trotzdem', 'dennoch', 'n\u00e4mlich', 'außerdem', 'schlie\u00dflich', 'doch'] },
-            { title: 'Kausal', translation: '(causalidad)', level: 'A1-B1', colorMain: '#b45309', badge: 'KAUSAL', words: ['also', 'deshalb', 'deswegen', 'sonst'] },
-            { title: 'Bezug', translation: '(pronominales)', level: 'A2-B1', colorMain: '#6366f1', badge: 'PRONOMINAL', words: ['dazu', 'damit', 'darauf', 'davon', 'darüber', 'dafür', 'dagegen'] }
+            { title: 'Gegenwart', translation: '(presente)', level: 'A1-B1', colorMain: 'color-mix(in srgb, var(--info) 18%, var(--surface))', badge: 'GEGENWART', words: ['jetzt', 'heute', 'gerade', 'sofort', 'bald', 'noch', 'mittlerweile'] },
+            { title: 'Abfolge', translation: '(secuencia)', level: 'A1-A2', colorMain: 'color-mix(in srgb, var(--info) 18%, var(--surface))', badge: 'ABFOLGE', words: ['gestern', 'morgen', 'dann', 'danach', 'später', 'zuerst', 'zuletzt'] },
+            { title: 'Wandel', translation: '(cambio/frecuencia)', level: 'A1-A2', colorMain: 'color-mix(in srgb, var(--info) 18%, var(--surface))', badge: 'WANDEL', words: ['schon', 'bereits', 'früher', 'immer', 'nie', 'oft', 'manchmal'] },
+            { title: 'Frequenz', translation: '(ritmo/rutina)', level: 'A2-B1', colorMain: 'color-mix(in srgb, var(--link-visited) 18%, var(--surface))', badge: 'FREQUENZ', words: ['normalerweise', 'regelmäßig', 'jedenfalls', 'sowieso', 'lieber', 'gern'] },
+            { title: 'Raum', translation: '(ubicación)', level: 'A1', colorMain: 'color-mix(in srgb, var(--danger) 10%, var(--surface))', badge: 'RAUM', words: ['hier', 'dort', 'da', 'oben', 'unten', 'überall'] },
+            { title: 'Umgebung', translation: '(entorno)', level: 'A1-B1', colorMain: 'color-mix(in srgb, var(--danger) 18%, var(--surface))', badge: 'POSITION', words: ['draußen', 'drinnen', 'nebenan', 'unterwegs', 'zurück'] },
+            { title: 'Grad & Fokus', translation: '(grado/enfoque)', level: 'A1-B1', colorMain: 'color-mix(in srgb, var(--accent) 18%, var(--surface))', badge: 'GRAD', words: ['sehr', 'fast', 'ganz', 'einfach', 'wirklich', 'nur', 'auch'] },
+            { title: 'Haltung', translation: '(actitud/opinión)', level: 'A1-B1', colorMain: 'color-mix(in srgb, var(--success) 18%, var(--surface))', badge: 'HALTUNG', words: ['nat\u00fcrlich', 'leider', 'vielleicht', 'wahrscheinlich', 'eigentlich', 'zusammen', 'überhaupt'] },
+            { title: 'Verbindung', translation: '(conectores)', level: 'A2-B1', colorMain: 'color-mix(in srgb, var(--accent) 18%, var(--surface))', badge: 'LOGIK', words: ['allerdings', 'trotzdem', 'dennoch', 'n\u00e4mlich', 'außerdem', 'schlie\u00dflich', 'doch'] },
+            { title: 'Kausal', translation: '(causalidad)', level: 'A1-B1', colorMain: 'color-mix(in srgb, var(--accent) 18%, var(--surface))', badge: 'KAUSAL', words: ['also', 'deshalb', 'deswegen', 'sonst'] },
+            { title: 'Bezug', translation: '(pronominales)', level: 'A2-B1', colorMain: 'color-mix(in srgb, var(--info) 10%, var(--surface))', badge: 'PRONOMINAL', words: ['dazu', 'damit', 'darauf', 'davon', 'darüber', 'dafür', 'dagegen'] }
         ];
 
         const modalParticlesGroup = {
             title: 'Modalpartikeln',
             description: '(part\u00edculas modales)',
             level: 'B1',
-            colorMain: '#7c3aed',
+            colorMain: 'color-mix(in srgb, var(--link-visited) 18%, var(--surface))',
             colorPastel: '',
             badge: 'PARTIKELN',
             emoji: '',
@@ -2784,7 +2790,7 @@
             // We use [\wäöüÄÖÜß]* to also grab trailing/leading German characters
             const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
             return text.replace(regex, (match) =>
-                `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${match}</span>`
+                `<span style="background: linear-gradient(135deg, color-mix(in srgb, var(--danger) 10%, var(--surface)) 0%, color-mix(in srgb, var(--accent) 10%, var(--surface)) 100%); color: var(--accent-text); padding: 0;">${match}</span>`
             );
         }
 
@@ -2804,7 +2810,7 @@
             // Only show speaker icon for the first item in the chunk (index === 0)
             const speakerIcon = index === 0 ? '<span class="audio-icon">🔊</span>' : '';
 
-            const starIcon = adv.dtz_star ? '<span class="dtz-star" title="Esencial para examen DTZ B1" style="color: #fbbf24; margin-right: 4px; cursor: help; font-size: 0.9em;">⭐</span>' : '';
+            const starIcon = adv.dtz_star ? '<span class="dtz-star" title="Esencial para examen DTZ B1" style="color: var(--accent-text); margin-right: 4px; cursor: help; font-size: 0.9em;">⭐</span>' : '';
             return `
             <tr onclick="openModal('${adv.word}', '${group.badge}')" style="cursor:pointer; transition: background-color 0.2s;">
                 <td>
@@ -2926,18 +2932,18 @@
                 customContent.innerHTML = `
         <div style="text-align:center;">
              <div class="modal-emoji" style="font-size: 4rem; margin-bottom: 10px; cursor: pointer;" onclick="speak('${foundAdverb.word}')">${foundAdverb.emoji}</div>
-             <div class="modal-main-word" style="color:var(--accent-green); font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; cursor:pointer;" onclick="speak('${foundAdverb.word}')">${foundAdverb.word}</div>
+             <div class="modal-main-word" style="color:var(--accent-var(--success)); font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; cursor:pointer;" onclick="speak('${foundAdverb.word}')">${foundAdverb.word}</div>
         </div>
         
         <div style="overflow-x: auto; width: 100%;">
             <table style="width: 100%; border-collapse: separate; border-spacing: 0; text-align: left; font-size: 0.9rem; color: var(--text-main); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden;">
                 <thead>
                     <tr style="background: rgba(255,255,255,0.05);">
-                        <th style="padding: 12px; color: var(--accent-green); border-bottom: 2px solid var(--border-color);">Tipo</th>
-                        <th style="padding: 12px; color: var(--accent-green); border-bottom: 2px solid var(--border-color);">Significado (ES)</th>
-                        <th style="padding: 12px; color: var(--accent-green); border-bottom: 2px solid var(--border-color);">Meaning (EN)</th>
-                        <th style="padding: 12px; color: var(--accent-green); border-bottom: 2px solid var(--border-color);">Uso / Matiz</th>
-                        <th style="padding: 12px; color: var(--accent-green); border-bottom: 2px solid var(--border-color);">Ejemplo</th>
+                        <th style="padding: 12px; color: var(--accent-var(--success)); border-bottom: 2px solid var(--border-color);">Tipo</th>
+                        <th style="padding: 12px; color: var(--accent-var(--success)); border-bottom: 2px solid var(--border-color);">Significado (ES)</th>
+                        <th style="padding: 12px; color: var(--accent-var(--success)); border-bottom: 2px solid var(--border-color);">Meaning (EN)</th>
+                        <th style="padding: 12px; color: var(--accent-var(--success)); border-bottom: 2px solid var(--border-color);">Uso / Matiz</th>
+                        <th style="padding: 12px; color: var(--accent-var(--success)); border-bottom: 2px solid var(--border-color);">Ejemplo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -2978,7 +2984,7 @@
             modalHeader.style.backgroundColor = foundGroup.colorMain;
 
             document.getElementById('modalEmoji').textContent = foundAdverb.emoji;
-            document.getElementById('modalWord').innerHTML = (foundAdverb.dtz_star ? '<span style="color:#fbbf24; margin-right:8px;">⭐</span>' : '') + foundAdverb.word;
+            document.getElementById('modalWord').innerHTML = (foundAdverb.dtz_star ? '<span style="color:var(--accent-text); margin-right:8px;">⭐</span>' : '') + foundAdverb.word;
 
             const levelBadge = document.getElementById('modalLevel');
             if (foundAdverb.level) {

@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abstrakte deutsche Substantive - A1 Niveau</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/dark-contract.css" />
     <style>
         /* =================================== */
         /* SIMPLIFIED ARTICLE VISIBILITY SYSTEM */
@@ -27,15 +33,15 @@
         
         /* Specific color preservations for underlines */
         .articles-hidden .article.der-color {
-            text-decoration-color: #3b82f6 !important; /* Blue for der */
+            text-decoration-color: var(--info-text) !important; /* Blue for der */
         }
         
         .articles-hidden .article.die-color {
-            text-decoration-color: #dc2626 !important; /* Red for die */
+            text-decoration-color: var(--danger) !important; /* Red for die */
         }
         
         .articles-hidden .article.das-color {
-            text-decoration-color: #059669 !important; /* Green for das */
+            text-decoration-color: var(--success) !important; /* Green for das */
         }
         
         /* Keep nouns always visible */
@@ -44,9 +50,9 @@
         }
         
         /* Article color definitions */
-        .der-color { color: #3b82f6; }
-        .die-color { color: #dc2626; }
-        .das-color { color: #059669; }
+        .der-color { color: var(--info-text); }
+        .die-color { color: var(--danger); }
+        .das-color { color: var(--success); }
         
         /* =================================== */
         /* TRANSLATION TOGGLE FUNCTIONALITY */
@@ -68,7 +74,7 @@
         
         tr.show-translations td[data-label="Substantiv"] {
             background-color: rgba(59, 130, 246, 0.15) !important;
-            border-left: 3px solid #3b82f6;
+            border-left: 3px solid var(--info);
         }
         
         tr.show-translations .translation {
@@ -82,39 +88,39 @@
         .responsive-table {
             width: 100%;
             border-collapse: collapse;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: var(--font-ui);
         }
         
         .responsive-table th,
         .responsive-table td {
             padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid var(--border);
             vertical-align: top;
         }
         
         .responsive-table th {
-            background-color: #f3f4f6;
+            background-color: var(--surface);
             font-weight: 600;
             position: sticky;
             top: 0;
         }
         
         .responsive-table tbody tr:nth-child(even) {
-            background-color: #f9fafb;
+            background-color: var(--surface);
         }
         
         .responsive-table tbody tr:hover {
-            background-color: #f3f4f6;
+            background-color: var(--surface);
         }
         
         /* Toggle switch styling */
         .toggle-container {
             margin: 20px 0;
             padding: 15px;
-            background-color: #f8fafc;
+            background-color: var(--surface);
             border-radius: 8px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border);
         }
         
         .toggle-switch {
@@ -138,7 +144,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
+            background-color: var(--border);
             transition: .4s;
             border-radius: 24px;
         }
@@ -150,13 +156,13 @@
             width: 18px;
             left: 3px;
             bottom: 3px;
-            background-color: white;
+            background-color: var(--surface);
             transition: .4s;
             border-radius: 50%;
         }
         
         input:checked + .slider {
-            background-color: #3b82f6;
+            background-color: color-mix(in srgb, var(--info) 18%, var(--surface));
         }
         
         input:checked + .slider:before {
@@ -186,7 +192,7 @@
                 <span class="slider"></span>
             </span>
         </label>
-        <p style="margin-top: 8px; font-size: 14px; color: #6b7280;">
+        <p style="margin-top: 8px; font-size: 14px; color: var(--ink-2);">
             📖 Klicken Sie auf ein Substantiv, um Übersetzungen zu sehen / Click on a noun to see translations
         </p>
     </div>

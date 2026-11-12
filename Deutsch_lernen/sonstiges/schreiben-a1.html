@@ -6,37 +6,42 @@
     <title>Tabla de Ejemplos de Escritura en Alemán (A1)</title>
     <!-- Carga de Tailwind CSS para el estilo -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/dark-contract.css" />
     <!-- Carga de la fuente Inter de Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Aplicar la fuente Inter al cuerpo del documento */
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-ui);
         }
         
         /* German article color coding */
         .der-color {
-            color: red; /* Masculine */
+            color: var(--danger); /* Masculine */
             font-weight: bold;
         }
         
         .die-color {
-            color: blue; /* Feminine */
+            color: var(--info-text); /* Feminine */
             font-weight: bold;
         }
         
         .das-color {
-            color: black; /* Neuter */
+            color: var(--ink); /* Neuter */
             font-weight: bold;
         }
         
         /* Button styles for Mehr column */
         .arrow-btn {
-            background: #f3f4f6;
-            border: 1px solid #d1d5db;
-            color: #374151;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--ink);
             padding: 8px 12px;
             border-radius: 6px;
             cursor: pointer;
@@ -45,25 +50,25 @@
         }
         
         .arrow-btn:hover {
-            background: #e5e7eb;
-            border-color: #9ca3af;
+            background: rgb(255 255 255 / 0.08);
+            border-color: var(--border);
         }
         
         .arrow-btn:active {
-            background: #d1d5db;
+            background: rgb(255 255 255 / 0.08);
         }
         
         /* Dark background when showing alternative example */
         .arrow-btn.showing-alternative {
-            background: #374151 !important;
-            color: #ffffff !important;
-            border-color: #374151 !important;
+            background: var(--surface) !important;
+            color: var(--ink) !important;
+            border-color: var(--border) !important;
         }
         
         .arrow-btn.showing-alternative:hover {
-            background: #4b5563 !important;
-            border-color: #4b5563 !important;
-            color: #ffffff !important;
+            background: var(--surface) !important;
+            border-color: var(--border) !important;
+            color: var(--ink) !important;
         }
         
         /* Alternative example styles */

@@ -6,26 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infografía: Administrative Ausdrücke A1-B1</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#282828" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/dark-contract.css" />
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f1f5f9;
+            font-family: var(--font-ui);
+            background-color: var(--surface);
         }
 
         .gradient-a1 {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            background: linear-gradient(135deg, color-mix(in srgb, var(--info) 18%, var(--surface)) 0%, color-mix(in srgb, var(--info) 18%, var(--surface)) 100%);
         }
 
         .gradient-a2 {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, color-mix(in srgb, var(--success) 18%, var(--surface)) 0%, color-mix(in srgb, var(--success) 18%, var(--surface)) 100%);
         }
 
         .gradient-b1 {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, var(--surface)) 0%, color-mix(in srgb, var(--accent) 18%, var(--surface)) 100%);
         }
 
         .card {
@@ -62,26 +68,26 @@
         }
 
         .bubble-a {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
             align-self: flex-start;
         }
 
         .bubble-b {
-            background-color: #eff6ff;
-            border: 1px solid #dbeafe;
+            background-color: color-mix(in srgb, var(--info) 6%, var(--surface));
+            border: 1px solid color-mix(in srgb, var(--info) 30%, var(--border));
             align-self: flex-end;
         }
 
         .bubble-b-a2 {
-            background-color: #f0fdf4;
-            border: 1px solid #dcfce7;
+            background-color: color-mix(in srgb, var(--success) 6%, var(--surface));
+            border: 1px solid color-mix(in srgb, var(--success) 30%, var(--border));
             align-self: flex-end;
         }
 
         .bubble-b-b1 {
-            background-color: #fffbeb;
-            border: 1px solid #fef3c7;
+            background-color: color-mix(in srgb, var(--accent) 6%, var(--surface));
+            border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
             align-self: flex-end;
         }
     </style>
