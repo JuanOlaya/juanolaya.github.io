@@ -1,0 +1,29 @@
+/*
+ * Shared design tokens (STYLE-CONTRACT §9 block A, derived from the home page). Import it right after
+ * `tailwind.css` from pages that follow the dark contract; raw/legacy pages and p5 sketches cannot import it
+ * and keep their own copies of the values.
+ */
+@theme {
+  --color-bg: #282828;
+  --color-surface: #33333d;
+  --color-border: #41414e;
+  --color-ink: #f8ecde;
+  --color-ink-2: #b9b2a6;
+  --color-link: #f4f0f9;
+  --color-link-visited: #b597d8;
+  --color-accent: #c48208;
+  --color-accent-hover: #d4870a;
+  --color-accent-text: #e5a53a;
+  --color-on-accent: #1a1a1a;
+  --color-info: #198bc6;
+  --color-info-text: #6cb6ff;
+  --color-success: #7bd389;
+  --color-danger: #ff7b72;
+  --font-sans: 'Noto Sans KR', 'Instrument Sans Variable', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius-card: 5px;
+  --radius-button: 8px;
+  --radius-panel: 10px;
+  --text-caption: 13px;
+  --text-caption--line-height: 1.3;
+}

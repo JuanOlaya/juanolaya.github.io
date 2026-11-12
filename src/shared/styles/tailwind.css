@@ -1,5 +1,5 @@
 /*
- * Shared Tailwind entry for every migrated page; shared design tokens go in an `@theme` block here.
+ * Shared Tailwind entry for every migrated page; shared design tokens live in `tokens.css`, imported next to this file.
  * `source(none)` turns off automatic scanning: the repository holds thousands of legacy files and
  * scanning them would bloat every page's CSS. Each page adds `@source` for its own folder.
  */
