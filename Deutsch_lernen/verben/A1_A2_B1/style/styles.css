@@ -71,7 +71,7 @@ body {
 
 
 
-    background-color: var(--info);
+    background-color: var(--bg);
 
 
 
@@ -675,7 +675,7 @@ body.compact-view .content-block {
 
 
 
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: var(--surface);
 
 
 
@@ -983,7 +983,7 @@ body.compact-view .content-block {
 
 
 
-    background-color: var(--modal-theme-pale, white);
+    background-color: var(--modal-theme-pale, var(--surface));
 
 
 
@@ -1039,7 +1039,7 @@ body.compact-view .content-block {
 
 
 
-    background-color: white;
+    background-color: var(--surface);
 
 
 
@@ -1359,7 +1359,7 @@ body.compact-view .content-block {
 
 
 
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--surface);
 
 
 
@@ -3094,7 +3094,7 @@ body.compact-view .content-block {
 
 
 
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: var(--surface);
 
 
 
@@ -3560,7 +3560,7 @@ body.compact-view .content-block {
 
 
 
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.95));
+    background: linear-gradient(to right, rgb(51 51 61 / 0), var(--surface));
 
 
 
@@ -3580,7 +3580,7 @@ body.compact-view .content-block {
 
 
 
-    background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.95));
+    background: linear-gradient(to left, rgb(51 51 61 / 0), var(--surface));
 
 
 
@@ -7500,7 +7500,7 @@ body.compact-view .content-block {
 
 
 
-    background-color: white;
+    background-color: var(--surface);
 
 
 
@@ -10730,7 +10730,7 @@ details[open]>summary .details-arrow {
 
 
 
-    background: white;
+    background: var(--surface);
 
 
 
@@ -10894,7 +10894,7 @@ details[open]>summary .details-arrow {
 
 
 
-    background: white;
+    background: var(--surface);
 
 
 
@@ -11038,7 +11038,7 @@ details[open]>summary .details-arrow {
 
 
 
-    background: linear-gradient(135deg, var(--surface) 0%, var(--accent) 100%);
+    background: var(--surface);
 
 
 
@@ -11206,7 +11206,7 @@ details[open]>summary .details-arrow {
 
 
 
-    background: white;
+    background: var(--surface);
 
 
 
@@ -11698,7 +11698,7 @@ details[open]>summary .details-arrow {
 
 
 
-    color: white !important;
+    color: var(--on-accent) !important;
 
 
 
@@ -12198,7 +12198,7 @@ details[open]>summary .details-arrow {
 
 
 
-    background: linear-gradient(135deg, var(--modal-theme-pale, var(--surface)) 0%, var(--modal-theme-soft, var(--accent)) 100%);
+    background: linear-gradient(135deg, var(--modal-theme-pale, var(--surface)) 0%, var(--modal-theme-soft, var(--surface)) 100%);
 
 
 
@@ -14138,7 +14138,7 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 
 
 
-    background: white;
+    background: var(--surface);
 
 
 
@@ -15526,7 +15526,7 @@ body.compact-view #modal-konjunktiv-konjugation-table-tab th {
 
 
 
-    background-color: white;
+    background-color: var(--surface);
 
 
 
@@ -15606,7 +15606,7 @@ body.compact-view #modal-konjunktiv-konjugation-table-tab th {
 
 
 
-    background: white;
+    background: var(--surface);
 
 
 
@@ -16250,7 +16250,7 @@ body.light-version-global-dark .info-button {
 
 
 
-    background-color: white;
+    background-color: var(--surface);
 
 
 
@@ -16895,7 +16895,7 @@ body.compact-view .cards-container {
 
 
 
-    background-color: white;
+    background-color: var(--surface);
 
 
 
@@ -23166,7 +23166,7 @@ body:not(.hide-separable-prefixes) .separable-prefix,
     font-size: 0.68rem !important;
     font-weight: 500 !important;
     font-style: italic !important;
-    color: rgba(56, 189, 248, 0.8) !important;
+    color: var(--info-text) !important;
     letter-spacing: 0.02em !important;
     line-height: 1 !important;
 }
@@ -24055,4 +24055,132 @@ dialog::backdrop {
         height: calc(100dvh - 140px) !important;
         min-height: 0 !important;
     }
+}
+
+/* Text on coloured fills (group headers, badges, primary buttons) is dark on-accent: white fails AA on these fills (STYLE-CONTRACT §2) */
+.kompakt-level-header,
+.kompakt-level-header *,
+.kompakt-level-card .card-footer,
+.kompakt-level-card .card-footer *,
+.ik-badge,
+.lid-badge,
+.dativ-badge,
+.verb-tag,
+.compact-nav-btn.next-btn,
+body.compact-view .level-option.active,
+.gustar-text,
+.gustar-emoji {
+    color: var(--on-accent) !important;
+}
+
+#story-button {
+    color: var(--on-accent) !important;
+}
+
+/* Bright contract fills (danger/accent/info/success) carry dark on-accent text, including descendants: audited with Playwright for AA */
+body.compact-view .level-option.active,
+body.compact-view .level-option.active *,
+.level-toggle-footer.mobile-collapsed,
+.level-toggle-footer.mobile-collapsed *,
+.level-toggle-footer.selector-collapsed,
+.level-toggle-footer.selector-collapsed *,
+.level-option.active,
+.level-option.active *,
+.level-toggle-footer.selector-collapsed .level-option.active,
+.level-toggle-footer.selector-collapsed .level-option.active *,
+.level-toggle-footer.mobile-collapsed .level-option.active,
+.level-toggle-footer.mobile-collapsed .level-option.active *,
+.group-theme-indicator,
+.group-theme-indicator *,
+.group-nav-arrow,
+.group-nav-arrow *,
+.group-nav-arrow:hover,
+.group-nav-arrow:hover *,
+.group-nav-arrow:disabled,
+.group-nav-arrow:disabled *,
+.level-a1-2,
+.level-a1-2 *,
+.level-a2-2,
+.level-a2-2 *,
+.level-b1-1,
+.level-b1-1 *,
+.level-b2-1,
+.level-b2-1 *,
+.verb-tag,
+.verb-tag *,
+.tag-dativ,
+.tag-dativ *,
+.verb-type-tag.type-separable,
+.verb-type-tag.type-separable *,
+.verb-type-tag.type-non-separable,
+.verb-type-tag.type-non-separable *,
+.verb-notes-tag,
+.verb-notes-tag *,
+#story-button,
+#story-button *,
+#story-button:hover,
+#story-button:hover *,
+.highlighted-word,
+.highlighted-word *,
+.modal-theme-badge,
+.modal-theme-badge *,
+.footer-search-toggle,
+.footer-search-toggle *,
+.gustar-btn,
+.gustar-btn *,
+.gustar-modal-header,
+.gustar-modal-header *,
+.gustar-section[open] summary,
+.gustar-section[open] summary *,
+.neg-highlight,
+.neg-highlight *,
+.gustar-modal-footer button,
+.gustar-modal-footer button *,
+.theme-close-btn,
+.theme-close-btn *,
+.theme-close-btn:hover,
+.theme-close-btn:hover *,
+.group-theme-indicator:hover,
+.group-theme-indicator:hover *,
+.theme-rating-badge.critical,
+.theme-rating-badge.critical *,
+.theme-rating-badge.high,
+.theme-rating-badge.high *,
+.theme-rating-badge.medium,
+.theme-rating-badge.medium *,
+body.light-version-global-dark .tag-filter-pill.active,
+body.light-version-global-dark .tag-filter-pill.active *,
+.reflexiv-badge,
+.reflexiv-badge *,
+.dativ-badge,
+.dativ-badge *,
+.case-tag-DAT,
+.case-tag-DAT *,
+.ik-badge,
+.ik-badge *,
+.lid-badge,
+.lid-badge *,
+.a1test-badge,
+.a1test-badge *,
+.compact-nav-btn.next-btn,
+.compact-nav-btn.next-btn *,
+.compact-nav-btn.next-btn:hover,
+.compact-nav-btn.next-btn:hover *,
+.level-toggle-footer .level-option.active,
+.level-toggle-footer .level-option.active *,
+.search-toggle-btn.active,
+.search-toggle-btn.active * {
+    color: var(--on-accent) !important;
+}
+
+.theme-german-name,
+.theme-spanish-name,
+.card-back-infinitive,
+.card-back-translation {
+    color: var(--on-accent) !important;
+}
+
+body.light-version-global-dark .tag-filter-pill {
+    background-color: var(--bg) !important;
+    color: var(--ink) !important;
 }

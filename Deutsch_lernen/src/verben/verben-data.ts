@@ -35,15 +35,16 @@ export const savedStories = [
   `<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> für eine Prüfung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefüragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklärt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`,
 ];
 
+/** Group header colours: STYLE-CONTRACT tokens, all carrying dark `on-accent` text at AA contrast. */
 export const standardColors = [
-  '#8b5cf6',
-  '#ec4899',
-  '#f59e0b',
-  '#3b82f6',
-  '#ea580c',
-  '#22C55E',
-  '#a855f7',
-  '#facc15',
+  '#b597d8',
+  '#ff7b72',
+  '#e5a53a',
+  '#6cb6ff',
+  '#c48208',
+  '#7bd389',
+  '#198bc6',
+  '#d4870a',
 ];
 
 /** Verbs that have a Konjunktiv II tab. */
