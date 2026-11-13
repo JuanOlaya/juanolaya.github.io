@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.15.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.14.0...v0.15.0) (2026-11-13)
+
+
+### Features
+
+* **home:** display categories in columns, remove MuseFlow from Interaction, and add DOI link to MuseFlow in Research ([f77972b](https://github.com/JuanOlaya/juanolaya.github.io/commit/f77972bb4be111643d011c50baba5c12b8103d41))
+* **home:** organize projects section into Teaching, Research and Interaction categories ([8422b74](https://github.com/JuanOlaya/juanolaya.github.io/commit/8422b7410f0c684077dd0885f2a5badcec9b7869))
+
+
+### Bug Fixes
+
+* **home:** remove MemoDeutsch, UX, PM, ShapyPresence and HCI BHT from home page and add permanent exclusion rule ([8f1692f](https://github.com/JuanOlaya/juanolaya.github.io/commit/8f1692f0d05d12ac9810ec603371759fd82c8775))
+
 ## [0.14.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.13.0...v0.14.0) (2026-11-12)
 
 
