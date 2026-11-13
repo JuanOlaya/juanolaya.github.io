@@ -100,5 +100,7 @@ Lee el archivo TRANSICION_WORKSPACE.md y el PLAN.md en la raíz del repositorio 
 3. MemoDeutsch está congelado en este repositorio porque fue migrado a Flutter/Dart.
 4. El stack del monorepo es Vue 3 + TypeScript + Vite MPA.
 
-Por favor indícame los siguientes pasos según el PLAN.md para avanzar con las tareas prioritarias (como el Light Mode y modernizaciones de Haptic Cards).
+IMPORTANTE: Aún NO vamos a implementar el plan; por ahora nos enfocaremos en seguir puliendo, enriqueciendo y mejorando el PLAN.md antes de pasar a la fase de ejecución.
+
+Por favor confirma que tienes todo este contexto claro y dime qué sugerencias o áreas de mejora ves en el PLAN.md para continuar refinándolo.
 ```
