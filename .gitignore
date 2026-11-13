@@ -16,8 +16,12 @@ __pycache__/
 .tmp_pypdf/
 Deutsch_lernen/vendorpdf/
 
-# Temporary folders (Deutsch_lernen/tmp, tmp_lid_pdf, tmp_edge_profile, ...)
+# Temporary and scratch folders
 tmp*/
+.tmp*/
+**/.tmp/
+scratch/
+**/scratch/
 
 # Headless browser profiles created by the PDF build scripts
 .chrome-headless-profile-*/
