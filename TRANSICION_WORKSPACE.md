@@ -46,18 +46,24 @@ La decisión de migrar el repositorio a **Vue 3 + TypeScript + Vite** fue ejecut
    - Color de dibujo inicial: Morado (`#484B78`). Forma inicial: Círculo (índice 1).
    - Encabezado superior colapsado por defecto (`[Show H]`).
 
-### B. Exclusión Permanente de 5 Proyectos de la Portada
-Se identificó que 5 proyectos habían vuelto a ser listados en la página de inicio. Por instrucción expresa del usuario, fueron removidos y blindados permanentemente:
-- ❌ **MemoDeutsch** (`/Deutsch_lernen/`) — Congelado; migrado a Flutter/Dart en repositorio independiente.
-- ❌ **UX Infographics** (`/UX/`)
-- ❌ **Project Management** (`/Project_Management/`)
-- ❌ **ShapyPresence** (`/EurekaWall/pixelGrid/`)
-- ❌ **HCI BHT** (`/HCI_BHT_Website/`)
-
-**Mecanismos de protección implementados:**
-1. Eliminados de `src/home/projectPages.ts`.
-2. Pruebas automatizadas en `src/home/projectPages.test.ts` que garantizan que nunca vuelvan a ser añadidos.
-3. Regla permanente documentada en `.agents/AGENTS.md` y `Deutsch_lernen/.agents/AGENTS.md`.
+### B. Cambios en el Portafolio Principal (`https://juanolaya.github.io/` en `src/home/`)
+1. **Reorganización por Categorías Temáticas:**
+   - En lugar de una lista genérica "Projects", el showcase del portafolio se estructuró en 3 categorías:
+     - 🎓 **Teaching**: *Haptic Cards*, *Platform Game*.
+     - 🔬 **Research**: *MuseFlow*.
+     - 🕹️ **Interaction**: *MuseFlow*, *Balcondipity*, *Particle Canvas*.
+   - Se excluyó *EurekaWall* de la portada.
+2. **Exclusión Permanente de 5 Proyectos:**
+   - Se identificó que 5 proyectos habían vuelto a ser listados en el portafolio. Por instrucción expresa del usuario, fueron removidos y blindados permanentemente:
+     - ❌ **MemoDeutsch** (`/Deutsch_lernen/`) — Congelado; migrado a Flutter/Dart en repositorio independiente.
+     - ❌ **UX Infographics** (`/UX/`)
+     - ❌ **Project Management** (`/Project_Management/`)
+     - ❌ **ShapyPresence** (`/EurekaWall/pixelGrid/`)
+     - ❌ **HCI BHT** (`/HCI_BHT_Website/`)
+   - **Mecanismos de protección implementados:**
+     - Eliminados de `src/home/projectPages.ts`.
+     - Pruebas automatizadas en `src/home/projectPages.test.ts` que garantizan que nunca vuelvan a ser añadidos.
+     - Regla permanente documentada en `.agents/AGENTS.md` y `Deutsch_lernen/.agents/AGENTS.md`.
 
 ### C. Plan Maestro y Arquitectura Multi-Agente (`PLAN.md`)
 - Se definió el flujo de trabajo orquestado con agentes especializados: `lead-orchestrator`, `sdd-architect`, `oop-domain-engineer`, `modern-web-specialist`, `system-architect` y `qa-gatekeeper`.
@@ -86,9 +92,11 @@ Al abrir la carpeta raíz **`juanolaya.github.io`** en Antigravity, puedes inici
 ```text
 Hola. Vengo de la sesión previa en la subcarpeta Deutsch_lernen y ahora estoy trabajando directamente en la raíz de juanolaya.github.io.
 
-Lee el archivo PLAN.md en la raíz del repositorio y ten en cuenta las siguientes decisiones ya consolidadas y desplegadas en master:
-1. Las mejoras en PixelGrid (paletas, desacople de fondo, fondo hueso #F5F2EB, default #282828, fullscreen) ya están completadas y testeadas.
-2. Los 5 proyectos (MemoDeutsch, UX Infographics, Project Management, ShapyPresence y HCI BHT) están permanentemente excluidos de la home page según la regla en .agents/AGENTS.md y blindados por tests en src/home/projectPages.test.ts.
+Lee el archivo TRANSICION_WORKSPACE.md y el PLAN.md en la raíz del repositorio y ten en cuenta las decisiones consolidadas y desplegadas en master:
+1. En el Portafolio principal (la página de inicio https://juanolaya.github.io/):
+   - Se reorganizó la sección de proyectos en 3 categorías temáticas: Teaching (Haptic Cards, Platform Game), Research (MuseFlow) e Interaction (MuseFlow, Balcondipity, Particle Canvas), excluyendo EurekaWall.
+   - Los 5 proyectos (MemoDeutsch, UX Infographics, Project Management, ShapyPresence y HCI BHT) están permanentemente excluidos del portafolio según la regla en .agents/AGENTS.md y blindados por tests en src/home/projectPages.test.ts.
+2. Las mejoras en PixelGrid (paletas, desacople de fondo, fondo hueso #F5F2EB, default #282828, fullscreen) ya están completadas y testeadas.
 3. MemoDeutsch está congelado en este repositorio porque fue migrado a Flutter/Dart.
 4. El stack del monorepo es Vue 3 + TypeScript + Vite MPA.
 
