@@ -57,7 +57,7 @@ export const projectCategories: readonly ProjectCategory[] = [
         href: '/MuseFlow/',
         links: [
           {
-            label: 'doi.org/10.1007/978-3-030-85613-7_9',
+            label: 'DOI',
             href: 'https://doi.org/10.1007/978-3-030-85613-7_9',
           },
         ],

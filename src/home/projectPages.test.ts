@@ -78,7 +78,7 @@ describe('projectCategories', () => {
     expect(research?.projects.map((p) => p.title)).toEqual(['MuseFlow']);
     expect(research?.projects[0]?.links).toEqual([
       {
-        label: 'doi.org/10.1007/978-3-030-85613-7_9',
+        label: 'DOI',
         href: 'https://doi.org/10.1007/978-3-030-85613-7_9',
       },
     ]);
