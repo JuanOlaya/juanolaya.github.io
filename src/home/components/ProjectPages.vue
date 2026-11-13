@@ -55,7 +55,31 @@ onBeforeUnmount(() => {
       </h2>
       <ul class="projects-list">
         <li v-for="page in category.projects" :key="category.name + '-' + page.href">
+          <div
+            v-if="page.links && page.links.length"
+            class="card project-card"
+            @pointerenter="onPointerEnter"
+            @pointerleave="onPointerLeave"
+            @focusin="onFocus"
+            @focusout="attractTo(null)"
+          >
+            <a :href="page.href" class="project-card-title">{{ page.title }}</a>
+            <span class="project-card-description">{{ page.description }}</span>
+            <div class="project-card-links">
+              <a
+                v-for="link in page.links"
+                :key="link.href"
+                :href="link.href"
+                class="project-card-link"
+                :target="link.href.startsWith('http') ? '_blank' : undefined"
+                :rel="link.href.startsWith('http') ? 'noopener noreferrer' : undefined"
+              >
+                {{ link.label }}
+              </a>
+            </div>
+          </div>
           <a
+            v-else
             class="card project-card"
             :href="page.href"
             @pointerenter="onPointerEnter"

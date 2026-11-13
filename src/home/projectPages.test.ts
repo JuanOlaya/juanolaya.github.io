@@ -76,12 +76,18 @@ describe('projectCategories', () => {
 
     const research = projectCategories.find((c) => c.name === 'Research');
     expect(research?.projects.map((p) => p.title)).toEqual(['MuseFlow']);
+    expect(research?.projects[0]?.links).toEqual([
+      {
+        label: 'doi.org/10.1007/978-3-030-85613-7_9',
+        href: 'https://doi.org/10.1007/978-3-030-85613-7_9',
+      },
+    ]);
 
     const interaction = projectCategories.find((c) => c.name === 'Interaction');
     expect(interaction?.projects.map((p) => p.title)).toEqual([
-      'MuseFlow',
       'Balcondipity',
       'Particle Canvas',
     ]);
+    expect(interaction?.projects.map((p) => p.title)).not.toContain('MuseFlow');
   });
 });

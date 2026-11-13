@@ -47,11 +47,11 @@ La decisión de migrar el repositorio a **Vue 3 + TypeScript + Vite** fue ejecut
    - Encabezado superior colapsado por defecto (`[Show H]`).
 
 ### B. Cambios en el Portafolio Principal (`https://juanolaya.github.io/` en `src/home/`)
-1. **Reorganización por Categorías Temáticas:**
-   - En lugar de una lista genérica "Projects", el showcase del portafolio se estructuró en 3 categorías:
+1. **Reorganización en Columnas por Categorías Temáticas:**
+   - En lugar de filas horizontales o una lista genérica "Projects", el showcase del portafolio se estructuró en 3 columnas independientes:
      - 🎓 **Teaching**: *Haptic Cards*, *Platform Game*.
-     - 🔬 **Research**: *MuseFlow*.
-     - 🕹️ **Interaction**: *MuseFlow*, *Balcondipity*, *Particle Canvas*.
+     - 🔬 **Research**: *MuseFlow* (con enlace directo a la publicación DOI `doi.org/10.1007/978-3-030-85613-7_9`).
+     - 🕹️ **Interaction**: *Balcondipity*, *Particle Canvas*.
    - Se excluyó *EurekaWall* de la portada.
 2. **Exclusión Permanente de 5 Proyectos:**
    - Se identificó que 5 proyectos habían vuelto a ser listados en el portafolio. Por instrucción expresa del usuario, fueron removidos y blindados permanentemente:
@@ -94,7 +94,7 @@ Hola. Vengo de la sesión previa en la subcarpeta Deutsch_lernen y ahora estoy t
 
 Lee el archivo TRANSICION_WORKSPACE.md y el PLAN.md en la raíz del repositorio y ten en cuenta las decisiones consolidadas y desplegadas en master:
 1. En el Portafolio principal (la página de inicio https://juanolaya.github.io/):
-   - Se reorganizó la sección de proyectos en 3 categorías temáticas: Teaching (Haptic Cards, Platform Game), Research (MuseFlow) e Interaction (MuseFlow, Balcondipity, Particle Canvas), excluyendo EurekaWall.
+   - Se reorganizó la sección de proyectos en 3 columnas temáticas: Teaching (Haptic Cards, Platform Game), Research (MuseFlow con link DOI) e Interaction (Balcondipity, Particle Canvas), excluyendo EurekaWall.
    - Los 5 proyectos (MemoDeutsch, UX Infographics, Project Management, ShapyPresence y HCI BHT) están permanentemente excluidos del portafolio según la regla en .agents/AGENTS.md y blindados por tests en src/home/projectPages.test.ts.
 2. Las mejoras en PixelGrid (paletas, desacople de fondo, fondo hueso #F5F2EB, default #282828, fullscreen) ya están completadas y testeadas.
 3. MemoDeutsch está congelado en este repositorio porque fue migrado a Flutter/Dart.
