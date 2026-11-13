@@ -42,34 +42,25 @@ describe('projectPages', () => {
     expect(hrefs).not.toContain('/PixelGrid/');
   });
 
-  // Republished after TODO.md §1: mobile layout, PWA and storage hydration are in place.
-  it('links MemoDeutsch at its public URL', () => {
-    expect(projectPages.map((page) => page.href)).toContain('/Deutsch_lernen/');
-  });
+  // Explicit permanent exclusion rule: MemoDeutsch, UX Infographic, Project Management, ShapyPresence, and HCI BHT
+  it('never links permanently excluded projects', () => {
+    const hrefs = projectPages.map((page) => page.href);
+    expect(hrefs).not.toContain('/Deutsch_lernen/');
+    expect(hrefs).not.toContain('/UX/');
+    expect(hrefs).not.toContain('/Project_Management/');
+    expect(hrefs).not.toContain('/EurekaWall/pixelGrid/');
+    expect(hrefs).not.toContain('/PixelGrid/');
+    expect(hrefs).not.toContain('/HCI_BHT_Website/');
 
-  // TODO.md §2: republished once the AI Hub degraded gracefully and the page followed the style contract.
-  it('lists the UX Infographic again', () => {
-    expect(projectPages.map((page) => page.href)).toContain('/UX/');
-  });
-
-  it('lists Project Management again (TODO.md §3)', () => {
-    expect(projectPages.map((page) => page.href)).toContain('/Project_Management/');
-  });
-
-  // TODO.md §5: ShapyPresence is back on the home page at its EurekaWall URL.
-  it('lists ShapyPresence under /EurekaWall/pixelGrid/', () => {
-    const page = projectPages.find((item) => item.title === 'ShapyPresence');
-    expect(page?.href).toBe('/EurekaWall/pixelGrid/');
-    expect(siteEntries).toContainEqual({ kind: 'vite', dir: 'EurekaWall/pixelGrid' });
+    const titles = projectPages.map((page) => page.title);
+    expect(titles).not.toContain('MemoDeutsch');
+    expect(titles).not.toContain('UX Infographic');
+    expect(titles).not.toContain('Project Management');
+    expect(titles).not.toContain('ShapyPresence');
+    expect(titles).not.toContain('HCI BHT');
   });
 
   it('has unique links', () => {
     expect(new Set(projectPages.map((page) => page.href)).size).toBe(projectPages.length);
-  });
-});
-
-describe('projects returned to the home page', () => {
-  it('lists HCI BHT again', () => {
-    expect(projectPages.map((page) => page.href)).toContain('/HCI_BHT_Website/');
   });
 });

@@ -8,3 +8,12 @@
 - **Rule**: After completing any task, regenerating the metadata index, and verifying everything is functional, you **MUST** stage the changes, commit them with a descriptive message, and push them to the GitHub remote repository (`git push origin master`).
 - **Rule**: In your final response message, after presenting the index update console logs, you **MUST** always provide the following link to monitor the build status: https://github.com/JuanOlaya/juanolaya.github.io/actions/
 
+## Permanent Home Page Project Exclusions
+- **Rule**: You **MUST NEVER** add or link the following projects to the main home page (`src/home/projectPages.ts`, `src/home/projects.ts` or `index.html`):
+  1. **MemoDeutsch** (`/Deutsch_lernen/`)
+  2. **UX Infographics** (`/UX/`)
+  3. **Project Management** (`/Project_Management/`)
+  4. **ShapyPresence** (`/EurekaWall/pixelGrid/` or `/PixelGrid/`)
+  5. **HCI BHT** (`/HCI_BHT_Website/`)
+  These 5 projects are explicitly and permanently excluded from the public landing showcase by owner decision.
+
