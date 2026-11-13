@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import type { SiteEntry } from '../../tooling/page-inputs.ts';
 import { siteEntries } from '../../tooling/site-pages.ts';
-import { projectPages } from './projectPages.ts';
+import { projectCategories, projectPages } from './projectPages.ts';
 
 const repoRoot = fileURLToPath(new URL('../../', import.meta.url));
 
@@ -62,5 +62,26 @@ describe('projectPages', () => {
 
   it('has unique links', () => {
     expect(new Set(projectPages.map((page) => page.href)).size).toBe(projectPages.length);
+  });
+});
+
+describe('projectCategories', () => {
+  it('groups projects into Teaching, Research and Interaction', () => {
+    expect(projectCategories.map((c) => c.name)).toEqual(['Teaching', 'Research', 'Interaction']);
+  });
+
+  it('contains expected projects per category', () => {
+    const teaching = projectCategories.find((c) => c.name === 'Teaching');
+    expect(teaching?.projects.map((p) => p.title)).toEqual(['Haptic Cards', 'Platform Game']);
+
+    const research = projectCategories.find((c) => c.name === 'Research');
+    expect(research?.projects.map((p) => p.title)).toEqual(['MuseFlow']);
+
+    const interaction = projectCategories.find((c) => c.name === 'Interaction');
+    expect(interaction?.projects.map((p) => p.title)).toEqual([
+      'MuseFlow',
+      'Balcondipity',
+      'Particle Canvas',
+    ]);
   });
 });

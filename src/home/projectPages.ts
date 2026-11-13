@@ -6,10 +6,16 @@ export interface ProjectPage {
   href: string;
 }
 
+export interface ProjectCategory {
+  name: string;
+  projects: readonly ProjectPage[];
+}
+
 /**
- * Project pages linked from the home "Projects" section.
- * Each card points to the copy the owner maintains: Balcondipity lives under
- * /EurekaWall/ (its Start button opens the same pages), not the older /Balconity/.
+ * Projects categorized by theme for the home page showcase:
+ * - Teaching: Haptic Cards, Platform Game
+ * - Research: MuseFlow
+ * - Interaction: MuseFlow, Balcondipity, Particle Canvas
  *
  * EXCLUSION RULE: By explicit user instruction, the following projects MUST NEVER
  * be listed on the home page:
@@ -19,35 +25,59 @@ export interface ProjectPage {
  * - ShapyPresence (/EurekaWall/pixelGrid/ or /PixelGrid/)
  * - HCI BHT (/HCI_BHT_Website/)
  */
-export const projectPages: readonly ProjectPage[] = [
+export const projectCategories: readonly ProjectCategory[] = [
   {
-    title: 'Haptic Cards',
-    description: 'Dashboard of 21 mechanism patterns for haptic VR controllers.',
-    href: '/Haptic_Cards/',
+    name: 'Teaching',
+    projects: [
+      {
+        title: 'Haptic Cards',
+        description: 'Dashboard of 21 mechanism patterns for haptic VR controllers.',
+        href: '/Haptic_Cards/',
+      },
+      {
+        title: 'Platform Game',
+        description: 'Teaching game for OOP, physics simulation and DDD.',
+        href: '/PlatformGame/',
+      },
+    ],
   },
   {
-    title: 'Balcondipity',
-    description: 'EurekaWall: a digital balcony for serendipitous inspiration in coworking spaces.',
-    href: '/EurekaWall/balconity/',
+    name: 'Research',
+    projects: [
+      {
+        title: 'MuseFlow',
+        description: 'Relaxing game that promotes mind-wandering to unlock creativity during breaks.',
+        href: '/MuseFlow/',
+      },
+    ],
   },
   {
-    title: 'MuseFlow',
-    description: 'Relaxing game that promotes mind-wandering to unlock creativity during breaks.',
-    href: '/MuseFlow/',
-  },
-  {
-    title: 'EurekaWall',
-    description: 'Research on mind-wandering, creativity and how a game can trigger them.',
-    href: '/EurekaWall/',
-  },
-  {
-    title: 'Particle Canvas',
-    description: 'InspirationalWall: generative flocking art in p5.js.',
-    href: '/ParticleCanvas/',
-  },
-  {
-    title: 'Platform Game',
-    description: 'Teaching game for OOP, physics simulation and DDD.',
-    href: '/PlatformGame/',
+    name: 'Interaction',
+    projects: [
+      {
+        title: 'MuseFlow',
+        description: 'Relaxing game that promotes mind-wandering to unlock creativity during breaks.',
+        href: '/MuseFlow/',
+      },
+      {
+        title: 'Balcondipity',
+        description: 'EurekaWall: a digital balcony for serendipitous inspiration in coworking spaces.',
+        href: '/EurekaWall/balconity/',
+      },
+      {
+        title: 'Particle Canvas',
+        description: 'InspirationalWall: generative flocking art in p5.js.',
+        href: '/ParticleCanvas/',
+      },
+    ],
   },
 ];
+
+/**
+ * Flat list of unique project pages across all categories.
+ */
+export const projectPages: readonly ProjectPage[] = Array.from(
+  new Map(
+    projectCategories.flatMap((category) => category.projects).map((page) => [page.href, page])
+  ).values()
+);
