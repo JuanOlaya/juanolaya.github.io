@@ -2,6 +2,9 @@
 
 Este documento recopila todas las decisiones técnicas, cambios implementados, justificaciones arquitectónicas y el estado actual del repositorio para retomar el trabajo directamente desde el espacio de trabajo raíz **`juanolaya.github.io`** en Antigravity.
 
+> [!NOTE]
+> **Colaboración activa de Luis:** Luis (`@Ludocius`) se unió recientemente como colaborador al repositorio y ha impulsado cambios profundos en la estructura del proyecto (modernización integral a Vue 3 + TypeScript + Vite, limpieza y archivado de código legado, pipeline de CI/CD con GitHub Actions, suite de más de 670 tests automatizados y arquitectura orientada al dominio DDD).
+
 ---
 
 ## 1. Justificación Arquitectónica: ¿Por qué Vue 3 + TypeScript + Vite?
@@ -93,12 +96,12 @@ Al abrir la carpeta raíz **`juanolaya.github.io`** en Antigravity, puedes inici
 Hola. Vengo de la sesión previa en la subcarpeta Deutsch_lernen y ahora estoy trabajando directamente en la raíz de juanolaya.github.io.
 
 Lee el archivo TRANSICION_WORKSPACE.md y el PLAN.md en la raíz del repositorio y ten en cuenta las decisiones consolidadas y desplegadas en master:
-1. En el Portafolio principal (la página de inicio https://juanolaya.github.io/):
-   - Se reorganizó la sección de proyectos en 3 columnas temáticas: Teaching (Haptic Cards, Platform Game), Research (MuseFlow con link DOI) e Interaction (Balcondipity, Particle Canvas), excluyendo EurekaWall.
+1. Contexto del repositorio: Luis (@Ludocius) se unió como colaborador y ha habido cambios importantes en el codebase (adopción de Vue 3 + TypeScript + Vite MPA, pipeline de CI/CD en Node 24 con GitHub Actions, suite de más de 670 tests automatizados y DDD).
+2. En el Portafolio principal (la página de inicio https://juanolaya.github.io/):
+   - Se reorganizó la sección de proyectos en 3 columnas temáticas: Teaching (Haptic Cards, Platform Game), Research (MuseFlow con link DOI doi.org/10.1007/978-3-030-85613-7_9) e Interaction (Balcondipity, Particle Canvas), excluyendo EurekaWall.
    - Los 5 proyectos (MemoDeutsch, UX Infographics, Project Management, ShapyPresence y HCI BHT) están permanentemente excluidos del portafolio según la regla en .agents/AGENTS.md y blindados por tests en src/home/projectPages.test.ts.
-2. Las mejoras en PixelGrid (paletas, desacople de fondo, fondo hueso #F5F2EB, default #282828, fullscreen) ya están completadas y testeadas.
-3. MemoDeutsch está congelado en este repositorio porque fue migrado a Flutter/Dart.
-4. El stack del monorepo es Vue 3 + TypeScript + Vite MPA.
+3. Las mejoras en PixelGrid (paletas, desacople de fondo, fondo hueso #F5F2EB, default #282828, fullscreen) ya están completadas y testeadas.
+4. MemoDeutsch está congelado en este repositorio porque fue migrado a Flutter/Dart.
 
 IMPORTANTE: Aún NO vamos a implementar el plan; por ahora nos enfocaremos en seguir puliendo, enriqueciendo y mejorando el PLAN.md antes de pasar a la fase de ejecución.
 
