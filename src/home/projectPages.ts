@@ -43,7 +43,7 @@ export const projectCategories: readonly ProjectCategory[] = [
       },
       {
         title: 'Platform Game',
-        description: 'Teaching game for OOP, physics simulation and DDD.',
+        description: 'Educational game for OOP, physics simulation and DDD.',
         href: '/PlatformGame/',
       },
     ],
@@ -53,7 +53,7 @@ export const projectCategories: readonly ProjectCategory[] = [
     projects: [
       {
         title: 'MuseFlow',
-        description: 'Relaxing game that promotes mind-wandering to unlock creativity during breaks.',
+        description: 'Relaxing game promoting mind-wandering to unlock creativity.',
         href: '/MuseFlow/',
         links: [
           {
@@ -69,12 +69,12 @@ export const projectCategories: readonly ProjectCategory[] = [
     projects: [
       {
         title: 'Balcondipity',
-        description: 'EurekaWall: a digital balcony for serendipitous inspiration in coworking spaces.',
+        description: 'Digital balcony for serendipitous inspiration in coworking spaces.',
         href: '/EurekaWall/balconity/',
       },
       {
         title: 'Particle Canvas',
-        description: 'InspirationalWall: generative flocking art in p5.js.',
+        description: 'Generative flocking art and interactive particle canvas in p5.js.',
         href: '/ParticleCanvas/',
       },
     ],

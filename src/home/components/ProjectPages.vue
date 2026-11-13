@@ -64,8 +64,8 @@ onBeforeUnmount(() => {
             @focusout="attractTo(null)"
           >
             <a :href="page.href" class="project-card-title">{{ page.title }}</a>
-            <span class="project-card-description">{{ page.description }}</span>
-            <div class="project-card-links">
+            <span class="project-card-description">
+              {{ page.description }}
               <a
                 v-for="link in page.links"
                 :key="link.href"
@@ -76,7 +76,7 @@ onBeforeUnmount(() => {
               >
                 {{ link.label }}
               </a>
-            </div>
+            </span>
           </div>
           <a
             v-else
