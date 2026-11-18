@@ -43,9 +43,9 @@ describe('layoutGrid', () => {
     expect(cellCenter(layout, 0).x - layout.cellSize / 2).toBeGreaterThanOrEqual(0);
   });
 
-  it('leaves room for the eraser strip on the left', () => {
+  it('leaves room for the eraser strip on top', () => {
     const layout = layoutGrid(400, 300, 28);
-    expect(cellCenter(layout, 0).x - layout.cellSize / 2).toBeGreaterThanOrEqual(28);
+    expect(cellCenter(layout, 0).y - layout.cellSize / 2).toBeGreaterThanOrEqual(28);
   });
 
   it.each([
@@ -93,6 +93,14 @@ describe('cellIndexAt', () => {
     expect(cellIndexAt(layout, first.x, first.y)).toBe(0);
     expect(cellIndexAt(layout, first.x + CELL_PX + GAP_PX, first.y)).toBe(1);
     expect(cellIndexAt(layout, first.x, first.y + CELL_PX + GAP_PX)).toBe(layout.cols);
+  });
+
+  it('finds the cell anywhere in its square area, including corners', () => {
+    const { layout } = blankGrid();
+    const first = cellCenter(layout, 0);
+    const cornerX = first.x + layout.cellSize / 2;
+    const cornerY = first.y + layout.cellSize / 2;
+    expect(cellIndexAt(layout, cornerX, cornerY)).toBe(0);
   });
 
   it('returns -1 outside the grid, in the margins and for non-finite points', () => {
@@ -168,13 +176,13 @@ describe('eraser', () => {
     expect(() => clearGrid(createGrid(layoutGrid(0, 0), alwaysPaint))).not.toThrow();
   });
 
-  it('eraseLeftOf wipes only the cells whose centre is left of x', () => {
+  it('eraseAbove wipes only the cells whose centre is above y', () => {
     const grid = createGrid(layoutGrid(400, 300), alwaysPaint);
-    const second = cellCenter(grid.layout, 1);
-    const wiped = eraseLeftOf(grid, second.x - 1);
-    expect(wiped).toBe(grid.layout.rows);
+    const secondRow = cellCenter(grid.layout, grid.layout.cols);
+    const wiped = eraseLeftOf(grid, secondRow.y - 1);
+    expect(wiped).toBe(grid.layout.cols);
     expect(grid.cells[0].color).toBe(BACKGROUND_COLOR);
-    expect(grid.cells[1].color).not.toBe(BACKGROUND_COLOR);
+    expect(grid.cells[grid.layout.cols].color).not.toBe(BACKGROUND_COLOR);
     expect(eraseLeftOf(grid, Number.NaN)).toBe(0);
   });
 });
@@ -241,22 +249,23 @@ describe('colours', () => {
   it('maps paint indices to the palette and the blank index to the current background', () => {
     expect(colorHex(0, 0)).toBe(PAINT_COLORS[0]);
     expect(colorHex(0, 0)).toBe('#F1B238');
-    expect(colorHex(8, 0)).toBe(PAINT_COLORS[8]);
-    expect(colorHex(8, 0)).toBe('#EBEBEB');
+    expect(colorHex(2, 0)).toBe('#58875D');
+    expect(colorHex(7, 0)).toBe(PAINT_COLORS[7]);
+    expect(colorHex(7, 0)).toBe('#29B6F6');
     expect(colorHex(BACKGROUND_COLOR, 1)).toBe(BACKGROUNDS[1]);
   });
 
-  it('supports the classic original palette on global indices 9-13', () => {
-    expect(colorHex(9, 0)).toBe(PALETTES.classic.paints[0]);
-    expect(colorHex(9, 0)).toBe('#484B78');
-    expect(colorHex(10, 0)).toBe('#E4AA2D');
-    expect(colorHex(11, 0)).toBe('#C62F40');
-    expect(colorHex(12, 0)).toBe('#58875D');
-    expect(colorHex(13, 0)).toBe('#D0692E');
+  it('supports the classic original palette on global indices 8-12', () => {
+    expect(colorHex(8, 0)).toBe(PALETTES.classic.paints[0]);
+    expect(colorHex(8, 0)).toBe('#484B78');
+    expect(colorHex(9, 0)).toBe('#E4AA2D');
+    expect(colorHex(10, 0)).toBe('#C62F40');
+    expect(colorHex(11, 0)).toBe('#58875D');
+    expect(colorHex(12, 0)).toBe('#D0692E');
     // Cells preserve their original colors regardless of the active palette parameter
     expect(colorHex(0, 0, 'classic')).toBe('#F1B238');
-    expect(colorHex(9, 0, 'modern')).toBe('#484B78');
-    expect(colorHex(14, 0, 'default')).toBe('#c48208');
+    expect(colorHex(8, 0, 'modern')).toBe('#484B78');
+    expect(colorHex(13, 0, 'default')).toBe('#c48208');
     expect(colorHex(BACKGROUND_COLOR, 0, 'classic')).toBe('#282828');
     expect(colorHex(BACKGROUND_COLOR, 1, 'classic')).toBe('#1E1E1E');
     expect(colorHex(BACKGROUND_COLOR, 2, 'classic')).toBe('#18111D');
@@ -272,7 +281,7 @@ describe('colours', () => {
     expect(getPalette('modern').label).toBe('Modern');
   });
 
-  it.each([-1, 20, Number.NaN])('draws an invalid colour index %s as the background', (color) => {
+  it.each([-1, 19, Number.NaN])('draws an invalid colour index %s as the background', (color) => {
     expect(colorHex(color, 0)).toBe(BACKGROUNDS[0]);
   });
 

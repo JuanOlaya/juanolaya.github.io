@@ -3,9 +3,8 @@ import './style.css';
 
 function hosts(): ShapyHosts | null {
   const stage = document.querySelector<HTMLElement>('.shapy__stage');
-  const panel = document.querySelector<HTMLElement>('.shapy__panel');
   const tools = document.querySelector<HTMLElement>('.shapy__tools');
-  return stage && panel && tools ? { stage, panel, tools } : null;
+  return stage && tools ? { stage, tools } : null;
 }
 
 const found = hosts();

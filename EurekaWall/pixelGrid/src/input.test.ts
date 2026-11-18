@@ -84,37 +84,37 @@ describe('eraser strip', () => {
   const inStrip = ERASER_STRIP_PX - 1;
 
   it('starts erasing from a press inside the strip and keeps erasing outside it', () => {
-    const { state, intents } = run([down(1, inStrip, 50), move(1, 300, 60)]);
+    const { state, intents } = run([down(1, 50, inStrip), move(1, 60, 300)]);
     expect(intents).toEqual([
-      { kind: 'erase', x: inStrip },
-      { kind: 'erase', x: 300 },
+      { kind: 'erase', y: inStrip },
+      { kind: 'erase', y: 300 },
     ]);
     expect(state.erasing).toBe(true);
   });
 
   it('starts erasing when a drag enters the strip', () => {
-    const { intents } = run([down(1, 200, 50), move(1, inStrip, 50), move(1, 400, 50)]);
-    expect(intents[0]).toEqual({ kind: 'paint', x: 200, y: 50 });
-    expect(intents[1]).toEqual({ kind: 'erase', x: inStrip });
-    expect(intents[2]).toEqual({ kind: 'erase', x: 400 });
+    const { intents } = run([down(1, 50, 200), move(1, 50, inStrip), move(1, 50, 400)]);
+    expect(intents[0]).toEqual({ kind: 'paint', x: 50, y: 200 });
+    expect(intents[1]).toEqual({ kind: 'erase', y: inStrip });
+    expect(intents[2]).toEqual({ kind: 'erase', y: 400 });
   });
 
   it('stops erasing on release', () => {
-    const { state, intents } = run([down(1, inStrip, 50), up(1), down(1, 200, 50)]);
+    const { state, intents } = run([down(1, 50, inStrip), up(1), down(1, 50, 200)]);
     expect(intents[1]).toEqual({ kind: 'release' });
-    expect(intents[2]).toEqual({ kind: 'paint', x: 200, y: 50 });
+    expect(intents[2]).toEqual({ kind: 'paint', x: 50, y: 200 });
     expect(state.erasing).toBe(false);
   });
 
   it('never pinches while erasing', () => {
-    const { intents } = run([down(1, inStrip, 50), down(2, 100, 100), move(2, 101, 101)]);
+    const { intents } = run([down(1, 50, inStrip), down(2, 100, 100), move(2, 101, 101)]);
     expect(intents[1]).toBeNull();
     expect(intents[2]).toBeNull();
   });
 
-  it('respects a custom strip width', () => {
-    const { intent } = reducePointer(createPointerState(), down(1, 40, 10), 60);
-    expect(intent).toEqual({ kind: 'erase', x: 40 });
+  it('respects a custom strip height', () => {
+    const { intent } = reducePointer(createPointerState(), down(1, 10, 40), 60);
+    expect(intent).toEqual({ kind: 'erase', y: 40 });
   });
 });
 

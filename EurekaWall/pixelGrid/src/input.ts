@@ -1,6 +1,6 @@
 import type { Point } from './grid.ts';
 
-/** Width of the eraser handle along the left edge of the canvas, in CSS px. */
+/** Height of the eraser handle along the top edge of the canvas, in CSS px. */
 export const ERASER_STRIP_PX = 28;
 
 export interface PointerAction {
@@ -19,7 +19,7 @@ export interface PointerState {
 export type PointerIntent =
   | { kind: 'paint'; x: number; y: number }
   | { kind: 'pinch'; a: Point; b: Point }
-  | { kind: 'erase'; x: number }
+  | { kind: 'erase'; y: number }
   | { kind: 'release' };
 
 export interface PointerResult {
@@ -45,7 +45,7 @@ function withPointer(state: PointerState, action: PointerAction): ReadonlyMap<nu
 function intentFor(pointers: ReadonlyMap<number, Point>, erasing: boolean, moved: Point): PointerResult {
   const state = { pointers, erasing };
   if (pointers.size === 1) {
-    return { state, intent: erasing ? { kind: 'erase', x: moved.x } : { kind: 'paint', x: moved.x, y: moved.y } };
+    return { state, intent: erasing ? { kind: 'erase', y: moved.y } : { kind: 'paint', x: moved.x, y: moved.y } };
   }
   if (pointers.size === 2 && !erasing) {
     const [a, b] = pointers.values();
@@ -54,9 +54,9 @@ function intentFor(pointers: ReadonlyMap<number, Point>, erasing: boolean, moved
   return unchanged(state);
 }
 
-function press(state: PointerState, action: PointerAction, stripWidth: number): PointerResult {
+function press(state: PointerState, action: PointerAction, stripHeight: number): PointerResult {
   const pointers = withPointer(state, action);
-  const erasing = state.erasing || (pointers.size === 1 && action.x < stripWidth);
+  const erasing = state.erasing || (pointers.size === 1 && action.y < stripHeight);
   return intentFor(pointers, erasing, action);
 }
 
@@ -74,11 +74,11 @@ function lift(state: PointerState, action: PointerAction): PointerResult {
 export function reducePointer(
   state: PointerState,
   action: PointerAction,
-  stripWidth = ERASER_STRIP_PX,
+  stripHeight = ERASER_STRIP_PX,
 ): PointerResult {
   if (!Number.isFinite(action.x) || !Number.isFinite(action.y)) return unchanged(state);
-  if (action.type === 'down') return press(state, action, stripWidth);
+  if (action.type === 'down') return press(state, action, stripHeight);
   if (!state.pointers.has(action.id)) return unchanged(state);
   if (action.type !== 'move') return lift(state, action);
-  return press(state, action, stripWidth);
+  return press(state, action, stripHeight);
 }

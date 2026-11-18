@@ -48,10 +48,10 @@ function countAlong(length: number): number {
   return Math.max(0, Math.floor((length - 2 * MARGIN_PX + GAP_PX) / (CELL_PX + GAP_PX)));
 }
 
-/** As many 48 px cells as fit, centred; `leftInset` reserves the eraser strip along the left edge. */
-export function layoutGrid(width: number, height: number, leftInset = 0): GridLayout {
-  const cols = countAlong(width - leftInset);
-  const rows = countAlong(height);
+/** As many 48 px cells as fit, centred; `topInset` reserves the eraser strip along the top edge. */
+export function layoutGrid(width: number, height: number, topInset = 0): GridLayout {
+  const cols = countAlong(width);
+  const rows = countAlong(height - topInset);
   if (cols === 0 || rows === 0) return EMPTY_LAYOUT;
   const pitch = CELL_PX + GAP_PX;
   const usedWidth = cols * pitch - GAP_PX;
@@ -61,8 +61,8 @@ export function layoutGrid(width: number, height: number, leftInset = 0): GridLa
     rows,
     cellSize: CELL_PX,
     gap: GAP_PX,
-    originX: leftInset + (width - leftInset - usedWidth) / 2 + CELL_PX / 2,
-    originY: (height - usedHeight) / 2 + CELL_PX / 2,
+    originX: (width - usedWidth) / 2 + CELL_PX / 2,
+    originY: topInset + (height - topInset - usedHeight) / 2 + CELL_PX / 2,
   };
 }
 
@@ -101,13 +101,14 @@ function nearestIndex(layout: GridLayout, x: number, y: number): number {
   return row * layout.cols + col;
 }
 
-/** Index of the cell whose disc (plus half a gap) contains the point, or -1. */
+/** Index of the cell whose square bounding box (plus half a gap) contains the point, or -1. */
 export function cellIndexAt(layout: GridLayout, x: number, y: number): number {
   if (!Number.isFinite(x) || !Number.isFinite(y) || layout.cols === 0) return -1;
   const index = nearestIndex(layout, x, y);
   if (index < 0) return -1;
   const centre = cellCenter(layout, index);
-  return Math.hypot(x - centre.x, y - centre.y) <= layout.cellSize / 2 + layout.gap / 2 ? index : -1;
+  const halfBound = layout.cellSize / 2 + layout.gap / 2;
+  return Math.abs(x - centre.x) <= halfBound && Math.abs(y - centre.y) <= halfBound ? index : -1;
 }
 
 function isShape(shape: number): boolean {
@@ -138,15 +139,18 @@ export function clearCell(grid: Grid, index: number): boolean {
   return paintCell(grid, index, 1, BACKGROUND_COLOR);
 }
 
-/** The eraser handle is dragged from the left edge and wipes everything it has passed. */
-export function eraseLeftOf(grid: Grid, x: number): number {
-  if (!Number.isFinite(x)) return 0;
+/** The eraser handle is dragged from the top edge and wipes everything it has passed. */
+export function eraseAbove(grid: Grid, y: number): number {
+  if (!Number.isFinite(y)) return 0;
   let wiped = 0;
   for (let index = 0; index < grid.cells.length; index += 1) {
-    if (cellCenter(grid.layout, index).x < x && clearCell(grid, index)) wiped += 1;
+    if (cellCenter(grid.layout, index).y < y && clearCell(grid, index)) wiped += 1;
   }
   return wiped;
 }
+
+/** Backward compatibility alias for eraseAbove. */
+export const eraseLeftOf = eraseAbove;
 
 export function clearGrid(grid: Grid): void {
   for (let index = 0; index < grid.cells.length; index += 1) clearCell(grid, index);
@@ -161,7 +165,8 @@ export function strokePaint(grid: Grid, stroke: Stroke, x: number, y: number, sh
 
 function isInsideCell(layout: GridLayout, index: number, point: Point): boolean {
   const centre = cellCenter(layout, index);
-  return Math.hypot(point.x - centre.x, point.y - centre.y) <= layout.cellSize / 2;
+  const halfBound = layout.cellSize / 2 + layout.gap / 2;
+  return Math.abs(point.x - centre.x) <= halfBound && Math.abs(point.y - centre.y) <= halfBound;
 }
 
 /** Two fingers pinched on the same cell step its shape; the pinch must leave the cell before it counts again. */

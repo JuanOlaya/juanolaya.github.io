@@ -75,29 +75,29 @@ export function drawGrid(
   });
 }
 
-/** The eraser handle: a strip on the left edge with three grip ticks; while dragged, a bar follows the pointer. */
+/** The eraser handle: a strip along the top edge with three grip ticks; while dragged downward, a horizontal bar follows the pointer. */
 export function drawEraser(
   p: p5,
-  stripWidth: number,
-  dragX: number | null,
-  paletteId: PaletteId = 'modern',
+  stripHeight: number,
+  dragY: number | null,
+  paletteId: PaletteId = 'default',
 ): void {
   const pal = getPalette(paletteId);
   p.noStroke();
   p.fill(pal.eraserSurface);
-  p.rect(0, 0, stripWidth, p.height);
+  p.rect(0, 0, p.width, stripHeight);
   p.stroke(pal.eraserAccent);
   p.strokeWeight(3);
-  const x = stripWidth / 2;
+  const y = stripHeight / 2;
   for (const fraction of [0.25, 0.5, 0.75]) {
-    const y = p.height * fraction;
-    p.line(x, y - TICK_HALF, x, y + TICK_HALF);
+    const x = p.width * fraction;
+    p.line(x - TICK_HALF, y, x + TICK_HALF, y);
   }
-  if (dragX === null) return;
+  if (dragY === null) return;
   p.strokeWeight(6);
-  p.line(dragX, 0, dragX, p.height);
+  p.line(0, dragY, p.width, dragY);
 }
 
-export function clearCanvas(p: p5, background: number, paletteId: PaletteId = 'modern'): void {
+export function clearCanvas(p: p5, background: number, paletteId: PaletteId = 'default'): void {
   p.background(backgroundHex(background, paletteId));
 }

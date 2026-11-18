@@ -39,75 +39,14 @@ body {
   outline-offset: 2px;
 }
 
-/* Header, canvas and toolbar share the viewport height; nothing is laid over the canvas. */
+/* Canvas and toolbar share the viewport height; nothing is laid over the canvas. */
 .shapy {
   display: grid;
   grid-template:
-    'bar' auto
     'stage' minmax(0, 1fr)
     'tools' auto
     / minmax(0, 1fr);
   height: 100dvh;
-}
-
-.shapy__bar {
-  grid-area: bar;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  min-height: 56px;
-  padding: 8px var(--page-pad);
-  border-bottom: 1px solid var(--border);
-  background: rgb(40 40 40 / 0.82);
-  backdrop-filter: blur(6px);
-}
-
-.shapy__home {
-  display: inline-flex;
-  flex: none;
-  align-items: center;
-  min-height: var(--tool-size);
-  min-width: var(--tool-size);
-  padding: 0 16px;
-  border: 1px solid var(--white-16);
-  border-radius: var(--radius-button);
-  background: var(--white-6);
-  color: var(--ink);
-  font-weight: 500;
-  text-decoration: none;
-  white-space: nowrap;
-  transition:
-    background-color 0.2s,
-    border-color 0.2s;
-}
-
-.shapy__home:hover {
-  background: var(--white-12);
-  text-decoration: underline;
-}
-
-.shapy__panel {
-  flex: 1;
-  min-width: 0;
-}
-
-/* The shared panel sits in the header instead of floating over the sketch. */
-.shapy__panel .sketch-ui {
-  position: static;
-  max-width: none;
-  padding: 0;
-  border: 0;
-  background: none;
-  backdrop-filter: none;
-  font-family: inherit;
-}
-
-.shapy__panel .sketch-ui__title {
-  font-weight: 500;
-}
-
-.shapy__panel .sketch-ui__caption {
-  color: var(--ink-2);
 }
 
 .shapy__stage {

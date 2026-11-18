@@ -6,7 +6,7 @@ import {
   POP_MS,
   clearGrid,
   createGrid,
-  eraseLeftOf,
+  eraseAbove,
   layoutGrid,
   nextBackground,
   popScale,
@@ -43,8 +43,8 @@ interface ShapyState {
   pointer: ReturnType<typeof createPointerState>;
   paint: Stroke;
   pinch: Stroke;
-  /** X of the eraser bar while it is being dragged. */
-  eraserX: number | null;
+  /** Y of the eraser bar while it is being dragged downward from top. */
+  eraserY: number | null;
   /** When each cell was last changed, for the pop feedback. */
   pops: Map<number, number>;
   reduced: boolean;
@@ -63,7 +63,7 @@ function createState(reduced: boolean): ShapyState {
     pointer: createPointerState(),
     paint: { lastCell: -1 },
     pinch: { lastCell: -1 },
-    eraserX: null,
+    eraserY: null,
     pops: new Map(),
     reduced,
     invalidate: () => {},
@@ -81,12 +81,12 @@ function apply(state: ShapyState, intent: PointerIntent): void {
   } else if (intent.kind === 'pinch') {
     if (strokeCycle(grid, state.pinch, intent.a, intent.b)) pop(state, state.pinch.lastCell);
   } else if (intent.kind === 'erase') {
-    eraseLeftOf(grid, intent.x);
-    state.eraserX = intent.x;
+    eraseAbove(grid, intent.y);
+    state.eraserY = intent.y;
   } else {
     state.paint.lastCell = -1;
     state.pinch.lastCell = -1;
-    state.eraserX = null;
+    state.eraserY = null;
   }
   state.invalidate();
 }
@@ -149,7 +149,7 @@ function createSketch(state: ShapyState, stage: HTMLElement, cleanups: (() => vo
     };
     p.draw = () => {
       clearCanvas(p, state.background, state.paletteId);
-      drawEraser(p, ERASER_STRIP_PX, state.eraserX, state.paletteId);
+      drawEraser(p, ERASER_STRIP_PX, state.eraserY, state.paletteId);
       drawGrid(p, state.grid, state.background, scaleOf(state, performance.now()), state.paletteId);
     };
   };
@@ -168,8 +168,8 @@ function watchReducedMotion(state: ShapyState, onChange: (reduced: boolean) => v
 
 export interface ShapyHosts {
   stage: HTMLElement;
-  panel: HTMLElement;
   tools: HTMLElement;
+  panel?: HTMLElement;
 }
 
 /** A grid of shapes to paint, pinch and wipe: the ShapyPresence tool of EurekaWall. */
@@ -219,6 +219,9 @@ export function mountShapyPresence(hosts: ShapyHosts): Unmount {
       cycleBackground();
     } else if (event.key.toLowerCase() === 'p') {
       setPalette(nextPalette(state.paletteId));
+    } else if (event.key.toLowerCase() === 'c') {
+      clearGrid(state.grid);
+      state.invalidate();
     } else if (event.key.toLowerCase() === 'f') {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(() => {});
@@ -233,23 +236,29 @@ export function mountShapyPresence(hosts: ShapyHosts): Unmount {
     () => window.removeEventListener('keydown', onKey),
     watchReducedMotion(state, (reduced) => (reduced ? instance?.noLoop() : instance?.loop())),
     toolbar,
-    mountSketchUi(hosts.panel, {
-      title: 'ShapyPresence',
-      caption:
-        'A shared board for remote presence. Tap a cell to paint it, pinch a cell with two fingers to change its shape, drag the handle on the left to wipe.',
-      initialCollapsed: true,
-      controls: [
-        {
-          label: 'Clear',
-          key: 'c',
-          action: () => {
-            clearGrid(state.grid);
-            state.invalidate();
-          },
-        },
-      ],
-    }),
   );
+
+  if (hosts.panel) {
+    cleanups.push(
+      mountSketchUi(hosts.panel, {
+        title: 'ShapyPresence',
+        caption:
+          'A shared board for remote presence. Tap a cell to paint it, pinch a cell with two fingers to change its shape, drag the handle on top to wipe.',
+        initialCollapsed: true,
+        controls: [
+          {
+            label: 'Clear',
+            key: 'c',
+            action: () => {
+              clearGrid(state.grid);
+              state.invalidate();
+            },
+          },
+        ],
+      }),
+    );
+  }
+
   return () => {
     for (const cleanup of cleanups.splice(0)) cleanup();
     unmountSketch();

@@ -30,7 +30,7 @@ describe('PALETTES', () => {
 
   it.each(PALETTE_IDS)('defines a complete palette for %s', (id) => {
     const pal = PALETTES[id];
-    const expectedCount = id === 'default' ? 9 : 5;
+    const expectedCount = id === 'default' ? 8 : 5;
     expect(pal.id).toBe(id);
     expect(typeof pal.label).toBe('string');
     expect(pal.paints).toHaveLength(expectedCount);
@@ -47,18 +47,17 @@ describe('PALETTES', () => {
     expect(pal.eraserAccent).toMatch(hexRegex);
   });
 
-  it('provides the new default 9-color palette', () => {
+  it('provides the new default 8-color palette', () => {
     const def = PALETTES.default;
     expect(def.paints).toEqual([
       '#F1B238',
       '#D83647',
-      '#4EAF67',
+      '#58875D',
       '#DF6D38',
       '#4C5680',
       '#DC417F',
       '#AB47BC',
       '#29B6F6',
-      '#EBEBEB',
     ]);
     expect(def.paintNames).toEqual([
       'Mustard Gold',
@@ -69,7 +68,6 @@ describe('PALETTES', () => {
       'Flamingo Pink',
       'Orchid Purple',
       'Sky Blue',
-      'Platinum',
     ]);
     expect(def.backgrounds).toEqual(['#282828', '#1E1E1E', '#18111D', '#F5F2EB']);
   });
