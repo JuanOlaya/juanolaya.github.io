@@ -141,9 +141,47 @@ function fullscreenIcon(exit = false): SVGElement {
   return svg;
 }
 
+function backgroundIcon(): SVGElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('width', '20');
+  svg.setAttribute('height', '20');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2');
+  svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round');
+  svg.setAttribute('aria-hidden', 'true');
+
+  const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  rect.setAttribute('x', '3');
+  rect.setAttribute('y', '3');
+  rect.setAttribute('width', '18');
+  rect.setAttribute('height', '18');
+  rect.setAttribute('rx', '2');
+  svg.append(rect);
+
+  const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path1.setAttribute('d', 'm3 16 5-5c.9-.9 2.1-.9 3 0l7 7');
+  svg.append(path1);
+
+  const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path2.setAttribute('d', 'm14 14 1-1c.9-.9 2.1-.9 3 0l2 2');
+  svg.append(path2);
+
+  const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  circle.setAttribute('cx', '8.5');
+  circle.setAttribute('cy', '8.5');
+  circle.setAttribute('r', '1.5');
+  circle.setAttribute('fill', 'currentColor');
+  svg.append(circle);
+
+  return svg;
+}
+
 /** Colour swatches with palette toggle button and shape icons */
 export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOptions): ToolbarHandle {
-  let activePaletteId: PaletteId = options?.paletteId ?? 'classic';
+  let activePaletteId: PaletteId = options?.paletteId ?? 'default';
   const colorButtons = new Map<number, HTMLButtonElement>();
   const shapeButtons = new Map<number, HTMLButtonElement>();
 
@@ -162,21 +200,13 @@ export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOpt
     }
   };
 
-  // 5 main color swatch buttons
-  const mainSwatchButtons: HTMLButtonElement[] = [];
-  for (let slot = 0; slot < 5; slot += 1) {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'tool';
-    btn.append(swatch(null));
-    mainSwatchButtons.push(btn);
-  }
-
   const blank = toolButton('Blank (background colour)', tool.color === BACKGROUND_COLOR, () => {
     tool.color = BACKGROUND_COLOR;
     sync();
   });
   blank.append(swatch(null));
+
+  const currentSwatchButtons: HTMLButtonElement[] = [];
 
   const setMainPalette = (id: PaletteId) => {
     activePaletteId = id;
@@ -185,26 +215,32 @@ export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOpt
     paletteButton.setAttribute('aria-label', `Cambiar paleta (actual: ${pal.label}, siguiente: ${otherPal.label})`);
     paletteButton.title = `Cambiar a paleta ${otherPal.label} (actual: ${pal.label})`;
 
+    for (const btn of currentSwatchButtons) {
+      btn.remove();
+    }
+    currentSwatchButtons.length = 0;
     colorButtons.clear();
 
     pal.indices.forEach((globalIndex, slot) => {
-      const btn = mainSwatchButtons[slot];
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'tool';
       const hex = pal.paints[slot];
       const name = pal.paintNames[slot];
 
       btn.setAttribute('aria-label', `${name} paint`);
-      const span = btn.querySelector('.tool__swatch') as HTMLSpanElement | null;
-      if (span) {
-        span.className = 'tool__swatch';
-        span.style.backgroundColor = hex;
-      }
+      btn.title = name;
+      btn.append(swatch(hex));
+
       btn.onclick = () => {
         tool.color = globalIndex;
         sync();
       };
+      currentSwatchButtons.push(btn);
       colorButtons.set(globalIndex, btn);
     });
 
+    blank.before(...currentSwatchButtons);
     colorButtons.set(BACKGROUND_COLOR, blank);
     sync();
   };
@@ -216,7 +252,7 @@ export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOpt
     setMainPalette(nextId);
     if (tool.color !== BACKGROUND_COLOR) {
       const newPal = getPalette(nextId);
-      tool.color = currentSlot >= 0 ? newPal.indices[currentSlot] : newPal.indices[0];
+      tool.color = currentSlot >= 0 && currentSlot < newPal.indices.length ? newPal.indices[currentSlot] : newPal.indices[0];
     }
     sync();
     options?.onPaletteChange?.(nextId);
@@ -231,17 +267,19 @@ export function mountToolbar(host: HTMLElement, tool: Tool, options?: ToolbarOpt
     shapeButtons.set(shape, button);
   }
 
-  const colorGroup = group('Colour', [paletteButton, ...mainSwatchButtons, blank]);
+  const colorGroup = group('Colour', [paletteButton, blank]);
+  colorGroup.classList.add('tools__group--colors');
 
   const shapeGroup = group('Shape', [...shapeButtons.values()]);
+  shapeGroup.classList.add('tools__group--shapes');
 
   // Actions group on the right: Background and Fullscreen buttons
   const bgButton = document.createElement('button');
   bgButton.type = 'button';
-  bgButton.className = 'tool tool--text tool--background';
+  bgButton.className = 'tool tool--background';
   bgButton.setAttribute('aria-label', 'Background colour (B)');
   bgButton.title = 'Background colour (B)';
-  bgButton.textContent = 'Background';
+  bgButton.append(backgroundIcon());
   bgButton.addEventListener('click', () => {
     options?.onBackgroundCycle?.();
   });

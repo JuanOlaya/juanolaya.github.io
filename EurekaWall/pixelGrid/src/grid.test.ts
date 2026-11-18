@@ -118,7 +118,7 @@ describe('paintCell', () => {
     expect(grid.cells).toEqual(before);
   });
 
-  it.each([-1, 11, 2.5, Number.NaN])('rejects the invalid colour %s without changing the cell', (color) => {
+  it.each([-1, BACKGROUND_COLOR + 1, 2.5, Number.NaN])('rejects the invalid colour %s without changing the cell', (color) => {
     const grid = blankGrid();
     expect(paintCell(grid, 0, 2, color)).toBe(false);
     expect(grid.cells[0]).toEqual({ shape: 1, color: BACKGROUND_COLOR });
@@ -240,34 +240,39 @@ describe('resizeGrid', () => {
 describe('colours', () => {
   it('maps paint indices to the palette and the blank index to the current background', () => {
     expect(colorHex(0, 0)).toBe(PAINT_COLORS[0]);
-    expect(colorHex(4, 0)).toBe(PAINT_COLORS[4]);
+    expect(colorHex(0, 0)).toBe('#F1B238');
+    expect(colorHex(8, 0)).toBe(PAINT_COLORS[8]);
+    expect(colorHex(8, 0)).toBe('#EBEBEB');
     expect(colorHex(BACKGROUND_COLOR, 1)).toBe(BACKGROUNDS[1]);
   });
 
-  it('supports the classic original palette with purple, yellow, pink, green and orange on global indices 5-9', () => {
-    expect(colorHex(5, 0)).toBe(PALETTES.classic.paints[0]);
-    expect(colorHex(5, 0)).toBe('#484B78');
-    expect(colorHex(6, 0)).toBe('#E4AA2D');
-    expect(colorHex(7, 0)).toBe('#C62F40');
-    expect(colorHex(8, 0)).toBe('#58875D');
-    expect(colorHex(9, 0)).toBe('#D0692E');
+  it('supports the classic original palette on global indices 9-13', () => {
+    expect(colorHex(9, 0)).toBe(PALETTES.classic.paints[0]);
+    expect(colorHex(9, 0)).toBe('#484B78');
+    expect(colorHex(10, 0)).toBe('#E4AA2D');
+    expect(colorHex(11, 0)).toBe('#C62F40');
+    expect(colorHex(12, 0)).toBe('#58875D');
+    expect(colorHex(13, 0)).toBe('#D0692E');
     // Cells preserve their original colors regardless of the active palette parameter
-    expect(colorHex(0, 0, 'classic')).toBe('#c48208');
-    expect(colorHex(5, 0, 'modern')).toBe('#484B78');
+    expect(colorHex(0, 0, 'classic')).toBe('#F1B238');
+    expect(colorHex(9, 0, 'modern')).toBe('#484B78');
+    expect(colorHex(14, 0, 'default')).toBe('#c48208');
     expect(colorHex(BACKGROUND_COLOR, 0, 'classic')).toBe('#282828');
     expect(colorHex(BACKGROUND_COLOR, 1, 'classic')).toBe('#1E1E1E');
     expect(colorHex(BACKGROUND_COLOR, 2, 'classic')).toBe('#18111D');
     expect(colorHex(BACKGROUND_COLOR, 3, 'classic')).toBe('#F5F2EB');
   });
 
-  it('toggles between modern and classic palettes', () => {
-    expect(nextPalette('modern')).toBe('classic');
+  it('cycles between default, classic and modern palettes', () => {
+    expect(nextPalette('default')).toBe('classic');
     expect(nextPalette('classic')).toBe('modern');
-    expect(getPalette('modern').label).toBe('Modern');
+    expect(nextPalette('modern')).toBe('default');
+    expect(getPalette('default').label).toBe('Default');
     expect(getPalette('classic').label).toBe('Classic');
+    expect(getPalette('modern').label).toBe('Modern');
   });
 
-  it.each([-1, 11, Number.NaN])('draws an invalid colour index %s as the background', (color) => {
+  it.each([-1, 20, Number.NaN])('draws an invalid colour index %s as the background', (color) => {
     expect(colorHex(color, 0)).toBe(BACKGROUNDS[0]);
   });
 

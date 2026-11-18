@@ -1,15 +1,16 @@
 /**
  * Color palettes for ShapyPresence.
  * Colors are assigned persistent global indices:
- * - 0 to 4: Modern paints (Orange, Blue, Green, Red, Cream)
- * - 5 to 9: Classic paints (Purple, Yellow, Pink, Green, Orange)
- * - 10: BACKGROUND_COLOR (drawn using current background color)
+ * - 0 to 8: Default paints (Mustard Gold, Crimson Red, Forest Green, Terracotta Orange, Slate Indigo, Flamingo Pink, Orchid Purple, Sky Blue, Platinum)
+ * - 9 to 13: Classic paints (Purple, Yellow, Pink, Green, Orange)
+ * - 14 to 18: Modern paints (Orange, Blue, Green, Red, Cream)
+ * - 19: BACKGROUND_COLOR (drawn using current background color)
  *
  * This guarantees that cells created in one palette KEEP their original color
- * even when the user switches to the other palette.
+ * even when the user switches to another palette.
  */
 
-export type PaletteId = 'modern' | 'classic';
+export type PaletteId = 'default' | 'classic' | 'modern';
 
 export interface PaletteDef {
   id: PaletteId;
@@ -29,21 +30,41 @@ export const BACKGROUNDS: readonly string[] = [
   '#F5F2EB',
 ] as const;
 
-export const MODERN_PALETTE: PaletteDef = {
-  id: 'modern',
-  label: 'Modern',
-  indices: [0, 1, 2, 3, 4] as const,
-  paints: ['#c48208', '#198bc6', '#7bd389', '#ff7b72', '#f8ecde'] as const,
-  paintNames: ['Orange', 'Blue', 'Green', 'Red', 'Cream'] as const,
+export const DEFAULT_PALETTE: PaletteDef = {
+  id: 'default',
+  label: 'Default',
+  indices: [0, 1, 2, 3, 4, 5, 6, 7, 8] as const,
+  paints: [
+    '#F1B238',
+    '#D83647',
+    '#4EAF67',
+    '#DF6D38',
+    '#4C5680',
+    '#DC417F',
+    '#AB47BC',
+    '#29B6F6',
+    '#EBEBEB',
+  ] as const,
+  paintNames: [
+    'Mustard Gold',
+    'Crimson Red',
+    'Forest Green',
+    'Terracotta Orange',
+    'Slate Indigo',
+    'Flamingo Pink',
+    'Orchid Purple',
+    'Sky Blue',
+    'Platinum',
+  ] as const,
   backgrounds: BACKGROUNDS,
   eraserSurface: '#33333d',
-  eraserAccent: '#c48208',
+  eraserAccent: '#F1B238',
 };
 
 export const CLASSIC_PALETTE: PaletteDef = {
   id: 'classic',
   label: 'Classic',
-  indices: [5, 6, 7, 8, 9] as const,
+  indices: [9, 10, 11, 12, 13] as const,
   paints: ['#484B78', '#E4AA2D', '#C62F40', '#58875D', '#D0692E'] as const,
   paintNames: ['Purple', 'Yellow', 'Pink', 'Green', 'Orange'] as const,
   backgrounds: BACKGROUNDS,
@@ -51,30 +72,46 @@ export const CLASSIC_PALETTE: PaletteDef = {
   eraserAccent: '#de5a04',
 };
 
-export const PALETTES: Record<PaletteId, PaletteDef> = {
-  modern: MODERN_PALETTE,
-  classic: CLASSIC_PALETTE,
+export const MODERN_PALETTE: PaletteDef = {
+  id: 'modern',
+  label: 'Modern',
+  indices: [14, 15, 16, 17, 18] as const,
+  paints: ['#c48208', '#198bc6', '#7bd389', '#ff7b72', '#f8ecde'] as const,
+  paintNames: ['Orange', 'Blue', 'Green', 'Red', 'Cream'] as const,
+  backgrounds: BACKGROUNDS,
+  eraserSurface: '#33333d',
+  eraserAccent: '#c48208',
 };
 
-export const PALETTE_IDS: readonly PaletteId[] = ['modern', 'classic'] as const;
+export const PALETTES: Record<PaletteId, PaletteDef> = {
+  default: DEFAULT_PALETTE,
+  classic: CLASSIC_PALETTE,
+  modern: MODERN_PALETTE,
+};
 
-/** All 10 persistent paints in global color order: 0-4 modern, 5-9 classic. */
+export const PALETTE_IDS: readonly PaletteId[] = ['default', 'classic', 'modern'] as const;
+
+/** All 19 persistent paints in global color order: 0-8 default, 9-13 classic, 14-18 modern. */
 export const ALL_PAINTS: readonly string[] = [
-  ...MODERN_PALETTE.paints,
+  ...DEFAULT_PALETTE.paints,
   ...CLASSIC_PALETTE.paints,
+  ...MODERN_PALETTE.paints,
 ];
 
 export const ALL_PAINT_NAMES: readonly string[] = [
-  ...MODERN_PALETTE.paintNames,
+  ...DEFAULT_PALETTE.paintNames,
   ...CLASSIC_PALETTE.paintNames,
+  ...MODERN_PALETTE.paintNames,
 ];
 
 export function getPalette(id: PaletteId): PaletteDef {
-  return PALETTES[id] ?? PALETTES.modern;
+  return PALETTES[id] ?? PALETTES.default;
 }
 
 export function nextPalette(id: PaletteId): PaletteId {
-  return id === 'modern' ? 'classic' : 'modern';
+  const currentIndex = PALETTE_IDS.indexOf(id);
+  if (currentIndex === -1) return 'default';
+  return PALETTE_IDS[(currentIndex + 1) % PALETTE_IDS.length];
 }
 
 /** Home-page palette tokens. */

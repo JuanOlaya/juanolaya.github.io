@@ -24,19 +24,20 @@ describe('SHAPE_TOOLS', () => {
 });
 
 describe('PALETTES', () => {
-  it('exposes modern and classic palette options', () => {
-    expect(PALETTE_IDS).toEqual(['modern', 'classic']);
+  it('exposes default, classic and modern palette options', () => {
+    expect(PALETTE_IDS).toEqual(['default', 'classic', 'modern']);
   });
 
   it.each(PALETTE_IDS)('defines a complete palette for %s', (id) => {
     const pal = PALETTES[id];
+    const expectedCount = id === 'default' ? 9 : 5;
     expect(pal.id).toBe(id);
     expect(typeof pal.label).toBe('string');
-    expect(pal.paints).toHaveLength(5);
-    expect(pal.paintNames).toHaveLength(5);
+    expect(pal.paints).toHaveLength(expectedCount);
+    expect(pal.paintNames).toHaveLength(expectedCount);
     expect(pal.backgrounds).toHaveLength(4);
-    expect(new Set(pal.paints).size).toBe(5);
-    expect(new Set(pal.paintNames).size).toBe(5);
+    expect(new Set(pal.paints).size).toBe(expectedCount);
+    expect(new Set(pal.paintNames).size).toBe(expectedCount);
     expect(new Set(pal.backgrounds).size).toBe(4);
 
     const hexRegex = /^#[0-9a-fA-F]{6}$/;
@@ -46,6 +47,33 @@ describe('PALETTES', () => {
     expect(pal.eraserAccent).toMatch(hexRegex);
   });
 
+  it('provides the new default 9-color palette', () => {
+    const def = PALETTES.default;
+    expect(def.paints).toEqual([
+      '#F1B238',
+      '#D83647',
+      '#4EAF67',
+      '#DF6D38',
+      '#4C5680',
+      '#DC417F',
+      '#AB47BC',
+      '#29B6F6',
+      '#EBEBEB',
+    ]);
+    expect(def.paintNames).toEqual([
+      'Mustard Gold',
+      'Crimson Red',
+      'Forest Green',
+      'Terracotta Orange',
+      'Slate Indigo',
+      'Flamingo Pink',
+      'Orchid Purple',
+      'Sky Blue',
+      'Platinum',
+    ]);
+    expect(def.backgrounds).toEqual(['#282828', '#1E1E1E', '#18111D', '#F5F2EB']);
+  });
+
   it('provides the original EurekaWall colors in the classic palette', () => {
     const classic = PALETTES.classic;
     expect(classic.paints).toEqual(['#484B78', '#E4AA2D', '#C62F40', '#58875D', '#D0692E']);
@@ -53,9 +81,10 @@ describe('PALETTES', () => {
     expect(classic.backgrounds).toEqual(['#282828', '#1E1E1E', '#18111D', '#F5F2EB']);
   });
 
-  it('toggles back and forth between palettes', () => {
-    expect(nextPalette('modern')).toBe('classic');
+  it('cycles through all palettes', () => {
+    expect(nextPalette('default')).toBe('classic');
     expect(nextPalette('classic')).toBe('modern');
-    expect(getPalette('unknown' as PaletteId).id).toBe('modern');
+    expect(nextPalette('modern')).toBe('default');
+    expect(getPalette('unknown' as PaletteId).id).toBe('default');
   });
 });

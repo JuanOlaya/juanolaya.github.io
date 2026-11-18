@@ -69,14 +69,14 @@ export function layoutGrid(width: number, height: number, leftInset = 0): GridLa
 const BLANK_RATIO = 0.4;
 
 /** The original seeded two cells in five as blank and the rest in a random paint from the active palette. */
-function randomCell(random: () => number, paletteId: PaletteId = 'classic'): Cell {
+function randomCell(random: () => number, paletteId: PaletteId = 'default'): Cell {
   if (random() < BLANK_RATIO) return { shape: 1, color: BACKGROUND_COLOR };
   const pal = getPalette(paletteId);
   const slot = Math.min(Math.floor(random() * pal.indices.length), pal.indices.length - 1);
   return { shape: 1, color: pal.indices[slot] };
 }
 
-export function createGrid(layout: GridLayout, random: () => number, paletteId: PaletteId = 'classic'): Grid {
+export function createGrid(layout: GridLayout, random: () => number, paletteId: PaletteId = 'default'): Grid {
   const cells = Array.from({ length: layout.cols * layout.rows }, () => randomCell(random, paletteId));
   return { layout, cells };
 }
@@ -188,17 +188,17 @@ export function resizeGrid(grid: Grid, layout: GridLayout): Grid {
   return { layout, cells };
 }
 
-export function backgroundHex(background: number, paletteId: PaletteId = 'modern'): string {
+export function backgroundHex(background: number, paletteId: PaletteId = 'default'): string {
   const pal = getPalette(paletteId);
   return pal.backgrounds[background] ?? pal.backgrounds[0];
 }
 
 /** Anything that is not a paint (including the blank index and garbage) renders as the background. */
-export function colorHex(color: number, background: number, paletteId: PaletteId = 'modern'): string {
+export function colorHex(color: number, background: number, paletteId: PaletteId = 'default'): string {
   return ALL_PAINTS[color] ?? backgroundHex(background, paletteId);
 }
 
-export function nextBackground(background: number, paletteId: PaletteId = 'modern'): number {
+export function nextBackground(background: number, paletteId: PaletteId = 'default'): number {
   const pal = getPalette(paletteId);
   return Number.isInteger(background) && background >= 0 ? (background + 1) % pal.backgrounds.length : 0;
 }

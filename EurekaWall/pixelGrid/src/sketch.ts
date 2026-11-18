@@ -23,16 +23,16 @@ import { mountToolbar, type Tool } from './toolbar.ts';
 
 const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
 const POINTER_TYPES = ['pointerdown', 'pointermove', 'pointerup', 'pointercancel'] as const;
-const PALETTE_STORAGE_KEY = 'shapy_presence_palette';
+const PALETTE_STORAGE_KEY = 'shapy_presence_palette_v2';
 
 function initialPalette(): PaletteId {
   try {
     const saved = localStorage.getItem(PALETTE_STORAGE_KEY);
-    if (saved === 'classic' || saved === 'modern') return saved;
+    if (saved === 'default' || saved === 'classic' || saved === 'modern') return saved;
   } catch {
     // Ignore storage errors in sandboxed environments
   }
-  return 'classic';
+  return 'default';
 }
 
 interface ShapyState {
