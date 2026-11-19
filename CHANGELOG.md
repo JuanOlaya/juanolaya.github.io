@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.16.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.15.0...v0.16.0) (2026-11-19)
+
+
+### Features
+
+* **EurekaWall/pixelGrid:** add 9-color default palette, align shapes/actions right, and iconify background button ([03d4398](https://github.com/JuanOlaya/juanolaya.github.io/commit/03d439814f07105b6fdea8145956e15d0dec0b58))
+* **EurekaWall/pixelGrid:** square hit testing, 8-color palette, remove header, top-to-bottom eraser ([90f20f1](https://github.com/JuanOlaya/juanolaya.github.io/commit/90f20f176f157e9ca2dfe686dce2d61aacbf1da7))
+
 ## [0.15.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.14.0...v0.15.0) (2026-11-13)
 
 
