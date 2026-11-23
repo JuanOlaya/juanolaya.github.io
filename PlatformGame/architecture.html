@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlatformGame — Architecture &amp; Flows</title>
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --panel: #111622;
+      --card: #151b28;
+      --card-border: #252f45;
+      --text: #e6edf7;
+      --muted: #8b98b1;
+      --dim: 0.24;
+      --accent: #f5b942;
+      --accent-glow: rgba(245, 185, 66, 0.22);
+      --actors: #ec4899;
+      --ui: #6366f1;
+      --application: #f59e0b;
+      --domain-entities: #10b981;
+      --domain-services: #06b6d4;
+      --guardrails: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 20px 28px 16px;
+      border-bottom: 1px solid #1d2536;
+      background: linear-gradient(180deg, #0f1420 0%, #0b0e14 100%);
+    }
+
+    header h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+      max-width: 960px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    @media (max-width: 1120px) {
+      .workspace { grid-template-columns: 1fr; }
+      aside { border-left: none; border-top: 1px solid #1d2536; }
+    }
+
+    .canvas-wrap {
+      position: relative;
+      padding: 22px 24px 32px;
+      overflow-x: auto;
+    }
+
+    .board {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(168px, 1fr));
+      gap: 18px;
+      min-width: 1080px;
+      padding-bottom: 12px;
+    }
+
+    svg.arrows {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+      overflow: visible;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .col-header {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 4px 6px;
+      border-bottom: 1px dashed #1f283b;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .node {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-left: 3px solid var(--layer-color);
+      border-radius: 8px;
+      padding: 11px 12px;
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.18s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+
+    .node:hover {
+      border-color: #46587d;
+      transform: translateY(-1px);
+    }
+
+    .node-title {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .node-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .board.has-selection .node {
+      opacity: var(--dim);
+    }
+
+    .board.has-selection .node.is-active {
+      opacity: 1;
+      border-color: var(--accent);
+      border-left-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 0 22px var(--accent-glow);
+      background: #1a2030;
+    }
+
+    .node.is-inspected {
+      opacity: 1 !important;
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 1px #60a5fa;
+    }
+
+    .rule-banner {
+      margin-top: 18px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #a7f3d0;
+      font-size: 0.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      min-width: 1080px;
+    }
+
+    .rule-banner code {
+      color: #fde68a;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    aside {
+      background: var(--panel);
+      border-left: 1px solid #1d2536;
+      padding: 18px 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      overflow-y: auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .flows-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .flow-btn {
+      text-align: left;
+      background: #151b28;
+      border: 1px solid #222c40;
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .flow-btn:hover {
+      border-color: #3a4a6b;
+      background: #192131;
+    }
+
+    .flow-btn.is-selected {
+      border-color: var(--accent);
+      background: rgba(245, 185, 66, 0.11);
+      box-shadow: inset 0 0 0 1px rgba(245, 185, 66, 0.25);
+    }
+
+    .flow-btn-title {
+      font-size: 0.83rem;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .flow-btn-sub {
+      font-size: 0.73rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .clear-btn {
+      margin-top: 4px;
+      align-self: flex-start;
+      background: transparent;
+      border: 1px solid #2c3852;
+      color: var(--muted);
+      font-size: 0.75rem;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .clear-btn:hover {
+      color: var(--text);
+      border-color: #4f638d;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .step-item {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 9px;
+      align-items: start;
+      padding: 8px 10px;
+      border-radius: 7px;
+      background: #141a27;
+      border: 1px solid #20293d;
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #111622;
+      font-weight: 800;
+      font-size: 0.72rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .step-route {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .step-label {
+      font-size: 0.73rem;
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      margin-bottom: 3px;
+    }
+
+    .step-detail {
+      font-size: 0.73rem;
+      color: var(--muted);
+      line-height: 1.38;
+    }
+
+    .inspector {
+      padding: 12px;
+      border-radius: 8px;
+      background: #141a27;
+      border: 1px solid #24304a;
+      font-size: 0.77rem;
+      line-height: 1.45;
+    }
+
+    .inspector code {
+      color: #93c5fd;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.74rem;
+    }
+
+    .empty-note {
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PlatformGame — Architecture &amp; Flows (DDD + OOP)</h1>
+    <p>
+      Interactive map of every module, OOP entity, and DDD boundary powering <strong>PlatformGame</strong>.
+      Pick a flow on the right to trace data through the layers, or click any node to inspect its file and responsibility.
+      Machine-readable companion: <code>PlatformGame/architecture.json</code>.
+    </p>
+    <div class="legend" id="legend"></div>
+  </header>
+
+  <div class="workspace">
+    <main class="canvas-wrap">
+      <div class="board" id="board">
+        <svg class="arrows" id="arrows"></svg>
+      </div>
+      <div class="rule-banner">
+        <span><strong>Dependency Rule:</strong> UI (p5 + DOM) → Application → Domain (Entities + Services). Domain never imports p5 or DOM.</span>
+        <span>Enforced by <code>src/domain/purity.test.ts</code></span>
+      </div>
+    </main>
+
+    <aside>
+      <div>
+        <div class="section-label">Flows</div>
+        <div class="flows-list" id="flows"></div>
+        <button class="clear-btn" id="clearBtn" type="button">Clear selection</button>
+      </div>
+
+      <div id="inspectorWrap" style="display:none;">
+        <div class="section-label">Node Inspector</div>
+        <div class="inspector" id="inspector"></div>
+      </div>
+
+      <div>
+        <div class="section-label">Steps</div>
+        <div class="steps-list" id="steps"></div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // Mirrors PlatformGame/architecture.json so this HTML works standalone via file:// with zero dependencies.
+    const DATA = {
+      layers: [
+        { id: "actors", label: "Actors", color: "#ec4899" },
+        { id: "ui", label: "UI · p5 + DOM", color: "#6366f1" },
+        { id: "application", label: "Application", color: "#f59e0b" },
+        { id: "domain-entities", label: "Domain · Entities (OOP)", color: "#10b981" },
+        { id: "domain-services", label: "Domain · Services", color: "#06b6d4" },
+        { id: "guardrails", label: "Guardrails", color: "#a855f7" }
+      ],
+      nodes: [
+        { id: "user", layer: "actors", title: "Player (User)", subtitle: "← → ↑ · Space · R · Touch", file: null, role: "External actor driving movement, pause, and level resets." },
+        { id: "browser", layer: "actors", title: "Browser Runtime", subtitle: "rAF · ResizeObserver · bfcache", file: "PlatformGame/index.html", role: "Hosts canvas, DOM panels, visibility events, and pagehide/pageshow lifecycle." },
+
+        { id: "input", layer: "ui", title: "input.ts", subtitle: "attachControls() → InputState", file: "PlatformGame/src/input.ts", role: "UI adapter translating keyboard & on-screen touch pad into an agnostic InputState." },
+        { id: "render", layer: "ui", title: "render.ts", subtitle: "drawSky / World / Player / Overlay", file: "PlatformGame/src/render.ts", role: "Pure p5.js canvas renderer reading domain state + visual FX parameters." },
+        { id: "particles", layer: "ui", title: "particles.ts", subtitle: "burst() · stepParticles()", file: "PlatformGame/src/particles.ts", role: "Ephemeral visual dust & spark particles (presentation-only, skipped on reduced motion)." },
+        { id: "panels", layer: "ui", title: "panels/learn.ts", subtitle: "architecture.ts · physics.ts", file: "PlatformGame/src/panels/learn.ts", role: "Live DOM telemetry panels showing active DDD layers and real-time kinematics." },
+
+        { id: "main", layer: "application", title: "main.ts", subtitle: "Entrypoint · fonts · bfcache", file: "PlatformGame/src/main.ts", role: "Composition root wiring DOM containers, learn panels, and mountPlatformGame()." },
+        { id: "game", layer: "application", title: "game.ts", subtitle: "mountPlatformGame() · GameState", file: "PlatformGame/src/game.ts", role: "Application orchestrator: owns session (started, paused, shake, squash, flash) and drives World.step()." },
+        { id: "clock", layer: "application", title: "clock.ts", subtitle: "approach() · fitAspect()", file: "PlatformGame/src/clock.ts", role: "UI timing easing and responsive canvas aspect-ratio fitting." },
+        { id: "shared", layer: "application", title: "@shared/p5/*", subtitle: "mountSketch · mountSketchUi", file: "src/shared/p5/mount.ts", role: "Shared site helpers for p5 instance mounting, pixel density, reduced motion, and control bar." },
+
+        { id: "world", layer: "domain-entities", title: "domain/world.ts", subtitle: "class World (Aggregate Root)", file: "PlatformGame/src/domain/world.ts", role: "OOP Aggregate Root owning Player, Platform[], fixed-step accumulator (carry), and lastStep StepReport." },
+        { id: "player", layer: "domain-entities", title: "domain/player.ts", subtitle: "class Player (Entity)", file: "PlatformGame/src/domain/player.ts", role: "OOP Entity owning position, velocity, minSpeed, fall(), move(), and keepInsideView()." },
+        { id: "platform", layer: "domain-entities", title: "domain/platform.ts", subtitle: "class Platform (Entity)", file: "PlatformGame/src/domain/platform.ts", role: "Read-only OOP Entity representing a solid floor block with closestPoint(Vector)." },
+        { id: "vector", layer: "domain-entities", title: "domain/vector.ts", subtitle: "class Vector (Value Object)", file: "PlatformGame/src/domain/vector.ts", role: "Immutable frozen 2D Value Object (add, scale, withX, withY, distanceTo) preventing accidental mutation." },
+
+        { id: "collision", layer: "domain-services", title: "domain/collision.ts", subtitle: "resolveCollisions() · sideOf()", file: "PlatformGame/src/domain/collision.ts", role: "Domain Service resolving circle-vs-rect contacts, clock-face normals, ×1.05 landing bounce, and deflections." },
+        { id: "timestep", layer: "domain-services", title: "domain/timestep.ts", subtitle: "planSteps() · 1/30 s fixed", file: "PlatformGame/src/domain/timestep.ts", role: "Fixed-timestep planner splitting variable frame deltaTime into deterministic 1/30 s steps + interpolation alpha." },
+        { id: "level", layer: "domain-services", title: "domain/level.ts", subtitle: "generateWorld() · 14 blocks", file: "PlatformGame/src/domain/level.ts", role: "Domain factory creating 14 random platforms with injectable PRNG for deterministic tests." },
+        { id: "view", layer: "domain-services", title: "domain/view.ts", subtitle: "VIEW_WIDTH · VIEW_HEIGHT", file: "PlatformGame/src/domain/view.ts", role: "Canonical logical playfield dimensions shared by domain boundaries and renderer." },
+
+        { id: "purity", layer: "guardrails", title: "purity.test.ts", subtitle: "Vitest architecture guard", file: "PlatformGame/src/domain/purity.test.ts", role: "Automated architectural test enforcing zero p5/DOM globals and sibling-only imports inside src/domain/." }
+      ],
+      flows: [
+        {
+          id: "frame-loop",
+          title: "Fixed-Timestep Frame Loop",
+          summary: "Real frame deltaTime drives deterministic 1/30 s OOP physics and interpolated p5 rendering.",
+          steps: [
+            { from: "browser", to: "game", label: "p.draw() tick", detail: "p5 invokes draw(); game.ts clamps deltaTime to MAX_FRAME_SECONDS (0.1 s)." },
+            { from: "user", to: "input", label: "Held directions", detail: "Arrow keys or touch pad update live getters in InputState { left, right, up }." },
+            { from: "game", to: "world", label: "world.step(dt, input)", detail: "Application hands elapsed seconds and InputState to the World Aggregate Root." },
+            { from: "world", to: "timestep", label: "planSteps(carry, dt)", detail: "Splits variable display time into whole 1/30 s steps plus interpolation alpha (0..1)." },
+            { from: "world", to: "player", label: "fall() & move()", detail: "For each fixed step, Player applies gravity, horizontal input, jump boost, and view bounds." },
+            { from: "player", to: "vector", label: "Immutable kinematics", detail: "velocity = velocity.add(GRAVITY); position = position.add(velocity) using frozen Vector instances." },
+            { from: "game", to: "render", label: "Interpolated draw", detail: "Interpolates previousPosition..position by alpha and draws sky, world, particles, player, and overlay." }
+          ]
+        },
+        {
+          id: "collision-service",
+          title: "Collision & Bounce (Domain Service)",
+          summary: "World delegates ball-vs-platform math to collision.ts so Player and Platform stay decoupled.",
+          steps: [
+            { from: "world", to: "collision", label: "resolveCollisions()", detail: "Passes player, readonly platforms[], and previous position into the domain service." },
+            { from: "collision", to: "platform", label: "platform.closestPoint()", detail: "Finds nearest point on each solid Platform rectangle to the ball's center." },
+            { from: "collision", to: "vector", label: "distanceTo() & normalOf()", detail: "Checks distance ≤ RADIUS and computes clock-face region (1..12) plus outward unit normal." },
+            { from: "collision", to: "player", label: "land() or deflect", detail: "Top hit (side 3) bounces vy × -1.05 (capped at 20); side/corner hits deflect velocity and push out." },
+            { from: "collision", to: "world", label: "CollisionResult", detail: "Returns { landingSpeed, wallHit, side, normal }, merged into world.lastStep." }
+          ]
+        },
+        {
+          id: "boot-mount",
+          title: "App Boot & Level Generation",
+          summary: "Composition root wires DOM panels, p5 sketch, controls, and initial procedural World.",
+          steps: [
+            { from: "browser", to: "main", label: "DOM ready / pageshow", detail: "main.ts preloads Instrument Sans font for canvas and locates stage, pad, panel, and learn slots." },
+            { from: "main", to: "panels", label: "mountLearnPanels()", detail: "Mounts Physics & Architecture DOM panels and returns the per-frame onFrame callback." },
+            { from: "main", to: "game", label: "mountPlatformGame()", detail: "Passes DOM slots and panels.onFrame into the Application layer." },
+            { from: "game", to: "level", label: "generateWorld()", detail: "Creates 14 random Platforms separated by 130-unit gaps." },
+            { from: "level", to: "world", label: "new World(platforms)", detail: "Instantiates the World Aggregate Root with Platforms and a fresh Player." },
+            { from: "game", to: "input", label: "attachControls()", detail: "Binds Arrow keys, blur release, and touch pad buttons with wake() callback." },
+            { from: "game", to: "shared", label: "mountSketch() & Ui", detail: "Mounts p5 instance with ResizeObserver and Pause / New level toolbar." }
+          ]
+        },
+        {
+          id: "visual-feedback",
+          title: "Landing Juice & Particles",
+          summary: "Dust bursts, squash-and-stretch, flash, and screen shake live strictly outside Domain.",
+          steps: [
+            { from: "world", to: "game", label: "world.lastStep report", detail: "Exposes landingSpeed and wallHit without knowing anything about animations or FX." },
+            { from: "game", to: "particles", label: "burst() & stepParticles()", detail: "Spawns warm dust on landing (> 2) or white sparks on wallHit unless prefersReducedMotion is set." },
+            { from: "game", to: "clock", label: "fadeEffects()", detail: "Smoothly eases overlay visibility via approach() and decays squash, flash, and shake." },
+            { from: "game", to: "render", label: "drawParticles & Player", detail: "Renders fading particles, squashed ball ellipse, white flash lerp, and camera shake." }
+          ]
+        },
+        {
+          id: "learn-telemetry",
+          title: "Live Learn Panels Telemetry",
+          summary: "Explanatory DOM panels observe Domain output every frame without Domain coupling.",
+          steps: [
+            { from: "game", to: "panels", label: "onFrame(world, input, dt)", detail: "Called at the end of every p5 draw() frame with current World and InputState." },
+            { from: "panels", to: "world", label: "Read lastStep & player", detail: "architecture.ts and physics.ts inspect world.lastStep, velocity, and contact side read-only." },
+            { from: "panels", to: "browser", label: "Highlight active layers", detail: "Updates DOM status text and lights up whichever DDD layers acted during that frame." }
+          ]
+        },
+        {
+          id: "purity-guard",
+          title: "DDD Purity Guardrail (Vitest)",
+          summary: "Automated test prevents accidental p5, DOM, or outward imports inside src/domain/.",
+          steps: [
+            { from: "purity", to: "world", label: "Scan src/domain/*.ts", detail: "Reads every non-test TypeScript file in src/domain/ from disk." },
+            { from: "purity", to: "collision", label: "Forbid p5 & DOM globals", detail: "Asserts no file mentions p5, document, window, HTMLElement, or navigator." },
+            { from: "purity", to: "vector", label: "Enforce inward imports", detail: "Asserts every import specifier matches /^\\.\\/[a-z-]+\\.ts$/ (domain siblings only)." }
+          ]
+        }
+      ]
+    };
+
+    const nodeById = new Map(DATA.nodes.map((n) => [n.id, n]));
+    const layerById = new Map(DATA.layers.map((l) => [l.id, l]));
+    const nodeElements = new Map();
+
+    const legendEl = document.getElementById("legend");
+    const boardEl = document.getElementById("board");
+    const svgEl = document.getElementById("arrows");
+    const flowsEl = document.getElementById("flows");
+    const stepsEl = document.getElementById("steps");
+    const inspectorWrap = document.getElementById("inspectorWrap");
+    const inspectorEl = document.getElementById("inspector");
+    const clearBtn = document.getElementById("clearBtn");
+
+    let selectedFlowId = DATA.flows[0].id;
+    let inspectedNodeId = null;
+
+    // Legend
+    DATA.layers.forEach((layer) => {
+      const item = document.createElement("span");
+      item.className = "legend-item";
+      item.innerHTML = `<span class="dot" style="background:${layer.color}"></span>${layer.label}`;
+      legendEl.appendChild(item);
+    });
+
+    // Columns & Nodes
+    DATA.layers.forEach((layer) => {
+      const col = document.createElement("div");
+      col.className = "column";
+      col.innerHTML = `<div class="col-header"><span class="dot" style="background:${layer.color}"></span>${layer.label}</div>`;
+      DATA.nodes
+        .filter((n) => n.layer === layer.id)
+        .forEach((node) => {
+          const card = document.createElement("div");
+          card.className = "node";
+          card.style.setProperty("--layer-color", layer.color);
+          card.innerHTML = `<div class="node-title">${node.title}</div><div class="node-sub">${node.subtitle}</div>`;
+          card.addEventListener("click", () => {
+            inspectedNodeId = inspectedNodeId === node.id ? null : node.id;
+            renderInspector();
+          });
+          col.appendChild(card);
+          nodeElements.set(node.id, card);
+        });
+      boardEl.appendChild(col);
+    });
+
+    // Flow buttons
+    const flowButtons = new Map();
+    DATA.flows.forEach((flow) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "flow-btn";
+      btn.innerHTML = `<div class="flow-btn-title">${flow.title}</div><div class="flow-btn-sub">${flow.summary}</div>`;
+      btn.addEventListener("click", () => {
+        selectedFlowId = selectedFlowId === flow.id ? null : flow.id;
+        renderSelection();
+      });
+      flowsEl.appendChild(btn);
+      flowButtons.set(flow.id, btn);
+    });
+
+    clearBtn.addEventListener("click", () => {
+      selectedFlowId = null;
+      inspectedNodeId = null;
+      renderInspector();
+      renderSelection();
+    });
+
+    function renderInspector() {
+      nodeElements.forEach((el, id) => el.classList.toggle("is-inspected", id === inspectedNodeId));
+      if (!inspectedNodeId) {
+        inspectorWrap.style.display = "none";
+        return;
+      }
+      const node = nodeById.get(inspectedNodeId);
+      const layer = layerById.get(node.layer);
+      inspectorWrap.style.display = "block";
+      inspectorEl.innerHTML = `
+        <div style="font-weight:700; margin-bottom:4px; color:${layer.color}">${node.title}</div>
+        <div style="margin-bottom:6px;">${node.role}</div>
+        <div><strong>Layer:</strong> ${layer.label}</div>
+        ${node.file ? `<div><strong>File:</strong> <code>${node.file}</code></div>` : ""}
+      `;
+    }
+
+    function drawArrows(flow) {
+      svgEl.innerHTML = `
+        <defs>
+          <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#f5b942"></polygon>
+          </marker>
+        </defs>
+      `;
+      if (!flow) return;
+
+      const boardRect = boardEl.getBoundingClientRect();
+      const pairCount = new Map();
+
+      flow.steps.forEach((step, idx) => {
+        const fromEl = nodeElements.get(step.from);
+        const toEl = nodeElements.get(step.to);
+        if (!fromEl || !toEl) return;
+
+        const r1 = fromEl.getBoundingClientRect();
+        const r2 = toEl.getBoundingClientRect();
+
+        const c1x = r1.left - boardRect.left + r1.width / 2;
+        const c1y = r1.top - boardRect.top + r1.height / 2;
+        const c2x = r2.left - boardRect.left + r2.width / 2;
+        const c2y = r2.top - boardRect.top + r2.height / 2;
+
+        const sameCol = Math.abs(c1x - c2x) < 20;
+        let x1, y1, x2, y2, cx1, cy1, cx2, cy2;
+
+        const key = [step.from, step.to].sort().join("|");
+        const dup = pairCount.get(key) || 0;
+        pairCount.set(key, dup + 1);
+        const offset = dup === 0 ? 0 : (dup % 2 === 1 ? 18 : -18);
+
+        if (sameCol) {
+          const goingDown = c2y > c1y;
+          x1 = r1.right - boardRect.left - 10;
+          y1 = goingDown ? r1.bottom - boardRect.top : r1.top - boardRect.top;
+          x2 = r2.right - boardRect.left - 10;
+          y2 = goingDown ? r2.top - boardRect.top : r2.bottom - boardRect.top;
+          cx1 = x1 + 42 + offset;
+          cy1 = y1 + (goingDown ? 10 : -10);
+          cx2 = x2 + 42 + offset;
+          cy2 = y2 + (goingDown ? -10 : 10);
+        } else if (c2x > c1x) {
+          x1 = r1.right - boardRect.left;
+          y1 = c1y + offset * 0.4;
+          x2 = r2.left - boardRect.left;
+          y2 = c2y + offset * 0.4;
+          const dx = Math.max(40, (x2 - x1) * 0.45);
+          cx1 = x1 + dx;
+          cy1 = y1 + offset;
+          cx2 = x2 - dx;
+          cy2 = y2 + offset;
+        } else {
+          x1 = r1.left - boardRect.left;
+          y1 = c1y + 8 + offset * 0.4;
+          x2 = r2.right - boardRect.left;
+          y2 = c2y + 8 + offset * 0.4;
+          const dx = Math.max(40, (x1 - x2) * 0.45);
+          cx1 = x1 - dx;
+          cy1 = y1 + 26 + offset;
+          cx2 = x2 + dx;
+          cy2 = y2 + 26 + offset;
+        }
+
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`);
+        path.setAttribute("fill", "none");
+        path.setAttribute("stroke", "#f5b942");
+        path.setAttribute("stroke-width", "2");
+        path.setAttribute("stroke-opacity", "0.92");
+        path.setAttribute("marker-end", "url(#arrowhead)");
+        svgEl.appendChild(path);
+
+        // Midpoint of cubic bezier (t = 0.5) for step badge
+        const mx = 0.125 * x1 + 0.375 * cx1 + 0.375 * cx2 + 0.125 * x2;
+        const my = 0.125 * y1 + 0.375 * cy1 + 0.375 * cy2 + 0.125 * y2;
+
+        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", mx);
+        circle.setAttribute("cy", my);
+        circle.setAttribute("r", "9.5");
+        circle.setAttribute("fill", "#f5b942");
+        circle.setAttribute("stroke", "#0b0e14");
+        circle.setAttribute("stroke-width", "2");
+
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", mx);
+        text.setAttribute("y", my + 3.5);
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("font-size", "10");
+        text.setAttribute("font-weight", "800");
+        text.setAttribute("fill", "#0b0e14");
+        text.textContent = String(idx + 1);
+
+        g.appendChild(circle);
+        g.appendChild(text);
+        svgEl.appendChild(g);
+      });
+    }
+
+    function renderSelection() {
+      const flow = DATA.flows.find((f) => f.id === selectedFlowId) || null;
+
+      flowButtons.forEach((btn, id) => btn.classList.toggle("is-selected", id === selectedFlowId));
+      boardEl.classList.toggle("has-selection", Boolean(flow));
+
+      const activeIds = new Set();
+      if (flow) {
+        flow.steps.forEach((s) => {
+          activeIds.add(s.from);
+          activeIds.add(s.to);
+        });
+      }
+      nodeElements.forEach((el, id) => el.classList.toggle("is-active", activeIds.has(id)));
+
+      stepsEl.innerHTML = "";
+      if (!flow) {
+        stepsEl.innerHTML = `<div class="empty-note">Select a flow above to trace how data moves across the DDD layers, or click any node to inspect its file and OOP role.</div>`;
+      } else {
+        flow.steps.forEach((step, idx) => {
+          const fromNode = nodeById.get(step.from);
+          const toNode = nodeById.get(step.to);
+          const row = document.createElement("div");
+          row.className = "step-item";
+          row.innerHTML = `
+            <div class="step-num">${idx + 1}</div>
+            <div>
+              <div class="step-route">${fromNode.title} → ${toNode.title}</div>
+              <div class="step-label">${step.label}</div>
+              <div class="step-detail">${step.detail}</div>
+            </div>
+          `;
+          stepsEl.appendChild(row);
+        });
+      }
+
+      requestAnimationFrame(() => drawArrows(flow));
+    }
+
+    window.addEventListener("resize", () => {
+      const flow = DATA.flows.find((f) => f.id === selectedFlowId) || null;
+      drawArrows(flow);
+    });
+
+    renderSelection();
+  </script>
+</body>
+</html>

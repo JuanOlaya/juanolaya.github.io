@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "project": "PlatformGame",
+  "url": "https://juanolaya.github.io/PlatformGame/",
+  "rootDir": "PlatformGame/src",
+  "architecture": {
+    "style": "Layered DDD (Domain-Driven Design) / Clean Architecture with OOP Domain",
+    "dependencyRule": "Dependencies point strictly inwards: UI (p5 + DOM) -> Application -> Domain (Entities + Value Objects + Services). Domain has zero imports from outside PlatformGame/src/domain/ and zero references to p5 or browser globals.",
+    "paradigm": "Object-Oriented Programming in the Domain (Aggregate Root, Entities, frozen Value Objects, composition over inheritance) paired with pure functions/modules in Domain Services, Application, and UI.",
+    "stack": ["TypeScript", "p5.js", "Vanilla DOM", "Vite", "Vitest"]
+  },
+  "layers": [
+    { "id": "actors", "label": "Actors", "color": "#ec4899" },
+    { "id": "ui", "label": "UI · p5 + DOM", "color": "#6366f1" },
+    { "id": "application", "label": "Application", "color": "#f59e0b" },
+    { "id": "domain-entities", "label": "Domain · Entities (OOP)", "color": "#10b981" },
+    { "id": "domain-services", "label": "Domain · Services & Rules", "color": "#06b6d4" },
+    { "id": "guardrails", "label": "Guardrails (Tests)", "color": "#a855f7" }
+  ],
+  "nodes": [
+    {
+      "id": "user",
+      "layer": "actors",
+      "title": "Player (User)",
+      "subtitle": "← → ↑ · Space · R · Touch pad",
+      "file": null,
+      "role": "External actor driving movement, pause, and level resets."
+    },
+    {
+      "id": "browser",
+      "layer": "actors",
+      "title": "Browser Runtime",
+      "subtitle": "rAF · ResizeObserver · bfcache",
+      "file": "PlatformGame/index.html",
+      "role": "Hosts canvas, DOM panels, visibility events, and pagehide/pageshow lifecycle."
+    },
+    {
+      "id": "input",
+      "layer": "ui",
+      "title": "input.ts",
+      "subtitle": "attachControls() → InputState",
+      "file": "PlatformGame/src/input.ts",
+      "role": "UI adapter translating keyboard & on-screen touch pad into an agnostic InputState."
+    },
+    {
+      "id": "render",
+      "layer": "ui",
+      "title": "render.ts",
+      "subtitle": "drawSky / World / Player / Overlay",
+      "file": "PlatformGame/src/render.ts",
+      "role": "Pure p5.js canvas renderer reading domain state + visual FX parameters."
+    },
+    {
+      "id": "particles",
+      "layer": "ui",
+      "title": "particles.ts",
+      "subtitle": "burst() · stepParticles()",
+      "file": "PlatformGame/src/particles.ts",
+      "role": "Ephemeral visual dust & spark particles (presentation-only, skipped on reduced motion)."
+    },
+    {
+      "id": "panels",
+      "layer": "ui",
+      "title": "panels/learn.ts",
+      "subtitle": "architecture.ts · physics.ts",
+      "file": "PlatformGame/src/panels/learn.ts",
+      "role": "Live DOM telemetry panels showing active DDD layers and real-time kinematics."
+    },
+    {
+      "id": "main",
+      "layer": "application",
+      "title": "main.ts",
+      "subtitle": "Entrypoint · fonts · bfcache",
+      "file": "PlatformGame/src/main.ts",
+      "role": "Composition root wiring DOM containers, learn panels, and mountPlatformGame()."
+    },
+    {
+      "id": "game",
+      "layer": "application",
+      "title": "game.ts",
+      "subtitle": "mountPlatformGame() · GameState",
+      "file": "PlatformGame/src/game.ts",
+      "role": "Application orchestrator: owns session (started, paused, shake, squash, flash) and drives World.step()."
+    },
+    {
+      "id": "clock",
+      "layer": "application",
+      "title": "clock.ts",
+      "subtitle": "approach() · fitAspect()",
+      "file": "PlatformGame/src/clock.ts",
+      "role": "UI timing easing and responsive canvas aspect-ratio fitting."
+    },
+    {
+      "id": "shared",
+      "layer": "application",
+      "title": "@shared/p5/*",
+      "subtitle": "mountSketch · mountSketchUi",
+      "file": "src/shared/p5/mount.ts",
+      "role": "Shared site helpers for p5 instance mounting, pixel density, reduced motion, and control bar."
+    },
+    {
+      "id": "world",
+      "layer": "domain-entities",
+      "title": "domain/world.ts",
+      "subtitle": "class World (Aggregate Root)",
+      "file": "PlatformGame/src/domain/world.ts",
+      "role": "OOP Aggregate Root owning Player, Platform[], fixed-step accumulator (carry), and lastStep StepReport."
+    },
+    {
+      "id": "player",
+      "layer": "domain-entities",
+      "title": "domain/player.ts",
+      "subtitle": "class Player (Entity)",
+      "file": "PlatformGame/src/domain/player.ts",
+      "role": "OOP Entity owning position, velocity, minSpeed, fall(), move(), and keepInsideView()."
+    },
+    {
+      "id": "platform",
+      "layer": "domain-entities",
+      "title": "domain/platform.ts",
+      "subtitle": "class Platform (Entity)",
+      "file": "PlatformGame/src/domain/platform.ts",
+      "role": "Read-only OOP Entity representing a solid floor block with closestPoint(Vector)."
+    },
+    {
+      "id": "vector",
+      "layer": "domain-entities",
+      "title": "domain/vector.ts",
+      "subtitle": "class Vector (Value Object)",
+      "file": "PlatformGame/src/domain/vector.ts",
+      "role": "Immutable frozen 2D Value Object (add, scale, withX, withY, distanceTo) preventing accidental mutation."
+    },
+    {
+      "id": "collision",
+      "layer": "domain-services",
+      "title": "domain/collision.ts",
+      "subtitle": "resolveCollisions() · sideOf()",
+      "file": "PlatformGame/src/domain/collision.ts",
+      "role": "Domain Service resolving circle-vs-rect contacts, clock-face normals, ×1.05 landing bounce, and deflections."
+    },
+    {
+      "id": "timestep",
+      "layer": "domain-services",
+      "title": "domain/timestep.ts",
+      "subtitle": "planSteps() · 1/30 s fixed",
+      "file": "PlatformGame/src/domain/timestep.ts",
+      "role": "Fixed-timestep planner splitting variable frame deltaTime into deterministic 1/30 s steps + interpolation alpha."
+    },
+    {
+      "id": "level",
+      "layer": "domain-services",
+      "title": "domain/level.ts",
+      "subtitle": "generateWorld() · 14 blocks",
+      "file": "PlatformGame/src/domain/level.ts",
+      "role": "Domain factory creating 14 random platforms with injectable PRNG for deterministic tests."
+    },
+    {
+      "id": "view",
+      "layer": "domain-services",
+      "title": "domain/view.ts",
+      "subtitle": "VIEW_WIDTH · VIEW_HEIGHT",
+      "file": "PlatformGame/src/domain/view.ts",
+      "role": "Canonical logical playfield dimensions shared by domain boundaries and renderer."
+    },
+    {
+      "id": "purity",
+      "layer": "guardrails",
+      "title": "domain/purity.test.ts",
+      "subtitle": "Vitest architecture test",
+      "file": "PlatformGame/src/domain/purity.test.ts",
+      "role": "Automated architectural test enforcing zero p5/DOM globals and sibling-only imports inside src/domain/."
+    }
+  ],
+  "flows": [
+    {
+      "id": "frame-loop",
+      "title": "Fixed-Timestep Frame Loop",
+      "summary": "Real frame deltaTime drives deterministic 1/30 s OOP physics and interpolated p5 rendering.",
+      "steps": [
+        { "from": "browser", "to": "game", "label": "p.draw() tick", "detail": "p5 invokes draw(); game.ts clamps deltaTime to MAX_FRAME_SECONDS (0.1 s)." },
+        { "from": "user", "to": "input", "label": "Held directions", "detail": "Arrow keys or touch pad update live getters in InputState { left, right, up }." },
+        { "from": "game", "to": "world", "label": "world.step(dt, input)", "detail": "Application hands elapsed seconds and InputState to the World Aggregate Root." },
+        { "from": "world", "to": "timestep", "label": "planSteps(carry, dt)", "detail": "Splits variable display time into whole 1/30 s steps plus interpolation alpha (0..1)." },
+        { "from": "world", "to": "player", "label": "fall() & move()", "detail": "For each fixed step, Player applies gravity, horizontal input, jump boost, and view bounds." },
+        { "from": "player", "to": "vector", "label": "Immutable kinematics", "detail": "velocity = velocity.add(GRAVITY); position = position.add(velocity) using frozen Vector instances." },
+        { "from": "game", "to": "render", "label": "Interpolated draw", "detail": "Interpolates previousPosition..position by alpha and draws sky, world, particles, player, and overlay." }
+      ]
+    },
+    {
+      "id": "collision-service",
+      "title": "Collision & Bounce (Domain Service)",
+      "summary": "World delegates ball-vs-platform math to collision.ts so Player and Platform stay decoupled.",
+      "steps": [
+        { "from": "world", "to": "collision", "label": "resolveCollisions()", "detail": "Passes player, readonly platforms[], and previous position into the domain service." },
+        { "from": "collision", "to": "platform", "label": "platform.closestPoint()", "detail": "Finds nearest point on each solid Platform rectangle to the ball's center." },
+        { "from": "collision", "to": "vector", "label": "distanceTo() & normalOf()", "detail": "Checks distance ≤ RADIUS and computes clock-face region (1..12) plus outward unit normal." },
+        { "from": "collision", "to": "player", "label": "land() or deflect", "detail": "Top hit (side 3) bounces vy × -1.05 (capped at 20); side/corner hits deflect velocity and push out." },
+        { "from": "collision", "to": "world", "label": "CollisionResult", "detail": "Returns { landingSpeed, wallHit, side, normal }, merged into world.lastStep." }
+      ]
+    },
+    {
+      "id": "boot-mount",
+      "title": "App Boot & Level Generation",
+      "summary": "Composition root wires DOM panels, p5 sketch, controls, and initial procedural World.",
+      "steps": [
+        { "from": "browser", "to": "main", "label": "DOM ready / pageshow", "detail": "main.ts preloads Instrument Sans font for canvas and locates stage, pad, panel, and learn slots." },
+        { "from": "main", "to": "panels", "label": "mountLearnPanels()", "detail": "Mounts Physics & Architecture DOM panels and returns the per-frame onFrame callback." },
+        { "from": "main", "to": "game", "label": "mountPlatformGame()", "detail": "Passes DOM slots and panels.onFrame into the Application layer." },
+        { "from": "game", "to": "level", "label": "generateWorld()", "detail": "Creates 14 random Platforms separated by 130-unit gaps." },
+        { "from": "level", "to": "world", "label": "new World(platforms)", "detail": "Instantiates the World Aggregate Root with Platforms and a fresh Player." },
+        { "from": "game", "to": "input", "label": "attachControls()", "detail": "Binds Arrow keys, blur release, and touch pad buttons with wake() callback." },
+        { "from": "game", "to": "shared", "label": "mountSketch() & Ui", "detail": "Mounts p5 instance with ResizeObserver and Pause / New level toolbar." }
+      ]
+    },
+    {
+      "id": "visual-feedback",
+      "title": "Landing Juice & Particles",
+      "summary": "Dust bursts, squash-and-stretch, flash, and screen shake live strictly outside Domain.",
+      "steps": [
+        { "from": "world", "to": "game", "label": "world.lastStep report", "detail": "Exposes landingSpeed and wallHit without knowing anything about animations or FX." },
+        { "from": "game", "to": "particles", "label": "burst() & stepParticles()", "detail": "Spawns warm dust on landing (> 2) or white sparks on wallHit unless prefersReducedMotion is set." },
+        { "from": "game", "to": "clock", "label": "fadeEffects()", "detail": "Smoothly eases overlay visibility via approach() and decays squash, flash, and shake." },
+        { "from": "game", "to": "render", "label": "drawParticles & Player", "detail": "Renders fading particles, squashed ball ellipse, white flash lerp, and camera shake." }
+      ]
+    },
+    {
+      "id": "learn-telemetry",
+      "title": "Live Learn Panels Telemetry",
+      "summary": "Explanatory DOM panels observe Domain output every frame without Domain coupling.",
+      "steps": [
+        { "from": "game", "to": "panels", "label": "onFrame(world, input, dt)", "detail": "Called at the end of every p5 draw() frame with current World and InputState." },
+        { "from": "panels", "to": "world", "label": "Read lastStep & player", "detail": "architecture.ts and physics.ts inspect world.lastStep, velocity, and contact side read-only." },
+        { "from": "panels", "to": "browser", "label": "Highlight active layers", "detail": "Updates DOM status text and lights up whichever DDD layers acted during that frame." }
+      ]
+    },
+    {
+      "id": "purity-guard",
+      "title": "DDD Purity Guardrail (Vitest)",
+      "summary": "Automated test prevents accidental p5, DOM, or outward imports inside src/domain/.",
+      "steps": [
+        { "from": "purity", "to": "world", "label": "Scan src/domain/*.ts", "detail": "Reads every non-test TypeScript file in src/domain/ from disk." },
+        { "from": "purity", "to": "collision", "label": "Forbid p5 & DOM globals", "detail": "Asserts no file mentions p5, document, window, HTMLElement, or navigator." },
+        { "from": "purity", "to": "vector", "label": "Enforce inward imports", "detail": "Asserts every import specifier matches /^\\.\\/[a-z-]+\\.ts$/ (domain siblings only)." }
+      ]
+    }
+  ]
+}
