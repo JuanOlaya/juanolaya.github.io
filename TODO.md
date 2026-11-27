@@ -80,3 +80,10 @@ Este documento recopila los proyectos retirados temporalmente de la sección de 
   - [x] Probar a mano en Firefox y Safari (iOS incluido); hasta ahora solo se verificó en Chrome. (#116, Firefox y WebKit con Playwright; iOS físico sin probar)
 * **Estilos compartidos**
   - [x] Consolidar los tokens del contrato visual (incluido `--text-caption` de UX) en una hoja común `src/shared/styles/` para no repetirlos en cada proyecto. (#114)
+
+---
+
+## 8. Formación y Automatización
+
+* **GitHub Actions**
+  - [ ] Hacer un curso de **GitHub Actions** para entender bien cómo GitHub levanta una máquina virtual temporal por cada issue (runners efímeros, triggers por evento/etiqueta, secretos y automatización de flujos/agentes).
